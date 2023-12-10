@@ -1,13 +1,164 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+header{
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo:hover{
+    cursor: pointer;
+}
+
+.logo img{
+    margin-right: 5px;
+    width: 50px;
+}
+
+.btns button , .text button{
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+}
+
+.btns :first-child{
+    background-color: #fff;
+    color: #86FFAF;
+    border: 1px solid #86FFAF;
+}
+
+.btns :first-child:hover{
+    background-color: #86FFAF;
+    color: black;
+    cursor: pointer;
+}
+
+.btns :last-child{
+    margin-left: 10px;
+    background-color: #86FFAF;
+}
+
+.btns :last-child:hover , .text button:hover{
+    background-color: #fff;
+    border: 1px solid #86FFAF;
+    cursor: pointer;
+}
+
+/* intro section */
+.intro{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-image: url("images/bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.text{
+    max-width: 450px;
+}
+
+.text h1{
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.text p{
+    margin-bottom: 20px;
+}
+
+.text button{
+    background-color: #86FFAF;
+}
+
+.intro img{
+    width: 450px;
+}
+
+/* about us */
+.about-us{
+    padding: 100px 50px;
+    background-color: #86FFAF;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.about-us div{
+    max-width: 400px;
+}
+
+.about-us h1{
+    margin-bottom: 20px;
+}
+
+.about-us img{
+    width: 400px;
+}
+
+/* features */
+.features{
+    padding: 100px 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card{
+    width: 25%;
+    border: 1px solid rgb(168, 168, 168);
+}
+
+.img1, .img2, .img3{
+    width: 100%;
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.img1{
+    background-image: url(images/img3.jpg);
+}
+
+.img2{
+    background-image: url(images/img4.jpg);
+}
+
+.img3{
+    background-image: url(images/img2.jpg);
+}
+
+.card :last-child{
+    padding: 15px;
+}
+.card h3{
+    text-align: center;
+}
+
+.card:hover{
+    box-shadow: 1px 1px 10px rgb(126, 126, 126);
+}
+
+
+
+h1, h2{
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: lighter;
 }
