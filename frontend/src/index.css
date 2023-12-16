@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body{
+body, button{
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -29,7 +29,7 @@ header{
     width: 50px;
 }
 
-.btns button , .text button{
+.btns button{
     width: 100px;
     height: 30px;
     border: none;
@@ -38,30 +38,30 @@ header{
 
 .btns :first-child{
     background-color: #fff;
-    color: #86FFAF;
-    border: 1px solid #86FFAF;
+    color: #74BCFF;
+    border: 1px solid #74BCFF;
 }
 
 .btns :first-child:hover{
-    background-color: #86FFAF;
+    background-color: #74BCFF;
     color: black;
     cursor: pointer;
 }
 
 .btns :last-child{
     margin-left: 10px;
-    background-color: #86FFAF;
+    background-color: #74BCFF;
 }
 
-.btns :last-child:hover , .text button:hover{
+.btns :last-child:hover{
     background-color: #fff;
-    border: 1px solid #86FFAF;
+    border: 1px solid #74BCFF;
     cursor: pointer;
 }
 
 /* intro section */
 .intro{
-    height: 100vh;
+    height: 95vh;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -84,9 +84,22 @@ header{
     margin-bottom: 20px;
 }
 
-.text button{
-    background-color: #86FFAF;
+.text button, .cta button{
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-image: linear-gradient(to right, #74bcff ,#68ffaf);
 }
+
+.text button:hover, .cta button:hover{
+    background-image: none;
+    background-color: #fff;
+    border: 1px solid #74bcff;
+    cursor: pointer;
+}
+
+
 
 .intro img{
     width: 450px;
@@ -95,7 +108,7 @@ header{
 /* about us */
 .about-us{
     padding: 100px 50px;
-    background-color: #86FFAF;
+    background-image: linear-gradient(#74BCFF, #86FFAf, #fff);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -156,9 +169,188 @@ header{
     box-shadow: 1px 1px 10px rgb(126, 126, 126);
 }
 
+/* testimonials */
+.testimonials{
+    padding: 50px;
+    background-image: linear-gradient(#74BCFF, #86FFAf);
+    display: flex;
+    flex-direction: column;
+}
 
+.testimonials h1{
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.testimonials-parent{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.testimonial{
+    padding: 20px 30px;
+    width: 25%;
+    background-color: rgb(255, 255, 255, 40%);
+    border-radius: 5px;
+}
+
+.person{
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.person div{
+    margin-right: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.circle1{
+    background-image: url(images/fairuz.jpg);
+}
+.circle2{
+    background-image: url(images/ahmed.jpg);
+}
+.circle3{
+    background-image: url(images/jack.jpg);
+}
+
+
+/* call to action */
+.cta{
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+    background-image: url(images/bg2.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.cta div{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.cta h1{
+    font-size: 2.5rem;
+}
+
+.cta div :first-child, .cta div :nth-child(2){
+    margin-bottom: 30px;
+}
+
+
+/* footer */
+footer{
+    padding: 30px;
+    background-color: #74BCFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* Auth */
+
+.authentication{
+    
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-select{
+    margin: 20px 0;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #E2FFEC;
+    border-radius: 5px;
+}
+
+.auth-select div{
+    width: 50%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-select div:hover{
+    cursor: pointer;
+}
+
+.selected{
+    background-color: #fff;
+}
+
+.form{
+    padding: 20px 40px;
+    width: 27%;
+    height: 80vh;
+    background-image: linear-gradient(#74BCFF, #86FFAf);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form form{
+    margin-bottom: 20px;
+}
+
+input{
+    margin: 2px 0;
+    padding: 10px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+input:focus {
+    border: 2px solid #74BCFF; /* Set your desired focus border color */
+  }
+
+
+.name{
+    display: flex;
+    justify-content: space-between;
+}
+
+.name input{
+    width: 49%;
+}
+
+.form-btn{
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #E2FFEC;
+}
+
+
+
+/**************************/
 
 h1, h2{
     font-family: 'Comfortaa', sans-serif;
     font-weight: lighter;
+}
+
+p{
+    line-height: 1.5;
 }
