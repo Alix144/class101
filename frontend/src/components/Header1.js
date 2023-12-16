@@ -1,12 +1,21 @@
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {authSection} from '../store/index';
 
 import logo from '../images/logo1.png'
 
 const Header1 = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     
-    const navigateTo = () => {
+    const navigateToLogin = () => {
         navigate("/auth")
+        dispatch(authSection.sectionLogin())
+    }
+
+    const navigateToRegister = () => {
+        navigate("/auth")
+        dispatch(authSection.sectionRegister())
     }
 
     const navigateToMain = () => {
@@ -21,8 +30,8 @@ const Header1 = () => {
             </div>
 
             <div className="btns">
-                <button onClick={navigateTo}>Login</button>
-                <button onClick={navigateTo}>Register</button>
+                <button onClick={navigateToLogin}>Login</button>
+                <button onClick={navigateToRegister}>Register</button>
             </div>
         </header>
      );

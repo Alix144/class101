@@ -1,24 +1,31 @@
-import { useState } from "react";
+import {authSection} from '../store/index';
+import { useDispatch, useSelector } from "react-redux";
 
 const Auth = () => {
-    const [auth, setAuth] = useState(true)
+    const section = useSelector(state => state.section);
+    const dispatch = useDispatch();
 
-    const changeState = () => {
-        setAuth(!auth)
+    const changeStateToLogin = () => {
+        dispatch(authSection.sectionLogin());
+    }
+
+    const changeStateToRegister = () => {
+        dispatch(authSection.sectionRegister());
     }
 
     return ( 
+        
         <div className="authentication">
 
             <div className="form">
-                {auth === true ? <h1>Login</h1>: <h1>Register</h1> }
+                {section === true ? <h1>Login</h1>: <h1>Register</h1> }
                 <div className="auth-select">
-                    <div className={auth ? "selected" : ""} onClick={changeState}>Login</div>
-                    <div className={auth === false ? "selected" : ""} onClick={changeState}>Register</div>
+                    <div className={section ? "selected" : ""} onClick={changeStateToLogin}>Login</div>
+                    <div className={section === false ? "selected" : ""} onClick={changeStateToRegister}>Register</div>
                 </div>
                 <form action="">
                     
-                    {auth ? 
+                    {section ? 
                     <> 
                     <input type="email" placeholder="Email"/>
                     <input type="password" placeholder="Password"/>
@@ -37,7 +44,7 @@ const Auth = () => {
                     }
                         
                 </form>
-                {auth ? <button className="form-btn">Login</button>
+                {section ? <button className="form-btn">Login</button>
                 : <button className="form-btn">Register</button>
                  }
                 
