@@ -8,16 +8,18 @@ const Header2 = () => {
 
     return ( 
         <div className='header2'>
-            <img src={hamburger} alt="" />
-            <div className="logo">
-                <img src={logo} alt="logo" />
-                <h2>Class101</h2>
+            <div className='header-part-1'>
+                <img src={hamburger} alt="" className='hamburger'/>
+                <div className="logo">
+                    <img src={logo} alt="logo" />
+                    <h2>Class101</h2>
+                </div>
             </div>
 
-            <div className="">
-                <img src={plus} alt="" />
-                <img src={bell} alt="" />
-                <div className="profile-pic"></div>
+            <div className="header-part-2">
+                <img src={plus} alt="Plus" />
+                <img src={bell} alt="Notification" />
+                <div className="profile">B</div>
             </div>
         </div>
      );
