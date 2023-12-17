@@ -1,8 +1,16 @@
 import home from '../images/home.png'
 import calendar from '../images/calendar.png'
 import todolist from '../images/to-do-list.png'
+import teacher from '../images/teacher.png'
+import student from '../images/student.png'
+import arrow from '../images/arrow.png'
+import { useState } from 'react'
+import {motion} from "framer-motion"
 
 const Sidebar = () => {
+    const [isOpen, setOpen] = useState(false)
+    const [isOpen2, setOpen2] = useState(false)
+
     return ( 
         <div className="sidebar">
             <div className='sidebar-list'>
@@ -18,16 +26,68 @@ const Sidebar = () => {
                 <p>To Do</p>
             </div>
             <hr />
-            <div className='sidebar-list'>
-                <img src={todolist} alt="To-Do-List" />
-                <p>To Do</p>
+            <div className='sidebar-list teaching-list' onClick={()=> setOpen(!isOpen)}>
+                <img src={arrow} alt="" id='arrow' style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}/>
+                <img src={teacher} alt="To-Do-List" />
+                <p>Teaching</p>
             </div>
+
+            {isOpen &&
+                <div className='classes'>
+                    <ul>
+                        <div className='class-parent'>
+                            <div className="profile-pic">M</div>
+                            <li>math</li>
+                        </div>
+                        <div className='class-parent'>
+                            <div className="profile-pic">S</div>
+                            <li>Spanish</li>
+                        </div> 
+                    </ul>
+                </div>
+                }
             <hr />
-            <div className='sidebar-list'>
-                <img src={todolist} alt="To-Do-List" />
-                <p>To Do</p>
+
+            <div className='sidebar-list learning-list' onClick={()=> setOpen2(!isOpen2)}>
+                <img src={arrow} alt="" id='arrow' style={{ transform: isOpen2 ? "rotate(90deg)" : "rotate(0deg)" }}/>
+                <img src={student} alt="To-Do-List" />
+                <p>Learning</p>
             </div>
-            <hr />
+
+                {isOpen2 &&
+                <div className='classes'>
+                    <ul>
+                        <div className='class-parent'>
+                            <div className="profile-pic">M</div>
+                            <li>math</li>
+                        </div>
+                        <div className='class-parent'>
+                            <div className="profile-pic">B</div>
+                            <li>biology</li>
+                        </div>
+                        <div className='class-parent'>
+                            <div className="profile-pic">S</div>
+                            <li>Spanish</li>
+                        </div>
+                        <div className='class-parent'>
+                            <div className="profile-pic">M</div>
+                            <li>math</li>
+                        </div>
+                        <div className='class-parent'>
+                            <div className="profile-pic">B</div>
+                            <li>biology</li>
+                        </div>
+                        <div className='class-parent'>
+                            <div className="profile-pic">S</div>
+                            <li>Spanish</li>
+                        </div>
+                    </ul>
+                </div>
+                }
+            <hr/>
+
+            
+
         </div>
      );
 }
