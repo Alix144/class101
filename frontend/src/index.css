@@ -351,7 +351,7 @@ input:focus {
 /*** Dashboard ***/
 
 .dashboard{
-    height: 200vh;
+    
     display: flex;
 }
 
@@ -490,6 +490,51 @@ input:focus {
     background-color: rgb(0, 0, 0, 20%);
 }
 
+/* board */
+
+.board{
+    height: 100%;
+    width: 80%;
+}
+
+.board hr{
+    height: 3px;
+    border: none;
+    background-image: linear-gradient(to right, #74BCFF, #86FFAf);
+}
+
+.welcome{
+    height: 35vh;
+    background-image: url(images/bgg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.welcome img{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+.content{
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 85%;
+}
+
+.title h3{
+    padding: 5px;
+    font-weight: 100;
+}
+
 /**************************/
 
 h1, h2{
@@ -505,28 +550,28 @@ p{
 
 /* Track */
 ::-webkit-scrollbar {
-    width: 8px; /* Set the width of the scrollbar */
+    width: 8px;
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background-image: linear-gradient(#74BCFF, #86FFAf); /* Set the color of the scrollbar handle */
-    border-radius: 6px; /* Set the border radius of the scrollbar handle */
+    background-image: linear-gradient(#74BCFF, #86FFAf);
+    border-radius: 6px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #74bcff; /* Set the color of the scrollbar handle on hover */
+    background-color: #74bcff;
   }
   
   /* Track */
   ::-webkit-scrollbar-track {
     border-radius: 6px;
-    background-color: #f1f1f1; /* Set the color of the scrollbar track */
+    background-color: #f1f1f1;
   }
   
   /* Handle when dragging */
   ::-webkit-scrollbar-thumb:active {
-    background-image: linear-gradient(#68ffaf, #74bcff); /* Set the color of the scrollbar handle when dragging */
+    background-image: linear-gradient(#68ffaf, #74bcff);
   }
   

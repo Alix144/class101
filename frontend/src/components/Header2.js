@@ -19,7 +19,7 @@ const Header2 = () => {
             <div className="header-part-2">
                 <img src={plus} alt="Plus" />
                 <img src={bell} alt="Notification" />
-                <div className="profile">B</div>
+                <div className="profile">A</div>
             </div>
         </div>
      );

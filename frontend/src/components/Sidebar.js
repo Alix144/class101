@@ -1,11 +1,12 @@
+import { useState } from 'react'
+import {motion} from "framer-motion"
+
 import home from '../images/home.png'
 import calendar from '../images/calendar.png'
 import todolist from '../images/to-do-list.png'
 import teacher from '../images/teacher.png'
 import student from '../images/student.png'
 import arrow from '../images/arrow.png'
-import { useState } from 'react'
-import {motion} from "framer-motion"
 
 const Sidebar = () => {
     const [isOpen, setOpen] = useState(false)
