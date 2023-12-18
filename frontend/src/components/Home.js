@@ -1,10 +1,16 @@
+import Board from "./Board";
 import Title from "./Title";
 
 const Home = () => {
     return ( 
-        <div className="content">
-            <Title/>
-        </div>
+
+        <main>
+            <Board/>
+            <div className="content">
+                <Title propTitle={"Teaching Classes"}/>
+            </div>
+        </main>
+
      );
 }
  

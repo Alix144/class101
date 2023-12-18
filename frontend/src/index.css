@@ -492,12 +492,14 @@ input:focus {
 
 /* board */
 
-.board{
-    height: 100%;
-    width: 80%;
+main{
+    width: 100%;
 }
 
-.board hr{
+.board{
+}
+
+.board hr, .title hr{
     height: 3px;
     border: none;
     background-image: linear-gradient(to right, #74BCFF, #86FFAf);
