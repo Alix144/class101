@@ -1,4 +1,5 @@
 import Board from "./Board";
+import ClassesContainer from "./ClassesContainer";
 import Title from "./Title";
 
 const Home = () => {
@@ -8,6 +9,9 @@ const Home = () => {
             <Board/>
             <div className="content">
                 <Title propTitle={"Teaching Classes"}/>
+                <ClassesContainer/>
+                <Title propTitle={"Learning Classes"}/>
+                <ClassesContainer/>
             </div>
         </main>
 

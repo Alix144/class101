@@ -1,3 +1,4 @@
+import ProfileImg from './ProfileImg'
 
 import logo from '../images/logo1.png'
 import hamburger from '../images/hamburger.png'
@@ -19,7 +20,7 @@ const Header2 = () => {
             <div className="header-part-2">
                 <img src={plus} alt="Plus" />
                 <img src={bell} alt="Notification" />
-                <div className="profile">A</div>
+                <ProfileImg/>
             </div>
         </div>
      );

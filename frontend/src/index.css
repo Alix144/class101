@@ -391,7 +391,7 @@ input:focus {
     align-items: center;
 }
 
-.profile{
+.header-part-2 .profile{
     margin-left: 15px;
     width: 40px;
     height: 40px;
@@ -420,8 +420,9 @@ input:focus {
 .sidebar{
     padding: 40px 0;
     width: 20%;
-    height: 99vh;
+    height: 95vh;
     background-image: linear-gradient(#74BCFF, #86FFAf);
+    box-shadow: 1px 1px 5px rgb(126, 126, 126);
     position: sticky;
     top: 50px;
     left: 0;
@@ -532,9 +533,99 @@ main{
     width: 85%;
 }
 
+.title{
+    margin-bottom: 20px;
+}
 .title h3{
     padding: 5px;
     font-weight: 100;
+}
+
+/* Classes Container */
+.classes-container{
+    margin: 0 auto;
+    margin-bottom: 40px;
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    
+    
+}
+
+.class-box{
+    margin: 10px 15px;
+    width: 250px;
+    height: 250px;
+    background-color: #74BCFF;
+    border-radius: 5px;
+}
+
+.class-box:hover{
+    box-shadow: 1px 1px 5px rgb(126, 126, 126);
+    cursor: pointer;
+}
+
+.class-img{
+    margin-bottom: 35px;
+    width: 100%;
+    height: 45%;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-image: url(images/classbg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.class-img .profile{
+    margin-left: 15px;
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    bottom: -25px;
+    background-color: #C2DEFF;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-overlay{
+    width: 100%;
+    height: 100%;  
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-image: linear-gradient(#282DA4, #74BCFF);
+    opacity: 0.7;
+}
+
+.class-box-info{
+    margin: 0 15px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.class-box-info h4{
+    margin-bottom: 10px;
+}
+
+.class-box-info p{
+    line-height: normal;
+    font-size: 14px;
+}
+
+.info-part2 div{
+    display: flex;
+    align-items: center;
+}
+
+.info-part2 img{
+    margin-right: 5px;
+    height: 20px;
+    width: 20px;
 }
 
 /**************************/
