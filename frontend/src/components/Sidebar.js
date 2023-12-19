@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import {motion} from "framer-motion"
 
 import home from '../images/home.png'
@@ -11,18 +12,31 @@ import arrow from '../images/arrow.png'
 const Sidebar = () => {
     const [isOpen, setOpen] = useState(false)
     const [isOpen2, setOpen2] = useState(false)
+    const navigate = useNavigate();
+
+    const goToHome = () => {
+        navigate("home")
+    }
+
+    const goToCalendar = () => {
+        navigate("calendar")
+    }
+
+    const goToToDo = () => {
+        navigate("to-do")
+    }
 
     return ( 
         <div className="sidebar">
-            <div className='sidebar-list'>
+            <div className='sidebar-list' onClick={goToHome}>
                 <img src={home} alt="Home" />
                 <p>Home</p>
             </div>
-            <div className='sidebar-list'>
+            <div className='sidebar-list' onClick={goToCalendar}>
                 <img src={calendar} alt="Calendar" />
                 <p>Calendar</p>
             </div>
-            <div className='sidebar-list'>
+            <div className='sidebar-list' onClick={goToToDo}>
                 <img src={todolist} alt="To-Do-List" />
                 <p>To Do</p>
             </div>

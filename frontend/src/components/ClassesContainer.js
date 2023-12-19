@@ -1,4 +1,5 @@
 import ClassBox from "./ClassBox";
+import AddBox from "./AddBox";
 
 const ClassesContainer = () => {
     return ( 
@@ -8,6 +9,7 @@ const ClassesContainer = () => {
             <ClassBox/>
             <ClassBox/>
             <ClassBox/>
+            <AddBox/>
         </div>
      );
 }

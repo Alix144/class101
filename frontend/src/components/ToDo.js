@@ -1,8 +1,15 @@
+import NotesContainer from "./NotesContainer";
+import Title from "./Title";
+
 const ToDo = () => {
     return ( 
+        <main>
         <div className="content">
-            <h1>to do list</h1>
+            <Title propTitle={"To Do"}/>
+            <NotesContainer/>
+            <Title propTitle={"Completed"}/>
         </div>
+        </main>
      );
 }
  
