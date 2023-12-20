@@ -536,9 +536,21 @@ main{
 .title{
     margin-bottom: 20px;
 }
-.title h3{
+
+.title div{
     padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title h3{
     font-weight: 100;
+}
+
+.title img{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
 /* Classes Container */
@@ -612,8 +624,9 @@ main{
 }
 
 .more{
-    width: 15px;
-    height: 15px;
+    padding: 5px;
+    width: 25px;
+    height: 25px;
     border-radius: 50px;
     position: absolute;
     top: 10px;
@@ -653,10 +666,36 @@ main{
 
 .note-box{
     margin: 10px 15px;
+    padding: 15px 10px;
     width: 230px;
     height: 230px;
-    background-color: #FFD464;
-    box-shadow: -5px 5px 15px 0px rgb(126, 126, 126);
+    box-shadow: -5px 5px 10px 0px rgb(126, 126, 126);
+    position: relative;
+}
+
+.note-box img{
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50px;
+}
+
+.note-box img:hover{
+    background-color: rgb(255, 255, 255, 20%);
+    cursor: pointer;
+}
+
+.note-box p{
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.note-box h5{
+    margin-top: 15px;
+    font-weight: 100;
 }
 
 /**************************/

@@ -1,7 +1,14 @@
-const Title = ({propTitle}) => {
+import plus from '../images/plus.png'
+
+const Title = ({propTitle, add}) => {
     return ( 
         <div className="title">
-            <h3>{propTitle}</h3>
+            <div>
+                <h3>{propTitle}</h3>
+                {add &&
+                    <img src={plus} alt="Add" />
+                }
+            </div>
             <hr />
         </div>
      );

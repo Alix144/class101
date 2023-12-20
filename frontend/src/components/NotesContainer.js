@@ -1,12 +1,13 @@
 import NoteBox from "./NoteBox";
 
-const NotesContainer = () => {
+const NotesContainer = ({isCompleted}) => {
+    const color = isCompleted ? '#E1FFA0' : '#FFD464';
     return ( 
         <div className="notes-container">
-            <NoteBox/>
-            <NoteBox/>
-            <NoteBox/>
-            <NoteBox/>
+            <NoteBox color={color} />
+            <NoteBox color={color} />
+            <NoteBox color={color} />
+            <NoteBox color={color} />
         </div>
      );
 }
