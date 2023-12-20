@@ -1,6 +1,5 @@
 import {configureStore, createSlice} from '@reduxjs/toolkit'
 
-
 const authSectionSlice = createSlice({
     name: "auth",
     initialState: {section: false},
@@ -14,8 +13,24 @@ const authSectionSlice = createSlice({
     }
 })
 
+const windowSlice = createSlice({
+    name: 'window',
+    initialState: { window: 'allClosed' },
+    reducers: {
+      setWindow: (state, action) => {
+        state.window = action.payload;
+      },
+    },
+});
+
+const rootReducer = {
+    auth: authSectionSlice.reducer,
+    window: windowSlice.reducer,
+  };
+
 export const authSection = authSectionSlice.actions;
+export const setWindow = windowSlice.actions;
 
 export const store = configureStore({
-    reducer: authSectionSlice.reducer
+    reducer: rootReducer,
 })
