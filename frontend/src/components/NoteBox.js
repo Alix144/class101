@@ -17,7 +17,7 @@ const NoteBox = ({color}) => {
             <h5>get the books from the store</h5>
             {isMoreOpen &&
                 <div className="note-more">
-                    <h6>Complete</h6>
+                    {color === "#E1FFA0" ? <h6>Undo</h6> : <h6>Complete</h6>}
                     <hr />
                     <h6>Edit</h6>
                     <hr />

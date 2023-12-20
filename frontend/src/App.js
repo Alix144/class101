@@ -1,18 +1,18 @@
 import { Routes, Route } from 'react-router-dom'
 
-//components
-import Header from "./components/Header1";
-import Header2 from "./components/Header2";
-
-
 //pages
 import Main from "./pages/Main";
 import Auth from './pages/Auth';
+
+//components
+import Header from "./components/Header1";
+import Header2 from "./components/Header2";
 import Dashboard from './pages/Dashboard';
 import Home from './components/Home';
 import Calendar from './components/Calendar';
 import ToDo from './components/ToDo';
 import NotFound from './components/NotFound';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
             <Route path="home" element={<Home/>}/>
             <Route path="calendar" element={<Calendar/>}/>
             <Route path="to-do" element={<ToDo/>}/>
+            <Route path="profile" element={<Profile/>}/>
           </Route>
           <Route path="/*" element={<NotFound/>}/>
         </Routes>

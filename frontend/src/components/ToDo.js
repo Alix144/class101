@@ -6,7 +6,37 @@ const ToDo = () => {
         <>
             {false && 
                 <div className="on-page-div">
-                    <div>heheh</div>
+                    <div className="add-form">
+                        <Title propTitle={"Create Class"}/>
+                        <form action="">
+                            <div>
+                                <p>Name*</p>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <p>Course Code</p>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <p>Description</p>
+                                <input type="text"/>
+                            </div>
+                            <div>
+                                <p>Max Students</p>
+                                <input type="number" min={1}/>
+                            </div>
+                            <div>
+                            <p>Color</p>
+                                <div className="colors">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             }
             <main>
