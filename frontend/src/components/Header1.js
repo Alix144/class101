@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setToLogin, setToRegister } from '../store/slices/loginOrRegister';
 
 import logo from '../images/logo1.png'
 
@@ -9,10 +11,12 @@ const Header1 = () => {
     
     const navigateToLogin = () => {
         navigate("/auth")
+        dispatch(setToLogin())
     }
 
     const navigateToRegister = () => {
         navigate("/auth")
+        dispatch(setToRegister())
     }
 
     const navigateToMain = () => {

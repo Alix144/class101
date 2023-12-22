@@ -1,4 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setToLogin, setToRegister } from '../store/slices/loginOrRegister';
 
 // images
 import heroImg from "../images/hero-img.png"
@@ -6,10 +9,12 @@ import img1 from "../images/img1.jpg"
 import logo2 from "../images/logo2.png"
 
 const Main = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     
     const navigateTo = () => {
         navigate("/auth")
+        dispatch(setToRegister())
     }
 
     return ( 

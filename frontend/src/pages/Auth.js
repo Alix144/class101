@@ -1,12 +1,14 @@
-
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { login, logout } from '../store/slices/authSlice';
+import { login } from '../store/slices/authSlice';
+import { setToLogin, setToRegister } from '../store/slices/loginOrRegister';
+import { useState } from "react";
 
 const Auth = () => {
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
     const dispatch = useDispatch()
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+    const isRegister = useSelector((state) => state.loginOrRegister.isRegister)
     const navigate = useNavigate();
 
     const loginFunction = () => {
@@ -19,14 +21,14 @@ const Auth = () => {
         <div className="authentication">
 
             <div className="form">
-                { true ? <h1>Login</h1>: <h1>Register</h1> }
+                { isRegister ? <h1>Register</h1> : <h1>Login</h1> }
                 <div className="auth-select">
-                    <div className={true ? "selected" : ""} >Login</div>
-                    <div className={false === false ? "selected" : ""} >Register</div>
+                    <div className={isRegister ? "" : "selected"} onClick={()=>dispatch(setToLogin())}>Login</div>
+                    <div className={isRegister ? "selected" : ""} onClick={()=>dispatch(setToRegister())}>Register</div>
                 </div>
                 <form action="">
                     
-                    {true ? 
+                    {!isRegister ? 
                     <> 
                     <input type="email" placeholder="Email"/>
                     <input type="password" placeholder="Password"/>
@@ -45,8 +47,8 @@ const Auth = () => {
                     }
                         
                 </form>
-                {true ? <button className="form-btn" onClick={loginFunction}>Login</button>
-                : <button className="form-btn">Register</button>
+                {isRegister ? <button className="form-btn">Register</button>
+                : <button className="form-btn" onClick={loginFunction}>Login</button>
                  }
                 
             </div>
