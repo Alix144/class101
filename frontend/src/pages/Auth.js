@@ -1,16 +1,17 @@
-import {authSection} from '../store/index';
+
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { login, logout } from '../store/slices/authSlice';
 
 const Auth = () => {
-    const section = useSelector(state => state.section);
-    const dispatch = useDispatch();
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
 
-    const changeStateToLogin = () => {
-        dispatch(authSection.sectionLogin());
-    }
-
-    const changeStateToRegister = () => {
-        dispatch(authSection.sectionRegister());
+    const loginFunction = () => {
+        dispatch(login())
+        navigate("/dashboard/home")
     }
 
     return ( 
@@ -18,14 +19,14 @@ const Auth = () => {
         <div className="authentication">
 
             <div className="form">
-                {section === true ? <h1>Login</h1>: <h1>Register</h1> }
+                { true ? <h1>Login</h1>: <h1>Register</h1> }
                 <div className="auth-select">
-                    <div className={section ? "selected" : ""} onClick={changeStateToLogin}>Login</div>
-                    <div className={section === false ? "selected" : ""} onClick={changeStateToRegister}>Register</div>
+                    <div className={true ? "selected" : ""} >Login</div>
+                    <div className={false === false ? "selected" : ""} >Register</div>
                 </div>
                 <form action="">
                     
-                    {section ? 
+                    {true ? 
                     <> 
                     <input type="email" placeholder="Email"/>
                     <input type="password" placeholder="Password"/>
@@ -44,7 +45,7 @@ const Auth = () => {
                     }
                         
                 </form>
-                {section ? <button className="form-btn">Login</button>
+                {true ? <button className="form-btn" onClick={loginFunction}>Login</button>
                 : <button className="form-btn">Register</button>
                  }
                 

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {authSection} from '../store/index';
 
 import logo from '../images/logo1.png'
 
@@ -10,12 +9,10 @@ const Header1 = () => {
     
     const navigateToLogin = () => {
         navigate("/auth")
-        dispatch(authSection.sectionLogin())
     }
 
     const navigateToRegister = () => {
         navigate("/auth")
-        dispatch(authSection.sectionRegister())
     }
 
     const navigateToMain = () => {

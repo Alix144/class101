@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { login, logout } from '../store/slices/authSlice';
 
 import ProfileImg from './ProfileImg'
 import logo from '../images/logo1.png'
 import hamburger from '../images/hamburger.png'
 import plus from '../images/plus.png'
 import bell from '../images/bell.png'
-import logout from '../images/logout.png'
+import logoutIcon from '../images/logout.png'
 
 const Header2 = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const [plusBtn, setPlusBtn] = useState(false)
     const [profileBtn, setProfileBtn] = useState(false)
@@ -28,6 +32,11 @@ const Header2 = () => {
     const goToProfile = () => {
         navigate('dashboard/profile')
         setProfileBtn(false)
+    }
+
+    const logoutFunction = () => {
+        dispatch(logout())
+        navigate("/auth")
     }
 
     return ( 
@@ -64,7 +73,7 @@ const Header2 = () => {
 
                         <hr />
 
-                        <div className="profile-btn"> <img src={logout} alt="" /> Signout</div>
+                        <div className="profile-btn" onClick={logoutFunction}> <img src={logoutIcon} alt="logout-icon" /> Signout</div>
                     </div>
                 }
             </div>

@@ -3,7 +3,9 @@ import ClassesContainer from "./ClassesContainer";
 import Title from "./Title";
 
 const Home = () => {
+
     return ( 
+        <>
 
         <main>
             <Board/>
@@ -14,7 +16,7 @@ const Home = () => {
                 <ClassesContainer/>
             </div>
         </main>
-
+        </>
      );
 }
  

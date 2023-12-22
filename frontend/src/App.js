@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 //pages
 import Main from "./pages/Main";
@@ -15,19 +16,31 @@ import NotFound from './components/NotFound';
 import Profile from './components/Profile';
 
 function App() {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+  const dispatch = useDispatch()
+
   return (
     <div className="App">
-        <Header2/>
+      
+        {isLoggedIn ? <Header2/> : <Header/>}
+
         <Routes>
-          <Route path="/" element={<Main/>}/>
-          <Route path="/auth" element={<Auth/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}>
-            <Route path="home" element={<Home/>}/>
-            <Route path="calendar" element={<Calendar/>}/>
-            <Route path="to-do" element={<ToDo/>}/>
-            <Route path="profile" element={<Profile/>}/>
-          </Route>
-          <Route path="/*" element={<NotFound/>}/>
+          {!isLoggedIn ?
+          <>
+            <Route path="/" element={<Main/>}/>
+            <Route path="/auth" element={<Auth/>}/>
+          
+          </> :
+          
+            <Route path="/dashboard" element={<Dashboard/>}>
+              <Route path="home" element={<Home/>}/>
+              <Route path="calendar" element={<Calendar/>}/>
+              <Route path="to-do" element={<ToDo/>}/>
+              <Route path="profile" element={<Profile/>}/>
+            </Route>
+          
+          }
+            <Route path="/*" element={<NotFound/>}/>
         </Routes>
         
     </div>
