@@ -495,7 +495,7 @@ input:focus{
     margin: 20px 0;
 }
 
-.profile-btn, .profile-div2 form button, .on-page-btns button{
+.profile-btn, .profile-div2 form button, .on-page-btns button, .upload{
     width: 130px;
     height: 25px;
     border: none;
@@ -507,7 +507,7 @@ input:focus{
     align-items: center;
 }
 
-.profile-btn:hover, .profile-div2 form button:hover, .on-page-btns button:hover{
+.profile-btn:hover, .profile-div2 form button:hover, .on-page-btns button:hover, .upload:hover{
     cursor: pointer;
     background-color: #cee7ff;
 }
@@ -940,7 +940,7 @@ textarea:focus{
     justify-content: space-evenly;
 }
 
-.bgs div{
+.bgs .bg{
     margin: 5px 5px 5px;
     width: 30%;
     min-width: 150px;
@@ -953,21 +953,56 @@ textarea:focus{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
 }
 
-.bgs div:hover{
+.bgs .bg:hover{
     cursor: pointer;
     box-shadow: 1px 1px 10px rgb(126, 126, 126);
 }
 
 .upload{
-    margin: 5px 5px;
-    width: 30%;
+    margin-top: 20px;
+    background-color: #8AABFF;
+}
+
+.upload img{
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+input[type='file']{
+    display: none;
 }
 
 .no-img{
     width: 30px;
     height: 30px;
+}
+
+.selected-bg{
+    width: 100% ;
+    height: 100%;
+    border-radius: 5px;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0, 50%);
+    box-shadow: 1px 1px 10px rgb(126, 126, 126);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selected-bg img{
+    width: 25px;
+    height: 25px;
+}
+
+.selected-bg:hover{
+    display: none;
 }
 
 /* Profile */
@@ -1039,7 +1074,6 @@ textarea:focus{
 .account-details hr{
     width: 100%;
 }
-
 
 .profile-div2 form{
     height: 90%;

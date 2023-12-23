@@ -17,17 +17,23 @@ import bg8 from '../images/classBgs/bg8.jpg'
 import bg9 from '../images/classBgs/bg9.jpg'
 
 import noImg from '../images/no-img.png'
+import upload from '../images/upload.png'
+import check from '../images/check.png'
 
 const Welcome = () => {
+
     const [isCustomizeDivOpen, setCustomizeDiv] = useState(false)
     const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedBg, setSelectedBg] = useState("bg1");
+
+    const handleClick = (index) => {
+        setSelectedBg(index)
+    };
 
     const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        
-        // Do further processing if needed, e.g., validation, resizing, etc.
-    
+        const file = event.target.files[0];    
         setSelectedImage(file);
+        setSelectedBg("bg9")
       };
 
     return ( 
@@ -42,20 +48,21 @@ const Welcome = () => {
                     <form action="">
                             <p>Background Image</p>
                             <div className="bgs">
-                                <div style={{backgroundImage: `url(${bg1})`}}></div>
-                                <div style={{backgroundImage: `url(${bg2})`}}></div>
-                                <div style={{backgroundImage: `url(${bg3})`}}></div>
-                                <div style={{backgroundImage: `url(${bg4})`}}></div>
-                                <div style={{backgroundImage: `url(${bg5})`}}></div>
-                                <div style={{backgroundImage: `url(${bg6})`}}></div>
-                                <div style={{backgroundImage: `url(${bg7})`}}></div>
-                                <div style={{backgroundImage: `url(${bg8})`}}></div>
+                                <div className='bg' style={{backgroundImage: `url(${bg1})`}} onClick={()=>handleClick("bg1")}> <div className={`${selectedBg ==="bg1" ? 'selected-bg' : ''}`}> {selectedBg ==="bg1" && <img src={check} alt="check"/>} </div> </div>
+                                <div className='bg' style={{backgroundImage: `url(${bg2})`}} onClick={()=>handleClick("bg2")}> <div className={`${selectedBg ==="bg2" ? 'selected-bg' : ''}`}> {selectedBg ==="bg2" && <img src={check} alt="check"/>} </div> </div>
+                                <div className='bg' style={{backgroundImage: `url(${bg3})`}} onClick={()=>handleClick("bg3")}> <div className={`${selectedBg ==="bg3" ? 'selected-bg' : ''}`}> {selectedBg ==="bg3" && <img src={check} alt="check"/>} </div> </div>
+                                <div className='bg' style={{backgroundImage: `url(${bg4})`}} onClick={()=>handleClick("bg4")}> <div className={`${selectedBg ==="bg4" ? 'selected-bg' : ''}`}> {selectedBg ==="bg4" && <img src={check} alt="check"/>} </div> </div>
+                                <div className='bg' style={{backgroundImage: `url(${bg5})`}} onClick={()=>handleClick("bg5")}> <div className={`${selectedBg ==="bg5" ? 'selected-bg' : ''}`}> {selectedBg ==="bg5" && <img src={check} alt="check"/>} </div> </div>
+                                <div className='bg' style={{backgroundImage: `url(${bg6})`}} onClick={()=>handleClick("bg6")}> <div className={`${selectedBg ==="bg6" ? 'selected-bg' : ''}`}> {selectedBg ==="bg6" && <img src={check} alt="check"/>} </div> </div>
+                                <div className='bg' style={{backgroundImage: `url(${bg7})`}} onClick={()=>handleClick("bg7")}> <div className={`${selectedBg ==="bg7" ? 'selected-bg' : ''}`}> {selectedBg ==="bg7" && <img src={check} alt="check"/>} </div> </div>
+                                <div className='bg' style={{backgroundImage: `url(${bg8})`}} onClick={()=>handleClick("bg8")}> <div className={`${selectedBg ==="bg8" ? 'selected-bg' : ''}`}> {selectedBg ==="bg8" && <img src={check} alt="check"/>} </div> </div>
                                 {selectedImage ? (
-                                <div style={{backgroundImage: `url(${URL.createObjectURL(selectedImage)})`}}></div>
+                                <div className='bg' style={{backgroundImage: `url(${URL.createObjectURL(selectedImage)})`}} onClick={()=>handleClick("bg9")}> <div className={`${selectedBg === "bg9" ? 'selected-bg' : ''}`}> {selectedBg ==="bg9" && <img src={check} alt="check"/>} </div></div>
                                 ) :
-                                <div><img src={noImg} alt="No-Uploaded-Img" className='no-img'/></div>
+                                <div className='bg'><img src={noImg} alt="No-Uploaded-Img" className='no-img'/></div>
                                 }       
-                                <input type="file" accept="image/*"  className='upload' onChange={handleImageChange}/>                         
+                                <label htmlFor="uploadBg" className='upload'> <img src={upload} alt="upload" /> Upload</label>
+                                <input type="file" accept="image/*" id='uploadBg' className='upload' onChange={handleImageChange}/>                         
                             </div>
                     </form>
                     <div className="on-page-btns">
