@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import pen from '../images/pen.png'
 import { clearOnPageDiv, setOnPageDiv } from '../store/slices/onPageDivSlice';
 
@@ -5,53 +6,69 @@ import Title from "./Title";
 
 import { useSelector, useDispatch } from 'react-redux'
 
+import bg1 from '../images/classBgs/bg1.jpg'
+import bg2 from '../images/classBgs/bg2.jpg'
+import bg3 from '../images/classBgs/bg3.jpg'
+import bg4 from '../images/classBgs/bg4.jpg'
+import bg5 from '../images/classBgs/bg5.jpg'
+import bg6 from '../images/classBgs/bg6.jpg'
+import bg7 from '../images/classBgs/bg7.jpg'
+import bg8 from '../images/classBgs/bg8.jpg'
+import bg9 from '../images/classBgs/bg9.jpg'
+
+import noImg from '../images/no-img.png'
+
 const Welcome = () => {
-    const onPageDiv = useSelector((state) => state.onPageDiv.value)
-    const dispatch = useDispatch()
+    const [isCustomizeDivOpen, setCustomizeDiv] = useState(false)
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        
+        // Do further processing if needed, e.g., validation, resizing, etc.
+    
+        setSelectedImage(file);
+      };
 
     return ( 
         <>
-        {onPageDiv && 
+        {isCustomizeDivOpen && 
             <div className="on-page-div">
-                <div className="add-form">
-                    <Title propTitle={"Create Class"}/>
+                <div className="add-form customize-form" >
+                    <div className="on-page-title">
+                        <h3>Customize</h3>
+                        <hr />
+                    </div>
                     <form action="">
-                        <div>
-                            <p>Name*</p>
-                            <input type="text"/>
-                        </div>
-                        <div>
-                            <p>Course Code</p>
-                            <input type="text"/>
-                        </div>
-                        <div>
-                            <p>Description</p>
-                            <input type="text"/>
-                        </div>
-                        <div>
-                            <p>Max Students</p>
-                            <input type="number" min={1}/>
-                        </div>
-                        <div>
-                        <p>Color</p>
-                            <div className="colors">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
+                            <p>Background Image</p>
+                            <div className="bgs">
+                                <div style={{backgroundImage: `url(${bg1})`}}></div>
+                                <div style={{backgroundImage: `url(${bg2})`}}></div>
+                                <div style={{backgroundImage: `url(${bg3})`}}></div>
+                                <div style={{backgroundImage: `url(${bg4})`}}></div>
+                                <div style={{backgroundImage: `url(${bg5})`}}></div>
+                                <div style={{backgroundImage: `url(${bg6})`}}></div>
+                                <div style={{backgroundImage: `url(${bg7})`}}></div>
+                                <div style={{backgroundImage: `url(${bg8})`}}></div>
+                                {selectedImage ? (
+                                <div style={{backgroundImage: `url(${URL.createObjectURL(selectedImage)})`}}></div>
+                                ) :
+                                <div><img src={noImg} alt="No-Uploaded-Img" className='no-img'/></div>
+                                }       
+                                <input type="file" accept="image/*"  className='upload' onChange={handleImageChange}/>                         
                             </div>
-                        </div>
                     </form>
-                    <button onClick={()=>dispatch(clearOnPageDiv())}>close</button>
+                    <div className="on-page-btns">
+                        <button onClick={()=>setCustomizeDiv(false)}>close</button>
+                        <button>Save</button>
+                    </div>
                 </div>
             </div>
         }
 
             <div className="welcome">
                 <h1>Welcome Back Ali!</h1>
-                <p>{onPageDiv}</p>
-                <img src={pen} alt="Edit" onClick={() => dispatch(setOnPageDiv())}/>
+                <img src={pen} alt="Edit" onClick={() => setCustomizeDiv(true)}/>
             </div>
             
         </>

@@ -20,6 +20,7 @@ const ClassesContainer = () => {
             <ClassBox color={"red"} img={bg2}/>
             <ClassBox color={"green"} img={bg3}/>
             <ClassBox color={"green"} img={bg5}/>
+            <ClassBox color={"blue"} img={bg1}/>
             <AddBox/>
         </div>
      );

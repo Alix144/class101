@@ -15,7 +15,6 @@ export const onPageDivSlice = createSlice({
   },
 })
 
-// Action creators are generated for each case reducer function
 export const { clearOnPageDiv, setOnPageDiv } = onPageDivSlice.actions
 
 export default onPageDivSlice.reducer

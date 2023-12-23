@@ -17,7 +17,8 @@ const Header2 = () => {
 
     const [plusBtn, setPlusBtn] = useState(false)
     const [profileBtn, setProfileBtn] = useState(false)
-    
+    const [isCreateClassDivOpen, setCreateClassDiv] = useState(false)
+    const [isJoinClassDivOpen, setJoinClassDiv] = useState(false)
 
     const plusMenu = () => {
         setPlusBtn(!plusBtn)
@@ -34,12 +35,89 @@ const Header2 = () => {
         setProfileBtn(false)
     }
 
+    const closeCreateClassDiv = () => {
+        setCreateClassDiv(false)
+        setPlusBtn(false)
+    }
+
+    const closeJoinClassDiv = () => {
+        setJoinClassDiv(false)
+        setPlusBtn(false)
+    }
+
     const logoutFunction = () => {
         dispatch(logout())
         navigate("/auth")
     }
 
     return ( 
+
+        <>
+        {isCreateClassDivOpen && 
+            <div className="on-page-div">
+                <div className="add-form">
+                    <div className="on-page-title">
+                        <h3>Create Class</h3>
+                        <hr />
+                    </div>
+                    <form action="">
+                        <div>
+                            <p>Name*</p>
+                            <input type="text"/>
+                        </div>
+                        <div>
+                            <p>Course Code</p>
+                            <input type="text"/>
+                        </div>
+                        <div>
+                            <p>Description</p>
+                            <textarea name="" id=""  rows="5"></textarea>
+                        </div>
+                        <div>
+                            <p>Max Students</p>
+                            <input type="number" min={1} className='type-number'/>
+                        </div>
+                        <div>
+                        <p>Color</p>
+                            <div className="colors">
+                                <div style={{backgroundColor: "#74BCFF"}}></div>
+                                <div style={{backgroundColor: "#86FFAF"}}></div>
+                                <div style={{backgroundColor: "#B63EFF"}}></div>
+                                <div style={{backgroundColor: "#FF6464"}}></div>
+                                <div style={{backgroundColor: "#FFD15A"}}></div>
+                            </div>
+                        </div>
+                    </form>
+                    <div className="on-page-btns">
+                        <button onClick={closeCreateClassDiv}>close</button>
+                        <button>Create</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        {isJoinClassDivOpen && 
+            <div className="on-page-div">
+                <div className="add-form" style={{marginTop: "0"}}>
+                    <div className="on-page-title">
+                        <h3>Join Class</h3>
+                        <hr />
+                    </div>
+                    <form action="">
+                        <div>
+                            <p>Class Code</p>
+                            <input type="text"/>
+                        </div>
+                    </form>
+
+                    <div className="on-page-btns">
+                        <button onClick={closeJoinClassDiv}>close</button>
+                        <button>join</button>
+                    </div>
+                </div>
+            </div>
+        }
+        
         <div className='header2'>
             <div className='header-part-1'>
                 <img src={hamburger} alt="" className='hamburger'/>
@@ -56,9 +134,9 @@ const Header2 = () => {
 
                 {plusBtn && 
                     <div className="plus-menu">
-                        <div><h5>Join Class</h5></div>
+                        <div onClick={()=> setJoinClassDiv(true)}><h5>Join Class</h5></div>
                         <hr/>
-                        <div><h5>Create Class</h5></div>
+                        <div onClick={()=> setCreateClassDiv(true)}><h5>Create Class</h5></div>
                     </div>
                 }
 
@@ -78,6 +156,9 @@ const Header2 = () => {
                 }
             </div>
         </div>
+        
+        </>
+
      );
 }
  

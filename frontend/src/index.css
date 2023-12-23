@@ -320,9 +320,9 @@ input{
     outline: none;
 }
 
-input:focus {
-    border: 2px solid #74BCFF; /* Set your desired focus border color */
-  }
+input:focus{
+    border: 2px solid #74BCFF;
+}
 
 
 .name{
@@ -495,7 +495,7 @@ input:focus {
     margin: 20px 0;
 }
 
-.profile-btn, .profile-div2 form button{
+.profile-btn, .profile-div2 form button, .on-page-btns button{
     width: 130px;
     height: 25px;
     border: none;
@@ -507,7 +507,7 @@ input:focus {
     align-items: center;
 }
 
-.profile-btn:hover, .profile-div2 form button:hover{
+.profile-btn:hover, .profile-div2 form button:hover, .on-page-btns button:hover{
     cursor: pointer;
     background-color: #cee7ff;
 }
@@ -562,8 +562,8 @@ input:focus {
 }
 
 .classes{
-    max-height: 200px;
-    overflow-y: scroll;
+    max-height: 150px;
+    overflow: auto;
 }
 
 .classes ul{
@@ -833,25 +833,77 @@ main{
     background-color: rgba(50, 50, 50, 40%);
     position: fixed;
     top: 0;
+    left: 0;
     z-index: 5;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: auto;
+}
+
+.on-page-title{
+    margin-bottom: 20px;
+}
+
+.on-page-div h3{
+    padding: 0 20px 10px;
+}
+
+.on-page-title hr{
+    height: 2px;
+    border: none;
+    background-image: linear-gradient(to right, #74BCFF, #86FFAf);
 }
 
 .add-form{
-    width: 45%;
+    margin-top: 100px;
+    padding: 20px 0px;
+    width: 35%;
     background-color: #fff;
     border-radius: 20px;
 }
 
 .add-form form{
-    width: 50%;
+    margin: 0 auto;
+    width: 70%;
+}
+
+.add-form textarea{
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    box-shadow: 1px 1px 5px 0px rgb(126, 126, 126);
+}
+
+textarea:focus{
+    border: 2px solid #74BCFF;
 }
 
 .add-form input{
+    margin-bottom: 15px;
+    height: 35px;
     background-color: #f5f5f5;
     box-shadow: 1px 1px 5px 0px rgb(126, 126, 126);
+
+}
+
+.type-number{
+    width: 30%;
+}
+
+.on-page-btns{
+    margin: 50px auto 0;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.on-page-btns button{
+    width: 100px;
+    background-color: #8AABFF;
 }
 
 .colors{
@@ -862,8 +914,60 @@ main{
 .colors div{
     width: 60px;
     height: 60px;
-    background-color: #FF6464;
     border-radius: 100px;
+}
+
+.colors div:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 10px rgb(126, 126, 126);
+}
+
+/* customize page */
+
+.customize-form{
+    margin-top: 0;
+    width: 60%;
+}
+
+.customize-form form{
+    width: 90%;
+}
+
+.bgs{
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.bgs div{
+    margin: 5px 5px 5px;
+    width: 30%;
+    min-width: 150px;
+    height: 60px;
+    background-color: #bbbbbb;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bgs div:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 10px rgb(126, 126, 126);
+}
+
+.upload{
+    margin: 5px 5px;
+    width: 30%;
+}
+
+.no-img{
+    width: 30px;
+    height: 30px;
 }
 
 /* Profile */
