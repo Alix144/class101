@@ -666,7 +666,6 @@ main{
     margin: 10px 15px;
     width: 250px;
     height: 250px;
-    background-color: #74BCFF;
     border-radius: 5px;
 }
 
@@ -693,7 +692,6 @@ main{
     height: 45%;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-    background-image: url(images/classbg.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -706,7 +704,6 @@ main{
     height: 55px;
     position: absolute;
     bottom: -25px;
-    background-color: #C2DEFF;
     border-radius: 50px;
     display: flex;
     justify-content: center;
@@ -718,8 +715,7 @@ main{
     height: 100%;  
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-    background-image: linear-gradient(#282DA4, #74BCFF);
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .more{
@@ -733,7 +729,7 @@ main{
 }
 
 .more:hover{
-    background-color: #74BCFF;
+    background-color: #ececec60;
 }
 
 .class-box-info{

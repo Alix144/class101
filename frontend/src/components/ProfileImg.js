@@ -1,6 +1,6 @@
-const ProfileImg = () => {
+const ProfileImg = ({picColor}) => {
     return (
-         <div className="profile">S</div>
+         <div className="profile" style={{backgroundColor: (picColor)}}>S</div>
      );
 }
  
