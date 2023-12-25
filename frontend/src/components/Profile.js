@@ -33,22 +33,22 @@ const Profile = () => {
                         <form action="">
                             <div className="full-name">
                                 <div>
-                                    <label htmlFor="">Name</label>
-                                    <input type="text" />
+                                    <label htmlFor="name">Name</label>
+                                    <input type="text" name="name" id="name"/>
                                 </div>
                                 <div>
-                                    <label htmlFor="">Surname</label>
-                                    <input type="text" />
+                                    <label htmlFor="surname">Surname</label>
+                                    <input type="text" name="surname" id="surname"/>
                                 </div>
                             </div>
 
                             <div className="email">
-                                <label htmlFor="">Email</label>
-                                <input type="email" />
+                                <label htmlFor="email">Email</label>
+                                <input type="email" name="email" id="email"/>
                             </div>
                             <div className="description">
-                                <label htmlFor="">Description</label>
-                                <textarea name="" id="" cols="30" rows="6"></textarea>
+                                <label htmlFor="desc">Description</label>
+                                <textarea name="desc" id="desc" cols="30" rows="6"></textarea>
                             </div>
                             <button>Save</button>
                         </form>

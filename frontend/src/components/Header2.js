@@ -66,16 +66,16 @@ const Header2 = () => {
                             <input type="text"/>
                         </div>
                         <div>
-                            <p>Course Code</p>
-                            <input type="text"/>
+                            <label htmlFor="code">Course Code</label>
+                            <input type="text" id="code" name="code"/>
                         </div>
                         <div>
-                            <p>Description</p>
-                            <textarea name="" id=""  rows="5"></textarea>
+                            <label htmlFor="desc">Description</label>
+                            <textarea name="desc" id="desc"  rows="5"></textarea>
                         </div>
                         <div>
-                            <p>Max Students</p>
-                            <input type="number" min={1} className='type-number'/>
+                            <label htmlFor="max">Max Students</label>
+                            <input type="number" min={1} className='type-number' name="max" id="max"/>
                         </div>
                         <div>
                         <p>Color</p>
@@ -105,7 +105,7 @@ const Header2 = () => {
                     </div>
                     <form action="">
                         <div>
-                            <p>Class Code</p>
+                            <label htmlFor="code">Class Code</label>
                             <input type="text"/>
                         </div>
                     </form>

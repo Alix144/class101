@@ -15,13 +15,13 @@ const Title = ({propTitle, add}) => {
                 </div>
                 <form action="">
                     <div>
-                        <label htmlFor="">Title*</label>
-                        <input type="text" />
+                        <label htmlFor="title">Title*</label>
+                        <input type="text" id="title" name="title"/>
                     </div>
 
                     <div>
-                        <label htmlFor="">Deadline</label>
-                        <input type="date" />
+                        <label htmlFor="deadline">Deadline</label>
+                        <input type="date" id="deadline" name="deadline"/>
                     </div>
 
                     <div>
@@ -34,8 +34,8 @@ const Title = ({propTitle, add}) => {
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="">Description</label>
-                        <textarea name="" id="" cols="30" rows="5"></textarea>
+                        <label htmlFor="desc">Description</label>
+                        <textarea name="desc" id="desc" cols="30" rows="5"></textarea>
                     </div>
 
                 </form>

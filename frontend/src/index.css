@@ -310,6 +310,10 @@ footer{
     margin-bottom: 20px;
 }
 
+label{
+    display: block;
+}
+
 input, select{
     margin: 2px 0;
     padding: 10px;
@@ -885,11 +889,6 @@ main{
 .add-form form{
     margin: 0 auto;
     width: 70%;
-}
-
-.add-form form div{
-    display: flex;
-    flex-direction: column;
 }
 
 .add-form textarea{
