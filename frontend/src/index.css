@@ -328,7 +328,6 @@ input:focus{
     border: 2px solid #74BCFF;
 }
 
-
 .name{
     display: flex;
     justify-content: space-between;
@@ -355,7 +354,6 @@ input:focus{
 /*** Dashboard ***/
 
 .dashboard{
-    
     display: flex;
 }
 
@@ -627,6 +625,7 @@ main{
     position: absolute;
     right: 10px;
     bottom: 10px;
+    border-radius: 50px;
     cursor: pointer;
 }
 
@@ -1133,6 +1132,99 @@ input[type='file']{
 
 .profile-div2 form button{
     margin: 0 auto;
+}
+
+/* classroom */
+.classroom-main{
+    background-color: #e6e6e6;
+}
+
+.board2{
+    width: 100%;
+}
+
+.class-info{
+    padding: 30px 80px;
+    position: relative;
+    background-image: url(images/classBgs/bg3.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.class-info div{
+    max-width: 50%;
+}
+
+.class-info p{
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.class-name-pic{
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.class-code{
+    margin-bottom: 5px;
+}
+
+.class-name-pic div{
+    margin-right: 5px;
+    width: 60px;
+    height: 60px;
+    background-color: #2fbdff;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.class-name-pic img{
+    margin-left: 15px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+}
+
+.class-name-pic img:hover, .welcome img:hover{
+    box-shadow: 1px 1px 5px rgb(126, 126, 126);
+    cursor: pointer;
+}
+
+.people-num{
+    display: flex;
+    position: absolute;
+    right: 25px;
+    bottom: 10px;
+}
+
+.people-num  div{
+    margin-left: 20px;
+    display: flex;
+}
+
+.people-num img{
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.nav{
+    padding: 0px 20px;
+    display: flex;
+    background-image: linear-gradient(to right, #74BCFF, #86FFAf);
+}
+
+.nav div{
+    padding: 10px 15px;
+}
+
+.nav div:hover{
+    background-color: rgb(255, 255, 255, 35%);
+    cursor: pointer;
 }
 
 /**************************/

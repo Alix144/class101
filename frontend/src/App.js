@@ -14,6 +14,7 @@ import Calendar from './components/Calendar';
 import ToDo from './components/ToDo';
 import NotFound from './components/NotFound';
 import Profile from './components/Profile';
+import Classroom from './components/Classroom';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -37,6 +38,7 @@ function App() {
               <Route path="calendar" element={<Calendar/>}/>
               <Route path="to-do" element={<ToDo/>}/>
               <Route path="profile" element={<Profile/>}/>
+              <Route path="classroom" element={<Classroom/>}/>
             </Route>
           
           }

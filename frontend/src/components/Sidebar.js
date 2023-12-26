@@ -26,6 +26,10 @@ const Sidebar = () => {
         navigate("to-do")
     }
 
+    const goToClassroom = () => {
+        navigate("classroom")
+    }
+
     return ( 
         <div className="sidebar">
             <div className='sidebar-list' onClick={goToHome}>
@@ -54,7 +58,7 @@ const Sidebar = () => {
                             <div className="profile-pic">M</div>
                             <li>math</li>
                         </div>
-                        <div className='class-parent'>
+                        <div className='class-parent' onClick={goToClassroom}>
                             <div className="profile-pic">S</div>
                             <li>Spanish</li>
                         </div> 
