@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from 'cors';
-// import userRouter from "./routes/user-route.js";
+import userRouter from "./routes/user-route.js";
 import { config } from 'dotenv';
 config();
 
@@ -17,18 +17,14 @@ app.use(cors());
 
 app.use(express.json())
 
-// app.use("/user", userRouter)
+app.use("/user", userRouter)
 
 app.get("/", (req, res)=>{
     res.send("messaghaha")
 })
 
 
-// mongoose.connect(process.env.MONGO_URI)
-// .then(() => app.listen(port, () => {
-//     console.log("Live on port " + port)
-// })).catch((err) => console.log(err))
-
-app.listen(PORT, () => {
+mongoose.connect(process.env.MONGO_URI)
+.then(() => app.listen(PORT, () => {
     console.log("Live on port " + PORT)
-})
+})).catch((err) => console.log(err))

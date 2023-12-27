@@ -6,12 +6,9 @@ export const signup = async(req, res, next) => {
     const {name, surname, email, password, description, teachingClasses, learningClasses} = req.body;
 
     let existingUser;
-    let existingSubject;
+
     try{
         existingUser = await User.findOne({email})
-        if(subject){
-            existingSubject = await User.findOne({subject})
-        }
         
     }catch(err){
         return console.log(err + "there was an error")
@@ -21,26 +18,23 @@ export const signup = async(req, res, next) => {
         return res.status(400).json({message: "User Already Exists!"})
     }
 
-    if(existingSubject){
-        return res.status(400).json({message: "This Subject Has Already Been Taken!"})
-    }
-
     const hashedPassword = bcrypt.hashSync(password);
     
 
     const user= new User({
         name,
+        surname,
         email,
         password: hashedPassword,
-        role,
-        subjects,
-        subject,
+        description,
+        teachingClasses,
+        learningClasses,
     })
 
     try{
         await user.save()
     }catch(err){
-        console.log(err +"jjjnkn")
+        console.log(err +" error while signing up maaan")
         return res.status(400).json({message: err})
     }
 
