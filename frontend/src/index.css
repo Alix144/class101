@@ -497,7 +497,7 @@ input:focus{
     margin: 20px 0;
 }
 
-.profile-btn, .profile-div2 form button, .on-page-btns button, .upload{
+.profile-btn, .profile-div2 form button, .on-page-btns button, .upload, .profile-div2 .save{
     width: 130px;
     height: 25px;
     border: none;
@@ -892,7 +892,7 @@ main{
     width: 70%;
 }
 
-.add-form textarea{
+.add-form textarea, .profile-divs textarea{
     margin-bottom: 15px;
     padding: 10px;
     width: 100%;
@@ -906,7 +906,7 @@ textarea:focus{
     border: 2px solid #74BCFF;
 }
 
-.add-form input, .add-form select{
+.add-form input, .add-form select, .profile-divs input{
     margin-bottom: 15px;
     height: 35px;
     background-color: #f5f5f5;
@@ -1035,9 +1035,12 @@ input[type='file']{
 /* Profile */
 .profile-divs{
     margin: 0 auto;
-    width: 95%;
+    margin-bottom: 50px;
+    width: 85%;
     display: flex;
     justify-content: space-between;
+    background-color: #FAFAFA;
+    border-radius: 5px;
 }
 
 .profile-divs p{
@@ -1046,9 +1049,6 @@ input[type='file']{
 }
 
 .profile-div1, .profile-div2{
-    height: 70vh;
-    background-color: #74bcff;
-    border-radius: 5px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -1062,15 +1062,32 @@ input[type='file']{
 
 .profile-div1{
     padding: 25px 20px;
-    width: 33%;
+    width: 35%;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-image: linear-gradient(to right, #74BCFF, #86FFAf);
+}
+
+.profile-div1-1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.div1, .div2, .classroom{
+    margin-bottom: 25px;
 }
 
 .profile-div-pic{
-    margin-bottom: 10px;
-    width: 150px;
-    height: 150px;
+    margin-bottom: 5px;
+    width: 130px;
+    height: 130px;
     border-radius: 100px;
-    background-color: #a1a1a1;
+    background-color: #d4d4d4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .classroom{
@@ -1103,14 +1120,16 @@ input[type='file']{
 }
 
 .profile-div2 form{
-    height: 90%;
+    margin: 20px auto;
+    margin-bottom: 5px;
+    width: 85%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
 .profile-div2 input{
-    height: 35px;
+    height: 30px;
 }
 
 .full-name{
@@ -1133,7 +1152,17 @@ input[type='file']{
 }
 
 .profile-div2 form button{
+    width: 150px;
+    height: 30px;
+    background-color: #8AABFF;
+}
+
+.profile-div2 .save{
     margin: 0 auto;
+    margin-top: 40px;
+    width: 150px;
+    height: 30px !important;
+
 }
 
 /* classroom */
