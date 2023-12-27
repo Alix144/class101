@@ -15,6 +15,8 @@ import ToDo from './components/ToDo';
 import NotFound from './components/NotFound';
 import Profile from './components/Profile';
 import Classroom from './components/Classroom';
+import Announcements from './components/Announcements';
+import ClassroomHome from './components/ClassroomHome';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -32,15 +34,20 @@ function App() {
             <Route path="/auth" element={<Auth/>}/>
           
           </> :
-          
+          <>
             <Route path="/dashboard" element={<Dashboard/>}>
               <Route path="home" element={<Home/>}/>
               <Route path="calendar" element={<Calendar/>}/>
               <Route path="to-do" element={<ToDo/>}/>
               <Route path="profile" element={<Profile/>}/>
-              <Route path="classroom" element={<Classroom/>}/>
+              
+              <Route path="classroom" element={<Classroom/>}>
+                <Route path="home" element={<ClassroomHome/>}/>
+                <Route path="announcements" element={<Announcements/>}/>
+              </Route>
+
             </Route>
-          
+              </>
           }
             <Route path="/*" element={<NotFound/>}/>
         </Routes>

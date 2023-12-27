@@ -27,7 +27,7 @@ const Sidebar = () => {
     }
 
     const goToClassroom = () => {
-        navigate("classroom")
+        navigate("classroom/home")
     }
 
     return ( 
