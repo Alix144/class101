@@ -10,18 +10,20 @@ const Profile = () => {
                 <Title propTitle={"Profile"}/>
                 <div className="profile-divs">
                     <div className="profile-div1">
-                        <div className="div1">
-                            <div className="profile-div-pic"></div>
+                        <div className="profile-div1-1">
+                            <div className="div1">
+                            <div className="profile-div-pic"><h1>A</h1></div>
                             <h3>Ali Youssef</h3>
-                        </div>
-                        <div>
+                            </div>
+                            <div className="div2">
                             <h4>Description</h4>
                             <p>Hello, I'm Mrs. Sara, an experienced educator with a passion for English literature. With over a decade of teaching.</p>
-                        </div>
-                        <div className="classroom">
+                            </div>
+                            <div className="classroom">
                             <img src={classroom} alt="Class-room" />
                             <h4>Classes:</h4>
                             <p>4</p>
+                            </div>
                         </div>
                     </div>
                     <div className="profile-div2">
@@ -50,7 +52,8 @@ const Profile = () => {
                                 <label htmlFor="desc">Description</label>
                                 <textarea name="desc" id="desc" cols="30" rows="6"></textarea>
                             </div>
-                            <button>Save</button>
+                            <button>Change Password</button>
+                            <button className="save">Save</button>
                         </form>
                     </div>
                 </div>
