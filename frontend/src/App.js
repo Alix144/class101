@@ -17,6 +17,7 @@ import Profile from './components/Profile';
 import Classroom from './components/Classroom';
 import Announcements from './components/Announcements';
 import ClassroomHome from './components/ClassroomHome';
+import Chat from './components/Chat';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -25,10 +26,12 @@ function App() {
   return (
     <div className="App">
       
-        {isLoggedIn ? <Header2/> : <Header/>}
+        {/* {isLoggedIn ? <Header2/> : <Header/>} */}
+        {true ? <Header2/> : <Header/>}
 
         <Routes>
-          {!isLoggedIn ?
+          {/* {!isLoggedIn ? */}
+          {!true ?
           <>
             <Route path="/" element={<Main/>}/>
             <Route path="/auth" element={<Auth/>}/>
@@ -44,6 +47,7 @@ function App() {
               <Route path="classroom" element={<Classroom/>}>
                 <Route path="home" element={<ClassroomHome/>}/>
                 <Route path="announcements" element={<Announcements/>}/>
+                <Route path="chat" element={<Chat/>}/>
               </Route>
 
             </Route>

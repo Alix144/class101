@@ -1364,6 +1364,132 @@ input[type='file']{
     height: 60px;
 }
 
+/* Announcements */
+
+.announcement-box{
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 20px 30px;
+    width: 95%;
+    background-color: rgb(255, 255, 255, 50%);
+    box-shadow: 1px 1px 5px rgb(126, 126, 126);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position: relative;
+}
+
+.announcement-box:hover{
+    box-shadow: 1px 1px 10px rgb(126, 126, 126);
+}
+
+.announcement-box .info{
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.announcement-box .profile-pic{
+    width: 50px;
+    height: 50px;
+}
+
+.announcement-box .info p{
+    font-size: small;
+}
+
+.left-border{
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(#74bcff ,#68ffaf);
+}
+
+.announcement-text{
+    margin-bottom: 20px;
+}
+
+.date{
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+    font-size: small;
+}
+
+/* Chat */
+.chat{
+    margin-bottom: 50px;
+}
+
+.output-msg{
+    margin: 0 auto;
+    margin-bottom: 10px;
+    width: 90%;
+    height: 75vh;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    position: relative;
+}
+
+.bottom-border{
+    width: 100%;
+    height: 3px;
+    background-image: linear-gradient(to right, #74bcff ,#68ffaf);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.input-msg{
+    margin: 0 auto;
+    width: 90%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-msg .input, .input-msg .send, .output-msg{
+    background-color: rgb(255, 255, 255, 50%);
+    box-shadow: 1px 1px 5px rgb(126, 126, 126);
+}
+
+.input-msg .input{
+    margin-right: 10px;
+    padding: 0 15px;
+    height: 100%;
+    border-radius: 20px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-msg .input input{
+    margin: 0 10px;
+    background-color: #ffffff00;
+    font-size: 20px;
+}
+
+.input-msg .send{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-msg img{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.send img{
+    width: 20px;
+    height: 20px;
+}
 
 /**************************/
 

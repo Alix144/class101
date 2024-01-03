@@ -22,12 +22,10 @@ const Auth = () => {
     const [password2, setPassword2] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
-
-
-    const loginFunction = () => {
-        dispatch(login())
-        navigate("/dashboard/home")
-    }
+    // const loginFunction = () => {
+    //     dispatch(login())
+    //     navigate("/dashboard/home")
+    // }
 
     const sendRequest = async() => {
         const res = await axios.post("http://localhost:4000/user/register", {
@@ -58,7 +56,7 @@ const Auth = () => {
 
     const handleLogin = (e) => {
         e.preventDefault()
-        sendRequest2().then((data)=>localStorage.setItem("userId", data.user._id)).then(()=>dispatch(login())).then(()=>navigate("/dashboard/home")).then((data) => console.log(data))
+        sendRequest2().then((data)=>localStorage.setItem("userId", data.user._id)).then(()=>navigate("/dashboard/home")).then(()=>dispatch(login())).then((data) => console.log(data))
     }
 
     return ( 

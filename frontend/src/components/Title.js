@@ -45,7 +45,7 @@ const Title = ({propTitle, add}) => {
                 </div>
             </div>
             </div>
-            }
+        }
 
         <div className="title">
             <div>
@@ -53,6 +53,10 @@ const Title = ({propTitle, add}) => {
                 {add &&
                 <>
                     {add === "toDo" &&
+                        <img src={plus} alt="Add" onClick={()=>setAddTaskPage(!isAddTaskPageOpen)}/>
+                    }
+
+                    {add === "announcements" &&
                         <img src={plus} alt="Add" onClick={()=>setAddTaskPage(!isAddTaskPageOpen)}/>
                     }
                 </>
