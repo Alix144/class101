@@ -1365,8 +1365,11 @@ input[type='file']{
 }
 
 /* Announcements */
+.announcements{
+    margin-bottom: 30px;
+}
 
-.announcement-box{
+.announcement-box {
     margin: 0 auto;
     margin-bottom: 10px;
     padding: 20px 30px;
@@ -1430,6 +1433,8 @@ input[type='file']{
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .bottom-border{
@@ -1485,11 +1490,161 @@ input[type='file']{
     height: 25px;
     cursor: pointer;
 }
+.send:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 10px rgb(126, 126, 126);
+}
 
 .send img{
     width: 20px;
     height: 20px;
 }
+
+.chat-info{
+    padding: 5px 25px;
+    width: 100%;
+}
+
+.chat hr{
+    width: 100%;
+    height: 1px;
+    border: none;
+    background-color: #2fbdff;
+}
+
+.chat-info2{
+    display: flex;
+    align-items: center;
+}
+
+.chat-img{
+    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    background-color: #2fbdff;
+}
+
+.chat-content{
+    padding: 0 25px 25px;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.my-msg, .others-msg{
+    margin: 10px 0;
+   
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-msg{
+    align-self: flex-end;
+}
+
+.others-msg{
+    align-self: flex-start;
+}
+
+.msg-text{
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.my-msg .msg-text{
+    background-color: #74BCFF;
+}
+
+.others-msg .msg-text{
+    background-color: rgb(134, 255, 175, 50%);
+}
+
+.msg-text h5{
+    margin-bottom: 15px;
+    font-weight:normal
+}
+
+.msg-text p{
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    font-size: 12px;
+}
+
+.msg-pic{
+    min-width: 45px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    background-color: #2fbdff;
+}
+
+/* Assignments */
+.going-assignments, .coming-assignments{
+    margin: 0 auto;
+    margin-bottom: 50px;
+    width: 95%;
+    max-height: 70vh;
+}
+
+.assignment{
+    margin-bottom: 10px;
+    padding: 25px 30px;
+    width: 100%;
+    position: relative;
+    background-color: rgb(255, 255, 255, 50%);
+    box-shadow: 1px 1px 5px rgb(126, 126, 126);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assignment:hover{
+    box-shadow: 1px 1px 10px rgb(126, 126, 126);
+    cursor: pointer;
+}
+
+.assignment .info{
+    display: flex;
+    align-items: center;
+}
+
+.assignment img{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.assignment .info img{
+    margin-right: 10px;
+    width: 35px;
+    height: 35px;
+}
+
+.assignment .info .pic{
+    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    background-color: #68ffaf;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.assignment .info p, .assignment .info h6{
+    margin-right: 5px;
+    font-size: 12px;
+    display: inline-block;
+}
+
 
 /**************************/
 

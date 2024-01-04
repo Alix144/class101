@@ -2,8 +2,9 @@ import Title from "./Title";
 
 const Announcements = () => {
     return ( 
-        <div className="content">
+        <div className="content announcements">
             <Title propTitle={"Announcements"} add={"announcements"}/>
+
             <div className="announcement-box">
                 <div className="left-border"></div>
                 <div className="info">
@@ -18,6 +19,7 @@ const Announcements = () => {
                 </div>
                 <p className="date">25-03-2023</p>
             </div>
+
             <div className="announcement-box">
                 <div className="left-border"></div>
                 <div className="info">

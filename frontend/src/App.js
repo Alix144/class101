@@ -18,6 +18,7 @@ import Classroom from './components/Classroom';
 import Announcements from './components/Announcements';
 import ClassroomHome from './components/ClassroomHome';
 import Chat from './components/Chat';
+import Assignments from './components/Assignments';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -48,6 +49,8 @@ function App() {
                 <Route path="home" element={<ClassroomHome/>}/>
                 <Route path="announcements" element={<Announcements/>}/>
                 <Route path="chat" element={<Chat/>}/>
+                <Route path="assignments" element={<Assignments/>}/>
+                
               </Route>
 
             </Route>
