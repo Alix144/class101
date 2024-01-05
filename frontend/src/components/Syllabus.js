@@ -26,7 +26,7 @@ const Syllabus = () => {
             </div>
             <div className="syllabus-box">
                 <div className="left-border"></div>
-                <h3>Week 1:</h3>
+                <h3>Week 2:</h3>
                 <div className="topics">
                     <ul>
                         <li>Verbs</li>
@@ -46,7 +46,7 @@ const Syllabus = () => {
             </div>
             <div className="syllabus-box">
                 <div className="left-border"></div>
-                <h3>Week 1:</h3>
+                <h3>Week 3:</h3>
                 <div className="topics">
                     <ul>
                         <li>Verbs</li>
