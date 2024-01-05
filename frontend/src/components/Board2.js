@@ -14,11 +14,10 @@ const Board = () => {
                 <div onClick={()=>navigate('announcements')}>Announcements</div>
                 <div onClick={()=>navigate('chat')}>Chat</div>
                 <div onClick={()=>navigate('assignments')}>Assignments</div>
-                <div>Q&A</div>
-                <div>Syllabus</div>
-                <div>Documents</div>
-                <div>People</div>
-                <div>People</div>
+                <div onClick={()=>navigate('QnA')}>Q&A</div>
+                <div onClick={()=>navigate('syllabus')}>Syllabus</div>
+                <div onClick={()=>navigate('documents')}>Documents</div>
+                <div onClick={()=>navigate('people')}>People</div>
             </div>
         </div>
      );

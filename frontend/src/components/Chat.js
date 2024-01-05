@@ -10,7 +10,7 @@ const Chat = () => {
 
                 <div className="chat-info">
                     <div className='chat-info2'>
-                        <div className='chat-img'></div>
+                        <div className='chat-img'>S</div>
                         <h4>Chat</h4>
                     </div>
                 </div>
@@ -23,11 +23,11 @@ const Chat = () => {
                             <p>13:03</p>
                         </div>
 
-                        <div className="msg-pic"></div>
+                        <div className="msg-pic">A</div>
                     </div>
 
                     <div className="others-msg">
-                        <div className="msg-pic"></div>
+                        <div className="msg-pic">A</div>
 
                         <div className="msg-text">
                             <h4>Ali Youssef</h4>

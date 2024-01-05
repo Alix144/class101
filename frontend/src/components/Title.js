@@ -59,6 +59,14 @@ const Title = ({propTitle, add}) => {
                     {add === "announcements" &&
                         <img src={plus} alt="Add" onClick={()=>setAddTaskPage(!isAddTaskPageOpen)}/>
                     }
+
+                    {add === "syllabus" &&
+                        <img src={plus} alt="Add" onClick={()=>setAddTaskPage(!isAddTaskPageOpen)}/>
+                    }
+
+                    {add === "documents" &&
+                        <img src={plus} alt="Add" onClick={()=>setAddTaskPage(!isAddTaskPageOpen)}/>
+                    }
                 </>
                 }
             </div>

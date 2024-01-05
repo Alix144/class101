@@ -42,9 +42,7 @@ const Assignments = () => {
             <div className="coming-assignments">
                 <div className="assignment">
                     <div className="info">
-                        <div className="pic">
-                            A
-                        </div>
+                        <div className="pic">A</div>
                         <div>
                             <h4>Ali Youssef</h4>
                             <h6>Spanish Assignment 1</h6>

@@ -19,6 +19,9 @@ import Announcements from './components/Announcements';
 import ClassroomHome from './components/ClassroomHome';
 import Chat from './components/Chat';
 import Assignments from './components/Assignments';
+import QnA from './components/QnA';
+import Syllabus from './components/Syllabus';
+import Documents from './components/Documents';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -50,7 +53,9 @@ function App() {
                 <Route path="announcements" element={<Announcements/>}/>
                 <Route path="chat" element={<Chat/>}/>
                 <Route path="assignments" element={<Assignments/>}/>
-                
+                <Route path="QnA" element={<QnA/>}/>
+                <Route path="syllabus" element={<Syllabus/>}/>
+                <Route path="documents" element={<Documents/>}/>
               </Route>
 
             </Route>
