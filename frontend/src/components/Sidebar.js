@@ -64,7 +64,7 @@ const Sidebar = () => {
                         </div> 
                     </ul>
                 </div>
-                }
+            }
             <hr />
 
             <div className='sidebar-list learning-list' onClick={()=> setOpen2(!isOpen2)}>

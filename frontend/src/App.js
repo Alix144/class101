@@ -22,6 +22,7 @@ import Assignments from './components/Assignments';
 import QnA from './components/QnA';
 import Syllabus from './components/Syllabus';
 import Documents from './components/Documents';
+import People from './components/People';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -56,6 +57,7 @@ function App() {
                 <Route path="QnA" element={<QnA/>}/>
                 <Route path="syllabus" element={<Syllabus/>}/>
                 <Route path="documents" element={<Documents/>}/>
+                <Route path="people" element={<People/>}/>
               </Route>
 
             </Route>
