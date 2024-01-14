@@ -872,8 +872,8 @@ main{
     margin-bottom: 5px;
 }
 
-.on-page-div .upload{
-    margin-top: 0;
+.no-mrgn{
+    margin-top: 0 !important;
 }
 
 .on-page-title{

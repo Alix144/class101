@@ -113,7 +113,7 @@ const Title = ({propTitle, add}) => {
 
                     <div>
                         <label htmlFor="file">Document</label>
-                        <label htmlFor="file" className='upload'>Upload</label>
+                        <label htmlFor="file" className='upload no-mrgn'>Upload</label>
                         <input type="file" id="file" onChange={handleFileChange}/>
                         <p>{fileName}</p>
                     </div>
@@ -142,7 +142,7 @@ const Title = ({propTitle, add}) => {
 
                     <div>
                         <label htmlFor="file">Document</label>
-                        <label htmlFor="file" className='upload'>Upload</label>
+                        <label htmlFor="file" className='upload no-mrgn'>Upload</label>
                         <input type="file" id="file" onChange={handleFileChange}/>
                         <p>{fileName}</p>
                     </div>
