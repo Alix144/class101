@@ -6,7 +6,7 @@ import download from '../images/download.png'
 const Assignments = () => {
     return ( 
         <div className="content assignments">
-            <Title propTitle={"Assignments"} add={"announcements"}/>
+            <Title propTitle={"Assignments"} add={"addAssignment"}/>
 
             <div className="going-assignments">
 

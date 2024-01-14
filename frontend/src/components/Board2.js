@@ -49,11 +49,6 @@ const Board = () => {
         dispatch(setToDashboard())
     }, []);
 
-    useEffect(() => {
-        console.log("********")
-        console.log(currentClassPage);
-    }, [currentClassPage]);
-
     return ( 
         <div className="board2">
             <ClassInfo/>

@@ -324,7 +324,11 @@ input, select{
     outline: none;
 }
 
-input:focus{
+textarea{
+    outline: none;
+}
+
+input:focus, textarea:focus{
     border: 2px solid #74BCFF;
 }
 
@@ -864,6 +868,14 @@ main{
     overflow: auto;
 }
 
+.on-page-div label{
+    margin-bottom: 5px;
+}
+
+.on-page-div .upload{
+    margin-top: 0;
+}
+
 .on-page-title{
     margin-bottom: 20px;
 }
@@ -994,8 +1006,8 @@ textarea:focus{
 
 .upload img{
     margin-right: 5px;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
 }
 
 input[type='file']{

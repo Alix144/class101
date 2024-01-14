@@ -4,12 +4,12 @@ import copy from '../images/copy.png'
 import noTask from '../images/no-task.png'
 
 const ClassroomHome = () => {
+
     return ( 
         <div className="content classroom-home">
             <div className="announcements-div">
                 <div className="div-title">
                     <h4>Announcements</h4>
-                    <img src={add} alt="Add" />
                 </div>
                 <div className="div-content">
                     <img src={emptyBox} alt="Empty-box" />

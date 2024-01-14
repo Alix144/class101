@@ -59,7 +59,7 @@ const People = () => {
                 <hr className="hr"/>
             </div>
 
-            <Title propTitle={"Students"} add={"add-instructors"}/>
+            <Title propTitle={"Students"} add={"add-student"}/>
             <div className="people-parent-div">
                 <div className="ppl-search">
                     <img src={search} alt="Search" />
@@ -78,7 +78,7 @@ const People = () => {
                         <div className="left-border"></div>
                         <div className="info">
                             <div className="profile-pic">{user.name.charAt(0).toUpperCase()}</div>
-                            <h4>{user.name}</h4>
+                            <h4>{user.name.charAt(0).toUpperCase()+user.name.slice(1)}</h4>
                         </div>
                         <p>{user.email}</p>
                     </div>
