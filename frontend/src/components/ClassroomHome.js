@@ -1,9 +1,12 @@
+import { useSelector } from 'react-redux'
+
 import add from '../images/plus.png'
 import emptyBox from '../images/empty-box.png'
 import copy from '../images/copy.png'
 import noTask from '../images/no-task.png'
 
 const ClassroomHome = () => {
+    const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     return ( 
         <div className="content classroom-home">
@@ -19,15 +22,19 @@ const ClassroomHome = () => {
             </div>
 
             <div className="code-todo-div">
-                <div className="code">
-                    <div className="div-title">
-                        <h4>Invitation Code</h4>
+                {isInstructor &&
+                    <div className="code">
+                        <div className="div-title">
+                            <h4>Invitation Code</h4>
+                        </div>
+                        <div className='code-string'>
+                            <h2>9OID8S2D</h2>
+                            <img src={copy} alt="Copy" />
+                        </div>
                     </div>
-                    <div className='code-string'>
-                        <h2>9OID8S2D</h2>
-                        <img src={copy} alt="Copy" />
-                    </div>
-                </div>
+                }
+
+
                 <div className="todo-div">
                     <div className="div-title">
                         <h4>To Do</h4>

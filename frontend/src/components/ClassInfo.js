@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux'
 
 import teacher from '../images/teacher.png'
 import student from '../images/student.png'
@@ -15,11 +16,15 @@ import bg8 from '../images/classBgs/bg8.jpg'
 import bg9 from '../images/classBgs/bg9.jpg'
 
 import noImg from '../images/no-img.png'
+import info from '../images/info.png'
 import upload from '../images/upload.png'
 import check from '../images/check.png'
 
 const ClassInfo = () => {
+    const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+
     const [isCustomizeDivOpen, setCustomizeDiv] = useState(false)
+    const [isClassInfoOpen, setClassInfoDiv] = useState(false)
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedBg, setSelectedBg] = useState("bg3");
 
@@ -61,7 +66,7 @@ const ClassInfo = () => {
                                 <label htmlFor="uploadBg" className='upload'> <img src={upload} alt="upload" /> Upload</label>
                                 <input type="file" accept="image/*" id='uploadBg' className='upload' onChange={handleImageChange}/>                         
                             </div>
-                            <label htmlFor="">Color</label>
+                            <label htmlFor="">Class Color</label>
                             <div className="colors" style={{width:"50%", marginLeft: "50px"}}>
                                 <div style={{backgroundColor: "#74BCFF"}}></div>
                                 <div style={{backgroundColor: "#86FFAF"}}></div>
@@ -77,11 +82,68 @@ const ClassInfo = () => {
                 </div>
             </div>
         }
+
+        {isClassInfoOpen && 
+            <div className="on-page-div">
+                <div className="add-form" style={{marginTop:'0'}}>
+                    <div className="on-page-title">
+                        <h3>Class Details</h3>
+                        <hr />
+                    </div>
+                    <form action="">
+                        <div>
+                            <p>Name*</p>
+                            {isInstructor?
+                                <input type="text"/>
+                                :
+                                <input type="text" readOnly/>
+                            }
+                            
+                        </div>
+                        <div>
+                            <label htmlFor="code">Course Code</label>
+                            {isInstructor?
+                                <input type="text" id="code" name="code"/>
+                                :
+                                <input type="text" id="code" name="code" readOnly/>
+                            }
+                            
+                        </div>
+                        <div>
+                            <label htmlFor="desc">Description</label>
+                            {isInstructor?
+                                <textarea name="desc" id="desc"  rows="5"></textarea>
+                                :
+                                <textarea name="desc" id="desc"  rows="5" readOnly></textarea>
+                            }
+                        </div>
+                        <div>
+                            <label htmlFor="max">Max Students</label>
+                            {isInstructor?
+                                <input type="number" min={1} className='type-number' name="max" id="max"/>
+                                :
+                                <input type="number" min={1} className='type-number' name="max" id="max" readOnly/>
+                            }
+                        </div>
+                    </form>
+                    <div className="on-page-btns">
+                        <button onClick={()=>setClassInfoDiv(!isClassInfoOpen)}>close</button>
+                        {isInstructor &&
+                        <button>Edit</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
         <div className="class-info">
             <div className='class-name-pic'>
                 <div><h1>S</h1></div>
                 <h1>Spanish</h1>
+                {isInstructor &&
                 <img src={pen} alt="Edit" onClick={() => setCustomizeDiv(true)}/>
+                }
+                <img src={info} alt="Info" onClick={()=> setClassInfoDiv(true)} style={{marginLeft:'5px'}}/>
             </div>
             <div className='class-code'>
                 <h5>Course Code:</h5>

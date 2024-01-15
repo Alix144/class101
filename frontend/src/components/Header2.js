@@ -78,7 +78,7 @@ const Header2 = () => {
                             <input type="number" min={1} className='type-number' name="max" id="max"/>
                         </div>
                         <div>
-                        <p>Color</p>
+                        <p>Class Color</p>
                             <div className="colors">
                                 <div style={{backgroundColor: "#74BCFF"}}></div>
                                 <div style={{backgroundColor: "#86FFAF"}}></div>

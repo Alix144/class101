@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector } from 'react-redux'
+
 import Title from "./Title";
 
 import search from '../images/search.png'
@@ -6,6 +8,9 @@ import teacher from '../images/teacher.png'
 import student from '../images/student.png'
 
 const People = () => {
+    const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+
+    const [isStudentInfoPageOpen, setStudentInfoPage] = useState(false)
     const [query, setQuery] = useState("");
     const [query2, setQuery2] = useState("");
 
@@ -28,8 +33,44 @@ const People = () => {
     ]
 
     return ( 
+        <>
+        {isStudentInfoPageOpen && 
+            <div className="on-page-div">   
+                <div className="add-form edit-task-form" >
+                    <div className="on-page-title">
+                        <h3>User's Details</h3>
+                        <hr/>
+                    </div>
+                    <div className="student-hw-info">
+                        <div className="st-info">
+                            <div className="profile-pic">A</div>
+                            <div>
+                                <h4>Ali Youssef</h4>
+                            </div>
+                        </div>
+                        <h4>Email</h4>
+                        <p>ali@gmail.com</p>
+
+                        <h4>Description</h4>
+                        <p className='maxh'>Lorem i eserunt doloribus placeat odio hic eligendi in! Hic possimus rem quod. eveniet neque vitae libero quo corporis dolorem quasi.</p>
+                    </div>
+
+                    <div className="on-page-btns">
+                        <button onClick={()=>setStudentInfoPage(!isStudentInfoPageOpen)}>Back</button>
+                        {isInstructor &&
+                        <button className="danger">Kick</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
         <div className="content">
-            <Title propTitle={"Instructors"} add={"add-instructors"}/>
+            {isInstructor ?
+                <Title propTitle={"Instructors"} add={"add-instructors"}/>
+                :
+                <Title propTitle={"Instructors"}/>
+            }
+            
             <div className="people-parent-div">
                 <div className="ppl-search">
                     <img src={search} alt="Search" />
@@ -44,7 +85,7 @@ const People = () => {
                 <div className="people">
                     {ppl.filter(user=>user.name.toLowerCase().includes(query2)).map((user)=>(
 
-                    <div className="one-ppl" key={user.id}>
+                    <div className="one-ppl" key={user.id} onClick={()=>setStudentInfoPage(!isStudentInfoPageOpen)}>
                         <div className="left-border"></div>
                         <div className="info">
                             <div className="profile-pic">{user.name.charAt(0).toUpperCase()}</div>
@@ -59,7 +100,13 @@ const People = () => {
                 <hr className="hr"/>
             </div>
 
-            <Title propTitle={"Students"} add={"add-student"}/>
+            
+            {isInstructor ?
+                <Title propTitle={"Students"} add={"add-student"}/>
+                :
+                <Title propTitle={"Students"}/>
+            }
+            
             <div className="people-parent-div">
                 <div className="ppl-search">
                     <img src={search} alt="Search" />
@@ -74,7 +121,7 @@ const People = () => {
                 <div className="people">
                     {ppl.filter(user=>user.name.toLowerCase().includes(query)).map((user)=>(
 
-                    <div className="one-ppl" key={user.id}>
+                    <div className="one-ppl" key={user.id} onClick={()=>setStudentInfoPage(!isStudentInfoPageOpen)}>
                         <div className="left-border"></div>
                         <div className="info">
                             <div className="profile-pic">{user.name.charAt(0).toUpperCase()}</div>
@@ -89,6 +136,7 @@ const People = () => {
                 <hr className="hr"/>
             </div>
         </div>
+        </>
      );
 }
  

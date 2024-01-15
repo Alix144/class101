@@ -1,12 +1,21 @@
+import { useSelector } from 'react-redux'
+
 import Title from "./Title";
 
 import doc from '../images/doc.png'
 import download from '../images/download.png'
 
 const Documents = () => {
+    const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+
     return ( 
         <div className="content">
-            <Title propTitle={"Documents"} add={"documents"}/>
+            
+            {isInstructor ?
+                <Title propTitle={"Documents"} add={"documents"}/>
+                :
+                <Title propTitle={"Documents"}/>
+            }
 
             <div className="documents">
                     <div className="info">

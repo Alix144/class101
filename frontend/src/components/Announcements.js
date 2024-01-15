@@ -1,12 +1,20 @@
+import { useSelector } from 'react-redux'
+
 import Title from "./Title";
 
 import trash from '../images/trash-can.png'
 import edit from '../images/pencil.png'
 
 const Announcements = () => {
+    const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+
     return ( 
         <div className="content announcements">
-            <Title propTitle={"Announcements"} add={"announcements"}/>
+            {isInstructor ?
+                <Title propTitle={"Announcements"} add={"announcements"}/>
+                :
+                <Title propTitle={"Announcements"}/>
+            }
 
             <div className="announcement-box">
                 <div className="left-border"></div>
@@ -21,10 +29,12 @@ const Announcements = () => {
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus br neque, culpa enim nesciunt nisi vero. Omnis nisi ex amet consequuntur sint fuga nobis magnam, aut corrupti esse?</p>
                 </div>
                 <p className="date">25-03-2023</p>
+                {isInstructor &&
                 <div className="update-delete">
                     <img src={trash} alt="Delete" />
                     <img src={edit} alt="" />
                 </div>
+                }
             </div>
 
             <div className="announcement-box">
@@ -41,10 +51,12 @@ const Announcements = () => {
                 </div>
                 <p className="date">20-03-2023</p>
 
+                {isInstructor &&
                 <div className="update-delete">
                     <img src={trash} alt="Delete" />
                     <img src={edit} alt="" />
                 </div>
+                }
 
             </div>
         </div>

@@ -1,12 +1,20 @@
+import { useSelector } from 'react-redux'
+
 import Title from "./Title";
 
 import trash from '../images/trash-can.png'
 import edit from '../images/pencil.png'
 
 const Syllabus = () => {
+    const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+
     return ( 
         <div className="content">
-            <Title propTitle={"Syllabus"} add={"addSyllabus"}/>
+            {isInstructor ?
+                <Title propTitle={"Syllabus"} add={"addSyllabus"}/>
+                :
+                <Title propTitle={"Syllabus"}/>
+            }
 
             <div className="syllabus-box">
                 <div className="left-border"></div>
@@ -17,11 +25,12 @@ const Syllabus = () => {
                         <li>Speaking</li>
                     </ul>
                 </div>
-
+                {isInstructor &&
                 <div className="update-delete">
                     <img src={trash} alt="Delete" />
                     <img src={edit} alt="" />
                 </div>
+                }
 
             </div>
             <div className="syllabus-box">
@@ -38,10 +47,12 @@ const Syllabus = () => {
                     </ul>
                 </div>
 
+                {isInstructor &&
                 <div className="update-delete">
                     <img src={trash} alt="Delete" />
                     <img src={edit} alt="" />
                 </div>
+                }
 
             </div>
             <div className="syllabus-box">
@@ -55,10 +66,12 @@ const Syllabus = () => {
                     </ul>
                 </div>
 
+                {isInstructor &&
                 <div className="update-delete">
                     <img src={trash} alt="Delete" />
                     <img src={edit} alt="" />
                 </div>
+                }
 
             </div>
 

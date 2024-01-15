@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
 import {motion} from "framer-motion"
+
+import { setToInstructor, setToStudent } from '../store/slices/instructorOrStudent';
+import { setToDashboard } from '../store/slices/currentClassPage';
 
 import home from '../images/home.png'
 import calendar from '../images/calendar.png'
@@ -10,6 +14,9 @@ import student from '../images/student.png'
 import arrow from '../images/arrow.png'
 
 const Sidebar = () => {
+    const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+    const dispatch = useDispatch()
+
     const [isOpen, setOpen] = useState(false)
     const [isOpen2, setOpen2] = useState(false)
     const navigate = useNavigate();
@@ -28,6 +35,14 @@ const Sidebar = () => {
 
     const goToClassroom = () => {
         navigate("classroom/home")
+        dispatch(setToInstructor())
+        dispatch(setToDashboard())
+    }
+
+    const goToClassroomS = () => {
+        navigate("classroom/home")
+        dispatch(setToStudent())
+        dispatch(setToDashboard())
     }
 
     return ( 
@@ -76,7 +91,7 @@ const Sidebar = () => {
                 {isOpen2 &&
                 <div className='classes'>
                     <ul>
-                        <div className='class-parent'>
+                        <div className='class-parent' onClick={goToClassroomS}>
                             <div className="profile-pic">M</div>
                             <li>math</li>
                         </div>

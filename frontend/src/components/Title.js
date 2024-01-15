@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux'
+
 import plus from '../images/plus.png'
 
 const Title = ({propTitle, add}) => {
+    const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+
     const [isAddTaskPageOpen, setAddTaskPage] = useState(false)
     const [isAddAnnouncementPageOpen, setAddAnnouncementPage] = useState(false)
     const [isAddAssignmentPageOpen, setAddAssignmentPage] = useState(false)
@@ -142,7 +146,7 @@ const Title = ({propTitle, add}) => {
         </div>
         }
 
-{isAddSyllabusPageOpen && 
+        {isAddSyllabusPageOpen && 
         <div className="on-page-div">   
             <div className="add-form edit-task-form" >
                 <div className="on-page-title">
@@ -254,7 +258,7 @@ const Title = ({propTitle, add}) => {
                     {add === "toDo" &&
                         <img src={plus} alt="Add" onClick={()=>setAddTaskPage(!isAddTaskPageOpen)}/>
                     }
-
+                    
                     {add === "announcements" &&
                         <img src={plus} alt="Add" onClick={()=>setAddAnnouncementPage(!isAddAnnouncementPageOpen)}/>
                     }

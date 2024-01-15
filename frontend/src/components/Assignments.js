@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux'
+
 import Title from "./Title";
 
 import doc from '../images/doc.png'
+import leaf from '../images/leaf.png'
 import download from '../images/download.png'
 
 const Assignments = () => {
+    const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+
     const [isStudentHwOpen, setIsStudentHwOpen] = useState(false)
 
     return ( 
@@ -46,13 +51,24 @@ const Assignments = () => {
                     </div>
                 </div>
             </div>
-            }
+        }
 
         <div className="content assignments">
-            <Title propTitle={"Assignments"} add={"addAssignment"}/>
+            {isInstructor ?
+                <Title propTitle={"Assignments"} add={"addAssignment"}/>
+                :
+                <Title propTitle={"Assignments"}/>
+            }
+            
 
-            <div className="going-assignments">
+            <div className="going-assignments empty-parent">
 
+                {false ? 
+                    <>
+                    <img src={leaf} alt="Empty" className='empty'/>
+                    <p>No Assignment Added</p>
+                    </>:
+                <>
                 <div className="assignment">
                     <div className="info">
                         <img src={doc} alt="Document" />
@@ -78,12 +94,21 @@ const Assignments = () => {
                     <p className="date">01-06-2024</p>
                     <div className="left-border"></div>
                 </div>
+                </>
+                }
+                
 
             </div>
 
             <Title propTitle={"Coming Assignments"}/>
-            <div className="coming-assignments">
-                <div className="assignment" onClick={()=>setIsStudentHwOpen(!isStudentHwOpen)}>
+            <div className="coming-assignments empty-parent">
+                {true ? 
+                    <>
+                        <img src={leaf} alt="Empty" className='empty'/>
+                        <p>No Coming Assignments</p>
+                    </>:
+                    <>
+                        <div className="assignment" onClick={()=>setIsStudentHwOpen(!isStudentHwOpen)}>
                     <div className="info">
                         <div className="pic">A</div>
                         <div>
@@ -93,8 +118,9 @@ const Assignments = () => {
                     </div>
                     <p className="date">01-06-2024</p>
                     <div className="left-border"></div>
-                </div>
-
+                        </div>
+                    </>
+                }
             </div>
         </div>
         </>

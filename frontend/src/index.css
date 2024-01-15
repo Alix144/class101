@@ -1942,6 +1942,26 @@ p{
     line-height: 1.5;
 }
 
+.danger{
+    background-color: #FF6767 !important;
+}
+
+.danger:hover{
+    background-color: rgb(243, 177, 177) !important;
+}
+
+.empty-parent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.empty{
+    margin: 20px auto 0;
+    width: 120px;
+}
+
 /* scrollbar */
 
 /* Track */
