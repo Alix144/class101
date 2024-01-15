@@ -5,10 +5,24 @@ const Title = ({propTitle, add}) => {
     const [isAddTaskPageOpen, setAddTaskPage] = useState(false)
     const [isAddAnnouncementPageOpen, setAddAnnouncementPage] = useState(false)
     const [isAddAssignmentPageOpen, setAddAssignmentPage] = useState(false)
+    const [isAddSyllabusPageOpen, setAddSyllabusPage] = useState(false)
     const [isAddDocPageOpen, setAddDocPage] = useState(false)
     const [isAddInstPageOpen, setAddInstPage] = useState(false)
     const [isAddStudentPageOpen, setAddStudentPage] = useState(false)
     const [fileName, setFileName] = useState('');
+    const [topics, setTopics] = useState([{ id: 1, value: '' }]);
+
+    const handleTopicChange = (id, value) => {
+      const updatedTopics = topics.map((topic) =>
+        topic.id === id ? { ...topic, value } : topic
+      );
+      setTopics(updatedTopics);
+    };
+  
+    const handleAddTopic = () => {
+      setTopics([...topics, { id: topics.length + 1, value: '' }]);
+    };
+  
 
     const handleFileChange = (event) => {
       const fileInput = event.target;
@@ -18,6 +32,7 @@ const Title = ({propTitle, add}) => {
         setFileName('Upload');
       }
     }
+
     return ( 
         <>
         {isAddTaskPageOpen && 
@@ -127,6 +142,37 @@ const Title = ({propTitle, add}) => {
         </div>
         }
 
+{isAddSyllabusPageOpen && 
+        <div className="on-page-div">   
+            <div className="add-form edit-task-form" >
+                <div className="on-page-title">
+                    <h3>Add Syllabus</h3>
+                    <hr/>
+                </div>
+                <form action="">
+                    <div>
+                        <label htmlFor="week">week*</label>
+                        <input type="number" min={0} id="week" name="week"/>
+                    </div>
+
+                    {topics.map((topic) => (
+                    <div key={topic.id}>
+                      <label htmlFor={`topic-${topic.id}`}>Topic {topic.id}</label>
+                      <input type="text" id={`topic-${topic.id}`} name={`topic-${topic.id}`} value={topic.value} onChange={(e) => handleTopicChange(topic.id, e.target.value)}/>
+                    </div>
+                ))}
+
+                <button type="button" className='add-topic no-mrgn' onClick={handleAddTopic}>Add Topic</button>
+                </form>
+
+                <div className="on-page-btns">
+                    <button onClick={()=>setAddSyllabusPage(!isAddSyllabusPageOpen)}>Cancel</button>
+                    <button>Add</button>
+                </div>
+            </div>
+        </div>
+        }
+
         {isAddDocPageOpen && 
         <div className="on-page-div">   
             <div className="add-form edit-task-form" >
@@ -217,8 +263,8 @@ const Title = ({propTitle, add}) => {
                         <img src={plus} alt="Add" onClick={()=>setAddAssignmentPage(!isAddAssignmentPageOpen)}/>
                     }
 
-                    {add === "syllabus" &&
-                        <img src={plus} alt="Add" onClick={()=>setAddTaskPage(!isAddTaskPageOpen)}/>
+                    {add === "addSyllabus" &&
+                        <img src={plus} alt="Add" onClick={()=>setAddSyllabusPage(!isAddSyllabusPageOpen)}/>
                     }
 
                     {add === "documents" &&

@@ -6,7 +6,7 @@ import edit from '../images/pencil.png'
 const Syllabus = () => {
     return ( 
         <div className="content">
-            <Title propTitle={"Syllabus"} add={"syllabus"}/>
+            <Title propTitle={"Syllabus"} add={"addSyllabus"}/>
 
             <div className="syllabus-box">
                 <div className="left-border"></div>

@@ -501,7 +501,7 @@ input:focus, textarea:focus{
     margin: 20px 0;
 }
 
-.profile-btn, .profile-div2 form button, .on-page-btns button, .upload, .profile-div2 .save, .q-input button, .answer button{
+.profile-btn, .profile-div2 form button, .on-page-btns button, .upload, .download, .add-topic, .profile-div2 .save, .q-input button, .answer button{
     width: 130px;
     height: 25px;
     border: none;
@@ -513,7 +513,7 @@ input:focus, textarea:focus{
     align-items: center;
 }
 
-.profile-btn:hover, .profile-div2 form button:hover, .on-page-btns button:hover, .upload:hover, .q-input button:hover, .answer button:hover{
+.profile-btn:hover, .profile-div2 form button:hover, .on-page-btns button:hover, .upload:hover, .download:hover, .add-topic:hover, .q-input button:hover, .answer button:hover{
     cursor: pointer;
     background-color: #cee7ff;
 }
@@ -898,9 +898,38 @@ main{
     border-radius: 20px;
 }
 
-.add-form form{
+.add-form form, .student-hw-info{
     margin: 0 auto;
     width: 70%;
+}
+
+.student-hw-info{
+    margin-bottom: 15px;
+}
+
+.maxh{
+    max-height: 100px;
+    overflow: auto;
+}
+
+.student-hw-info p{
+    margin-bottom: 10px;
+}
+
+.student-hw-info .st-info{
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.st-info .profile-pic{
+    width: 50px;
+    height: 50px;
+}
+
+.st-info p{
+    margin: 0;
+    font-size: 13px;
 }
 
 .add-form textarea, .profile-divs textarea{
@@ -999,7 +1028,7 @@ textarea:focus{
     box-shadow: 1px 1px 10px rgb(126, 126, 126);
 }
 
-.upload{
+.upload, .download, .add-topic{
     margin-top: 20px;
     background-color: #8AABFF;
 }
