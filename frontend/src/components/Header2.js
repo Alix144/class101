@@ -9,6 +9,7 @@ import logo from '../images/logo1.png'
 import hamburger from '../images/hamburger.png'
 import plus from '../images/plus.png'
 import bell from '../images/bell.png'
+import bell2 from '../images/bell2.png'
 import logoutIcon from '../images/logout.png'
 
 const Header2 = () => {
@@ -17,17 +18,26 @@ const Header2 = () => {
 
     const [plusBtn, setPlusBtn] = useState(false)
     const [profileBtn, setProfileBtn] = useState(false)
+    const [notificationBtn, setNotificationBtn] = useState(false)
     const [isCreateClassDivOpen, setCreateClassDiv] = useState(false)
     const [isJoinClassDivOpen, setJoinClassDiv] = useState(false)
 
     const plusMenu = () => {
         setPlusBtn(!plusBtn)
         setProfileBtn(false)
+        setNotificationBtn(false)
+    }
+
+    const notificationMenu = () => {
+        setNotificationBtn(!notificationBtn)
+        setProfileBtn(false)
+        setPlusBtn(false)
     }
 
     const profileMenu = () => {
         setProfileBtn(!profileBtn)
         setPlusBtn(false)
+        setNotificationBtn(false)
     }
 
     const goToProfile = () => {
@@ -129,7 +139,7 @@ const Header2 = () => {
 
             <div className="header-part-2">
                 <img src={plus} alt="Plus" className='plus' onClick={plusMenu}/>
-                <img src={bell} alt="Notification" className='bell'/>
+                <img src={bell} alt="Notification" className='bell' onClick={notificationMenu}/>
                 <div className="profile" onClick={profileMenu}>A</div>
 
                 {plusBtn && 
@@ -137,6 +147,39 @@ const Header2 = () => {
                         <div onClick={()=> setJoinClassDiv(true)}><h5>Join Class</h5></div>
                         <hr/>
                         <div onClick={()=> setCreateClassDiv(true)}><h5>Create Class</h5></div>
+                    </div>
+                }
+
+                {notificationBtn &&
+                    <div className="notification-menu">
+                        <div className="notification-menu-header">
+                            <img src={bell2} alt="Bell" />
+                            <h4>Notifications</h4>
+                        </div>
+                        <div className="notifications">
+                            <div className="notification">
+                                <div className="notification-profile-pic">S</div>
+                                <div className="notification-info">
+                                    <p><b>Sara</b> Invited you to <b>Spanish101</b></p>
+                                    <p className='notification-date'>4 October</p>
+                                </div>
+                            </div>
+                            <div className="notification">
+                                <div className="notification-profile-pic">S</div>
+                                <div className="notification-info">
+                                    <p><b>Sara</b> Invited you to <b>Spanish101</b></p>
+                                    <p className='notification-date'>4 October</p>
+                                </div>
+                            </div>
+                            <div className="notification">
+                                <div className="notification-profile-pic">S</div>
+                                <div className="notification-info">
+                                    <p><b>Sara</b> Invited you to <b>Spanish101</b></p>
+                                    <p className='notification-date'>4 October</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button>View All</button>
                     </div>
                 }
 

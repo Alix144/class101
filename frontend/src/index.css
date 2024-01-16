@@ -423,7 +423,7 @@ input:focus, textarea:focus{
     cursor: pointer;
 }
 
-.plus-menu, .profile-menu{
+.plus-menu, .profile-menu, .notification-menu{
     background-color: #74BCFF;
     border-radius: 5px;
     position: absolute;
@@ -432,6 +432,7 @@ input:focus, textarea:focus{
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    box-shadow: 1px 1px 5px 0px rgb(126, 126, 126);
 }
 
 /* plus menu */
@@ -439,7 +440,6 @@ input:focus, textarea:focus{
     width: 150px;
     height: 120px;
     right: 110px;
-    box-shadow: 1px 1px 5px 0px rgb(126, 126, 126);
 }
 
 .plus-menu div{
@@ -463,6 +463,88 @@ input:focus, textarea:focus{
     background-color: rgb(0, 0, 0, 20%);
 }
 
+/* Notification menu */
+.notification-menu{
+    width: 390px;
+    right: 65px;
+    background-color: rgb(255, 255, 255, 80%);
+}
+
+.notification-menu-header{
+    padding: 0 10px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: #74BCFF;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    box-shadow: 1px 1px 5px 0px rgb(126, 126, 126);
+
+}
+
+.notification-menu-header img{
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+.notifications{
+    padding-right: 5px;
+    margin: 20px 0;
+    width: 90%;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.notification{
+    margin-bottom: 15px;
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid rgb(0, 0, 0, 20%);
+}
+
+.notification:hover{
+    cursor: pointer;
+    background-color: rgb(255, 255, 255, 50%);
+    border: none;
+    border-radius: 5px;
+}
+
+.notification p{
+    font-size: 15px;
+}
+
+.notification-date{
+    font-size: small !important;
+}
+
+.notification-profile-pic{
+    margin-right: 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: #418dff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-menu button{
+    margin-bottom: 10px;
+    width: 100px;
+    height: 25px;
+    background-color: #74BCFF;
+    border: none;
+    border-radius: 5px;
+}
+
+.notification-menu button:hover{
+    background-color: #b3daff;
+    cursor: pointer;
+}
+
 /* profile menu */
 .profile-menu{
     padding: 30px 20px;
@@ -471,7 +553,6 @@ input:focus, textarea:focus{
     top: 50px;
     right: 0px;
     background-color: #74BCFF;
-    box-shadow: 1px 1px 5px 0px rgb(126, 126, 126);
 }
 
 .profile-menu-1{
