@@ -99,15 +99,24 @@ const Assignments = () => {
                 
 
             </div>
-
+            
+            {isInstructor ?
             <Title propTitle={"Coming Assignments"}/>
+            :
+            <Title propTitle={"Previous Assignments"}/>
+            }
             <div className="coming-assignments empty-parent">
-                {true ? 
+                {false ? 
                     <>
                         <img src={leaf} alt="Empty" className='empty'/>
+                        {isInstructor ?
                         <p>No Coming Assignments</p>
+                        :
+                        <p>No Previous Assignments Found</p>
+                        }
                     </>:
                     <>
+                    {isInstructor ?
                         <div className="assignment" onClick={()=>setIsStudentHwOpen(!isStudentHwOpen)}>
                     <div className="info">
                         <div className="pic">A</div>
@@ -119,6 +128,19 @@ const Assignments = () => {
                     <p className="date">01-06-2024</p>
                     <div className="left-border"></div>
                         </div>
+                    :     
+                    <div className="assignment">
+                        <div className="info">
+                            <img src={doc} alt="Document" />
+                            <div>
+                                <h4>Spanish Assignment 1</h4>
+                            </div>
+                        </div>
+                        <p><b>Grade:</b> 90</p>
+                        <p className="date">01-06-2024</p>
+                        <div className="left-border"></div>
+                    </div>
+                    }
                     </>
                 }
             </div>

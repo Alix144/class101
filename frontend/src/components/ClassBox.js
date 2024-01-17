@@ -4,6 +4,19 @@ import student from '../images/student.png'
 import teacher from '../images/teacher.png'
 import more from '../images/more.png'
 
+import { motion } from "framer-motion";
+const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
 const ClassBox = ( {color, img}) => {
     let primaryColor;
     let secondColor;
@@ -35,7 +48,11 @@ const ClassBox = ( {color, img}) => {
     }
     
     return ( 
-        <div className="class-box" style={{backgroundColor: (primaryColor)}}>
+        <motion.div className="class-box" style={{backgroundColor: (primaryColor)}}
+        variants={container}
+        initial="hidden"
+        animate="visible"
+        >
             <div className="class-img" style={{backgroundImage: `url(${img})`}}>
                 <div className="img-overlay" style={{backgroundImage: `linear-gradient(${secondColor}, ${primaryColor})`}}></div>
                 <img src={more} alt="More" className="more" />
@@ -62,7 +79,7 @@ const ClassBox = ( {color, img}) => {
             </div>
 
 
-        </div>
+        </motion.div>
      );
 }
  

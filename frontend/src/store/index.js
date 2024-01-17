@@ -4,6 +4,7 @@ import authReducer from './slices/authSlice'
 import loginOrRegisterReducer from './slices/loginOrRegister'
 import instructorOrStudentReducer from './slices/instructorOrStudent'
 import currentClassPageReducer from './slices/currentClassPage'
+import currentSectionReducer from './slices/currentSection'
 
 export default configureStore({
     reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
         loginOrRegister: loginOrRegisterReducer,
         instructorOrStudent: instructorOrStudentReducer,
         currentClassPage: currentClassPageReducer,
+        currentSection: currentSectionReducer,
     }
 })

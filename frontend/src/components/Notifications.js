@@ -25,7 +25,7 @@ const Notifications = () => {
                         
                     </div>
                     <hr className="hr"/>
-                </div>
+            </div>
         </div>
         </main>
      );

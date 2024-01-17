@@ -507,7 +507,7 @@ input:focus, textarea:focus{
 
 .notification:hover{
     cursor: pointer;
-    background-color: rgb(255, 255, 255, 50%);
+    background-color: rgb(255, 255, 255, 100%);
     border: none;
     border-radius: 5px;
 }
@@ -529,21 +529,6 @@ input:focus, textarea:focus{
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.notification-menu button{
-    margin-bottom: 10px;
-    width: 100px;
-    height: 25px;
-    background-color: #74BCFF;
-    box-shadow: 1px 1px 5px 0px rgb(126, 126, 126);
-    border: none;
-    border-radius: 5px;
-}
-
-.notification-menu button:hover{
-    background-color: #cee7ff;
-    cursor: pointer;
 }
 
 .notification-details{
@@ -1468,11 +1453,6 @@ input[type='file']{
     flex-grow: 1;
     justify-content: center;
     align-items: center;
-}
-
-.temp-message{
-
-   
 }
 
 .code-string h2:hover, .code-string img:hover{

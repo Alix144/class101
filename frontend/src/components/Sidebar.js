@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import {motion} from "framer-motion"
 
+import {  setToNull, setToHome, setToCalendar, setToToDo, setToClassT, setToClassS } from '../store/slices/currentSection';
 import { setToInstructor, setToStudent } from '../store/slices/instructorOrStudent';
 import { setToDashboard } from '../store/slices/currentClassPage';
 
@@ -15,6 +16,8 @@ import arrow from '../images/arrow.png'
 
 const Sidebar = () => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+    const currentSection = useSelector((state) => state.currentSection.value)
+
     const dispatch = useDispatch()
 
     const [isOpen, setOpen] = useState(false)
@@ -23,44 +26,49 @@ const Sidebar = () => {
 
     const goToHome = () => {
         navigate("home")
+        dispatch(setToHome())
     }
 
     const goToCalendar = () => {
         navigate("calendar")
+        dispatch(setToCalendar())
     }
 
     const goToToDo = () => {
         navigate("to-do")
+        dispatch(setToToDo())
     }
 
     const goToClassroom = () => {
         navigate("classroom/home")
         dispatch(setToInstructor())
         dispatch(setToDashboard())
+        dispatch(setToClassT())
     }
 
     const goToClassroomS = () => {
         navigate("classroom/home")
         dispatch(setToStudent())
         dispatch(setToDashboard())
+        dispatch(setToClassS())
     }
 
     return ( 
         <div className="sidebar">
-            <div className='sidebar-list' onClick={goToHome}>
+            <div className={`sidebar-list ${currentSection === 'home' ? 'current-page' : ''}`} onClick={goToHome}>
                 <img src={home} alt="Home" />
                 <p>Home</p>
             </div>
-            <div className='sidebar-list' onClick={goToCalendar}>
+            <div className={`sidebar-list ${currentSection === 'calendar' ? 'current-page' : ''}`} onClick={goToCalendar}>
                 <img src={calendar} alt="Calendar" />
                 <p>Calendar</p>
             </div>
-            <div className='sidebar-list' onClick={goToToDo}>
+            <div className={`sidebar-list ${currentSection === 'toDo' ? 'current-page' : ''}`} onClick={goToToDo}>
                 <img src={todolist} alt="To-Do-List" />
                 <p>To Do</p>
             </div>
             <hr />
-            <div className='sidebar-list teaching-list' onClick={()=> setOpen(!isOpen)}>
+            <div className={`sidebar-list teaching-list ${currentSection === 'classT' ? 'current-page' : ''}`} onClick={()=> setOpen(!isOpen)}>
                 <img src={arrow} alt="" id='arrow' style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}/>
                 <img src={teacher} alt="To-Do-List" />
                 <p>Teaching</p>
@@ -82,7 +90,7 @@ const Sidebar = () => {
             }
             <hr />
 
-            <div className='sidebar-list learning-list' onClick={()=> setOpen2(!isOpen2)}>
+            <div className={`sidebar-list learning-list ${currentSection === 'classS' ? 'current-page' : ''}`} onClick={()=> setOpen2(!isOpen2)}>
                 <img src={arrow} alt="" id='arrow' style={{ transform: isOpen2 ? "rotate(90deg)" : "rotate(0deg)" }}/>
                 <img src={student} alt="To-Do-List" />
                 <p>Learning</p>

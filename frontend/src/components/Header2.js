@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux'
 
 import { login, logout } from '../store/slices/authSlice';
 
@@ -171,7 +171,7 @@ const Header2 = () => {
                             </div>
 
                         </div>
-                        <button>View All</button>
+                        
                     </div>
                 }
 

@@ -6,6 +6,19 @@ import edit from '../images/pencil.png'
 import trash from '../images/trash-can.png'
 import undo from '../images/undo.png'
 
+import { motion } from "framer-motion";
+const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
+  
 const NoteBox = ({color}) => {
     const [isMoreOpen, setMore] = useState(false)
     const [isEditPageOpen, setEditPage] = useState(false)
@@ -62,14 +75,19 @@ const NoteBox = ({color}) => {
             </div>
             }
         
-            <div className="note-box" style={{backgroundColor: color}}>
-            <img src={more} alt="More" className='show-more' onClick={showMore}/>
-            <h4>Get the books</h4>
-            <p>Spanish</p>
-            <p>20-12-2023</p>
-            <h5>get the books from the store</h5>
-            {isMoreOpen &&
-                <div className="note-more">
+            <motion.div className="note-box" style={{backgroundColor: color}}
+                    variants={container}
+                    initial="hidden"
+                    animate="visible"
+            >
+                <img src={more} alt="More" className='show-more' onClick={showMore}/>
+                <h4>Get the books</h4>
+                <p>Spanish</p>
+                <p>20-12-2023</p>
+                <h5>get the books from the store</h5>
+            
+                {isMoreOpen &&
+                    <div className="note-more">
                     <div className='note-more2'>
                         <div>
                         {color === "#E1FFA0" ? 
@@ -103,9 +121,9 @@ const NoteBox = ({color}) => {
                         <h6>Delete</h6>
                         </div>
                     </div>
-                </div>
-            }
-            </div>
+                    </div>
+                }
+            </motion.div>
         </>
      );
 }
