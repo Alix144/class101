@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import {motion} from "framer-motion"
@@ -19,24 +19,27 @@ const Sidebar = () => {
     const currentSection = useSelector((state) => state.currentSection.value)
 
     const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const [isOpen, setOpen] = useState(false)
     const [isOpen2, setOpen2] = useState(false)
-    const navigate = useNavigate();
 
     const goToHome = () => {
         navigate("home")
         dispatch(setToHome())
+        localStorage.setItem('currentSection', 'home');
     }
 
     const goToCalendar = () => {
         navigate("calendar")
         dispatch(setToCalendar())
+        localStorage.setItem('currentSection', 'calendar');
     }
 
     const goToToDo = () => {
         navigate("to-do")
         dispatch(setToToDo())
+        localStorage.setItem('currentSection', 'toDo');
     }
 
     const goToClassroom = () => {
@@ -44,6 +47,7 @@ const Sidebar = () => {
         dispatch(setToInstructor())
         dispatch(setToDashboard())
         dispatch(setToClassT())
+        localStorage.setItem('currentSection', 'classT');
     }
 
     const goToClassroomS = () => {
@@ -51,7 +55,29 @@ const Sidebar = () => {
         dispatch(setToStudent())
         dispatch(setToDashboard())
         dispatch(setToClassS())
+        localStorage.setItem('currentSection', 'classS');
     }
+
+    useEffect(() => {
+        const storedSection = localStorage.getItem('currentSection');
+        if (storedSection) {
+            dispatch(setToNull());
+            if (storedSection === 'home'){
+                dispatch(setToHome())
+            }else if(storedSection === 'calendar'){
+                dispatch(setToCalendar())
+            }else if(storedSection === 'toDo'){
+                dispatch(setToToDo())
+            }else if(storedSection === 'classT'){
+                dispatch(setToClassT())
+            }else if(storedSection === 'classS'){
+                dispatch(setToClassS())
+            }else{
+                dispatch(setToNull())
+            }
+
+        }
+    }, [dispatch]);
 
     return ( 
         <div className="sidebar">

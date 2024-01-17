@@ -8,9 +8,11 @@ export const instructorOrStudent = createSlice({
     reducers: {
         setToInstructor: (state) => {
             state.isInstructor = true
+            localStorage.setItem('role', 'instructor');
         },
         setToStudent: (state) => {
             state.isInstructor = false
+            localStorage.setItem('role', 'student');
         },
     },
 })

@@ -46,8 +46,27 @@ const Board = () => {
     }
 
     useEffect(() => {
-        dispatch(setToDashboard())
-    }, []);
+        const currentPage = localStorage.getItem('currentPage');
+        if (currentPage) {
+            if (currentPage === 'dashboard'){
+                dispatch(setToDashboard())
+            }else if(currentPage === 'announcements'){
+                dispatch(setToAnnouncements())
+            }else if(currentPage === 'chat'){
+                dispatch(setToChat())
+            }else if(currentPage === 'assignments'){
+                dispatch(setToAssignments())
+            }else if(currentPage === 'QnA'){
+                dispatch(setToQnA())
+            }else if(currentPage === 'syllabus'){
+                dispatch(setToSyllabus())
+            }else if(currentPage === 'documents'){
+                dispatch(setToDocuments())
+            }else if(currentPage === 'people'){
+                dispatch(setToPeople())
+            }
+        }
+    }, [dispatch]);
 
     return ( 
         <div className="board2">

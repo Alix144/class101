@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+
+import { setToInstructor, setToStudent } from './store/slices/instructorOrStudent';
 
 //pages
 import Main from "./pages/Main";
@@ -28,6 +31,16 @@ import Notifications from './components/Notifications';
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    const role = localStorage.getItem('role');
+    if(role === 'instructor'){
+      dispatch(setToInstructor())
+    }else if(role === 'student'){
+      dispatch(setToStudent())
+    }
+
+}, [dispatch]);
 
   return (
     <div className="App">
