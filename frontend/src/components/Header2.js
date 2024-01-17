@@ -60,6 +60,11 @@ const Header2 = () => {
         navigate("/auth")
     }
 
+    const goToNotifications = () => {
+        navigate("dashboard/notifications")
+        setNotificationBtn(false)
+    }
+
     return ( 
 
         <>
@@ -157,27 +162,14 @@ const Header2 = () => {
                             <h4>Notifications</h4>
                         </div>
                         <div className="notifications">
-                            <div className="notification">
+                            <div className="notification" onClick={goToNotifications}>
                                 <div className="notification-profile-pic">S</div>
                                 <div className="notification-info">
                                     <p><b>Sara</b> Invited you to <b>Spanish101</b></p>
                                     <p className='notification-date'>4 October</p>
                                 </div>
                             </div>
-                            <div className="notification">
-                                <div className="notification-profile-pic">S</div>
-                                <div className="notification-info">
-                                    <p><b>Sara</b> Invited you to <b>Spanish101</b></p>
-                                    <p className='notification-date'>4 October</p>
-                                </div>
-                            </div>
-                            <div className="notification">
-                                <div className="notification-profile-pic">S</div>
-                                <div className="notification-info">
-                                    <p><b>Sara</b> Invited you to <b>Spanish101</b></p>
-                                    <p className='notification-date'>4 October</p>
-                                </div>
-                            </div>
+
                         </div>
                         <button>View All</button>
                     </div>

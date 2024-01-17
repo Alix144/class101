@@ -1,3 +1,4 @@
+import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux'
 
 import add from '../images/plus.png'
@@ -7,6 +8,23 @@ import noTask from '../images/no-task.png'
 
 const ClassroomHome = () => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+
+    const [isCopied, setIsCopied] = useState(false);
+    const textToCopy = '9OID8S2D'; // Replace with the actual text you want to copy
+    const textAreaRef = useRef(null);
+  
+    const handleCopyClick = () => {
+      if (textAreaRef.current) {
+        textAreaRef.current.select();
+        document.execCommand('copy');
+
+        setIsCopied(true);
+
+        setTimeout(() => {
+            setIsCopied(false);
+          }, 2000);
+      }
+    };
 
     return ( 
         <div className="content classroom-home">
@@ -28,9 +46,15 @@ const ClassroomHome = () => {
                             <h4>Invitation Code</h4>
                         </div>
                         <div className='code-string'>
-                            <h2>9OID8S2D</h2>
-                            <img src={copy} alt="Copy" />
+                            <textarea ref={textAreaRef} value={textToCopy} style={{ position: 'absolute', left: '-9999px' }} readOnly />
+                            {isCopied ? 
+                                <h2 className='temp-message'>Copied!</h2>
+                                :
+                                <h2 onClick={handleCopyClick}>9OID8S2D</h2>
+                            }
+                            <img src={copy} alt="Copy" onClick={handleCopyClick}/>
                         </div>
+
                     </div>
                 }
 
@@ -46,6 +70,7 @@ const ClassroomHome = () => {
                 </div>
             </div>
         </div>
+                                   
      );
 }
  

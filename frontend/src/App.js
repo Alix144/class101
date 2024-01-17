@@ -23,6 +23,7 @@ import QnA from './components/QnA';
 import Syllabus from './components/Syllabus';
 import Documents from './components/Documents';
 import People from './components/People';
+import Notifications from './components/Notifications';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -48,6 +49,7 @@ function App() {
               <Route path="calendar" element={<Calendar/>}/>
               <Route path="to-do" element={<ToDo/>}/>
               <Route path="profile" element={<Profile/>}/>
+              <Route path="notifications" element={<Notifications/>}/>
               
               <Route path="classroom" element={<Classroom/>}>
                 <Route path="home" element={<ClassroomHome/>}/>
