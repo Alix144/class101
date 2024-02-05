@@ -23,13 +23,13 @@ const userSchema = new Schema({
       description: {
         type: String,
       },
-      // classes: {
-
-      // }
+      classes: [{
+        type: mongoose.Types.ObjectId,
+        ref:"Class",
+      }],
       tasks: [{
         type: mongoose.Types.ObjectId,
         ref:"Task",
-        required: true
       }]
 })
 
