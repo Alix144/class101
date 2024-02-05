@@ -10,7 +10,8 @@ const ClassroomHome = () => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const [isCopied, setIsCopied] = useState(false);
-    const textToCopy = '9OID8S2D'; // Replace with the actual text you want to copy
+    // random text
+    const textToCopy = '9OID8S2D'; 
     const textAreaRef = useRef(null);
   
     const handleCopyClick = () => {

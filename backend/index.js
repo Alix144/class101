@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from 'cors';
 import userRouter from "./routes/user-route.js";
+import taskRouter from "./routes/task-route.js";
 import { config } from 'dotenv';
 config();
 
@@ -14,14 +15,10 @@ const app = express();
 // }))
 
 app.use(cors());
-
 app.use(express.json())
 
 app.use("/user", userRouter)
-
-app.get("/", (req, res)=>{
-    res.send("messaghaha")
-})
+app.use("/task", taskRouter)
 
 
 mongoose.connect(process.env.MONGO_URI)

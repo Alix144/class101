@@ -23,7 +23,7 @@ const QnA = () => {
                             </div>
                         </div>
                         <div className="question">
-                            <p>Lorem. Inventore nemo cumklsa lskj ;lasjdf;l jasflj sadlf jsldkf asnf;lasnflsfnl;fl;sjfl;sdjf sque harum deserunt,uptas asperiores tenetur?</p>
+                            <p>Lorem. Inventore nemo cumklsa  sadlf jsldkf sque harum deserunt,uptas asperiores tenetur?</p>
                         </div>
                         <hr />
                     </div>

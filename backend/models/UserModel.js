@@ -23,8 +23,14 @@ const userSchema = new Schema({
       description: {
         type: String,
       },
-      teachingClasses: [String], // Only for students
-      learningClasses: [String], // Only for teachers
+      // classes: {
+
+      // }
+      tasks: [{
+        type: mongoose.Types.ObjectId,
+        ref:"Task",
+        required: true
+      }]
 })
 
 export default mongoose.model("User", userSchema)

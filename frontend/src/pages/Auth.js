@@ -41,7 +41,10 @@ const Auth = () => {
 
     const handleRegister = (e) => {
         e.preventDefault()
-        sendRequest().then((data)=>localStorage.setItem("userId", data.user._id)).then(()=>dispatch(login())).then(()=> navigate("/dashboard/home")).then(data=> console.log(data))
+        sendRequest().then((data)=>localStorage.setItem("userId", data.user._id))
+        .then(()=>dispatch(login()))
+        .then(()=> navigate("/dashboard/home"))
+        .then(data=> console.log(data))
     }
 
     const sendRequest2 = async() => {
@@ -56,7 +59,10 @@ const Auth = () => {
 
     const handleLogin = (e) => {
         e.preventDefault()
-        sendRequest2().then((data)=>localStorage.setItem("userId", data.user._id)).then(()=>navigate("/dashboard/home")).then(()=>dispatch(login())).then((data) => console.log(data))
+        sendRequest2().then((data)=>localStorage.setItem("userId", data.user._id))
+        .then(()=>navigate("/dashboard/home"))
+        .then(()=>dispatch(login()))
+        .then((data) => console.log(data))
     }
 
     return ( 

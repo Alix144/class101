@@ -31,18 +31,18 @@ const Chat = () => {
 
                         <div className="msg-text">
                             <h4>Ali Youssef</h4>
-                            <h5>hi how are you ali? i love how you do your homeworks man</h5>
+                            <h5>Lorem ipsum dolor sit amet, consectetur adipisic</h5>
                             <p>13:08</p>
                         </div>
 
                     </div>
 
                     <div className="others-msg">
-                        <div className="msg-pic"></div>
+                        <div className="msg-pic">A</div>
 
                         <div className="msg-text">
                             <h4>Ali Youssef</h4>
-                            <h5>hi how are you ali? i love how you do your homeworks man</h5>
+                            <h5>Lorem ipsum periam aut.</h5>
                             <p>13:08</p>
                         </div>
 

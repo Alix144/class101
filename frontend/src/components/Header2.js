@@ -165,7 +165,7 @@ const Header2 = () => {
                             <div className="notification" onClick={goToNotifications}>
                                 <div className="notification-profile-pic">S</div>
                                 <div className="notification-info">
-                                    <p><b>Sara</b> Invited you to <b>Spanish101</b></p>
+                                    <p><b>Sara Nur</b> Invited you to <b>Spanish101</b></p>
                                     <p className='notification-date'>4 October</p>
                                 </div>
                             </div>

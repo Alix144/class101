@@ -40,7 +40,7 @@ function App() {
       dispatch(setToStudent())
     }
 
-}, [dispatch]);
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -76,7 +76,7 @@ function App() {
               </Route>
 
             </Route>
-              </>
+          </>
           }
             <Route path="/*" element={<NotFound/>}/>
         </Routes>

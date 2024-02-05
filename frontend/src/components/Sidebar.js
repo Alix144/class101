@@ -95,7 +95,7 @@ const Sidebar = () => {
             </div>
             <hr />
             <div className={`sidebar-list teaching-list ${currentSection === 'classT' ? 'current-page' : ''}`} onClick={()=> setOpen(!isOpen)}>
-                <img src={arrow} alt="" id='arrow' style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}/>
+                <img src={arrow} alt="" id='arrow' style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}/>
                 <img src={teacher} alt="To-Do-List" />
                 <p>Teaching</p>
             </div>
@@ -117,7 +117,7 @@ const Sidebar = () => {
             <hr />
 
             <div className={`sidebar-list learning-list ${currentSection === 'classS' ? 'current-page' : ''}`} onClick={()=> setOpen2(!isOpen2)}>
-                <img src={arrow} alt="" id='arrow' style={{ transform: isOpen2 ? "rotate(90deg)" : "rotate(0deg)" }}/>
+                <img src={arrow} alt="" id='arrow' style={{ transform: isOpen2 ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}/>
                 <img src={student} alt="To-Do-List" />
                 <p>Learning</p>
             </div>
