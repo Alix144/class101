@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
+import axios from "axios";
 
 import { login, logout } from '../store/slices/authSlice';
 
@@ -21,6 +22,12 @@ const Header2 = () => {
     const [notificationBtn, setNotificationBtn] = useState(false)
     const [isCreateClassDivOpen, setCreateClassDiv] = useState(false)
     const [isJoinClassDivOpen, setJoinClassDiv] = useState(false)
+
+    const [name, setName] = useState("");
+    const [courseCode, setCourseCode] = useState("");
+    const [description, setDescription] = useState("");
+    const [maxStudents, setMaxStudents] = useState();
+
 
     const plusMenu = () => {
         setPlusBtn(!plusBtn)
@@ -68,6 +75,38 @@ const Header2 = () => {
 
     /*******************/
 
+    function generateRandomCode(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let code = '';
+      
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          code += characters.charAt(randomIndex);
+        }
+      
+        return code;
+      }
+
+    const createClass = async() => {
+        const res = await axios.post("http://localhost:4000/class/create", {
+            name,
+            courseCode,
+            invitationCode: generateRandomCode(5),
+            description,
+            maxStudents,
+            user: localStorage.getItem('userId')
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        return data;
+    }
+
+    const handleCreateClass = (e) => {
+        e.preventDefault()
+        createClass().then(navigate("home")).then(() => {
+            navigate("dashboard/classroom/home");
+            window.location.reload();});
+    }
+
     return ( 
 
         <>
@@ -81,19 +120,19 @@ const Header2 = () => {
                     <form action="">
                         <div>
                             <p>Name*</p>
-                            <input type="text"/>
+                            <input type="text" value={name} onChange={(e)=>setName(e.target.value)}/>
                         </div>
                         <div>
                             <label htmlFor="code">Course Code</label>
-                            <input type="text" id="code" name="code"/>
+                            <input type="text" id="code" name="code" value={courseCode} onChange={(e)=>setCourseCode(e.target.value)}/>
                         </div>
                         <div>
                             <label htmlFor="desc">Description</label>
-                            <textarea name="desc" id="desc"  rows="5"></textarea>
+                            <textarea name="desc" id="desc"  rows="5" value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
                         </div>
                         <div>
                             <label htmlFor="max">Max Students</label>
-                            <input type="number" min={1} className='type-number' name="max" id="max"/>
+                            <input type="number" min={1} className='type-number' name="max" id="max" value={maxStudents} onChange={(e)=>setMaxStudents(e.target.value)}/>
                         </div>
                         <div>
                         <p>Class Color</p>
@@ -108,7 +147,7 @@ const Header2 = () => {
                     </form>
                     <div className="on-page-btns">
                         <button onClick={closeCreateClassDiv}>close</button>
-                        <button>Create</button>
+                        <button onClick={handleCreateClass}>Create</button>
                     </div>
                 </div>
             </div>

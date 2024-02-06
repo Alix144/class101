@@ -11,9 +11,9 @@ const Home = () => {
             <Board/>
             <div className="content">
                 <Title propTitle={"Teaching Classes"}/>
-                <ClassesContainer/>
+                <ClassesContainer type={"teaching"}/>
                 <Title propTitle={"Learning Classes"}/>
-                <ClassesContainer/>
+                <ClassesContainer type={"learning"}/>
             </div>
         </main>
         </>

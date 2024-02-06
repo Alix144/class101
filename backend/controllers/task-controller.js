@@ -89,7 +89,7 @@ export const getByUserId = async(req, res, next) => {
         return res.status(404).json({message: "No task Found"})
     }
 
-    return res.status(200).json({user: userTasks.tasks})
+    return res.status(200).json({tasks: userTasks.tasks})
 }
 
 export const completeTask = async(req, res, next) => {
@@ -112,21 +112,6 @@ export const completeTask = async(req, res, next) => {
 
 }
 
-export const getAllTasks = async(req, res, next) => {
-    let tasks;
-    try{
-        tasks = await Task.find().populate('user');
-    }catch(err){
-        return console.log(err)
-    }
-
-    if(!tasks){
-        return res.status(404).json({message: "No Blogs Found"})
-    }
-
-    return res.status(200).json({blogs})
-}//not used till now
-
 export const getById = async(req, res, next) => {
     const id = req.params.id;
     let task;
@@ -141,4 +126,19 @@ export const getById = async(req, res, next) => {
     }
 
     return res.status(200).json({task})
+}
+
+export const getAllTasks = async(req, res, next) => {
+    let tasks;
+    try{
+        tasks = await Task.find().populate('user');
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!tasks){
+        return res.status(404).json({message: "No Blogs Found"})
+    }
+
+    return res.status(200).json({blogs})
 }//not used till now

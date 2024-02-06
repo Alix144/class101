@@ -3,14 +3,32 @@ import NoteBox from "./NoteBox";
 import { useEffect, useState } from "react";
 
 const NotesContainer = ({isCompleted}) => {
+    const id = localStorage.getItem("userId");
+    const [notes, setNotes] = useState();
 
-    const color = isCompleted ? '#E1FFA0' : '#FFD464';
+    const sendRequest = async() => {
+        const res = await axios.get(`http://localhost:4000/task/view/${id}`).catch(err=>console.log(err))
+        const data = await res.data.tasks
+        console.log(data)
+        return data;
+    }
+
+    useEffect(() => {
+        sendRequest().then(data=>setNotes(data))
+    },[])
+
     return ( 
         <div className="notes-container">
-            <NoteBox color={color} />
-            <NoteBox color={color} />
-            <NoteBox color={color} />
-            <NoteBox color={color} />
+
+            {notes && notes.map((note, index)=>{
+                console.log(note)
+                if(isCompleted === false && note.isCompleted === false){
+                    return <NoteBox key={index} id={note._id} title={note.title} description={note.description} deadline={note.deadline} isCompleted={note.isCompleted}/>
+                }
+                else if(isCompleted && note.isCompleted)
+                    return <NoteBox key={index} id={note._id} title={note.title} description={note.description} deadline={note.deadline} isCompleted={note.isCompleted}/>
+                }
+            )}
         </div>
      );
 }

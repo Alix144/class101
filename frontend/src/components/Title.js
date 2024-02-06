@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux'
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import plus from '../images/plus.png'
 
 const Title = ({propTitle, add}) => {
+    const navigate = useNavigate();
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const [isAddTaskPageOpen, setAddTaskPage] = useState(false)
@@ -15,6 +18,11 @@ const Title = ({propTitle, add}) => {
     const [isAddStudentPageOpen, setAddStudentPage] = useState(false)
     const [fileName, setFileName] = useState('');
     const [topics, setTopics] = useState([{ id: 1, value: '' }]);
+
+    const [title, setTitle] = useState("")
+    const [deadline, setDeadline] = useState("")
+    const [course, setCourse] = useState("")
+    const [description, setDescription] = useState("")
 
     const handleTopicChange = (id, value) => {
       const updatedTopics = topics.map((topic) =>
@@ -37,6 +45,27 @@ const Title = ({propTitle, add}) => {
       }
     }
 
+    /*******************/
+    const addTask = async() => {
+        const res = await axios.post("http://localhost:4000/task/add", {
+            title,
+            deadline,
+            description,
+            user: localStorage.getItem('userId')
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleAddTask = (e) => {
+        e.preventDefault()
+        addTask().then(() => {
+            // navigate("dashboard/todo");
+            window.location.reload();
+        });
+    }
+
     return ( 
         <>
         {isAddTaskPageOpen && 
@@ -49,17 +78,17 @@ const Title = ({propTitle, add}) => {
                 <form action="">
                     <div>
                         <label htmlFor="title">Title*</label>
-                        <input type="text" id="title" name="title"/>
+                        <input type="text" id="title" name="title" value={title} onChange={(e)=>setTitle(e.target.value)}/>
                     </div>
 
                     <div>
                         <label htmlFor="deadline">Deadline</label>
-                        <input type="date" id="deadline" name="deadline"/>
+                        <input type="date" id="deadline" name="deadline" value={deadline} onChange={(e)=>setDeadline(e.target.value)}/>
                     </div>
 
                     <div>
                         <label htmlFor="courses">Course</label>
-                        <select id="courses" name="courses">
+                        <select id="courses" name="courses" value={course} onChange={(e)=>setCourse(e.target.value)}>
                             <option selected>Select a Course</option>
                             <option>Math</option>
                             <option>Spanish</option>
@@ -68,13 +97,13 @@ const Title = ({propTitle, add}) => {
                     </div>
                     <div>
                         <label htmlFor="desc">Description</label>
-                        <textarea name="desc" id="desc" cols="30" rows="5"></textarea>
+                        <textarea name="desc" id="desc" cols="30" rows="5" value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
                     </div>
 
                 </form>
                 <div className="on-page-btns">
                     <button onClick={()=>setAddTaskPage(!isAddTaskPageOpen)}>Cancel</button>
-                    <button>Save</button>
+                    <button onClick={handleAddTask}>Add</button>
                 </div>
             </div>
             </div>
