@@ -24,7 +24,7 @@ const classSchema = new Schema({
       },
       classColor:{
         type: String,
-        default: '#FFFFFF',
+        default: 'blue',
       },
       instructors:[{
         type: mongoose.Types.ObjectId,

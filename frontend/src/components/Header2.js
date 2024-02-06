@@ -57,6 +57,7 @@ const Header2 = () => {
 
     const logoutFunction = () => {
         dispatch(logout())
+        localStorage.clear();
         navigate("/auth")
     }
 
@@ -64,6 +65,8 @@ const Header2 = () => {
         navigate("dashboard/notifications")
         setNotificationBtn(false)
     }
+
+    /*******************/
 
     return ( 
 

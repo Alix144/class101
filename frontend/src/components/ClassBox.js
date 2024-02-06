@@ -17,7 +17,7 @@ const container = {
     }
   };
 
-const ClassBox = ( {color, img}) => {
+const ClassBox = ( {color, img, className, instructorsNum, studentsNum}) => {
     let primaryColor;
     let secondColor;
     let picColor;
@@ -60,18 +60,18 @@ const ClassBox = ( {color, img}) => {
             </div>
             <div className="class-box-info">
                 <div>
-                    <h4>Spanish</h4>
+                    <h4>{className}</h4>
                     <p><b>Instructor:</b></p>
                     <p>Person1</p>
                 </div>
                 <div className='info-part2'>
                     <div>
                         <img src={teacher} alt="Teacher" />
-                        <p>2</p>
+                        <p>{instructorsNum}</p>
                     </div>
                     <div>
                         <img src={student} alt="Student" />
-                        <p>23</p>
+                        <p>{studentsNum}</p>
                     </div>
                 </div>
 

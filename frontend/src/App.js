@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { setToInstructor, setToStudent } from './store/slices/instructorOrStudent';
+import { login, logout } from './store/slices/authSlice';
 
 //pages
 import Main from "./pages/Main";
@@ -34,10 +35,18 @@ function App() {
 
   useEffect(() => {
     const role = localStorage.getItem('role');
-    if(role === 'instructor'){
-      dispatch(setToInstructor())
-    }else if(role === 'student'){
-      dispatch(setToStudent())
+    const isAuthenticated = localStorage.getItem('userId');
+
+    if (isAuthenticated) {
+      dispatch(login());
+
+      if(role === 'instructor'){
+        dispatch(setToInstructor())
+      }else if(role === 'student'){
+        dispatch(setToStudent())
+      }
+    }else {
+      dispatch(logout());
     }
 
   }, [dispatch]);
@@ -45,12 +54,12 @@ function App() {
   return (
     <div className="App">
       
-        {/* {isLoggedIn ? <Header2/> : <Header/>} */}
-        {true ? <Header2/> : <Header/>}
+        {isLoggedIn ? <Header2/> : <Header/>}
+        {/* {true ? <Header2/> : <Header/>} */}
 
         <Routes>
-          {/* {!isLoggedIn ? */}
-          {!true ?
+          {!isLoggedIn ?
+          // {!true ?
           <>
             <Route path="/" element={<Main/>}/>
             <Route path="/auth" element={<Auth/>}/>
