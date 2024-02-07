@@ -1015,7 +1015,7 @@ main{
     box-shadow: 1px 1px 5px 0px rgb(126, 126, 126);
 }
 
-textarea:focus{
+textarea:focus, select:focus{
     border: 2px solid #74BCFF;
 }
 
@@ -1287,8 +1287,14 @@ input[type='file']{
     width: 100%;
 }
 
+.default-pic{
+    font-family: 'Montserrat', sans-serif;;
+    font-size: 2rem;
+}
+
 .class-info{
     padding: 30px 80px;
+    min-height: 250px;
     position: relative;
     background-image: url(images/classBgs/bg3.jpg);
     background-position: center;

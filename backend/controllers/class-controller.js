@@ -32,7 +32,7 @@ export const createClass = async(req, res, next) => {
         return res.status(500).json({message: "err"})
     }
     
-    return res.status(200).json({klass})
+    return res.status(200).json({class: klass})
 }
 
 export const updateClass = async(req, res, next) => {
@@ -111,16 +111,16 @@ export const getAllTasks = async(req, res, next) => {
 
 export const getById = async(req, res, next) => {
     const id = req.params.id;
-    let task;
+    let klass;
     try{
-        task = await Task.findById(id)
+        klass = await Class.findById(id)
     }catch(err){
         return console.log(err)
     }
 
-    if(!task){
-        return res.status(404).json({message: "No task Found"});
+    if(!klass){
+        return res.status(404).json({message: "No Class Found"});
     }
 
-    return res.status(200).json({task})
-}//not used till now
+    return res.status(200).json({class: klass})
+}

@@ -20,7 +20,7 @@ const NotesContainer = ({isCompleted}) => {
     return ( 
         <div className="notes-container">
 
-            {notes && notes.map((note, index)=>{
+            {notes && notes.slice().reverse().map((note, index)=>{
                 console.log(note)
                 if(isCompleted === false && note.isCompleted === false){
                     return <NoteBox key={index} id={note._id} title={note.title} description={note.description} deadline={note.deadline} isCompleted={note.isCompleted}/>

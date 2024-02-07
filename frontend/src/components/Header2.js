@@ -85,26 +85,28 @@ const Header2 = () => {
         }
       
         return code;
-      }
+    }
 
     const createClass = async() => {
         const res = await axios.post("http://localhost:4000/class/create", {
             name,
             courseCode,
-            invitationCode: generateRandomCode(5),
+            invitationCode: generateRandomCode(6),
             description,
             maxStudents,
             user: localStorage.getItem('userId')
         }).catch(err=>console.log(err));
         const data = await res.data;
+        console.log(data)
         return data;
     }
 
     const handleCreateClass = (e) => {
         e.preventDefault()
-        createClass().then(navigate("home")).then(() => {
-            navigate("dashboard/classroom/home");
-            window.location.reload();});
+        createClass().then((data) => {
+            navigate(`dashboard/classroom/${data.class._id}/home`);
+            window.location.reload();
+        });
     }
 
     return ( 

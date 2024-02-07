@@ -20,7 +20,7 @@ import info from '../images/info.png'
 import upload from '../images/upload.png'
 import check from '../images/check.png'
 
-const ClassInfo = () => {
+const ClassInfo = ({name, courseCode, description, maxStudents, classColor, instructors, students}) => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const [isCustomizeDivOpen, setCustomizeDiv] = useState(false)
@@ -127,7 +127,7 @@ const ClassInfo = () => {
                         </div>
                     </form>
                     <div className="on-page-btns">
-                        <button onClick={()=>setClassInfoDiv(!isClassInfoOpen)}>close</button>
+                        <button onClick={()=>setClassInfoDiv(!isClassInfoOpen)}>Close</button>
                         {isInstructor &&
                         <button>Edit</button>
                         }
@@ -138,32 +138,34 @@ const ClassInfo = () => {
 
         <div className="class-info">
             <div className='class-name-pic'>
-                <div><h1>S</h1></div>
-                <h1>Spanish</h1>
+                <div className='default-pic'>{name[0].toUpperCase()}</div>
+                <h1>{name}</h1>
                 {isInstructor &&
                 <img src={pen} alt="Edit" onClick={() => setCustomizeDiv(true)}/>
                 }
                 <img src={info} alt="Info" onClick={()=> setClassInfoDiv(true)} style={{marginLeft:'5px'}}/>
             </div>
+            {courseCode &&
             <div className='class-code'>
                 <h5>Course Code:</h5>
-                <p>ESP101</p>
+                <p>{courseCode}</p>
             </div>
+            }
+            {description &&
             <div>
                 <h5>Description:</h5>
-                <p>Unlock the beauty of Spanish in our Beginner Course.
-                    From fundamental grammar to practical communication,
-                     our dynamic lessons immerse you in the language.</p>
+                <p>{description}</p>
             </div>
+            }
 
             <div className="people-num">
                 <div>
                     <img src={teacher} alt="Instructor" />
-                    <p>1</p>
+                    <p>{instructors.length}</p>
                 </div>
                 <div>
                     <img src={student} alt="Student" />
-                    <p>203</p>
+                    <p>{students.length}</p>
                 </div>
             </div>
         </div>

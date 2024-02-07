@@ -1,5 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import add from '../images/plus.png'
 import emptyBox from '../images/empty-box.png'
@@ -10,8 +12,7 @@ const ClassroomHome = () => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const [isCopied, setIsCopied] = useState(false);
-    // random text
-    const textToCopy = '9OID8S2D'; 
+    // random text 
     const textAreaRef = useRef(null);
   
     const handleCopyClick = () => {
@@ -26,6 +27,24 @@ const ClassroomHome = () => {
           }, 2000);
       }
     };
+
+
+    const id = useParams().id
+    const [klass, setKlass] = useState("");
+
+    const fetchDetails = async() => {
+        const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
+        const data = await res.data;
+        return data;
+    }
+
+    useEffect(()=>{ 
+        fetchDetails()
+        .then((data)=>{
+            setKlass(data.class)
+            console.log(klass)
+        })
+    },[])
 
     return ( 
         <div className="content classroom-home">
@@ -47,11 +66,11 @@ const ClassroomHome = () => {
                             <h4>Invitation Code</h4>
                         </div>
                         <div className='code-string'>
-                            <textarea ref={textAreaRef} value={textToCopy} style={{ position: 'absolute', left: '-9999px' }} readOnly />
+                            <textarea ref={textAreaRef} value={klass.invitationCode} style={{ position: 'absolute', left: '-9999px' }} readOnly />
                             {isCopied ? 
                                 <h2 className='temp-message'>Copied!</h2>
                                 :
-                                <h2 onClick={handleCopyClick}>9OID8S2D</h2>
+                                <h2 onClick={handleCopyClick}>{klass.invitationCode}</h2>
                             }
                             <img src={copy} alt="Copy" onClick={handleCopyClick}/>
                         </div>

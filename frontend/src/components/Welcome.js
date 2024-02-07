@@ -66,7 +66,7 @@ const Welcome = () => {
                             </div>
                     </form>
                     <div className="on-page-btns">
-                        <button onClick={()=>setCustomizeDiv(false)}>close</button>
+                        <button onClick={()=>setCustomizeDiv(false)}>Close</button>
                         <button>Save</button>
                     </div>
                 </div>

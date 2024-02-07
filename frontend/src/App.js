@@ -73,7 +73,7 @@ function App() {
               <Route path="profile" element={<Profile/>}/>
               <Route path="notifications" element={<Notifications/>}/>
               
-              <Route path="classroom" element={<Classroom/>}>
+              <Route path="classroom/:id" element={<Classroom/>}>
                 <Route path="home" element={<ClassroomHome/>}/>
                 <Route path="announcements" element={<Announcements/>}/>
                 <Route path="chat" element={<Chat/>}/>

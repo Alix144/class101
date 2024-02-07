@@ -160,7 +160,7 @@ const NoteBox = ({id, title, description, deadline, isCompleted}) => {
                 <img src={more} alt="More" className='show-more' onClick={showMore}/>
                 <h4>{title}</h4>
                 <p>Spanish</p>
-                <p>{formattedDate}</p>
+                {deadline && <p>Deadline: {formattedDate}</p>}
                 <h5>{description}</h5>
             
                 {isMoreOpen &&
