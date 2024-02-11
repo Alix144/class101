@@ -164,7 +164,7 @@ const NoteBox = ({id, title, description, deadline, isCompleted}) => {
                 <h5>{description}</h5>
             
                 {isMoreOpen &&
-                    <div className="note-more">
+                <div className="note-more">
                     <div className='note-more2'>
                         <div onClick={handleComplete}>
                         {color === "#E1FFA0" ? 
@@ -198,7 +198,7 @@ const NoteBox = ({id, title, description, deadline, isCompleted}) => {
                             <h6>Delete</h6>
                         </div>
                     </div>
-                    </div>
+                </div>
                 }
             </motion.div>
         </>

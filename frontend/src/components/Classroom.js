@@ -24,7 +24,7 @@ const Classroom = () => {
             setKlass(data.class)
             console.log(klass)
         })
-    },[])
+    },[id])
 
     return ( 
         <main className="classroom-main">

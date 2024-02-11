@@ -44,7 +44,8 @@ const ClassroomHome = () => {
             setKlass(data.class)
             console.log(klass)
         })
-    },[])
+        
+    },[id])
 
     return ( 
         <div className="content classroom-home">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import {motion} from "framer-motion"
+import axios from "axios";
 
 import {  setToNull, setToHome, setToCalendar, setToToDo, setToClassT, setToClassS } from '../store/slices/currentSection';
 import { setToInstructor, setToStudent } from '../store/slices/instructorOrStudent';
@@ -42,13 +42,21 @@ const Sidebar = () => {
         localStorage.setItem('currentSection', 'toDo');
     }
 
-    const goToClassroom = () => {
-        navigate("classroom/home")
+    // const classPress = async(id) => {
+    //     const res = await axios.get(`http://localhost:4000/class/view/class/${id}`)
+    //     .catch(err=>console.log(err))
+    //     const data = await res.data;
+    //     return data;
+    // }
+
+    const goToClassroom = (id) => {
+        navigate(`classroom/${id}/home`)
         dispatch(setToInstructor())
         dispatch(setToDashboard())
         dispatch(setToClassT())
         localStorage.setItem('currentSection', 'classT');
     }
+
 
     const goToClassroomS = () => {
         navigate("classroom/home")
@@ -79,6 +87,21 @@ const Sidebar = () => {
         }
     }, [dispatch]);
 
+/***********************************/
+
+    const id = localStorage.getItem("userId");
+    const [classes, setClasses] = useState();
+
+    const sendRequest = async() => {
+        const res = await axios.get(`http://localhost:4000/class/view/${id}`).catch(err=>console.log(err))
+        const data = await res.data.classes
+        return data;
+    }
+
+    useEffect(() => {
+        sendRequest().then(data=>setClasses(data))
+    })
+
     return ( 
         <div className="sidebar">
             <div className={`sidebar-list ${currentSection === 'home' ? 'current-page' : ''}`} onClick={goToHome}>
@@ -103,10 +126,15 @@ const Sidebar = () => {
             {isOpen &&
                 <div className='classes'>
                     <ul>
-                        <div className='class-parent'>
+                    {classes && classes.map((klass, index)=>{
+                        if(klass.instructors.includes(id))
+                        return(
+                        <div key={index} className='class-parent' onClick={()=>goToClassroom(klass._id)}>
                             <div className="profile-pic">M</div>
-                            <li>math</li>
+                            <li>{klass.name}</li>
                         </div>
+                        )
+                    })}
                         <div className='class-parent' onClick={goToClassroom}>
                             <div className="profile-pic">S</div>
                             <li>Spanish</li>
