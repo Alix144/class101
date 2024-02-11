@@ -4,6 +4,7 @@ import cors from 'cors';
 import userRouter from "./routes/user-route.js";
 import taskRouter from "./routes/task-route.js";
 import classRouter from "./routes/class-route.js";
+import announcementRouter from "./routes/announcement-route.js";
 import { config } from 'dotenv';
 config();
 
@@ -21,6 +22,7 @@ app.use(express.json())
 app.use("/user", userRouter)
 app.use("/task", taskRouter)
 app.use("/class", classRouter)
+app.use("/announcement", announcementRouter)
 
 
 mongoose.connect(process.env.MONGO_URI)

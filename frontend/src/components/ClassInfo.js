@@ -138,7 +138,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
 
         <div className="class-info">
             <div className='class-name-pic'>
-                <div className='default-pic'>{name[0].toUpperCase()}</div>
+                <div className='default-pic' style={{backgroundColor: {classColor}}}>{name[0].toUpperCase()}</div>
                 <h1>{name}</h1>
                 {isInstructor &&
                 <img src={pen} alt="Edit" onClick={() => setCustomizeDiv(true)}/>

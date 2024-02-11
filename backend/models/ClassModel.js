@@ -26,6 +26,10 @@ const classSchema = new Schema({
         type: String,
         default: 'blue',
       },
+      announcements:[{
+        type: mongoose.Types.ObjectId,
+        ref:"Announcement",
+      }],
       instructors:[{
         type: mongoose.Types.ObjectId,
         ref:"User",
