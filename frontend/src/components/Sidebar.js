@@ -130,7 +130,7 @@ const Sidebar = () => {
                         if(klass.instructors.includes(id))
                         return(
                         <div key={index} className='class-parent' onClick={()=>goToClassroom(klass._id)}>
-                            <div className="profile-pic">M</div>
+                            <div className="profile-pic" style={{backgroundColor: klass.classColor} }>M</div>
                             <li>{klass.name}</li>
                         </div>
                         )

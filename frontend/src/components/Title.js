@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import plus from '../images/plus.png'
@@ -8,6 +8,7 @@ import plus from '../images/plus.png'
 const Title = ({propTitle, add}) => {
     const navigate = useNavigate();
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
+    const { id } = useParams();
 
     const [isAddTaskPageOpen, setAddTaskPage] = useState(false)
     const [isAddAnnouncementPageOpen, setAddAnnouncementPage] = useState(false)
@@ -19,10 +20,15 @@ const Title = ({propTitle, add}) => {
     const [fileName, setFileName] = useState('');
     const [topics, setTopics] = useState([{ id: 1, value: '' }]);
 
+    //task
     const [title, setTitle] = useState("")
     const [deadline, setDeadline] = useState("")
     const [course, setCourse] = useState("")
     const [description, setDescription] = useState("")
+
+    //announcement
+    const [announcementTitle, setAnnouncementTitle] = useState("")
+    const [announcementDescription, setAnnouncementDescription] = useState("")
 
     const handleTopicChange = (id, value) => {
       const updatedTopics = topics.map((topic) =>
@@ -46,6 +52,7 @@ const Title = ({propTitle, add}) => {
     }
 
     /*******************/
+    //add task
     const addTask = async() => {
         const res = await axios.post("http://localhost:4000/task/add", {
             title,
@@ -61,6 +68,27 @@ const Title = ({propTitle, add}) => {
     const handleAddTask = (e) => {
         e.preventDefault()
         addTask().then(() => {
+            // navigate("dashboard/todo");
+            window.location.reload();
+        });
+    }
+
+    //add announcement
+    const addAnnouncement = async() => {
+        const res = await axios.post("http://localhost:4000/announcement/add", {
+            title: announcementTitle,
+            description: announcementDescription,
+            user: localStorage.getItem('userId'),
+            klass: id
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleAddAnnouncement = (e) => {
+        e.preventDefault()
+        addAnnouncement().then(() => {
             // navigate("dashboard/todo");
             window.location.reload();
         });
@@ -119,18 +147,18 @@ const Title = ({propTitle, add}) => {
                 <form action="">
                     <div>
                         <label htmlFor="title">Title*</label>
-                        <input type="text" id="title" name="title"/>
+                        <input type="text" id="title" name="title" value={announcementTitle} onChange={(e)=>setAnnouncementTitle(e.target.value)}/>
                     </div>
 
                     <div>
                         <label htmlFor="desc">Description</label>
-                        <textarea name="desc" id="desc" cols="30" rows="5"></textarea>
+                        <textarea name="desc" id="desc" cols="30" rows="5" value={announcementDescription} onChange={(e)=>setAnnouncementDescription(e.target.value)}></textarea>
                     </div>
 
                 </form>
                 <div className="on-page-btns">
                     <button onClick={()=>setAddAnnouncementPage(!isAddAnnouncementPageOpen)}>Cancel</button>
-                    <button>Add</button>
+                    <button onClick={handleAddAnnouncement}>Add</button>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 export const getAllAnnouncements = async(req, res, next) => {
     let announcements;
     try{
-        announcements = await Announcement.find();
+        announcements = await Announcement.find().populate("user");
     }catch(err){
         return console.log(err)
     }
@@ -102,16 +102,16 @@ export const deleteAnnouncement = async(req, res, next) => {
 
 export const getById = async(req, res, next) => {
     const id = req.params.id;
-    let task;
+    let announcement;
     try{
-        task = await Task.findById(id)
+        task = await Announcement.findById(id)
     }catch(err){
         return console.log(err)
     }
 
     if(!task){
-        return res.status(404).json({message: "No task Found"});
+        return res.status(404).json({message: "No announcement Found"});
     }
 
-    return res.status(200).json({task})
+    return res.status(200).json({announcement})
 }//not used till now
