@@ -8,21 +8,24 @@ import Title from "./Title";
 
 import trash from '../images/trash-can.png'
 import edit from '../images/pencil.png'
+import emptyBox from '../images/empty-box.png'
 
 const Announcements = () => {
     const id = useParams().id
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
     const [announcements, setAnnouncements] = useState()
+    const [isEmpty, setIsEmpty] = useState(true)
 
     const sendRequest = async() => {
         const res = await axios.get("http://localhost:4000/announcement").catch(err=>console.log(err))
         const data = await res.data.announcements
+        setIsEmpty(data.filter(announcement => announcement.class === id).length === 0);
         return data;
     }
 
     useEffect(() => {
         sendRequest().then(data=>setAnnouncements(data))
-    },[])
+    },[id])
 
     //delete
     const deleteTask = async(id) => {
@@ -53,7 +56,7 @@ const Announcements = () => {
             }
 
             {announcements && announcements.slice().reverse().map((announcement, index)=>{
-                if(id === announcement.class)
+                if(id === announcement.class){
                     return(
                         <div className="announcement-box" key={index}>
                             <div className="left-border"></div>
@@ -75,8 +78,16 @@ const Announcements = () => {
                             </div>
                             }
                         </div>
-                    )
+                    )}
             })}
+
+            {isEmpty && 
+                <div className="div-content">
+                <img src={emptyBox} alt="Empty-box" />
+                <p>This is were you can see your 
+                    instructor’s announcements</p>
+            </div>
+            }
 
             {/* <div className="announcement-box">
                 <div className="left-border"></div>

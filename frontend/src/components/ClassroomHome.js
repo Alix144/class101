@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import moment from "moment";
 
 import add from '../images/plus.png'
 import emptyBox from '../images/empty-box.png'
@@ -12,6 +13,8 @@ const ClassroomHome = () => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const [isCopied, setIsCopied] = useState(false);
+    const [isEmpty, setIsEmpty] = useState(true)
+
     // random text 
     const textAreaRef = useRef(null);
   
@@ -28,9 +31,12 @@ const ClassroomHome = () => {
       }
     };
 
+    const handleDate = (date) => {
+        return moment(date).fromNow()
+    }
 
     const id = useParams().id
-    const [klass, setKlass] = useState("");
+    const [klass, setKlass] = useState('');
 
     const fetchDetails = async() => {
         const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
@@ -42,22 +48,51 @@ const ClassroomHome = () => {
         fetchDetails()
         .then((data)=>{
             setKlass(data.class)
-            console.log(klass)
+            setIsEmpty(data.class.announcements.length === 0);
+            // console.log(klass)
+            // console.log(isEmpty)
         })
-        
     },[id])
+
+    useEffect(() => {
+        console.log(klass)
+        console.log(isEmpty);
+    }, [klass, isEmpty]);
 
     return ( 
         <div className="content classroom-home">
+
             <div className="announcements-div">
                 <div className="div-title">
                     <h4>Announcements</h4>
                 </div>
-                <div className="div-content">
-                    <img src={emptyBox} alt="Empty-box" />
-                    <p>This is were you can see your 
+
+                
+                {isEmpty ? 
+                    <div className="div-content">
+                        <img src={emptyBox} alt="Empty-box" />
+                        <p>This is were you can see your 
                         instructor’s announcements</p>
-                </div>
+                    </div>
+                :
+                    <div className="announcement-home">
+                    {klass.announcements.slice().reverse().map((announcement, index)=>(
+                        
+                            <div className="one-ppl" key={index} style={{width: '90%'}}>
+                                <div className="left-border"></div>
+                                <div className="info">
+                                    <div className='announc-div'>
+                                        <h5>{announcement.title}</h5>
+                                    </div>
+                                </div>
+                                <p style={{fontSize: "12px"}}>{handleDate(announcement.date)}</p>
+                            </div>
+                        
+                    
+                    ))}
+                    </div>
+                }
+
             </div>
 
             <div className="code-todo-div">
