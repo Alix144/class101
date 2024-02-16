@@ -1,6 +1,20 @@
 import User from "../models/UserModel.js";
 import bcrypt from "bcryptjs";
 
+export const getAllUsers = async(req, res, next) => {
+    let users;
+    try{
+        users = await User.find()
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!users){
+        return res.status(404).json({message: "No users Found"})
+    }
+
+    return res.status(200).json({users})
+}
 
 export const signup = async(req, res, next) => {
     const {name, surname, email, password, description, teachingClasses, learningClasses} = req.body;

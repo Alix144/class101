@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from 'react-redux'
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 
 import Title from "./Title";
 
@@ -13,6 +16,9 @@ const People = () => {
     const [isStudentInfoPageOpen, setStudentInfoPage] = useState(false)
     const [query, setQuery] = useState("");
     const [query2, setQuery2] = useState("");
+    const id = useParams().id;
+    const [instructors, setInstructors] = useState([]);
+    const [students, setStudents] = useState([]);
 
     const ppl = [
         {
@@ -31,6 +37,27 @@ const People = () => {
         email: 'rawan@gmail.com'
         },
     ]
+
+    const fetchDetails = async() => {
+        const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
+        const data = await res.data.class;
+        return data;
+    }
+
+    useEffect(()=>{
+        fetchDetails()
+        .then((data)=>{
+            setInstructors(data.instructors)
+            setStudents(data.students)
+        })
+    }, [id])
+
+    useEffect(()=>{
+        console.log(instructors)
+        console.log(students)
+
+    }, [instructors, students])
+    
 
     return ( 
         <>
@@ -83,7 +110,7 @@ const People = () => {
                 </div>
 
                 <div className="people">
-                    {ppl.filter(user=>user.name.toLowerCase().includes(query2)).map((user)=>(
+                    {instructors.filter(user=>user.name.toLowerCase().includes(query2)).map((user)=>(
 
                     <div className="one-ppl" key={user.id} onClick={()=>setStudentInfoPage(!isStudentInfoPageOpen)}>
                         <div className="left-border"></div>
@@ -119,7 +146,7 @@ const People = () => {
                 </div>
 
                 <div className="people">
-                    {ppl.filter(user=>user.name.toLowerCase().includes(query)).map((user)=>(
+                    {students.filter(user=>user.name.toLowerCase().includes(query)).map((user)=>(
 
                     <div className="one-ppl" key={user.id} onClick={()=>setStudentInfoPage(!isStudentInfoPageOpen)}>
                         <div className="left-border"></div>

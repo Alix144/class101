@@ -113,7 +113,7 @@ export const getById = async(req, res, next) => {
     const id = req.params.id;
     let klass;
     try{
-        klass = await Class.findById(id).populate("announcements")
+        klass = await Class.findById(id).populate("announcements").populate("students").populate("instructors")
     }catch(err){
         return console.log(err)
     }
