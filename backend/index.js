@@ -5,6 +5,7 @@ import userRouter from "./routes/user-route.js";
 import taskRouter from "./routes/task-route.js";
 import classRouter from "./routes/class-route.js";
 import announcementRouter from "./routes/announcement-route.js";
+import PostRouter from "./routes/post-route.js";
 import { config } from 'dotenv';
 config();
 
@@ -23,6 +24,7 @@ app.use("/user", userRouter)
 app.use("/task", taskRouter)
 app.use("/class", classRouter)
 app.use("/announcement", announcementRouter)
+app.use("/post", PostRouter)
 
 
 mongoose.connect(process.env.MONGO_URI)

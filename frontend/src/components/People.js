@@ -105,7 +105,7 @@ const People = () => {
 
                     <div>
                         <img src={teacher} alt="Instructor" />
-                        <p>1</p>
+                        <p>{instructors.length}</p>
                     </div>
                 </div>
 
@@ -141,7 +141,7 @@ const People = () => {
 
                     <div>
                         <img src={student} alt="Instructor" />
-                        <p>203</p>
+                        <p>{students.length}</p>
                     </div>
                 </div>
 

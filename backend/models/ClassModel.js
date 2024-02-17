@@ -31,6 +31,11 @@ const classSchema = new Schema({
         ref:"Announcement",
         default: [],
       }],
+      posts: [{
+        type: mongoose.Types.ObjectId,
+        ref: "Post",
+        default: [],
+      }],
       instructors:[{
         type: mongoose.Types.ObjectId,
         ref:"User",
