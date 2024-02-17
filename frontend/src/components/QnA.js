@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import moment from "moment";
 
 import Title from "./Title";
 
@@ -9,6 +10,10 @@ const QnA = () => {
     const userId = localStorage.getItem("userId");
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState({name:"?"});
+
+    const handleDate = (date) => {
+        return moment(date).fromNow()
+    }
 
     const fetchUserDetails = async() => {
         const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
@@ -99,7 +104,7 @@ const QnA = () => {
                             <div className="a-img">{post.user.name[0].toUpperCase()}</div>
                             <div>
                                 <h4>{post.user.name}</h4>
-                                <p>{post.date}</p>
+                                <p>{handleDate(post.date)}</p>
                             </div>
                         </div>
                         <div className="question">
