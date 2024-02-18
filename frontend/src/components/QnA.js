@@ -10,7 +10,10 @@ const QnA = () => {
     const userId = localStorage.getItem("userId");
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState({name:"?"});
-
+    const [question, setQuestion] = useState("");
+    const [answer, setAnswer] = useState("");
+    const [answers, setAnswers] = useState([]);
+    
     const handleDate = (date) => {
         return moment(date).fromNow()
     }
@@ -21,29 +24,77 @@ const QnA = () => {
         return data;
     }
 
-    useEffect(()=>{ 
-        fetchUserDetails()
-        .then((data)=>{
-            setUser(data)
-        })
-    }, [id])
-
     const fetchDetails = async() => {
         const res = await axios.get("http://localhost:4000/post/").catch(err=>console.log(err))
         const data = await res.data;
         return data;
     }
 
+    useEffect(() => {
+        console.log(answers)
+    }, [posts, user, answers]);
+
+    const createPost = async() => {
+        const res = await axios.post("http://localhost:4000/post/create", {
+            question,
+            klass: id,
+            user: userId
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleCreatePost = (e) => {
+        e.preventDefault();
+        createPost().then(()=>{
+            window.location.reload()
+        })
+    }
+
+    // Add answer
+    const addAnswer = async(postId) => {
+        const res = await axios.post("http://localhost:4000/post/answers/add", {
+            answer,
+            user: userId,
+            post: postId
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleAnswerSubmit = async(e, postId) => {
+        e.preventDefault();
+        await addAnswer(postId).then(()=>{
+            window.location.reload()
+        })
+    }
+
+    //******************************* */
+
+    const fetchAnswers = async() => {
+        const res = await axios.get("http://localhost:4000/post/answers").catch(err=>console.log(err))
+        const data = await res.data.answers;
+        return data;
+    }
+
     useEffect(()=>{ 
+        fetchUserDetails()
+        .then((data)=>{
+            setUser(data)
+        })
+
         fetchDetails()
         .then((data)=>{
             setPosts(data.posts)
         })
-    },[id])
 
-    useEffect(() => {
-        console.log(user)
-    }, [posts, user]);
+        fetchAnswers()
+        .then((data)=>{
+            setAnswers(data)
+        })
+    },[id])
 
     return ( 
         <div className="content">
@@ -52,48 +103,10 @@ const QnA = () => {
             <div className="qna">
 
                 <div className="q-input">
-                    {user &&
                     <div className="q-img">{user.name[0].toUpperCase()}</div>
-                    }
-                    <input type="text" placeholder="Add Question"/>
-                    <button>Submit</button>
+                    <input type="text" placeholder="Add Question" value={question} onChange={(e)=>setQuestion(e.target.value)}/>
+                    <button onClick={handleCreatePost}>Submit</button>
                 </div>
-
-                {/* <div className="qna-post">
-                    <div className="question-div">
-                        <div className="info">
-                            <div className="a-img">A</div>
-                            <div>
-                                <h4>Ali Youssef</h4>
-                                <p>20-03-2023</p>
-                            </div>
-                        </div>
-                        <div className="question">
-                            <p>Lorem. Inventore nemo cumklsa  sadlf jsldkf sque harum deserunt,uptas asperiores tenetur?</p>
-                        </div>
-                        <hr />
-                    </div>
-                    <div className="answer">
-                        <div className="a-img">A</div>
-                        <input type="text" placeholder="Answer"/>
-                        <button>Answer</button>
-                    </div>
-
-                    <div className="comments">
-                        <div className="comment">
-                            <div className="info">
-                                <div className="a-img">A</div>
-                                <div>
-                                    <h4>Ali Youssef</h4>
-                                    <p>20-03-2023</p>
-                                </div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum quisquam error minus laudantium est blanditiis magnam itaque aspernatur nobis dignissimos, quibusdam asperiores maxime velit sit quos, perferendis odio non ab!</p>
-                        </div>
-                    </div>
-                    <hr className="hr"/>
-                </div> */}
-
 
                 {posts.slice().reverse().map((post, index)=>
                         
@@ -114,21 +127,24 @@ const QnA = () => {
                     </div>
                     <div className="answer">
                         <div className="a-img">{user.name[0].toUpperCase()}</div>
-                        <input type="text" placeholder="Answer"/>
-                        <button>Answer</button>
+                        <input type="text" placeholder="Answer" onChange={(e)=>{setAnswer(e.target.value)}}/>
+                        <button onClick={(e)=>handleAnswerSubmit(e, post._id)}>Answer</button>
                     </div>
 
                     <div className="comments">
-                        <div className="comment">
+                        {answers.length !== 0 && answers.slice().reverse().map((answer, index) => (
+                        answer.post === post._id &&
+                        <div className="comment" key={index}>
                             <div className="info">
-                                <div className="a-img">A</div>
+                                <div className="a-img">{answer.user.name[0].toUpperCase()}</div>
                                 <div>
-                                    <h4>Ali Youssef</h4>
-                                    <p>20-03-2023</p>
+                                    <h4>{answer.user.name}</h4>
+                                    <p>{handleDate(answer.date)}</p>
                                 </div>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum quisquam error minus laudantium est blanditiis magnam itaque aspernatur nobis dignissimos, quibusdam asperiores maxime velit sit quos, perferendis odio non ab!</p>
+                            <p>{answer.answer}</p>
                         </div>
+                        ))}
                     </div>
                     <hr className="hr"/>
                 </div>

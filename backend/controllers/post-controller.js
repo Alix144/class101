@@ -1,6 +1,7 @@
 import Class from "../models/ClassModel.js";
 import User from "../models/UserModel.js";
 import Post from "../models/PostModel.js";
+import Answer from "../models/AnswerModel.js";
 import mongoose from "mongoose";
 
 
@@ -42,6 +43,61 @@ export const createPost = async(req, res, next) => {
     }
     
     return res.status(200).json({post: post})
+}
+
+export const addAnswer = async(req, res, next) => {
+    const {answer, user, post} = req.body;
+    
+    let existingUser;
+    try{
+        existingUser = await User.findById(user)
+    }catch(err){
+        console.log(err)
+    }
+    if(!existingUser){
+        return res.status(400).json({message: "Unable to Find User by This ID"})
+    }
+
+    let existingPost;
+    try{
+        existingPost = await Post.findById(post)
+    }catch(err){
+        console.log(err)
+    }
+    if(!existingPost){
+        return res.status(400).json({message: "Unable to Find a Class by This ID"})
+    }
+    
+    const answerr = new Answer({answer, user, post})
+    try{
+        const session = await mongoose.startSession();
+        session.startTransaction();
+        await answerr.save({session})
+        
+        existingPost.answers.push(answerr)
+        await existingPost.save({session})
+        await session.commitTransaction();
+    }catch(err){
+        console.log(err)
+        return res.status(500).json({message: "err"})
+    }
+    
+    return res.status(200).json({answer: answerr})
+}
+
+export const getAnswers = async(req, res, next) => {
+    let answers;
+    try{
+        answers = await Answer.find().populate('user');
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!answers){
+        return res.status(404).json({message: "No Answer Found"})
+    }
+
+    return res.status(200).json({answers})
 }
 
 export const updatePost = async(req, res, next) => {
