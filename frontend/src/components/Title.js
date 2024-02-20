@@ -221,7 +221,7 @@ const Title = ({propTitle, add}) => {
                       <label htmlFor={`topic-${topic.id}`}>Topic {topic.id}</label>
                       <input type="text" id={`topic-${topic.id}`} name={`topic-${topic.id}`} value={topic.value} onChange={(e) => handleTopicChange(topic.id, e.target.value)}/>
                     </div>
-                ))}
+                    ))}
 
                 <button type="button" className='add-topic no-mrgn' onClick={handleAddTopic}>Add Topic</button>
                 </form>
