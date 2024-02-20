@@ -37,7 +37,7 @@ const Syllabus = () => {
                 <Title propTitle={"Syllabus"}/>
             }
 
-            {syllabus && syllabus.slice().reverse().map((sylla, index)=>{
+            {syllabus && syllabus.map((sylla, index)=>{
                 if(id === sylla.class){
                     return(
                     <div className="syllabus-box" key={index}>

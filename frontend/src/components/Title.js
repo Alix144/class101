@@ -18,6 +18,7 @@ const Title = ({propTitle, add}) => {
     const [isAddInstPageOpen, setAddInstPage] = useState(false)
     const [isAddStudentPageOpen, setAddStudentPage] = useState(false)
     const [fileName, setFileName] = useState('');
+    const [week, setWeek] = useState("");
     const [topics, setTopics] = useState([{ id: 1, value: '' }]);
 
     //task
@@ -87,6 +88,25 @@ const Title = ({propTitle, add}) => {
     }
 
     const handleAddAnnouncement = (e) => {
+        e.preventDefault()
+        addSyllabus().then(() => {
+            window.location.reload();
+        });
+    }
+
+    //add syllabus
+    const addSyllabus = async() => {
+        const res = await axios.post("http://localhost:4000/syllabus/add", {
+            week,
+            topics,
+            klass: id
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleAddSyllabus = (e) => {
         e.preventDefault()
         addAnnouncement().then(() => {
             // navigate("dashboard/todo");
@@ -213,7 +233,7 @@ const Title = ({propTitle, add}) => {
                 <form action="">
                     <div>
                         <label htmlFor="week">week*</label>
-                        <input type="number" min={0} id="week" name="week"/>
+                        <input type="number" min={0} id="week" name="week" value={week} onChange={(e)=>setWeek(e.target.value)}/>
                     </div>
 
                     {topics.map((topic) => (
@@ -228,7 +248,7 @@ const Title = ({propTitle, add}) => {
 
                 <div className="on-page-btns">
                     <button onClick={()=>setAddSyllabusPage(!isAddSyllabusPageOpen)}>Cancel</button>
-                    <button>Add</button>
+                    <button onClick={handleAddAnnouncement}>Add</button>
                 </div>
             </div>
         </div>
