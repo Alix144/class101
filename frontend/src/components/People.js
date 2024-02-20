@@ -20,23 +20,9 @@ const People = () => {
     const [instructors, setInstructors] = useState([]);
     const [students, setStudents] = useState([]);
 
-    const ppl = [
-        {
-        id: '1',
-        name: 'ali',
-        email: 'ali@gmail.com'
-        },
-        {
-        id: '2',
-        name: 'nagham',
-        email: 'nagham@gmail.com'
-        },
-        {
-        id: '3',
-        name: 'rawan',
-        email: 'rawan@gmail.com'
-        },
-    ]
+    const openInfoPage = () => {
+        setStudentInfoPage(!isStudentInfoPageOpen)
+    }
 
     const fetchDetails = async() => {
         const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
@@ -112,7 +98,7 @@ const People = () => {
                 <div className="people">
                     {instructors.filter(user=>user.name.toLowerCase().includes(query2)).map((user)=>(
 
-                    <div className="one-ppl" key={user.id} onClick={()=>setStudentInfoPage(!isStudentInfoPageOpen)}>
+                    <div className="one-ppl" key={user.id} onClick={openInfoPage()}>
                         <div className="left-border"></div>
                         <div className="info">
                             <div className="profile-pic">{user.name.charAt(0).toUpperCase()}</div>
