@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import teacher from '../images/teacher.png'
 import student from '../images/student.png'
@@ -23,10 +25,16 @@ import check from '../images/check.png'
 const ClassInfo = ({name, courseCode, description, maxStudents, classColor, instructors, students}) => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
+    const id = useParams().id;
     const [isCustomizeDivOpen, setCustomizeDiv] = useState(false)
     const [isClassInfoOpen, setClassInfoDiv] = useState(false)
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedBg, setSelectedBg] = useState("bg3");
+    const [newName, setName] = useState("");
+    const [newCourseCode, setCourseCode] = useState("");
+    const [newDescription, setDescription] = useState("");
+    const [newMaxStudents, setMaxStudents] = useState("");
+
 
     const handleClick = (index) => {
         setSelectedBg(index)
@@ -36,7 +44,42 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
         const file = event.target.files[0];    
         setSelectedImage(file);
         setSelectedBg("bg9")
-      };
+    };
+
+    //class info
+
+        //update
+        const update = async() => {
+            const res = await axios.put(`http://localhost:4000/class/view/class/${id}`,{
+                name: newName,
+                courseCode: newCourseCode,
+                description: newDescription,
+                maxStudents: newMaxStudents,
+            }).catch(err=>console.log(err))
+            const data = await res;
+            return data;
+        }
+    
+        const handleUpdate = (e) => {
+            e.preventDefault()
+            update()
+            .then(data => {
+                alert("Updated Successfully");
+                window.location.reload();
+            })
+            .catch(err => console.log(err));
+        }
+
+    const openClassInfo = () => {
+        setClassInfoDiv(true)
+    }
+
+    useEffect(()=>{
+        setName(name)
+        setCourseCode(courseCode)
+        setDescription(description)
+        setMaxStudents(maxStudents)
+    }, [])
 
     return ( 
         <>
@@ -93,43 +136,43 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
                     <form action="">
                         <div>
                             <p>Name*</p>
-                            {isInstructor?
-                                <input type="text"/>
+                            {isInstructor ?
+                                <input type="text" value={newName} onChange={(e)=>setName(e.target.value)}/>
                                 :
-                                <input type="text" readOnly/>
+                                <input type="text" value={newName} onChange={(e)=>setName(e.target.value)} readOnly/>
                             }
                             
                         </div>
                         <div>
                             <label htmlFor="code">Course Code</label>
-                            {isInstructor?
-                                <input type="text" id="code" name="code"/>
+                            {isInstructor ?
+                                <input type="text" id="code" name="code" value={newCourseCode} onChange={(e)=>setCourseCode(e.target.value)}/>
                                 :
-                                <input type="text" id="code" name="code" readOnly/>
+                                <input type="text" id="code" name="code" value={newCourseCode} onChange={(e)=>setCourseCode(e.target.value)} readOnly/>
                             }
                             
                         </div>
                         <div>
                             <label htmlFor="desc">Description</label>
-                            {isInstructor?
-                                <textarea name="desc" id="desc"  rows="5"></textarea>
+                            {isInstructor ?
+                                <textarea name="desc" id="desc"  rows="5" value={newDescription} onChange={(e)=>setDescription(e.target.value)}></textarea>
                                 :
-                                <textarea name="desc" id="desc"  rows="5" readOnly></textarea>
+                                <textarea name="desc" id="desc"  rows="5" value={newDescription} onChange={(e)=>setDescription(e.target.value)} readOnly></textarea>
                             }
                         </div>
                         <div>
                             <label htmlFor="max">Max Students</label>
                             {isInstructor?
-                                <input type="number" min={1} className='type-number' name="max" id="max"/>
+                                <input type="number" min={1} className='type-number' name="max" id="max" value={newMaxStudents} onChange={(e)=>setMaxStudents(e.target.value)}/>
                                 :
-                                <input type="number" min={1} className='type-number' name="max" id="max" readOnly/>
+                                <input type="number" min={1} className='type-number' name="max" id="max" value={newMaxStudents} onChange={(e)=>setMaxStudents(e.target.value)} readOnly/>
                             }
                         </div>
                     </form>
                     <div className="on-page-btns">
                         <button onClick={()=>setClassInfoDiv(!isClassInfoOpen)}>Close</button>
                         {isInstructor &&
-                        <button>Edit</button>
+                        <button onClick={(e)=>handleUpdate(e)}>Edit</button>
                         }
                     </div>
                 </div>
@@ -143,7 +186,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
                 {isInstructor &&
                 <img src={pen} alt="Edit" onClick={() => setCustomizeDiv(true)}/>
                 }
-                <img src={info} alt="Info" onClick={()=> setClassInfoDiv(true)} style={{marginLeft:'5px'}}/>
+                <img src={info} alt="Info" onClick={()=> openClassInfo()} style={{marginLeft:'5px'}}/>
             </div>
             {courseCode &&
             <div className='class-code'>

@@ -41,7 +41,7 @@ export const updateClass = async(req, res, next) => {
     let klass;
     try{
         klass = await Class.findByIdAndUpdate(classId,{
-            name, 
+            name,
             courseCode, 
             description, 
             maxStudents
@@ -55,7 +55,6 @@ export const updateClass = async(req, res, next) => {
     }
 
     return res.status(200).json({klass})
-
 }
 
 export const getByUserId = async(req, res, next) => {

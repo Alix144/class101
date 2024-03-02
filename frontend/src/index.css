@@ -1754,6 +1754,10 @@ input[type='file']{
     cursor: pointer;
 }
 
+.documents:hover{
+    cursor:auto;
+}
+
 .assignment .info, .documents .info{
     display: flex;
     align-items: center;

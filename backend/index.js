@@ -7,6 +7,7 @@ import classRouter from "./routes/class-route.js";
 import announcementRouter from "./routes/announcement-route.js";
 import PostRouter from "./routes/post-route.js";
 import syllabusRouter from "./routes/syllabus-route.js";
+import documentRouter from "./routes/document-route.js";
 import { config } from 'dotenv';
 config();
 
@@ -27,6 +28,7 @@ app.use("/class", classRouter)
 app.use("/announcement", announcementRouter)
 app.use("/post", PostRouter)
 app.use("/syllabus", syllabusRouter)
+app.use("/document", documentRouter)
 
 
 mongoose.connect(process.env.MONGO_URI)

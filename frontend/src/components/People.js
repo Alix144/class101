@@ -19,10 +19,25 @@ const People = () => {
     const id = useParams().id;
     const [instructors, setInstructors] = useState([]);
     const [students, setStudents] = useState([]);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [description, setDescription] = useState("");
+    const [userInfo, setUserInfo] = useState("");
+    
 
-    const openInfoPage = () => {
-        setStudentInfoPage(!isStudentInfoPageOpen)
+
+    const fetchUserDetails = async(userId) => {
+        const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
+        const data = await res.data.user;
+        return data;
     }
+
+    const openInfoPage = (userId) => {
+        setStudentInfoPage(!isStudentInfoPageOpen)
+        fetchUserDetails(userId).then((data)=>setUserInfo(data))
+    }
+
+
 
     const fetchDetails = async() => {
         const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
@@ -41,8 +56,8 @@ const People = () => {
     useEffect(()=>{
         console.log(instructors)
         console.log(students)
-
-    }, [instructors, students])
+        console.log(name)
+    }, [instructors, students, name])
     
 
     return ( 
@@ -51,21 +66,25 @@ const People = () => {
             <div className="on-page-div">   
                 <div className="add-form edit-task-form" >
                     <div className="on-page-title">
-                        <h3>User's Details</h3>
+                        <h3>{userInfo.name}'s Details</h3>
                         <hr/>
                     </div>
                     <div className="student-hw-info">
                         <div className="st-info">
-                            <div className="profile-pic">A</div>
+                            <div className="profile-pic">{userInfo.name[0].toUpperCase()}</div>
                             <div>
-                                <h4>Ali Youssef</h4>
+                                <h4>{userInfo.name} {userInfo.surname}</h4>
                             </div>
                         </div>
                         <h4>Email</h4>
-                        <p>ali@gmail.com</p>
+                        <p>{userInfo.email}</p>
 
-                        <h4>Description</h4>
-                        <p className='maxh'>Lorem i eserunt doloribus placeat odio hic eligendi in! Hic possimus rem quod. eveniet neque vitae libero quo corporis dolorem quasi.</p>
+                        {userInfo.description &&
+                        <>
+                            <h4>Description</h4>
+                            <p className='maxh'>{userInfo.description}</p>
+                        </>
+                        }
                     </div>
 
                     <div className="on-page-btns">
@@ -87,7 +106,7 @@ const People = () => {
             <div className="people-parent-div">
                 <div className="ppl-search">
                     <img src={search} alt="Search" />
-                    <input type="text" name="" id="" onChange={e=>setQuery2(e.target.value)}/>
+                    <input type="text" name="" id="" onChange={(e)=>setQuery2(e.target.value)}/>
 
                     <div>
                         <img src={teacher} alt="Instructor" />
@@ -98,7 +117,7 @@ const People = () => {
                 <div className="people">
                     {instructors.filter(user=>user.name.toLowerCase().includes(query2)).map((user)=>(
 
-                    <div className="one-ppl" key={user.id} onClick={openInfoPage()}>
+                    <div className="one-ppl" key={user._id} onClick={()=>openInfoPage(user._id)}>
                         <div className="left-border"></div>
                         <div className="info">
                             <div className="profile-pic">{user.name.charAt(0).toUpperCase()}</div>
@@ -134,7 +153,7 @@ const People = () => {
                 <div className="people">
                     {students.filter(user=>user.name.toLowerCase().includes(query)).map((user)=>(
 
-                    <div className="one-ppl" key={user.id} onClick={()=>setStudentInfoPage(!isStudentInfoPageOpen)}>
+                    <div className="one-ppl" key={user.id} onClick={()=>openInfoPage(user.id)}>
                         <div className="left-border"></div>
                         <div className="info">
                             <div className="profile-pic">{user.name.charAt(0).toUpperCase()}</div>
