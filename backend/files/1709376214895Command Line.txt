@@ -1,0 +1,17 @@
+d
+cd ..
+touch
+mkdir
+histroy
+ls
+pwd
+cp
+mv
+rm
+cat
+wc *** -w
+
+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
+
+select all of this word in available in the file
+ctrl + d 
