@@ -135,10 +135,7 @@ const Sidebar = () => {
                         </div>
                         )
                     })}
-                        <div className='class-parent' onClick={goToClassroom}>
-                            <div className="profile-pic">S</div>
-                            <li>Spanish</li>
-                        </div> 
+                    
                     </ul>
                 </div>
             }

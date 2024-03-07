@@ -89,7 +89,7 @@ const Title = ({propTitle, add}) => {
 
     const handleAddAnnouncement = (e) => {
         e.preventDefault()
-        addSyllabus().then(() => {
+        addAnnouncement().then(() => {
             window.location.reload();
         });
     }
@@ -108,7 +108,7 @@ const Title = ({propTitle, add}) => {
 
     const handleAddSyllabus = (e) => {
         e.preventDefault()
-        addAnnouncement().then(() => {
+        addSyllabus().then(() => {
             // navigate("dashboard/todo");
             window.location.reload();
         });
@@ -248,7 +248,7 @@ const Title = ({propTitle, add}) => {
 
                 <div className="on-page-btns">
                     <button onClick={()=>setAddSyllabusPage(!isAddSyllabusPageOpen)}>Cancel</button>
-                    <button onClick={handleAddAnnouncement}>Add</button>
+                    <button onClick={handleAddSyllabus}>Add</button>
                 </div>
             </div>
         </div>
