@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 export const addDocument = async(req, res, next) => {
     const {title, klass} = req.body;
     const file = req.file.filename;
-
+    
     let existingClass;
     try{
         existingClass = await Class.findById(klass)

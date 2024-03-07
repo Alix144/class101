@@ -31,6 +31,11 @@ const Title = ({propTitle, add}) => {
     const [announcementTitle, setAnnouncementTitle] = useState("")
     const [announcementDescription, setAnnouncementDescription] = useState("")
 
+    //documents
+    const [docTitle, setDocTitle] = useState("")
+    const [file, setFile] = useState("")
+
+
     const handleTopicChange = (id, value) => {
       const updatedTopics = topics.map((topic) =>
         topic.id === id ? { ...topic, value } : topic
@@ -47,9 +52,11 @@ const Title = ({propTitle, add}) => {
       const fileInput = event.target;
       if (fileInput.files.length > 0) {
         setFileName(fileInput.files[0].name);
+        setFile(event.target.files[0])
       } else {
         setFileName('Upload');
       }
+
     }
 
     /*******************/
@@ -110,6 +117,35 @@ const Title = ({propTitle, add}) => {
         e.preventDefault()
         addSyllabus().then(() => {
             // navigate("dashboard/todo");
+            window.location.reload();
+        });
+    }
+
+    //add document
+
+
+    const addDocument = async() => {
+        // const res = await axios.post("http://localhost:4000/document/add", {
+        //     title: docTitle,
+        //     file,
+        //     klass: id
+        // })
+
+        const formData = new FormData();
+        formData.append("title", docTitle);
+        formData.append("file", file);
+        formData.append("klass", id);
+        
+        const res = await axios.post("http://localhost:4000/document/add", formData)
+        .catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleAddDocument = (e) => {
+        e.preventDefault()
+        addDocument().then(() => {
             window.location.reload();
         });
     }
@@ -264,7 +300,7 @@ const Title = ({propTitle, add}) => {
                 <form action="">
                     <div>
                         <label htmlFor="title">Title*</label>
-                        <input type="text" id="title" name="title"/>
+                        <input type="text" id="title" name="title" value={docTitle} onChange={(e)=>setDocTitle(e.target.value)}/>
                     </div>
 
                     <div>
@@ -277,7 +313,7 @@ const Title = ({propTitle, add}) => {
                 </form>
                 <div className="on-page-btns">
                     <button onClick={()=>setAddDocPage(!isAddDocPageOpen)}>Cancel</button>
-                    <button>Add</button>
+                    <button onClick={handleAddDocument}>Add</button>
                 </div>
             </div>
         </div>
