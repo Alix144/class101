@@ -35,6 +35,10 @@ const Title = ({propTitle, add}) => {
     const [docTitle, setDocTitle] = useState("")
     const [file, setFile] = useState("")
 
+    //assignments
+    const [HwTitle, setHwTitle] = useState("")
+    const [HwDeadline, setHwDeadline] = useState("")
+    const [HwDescription, setHwDescription] = useState("")
 
     const handleTopicChange = (id, value) => {
       const updatedTopics = topics.map((topic) =>
@@ -122,14 +126,7 @@ const Title = ({propTitle, add}) => {
     }
 
     //add document
-
-
     const addDocument = async() => {
-        // const res = await axios.post("http://localhost:4000/document/add", {
-        //     title: docTitle,
-        //     file,
-        //     klass: id
-        // })
 
         const formData = new FormData();
         formData.append("title", docTitle);
@@ -146,6 +143,31 @@ const Title = ({propTitle, add}) => {
     const handleAddDocument = (e) => {
         e.preventDefault()
         addDocument().then(() => {
+            window.location.reload();
+        });
+    }
+
+
+    //add assignment
+    const addAssignment = async() => {
+
+        const formData = new FormData();
+        formData.append("title", HwTitle);
+        formData.append("description", HwDescription);
+        formData.append("file", file);
+        formData.append("klass", id);
+        formData.append("deadline", HwDeadline);
+        
+        const res = await axios.post("http://localhost:4000/assignment/add", formData)
+        .catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleAddAssignment = (e) => {
+        e.preventDefault()
+        addAssignment().then(() => {
             window.location.reload();
         });
     }
@@ -230,17 +252,17 @@ const Title = ({propTitle, add}) => {
                 <form action="">
                     <div>
                         <label htmlFor="title">Title*</label>
-                        <input type="text" id="title" name="title"/>
+                        <input type="text" id="title" name="title" value={HwTitle} onChange={e=>setHwTitle(e.target.value)}/>
                     </div>
 
                     <div>
                         <label htmlFor="deadline">Deadline</label>
-                        <input type="date" id="deadline" name="deadline"/>
+                        <input type="date" id="deadline" name="deadline" value={HwDeadline} onChange={e=>setHwDeadline(e.target.value)}/>
                     </div>
 
                     <div>
                         <label htmlFor="desc">Description</label>
-                        <textarea name="desc" id="desc" cols="30" rows="5"></textarea>
+                        <textarea name="desc" id="desc" cols="30" rows="5" value={HwDescription} onChange={e=>setHwDescription(e.target.value)}></textarea>
                     </div>
 
                     <div>
@@ -253,7 +275,7 @@ const Title = ({propTitle, add}) => {
                 </form>
                 <div className="on-page-btns">
                     <button onClick={()=>setAddAssignmentPage(!isAddAssignmentPageOpen)}>Cancel</button>
-                    <button>Add</button>
+                    <button onClick={handleAddAssignment}>Add</button>
                 </div>
             </div>
         </div>

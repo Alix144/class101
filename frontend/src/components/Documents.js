@@ -53,7 +53,7 @@ const Documents = () => {
                             <h4>{document.title}</h4>
                         </div>
                     </div>
-                    {/* <img src={download} alt="Download" /> */}
+
                     <a href={document.url} download onClick={() => showFile(document.file)}>
                             <img src={download} alt="Download" />
                     </a>

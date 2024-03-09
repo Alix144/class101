@@ -26,7 +26,6 @@ const assignmentSchema = new Schema({
       },
       deadline: {
         type: Date,
-        default: Date.now,
       },
 
 })

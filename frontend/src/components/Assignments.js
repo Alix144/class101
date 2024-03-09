@@ -1,5 +1,8 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux'
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import moment from "moment";
 
 import Title from "./Title";
 
@@ -10,7 +13,38 @@ import download from '../images/download.png'
 const Assignments = () => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
+    const classId = useParams().id
+
     const [isStudentHwOpen, setIsStudentHwOpen] = useState(false)
+    const [assignments, setAssignments] = useState([]);
+
+    const getAssignments = async() => {
+        const res = await axios.get(`http://localhost:4000/assignment/${classId}`).catch(err=>console.log(err))
+        const data = await res.data.assignments
+        return data;
+    }
+
+    useEffect(() => {
+        getAssignments().then(
+        (data)=>{setAssignments(data) 
+        console.log(data)})
+    },[classId])
+
+    const handleDate = (date) => {
+        return moment(date).fromNow()
+    }
+
+    function formatDeadline(deadline) {
+        if (!deadline) return "-";
+    
+        const formattedDeadline = moment(deadline).format('MMMM Do YYYY');
+    
+        return formattedDeadline;
+    }
+
+    const showFile = async(url) => {
+        window.open(`http://localhost:4000/files/${url}`, "_blank", "noreferrer");
+    }
 
     return ( 
         <>
@@ -69,31 +103,29 @@ const Assignments = () => {
                     <p>No Assignment Added</p>
                     </>:
                 <>
-                <div className="assignment">
-                    <div className="info">
-                        <img src={doc} alt="Document" />
-                        <div>
-                            <h4>Spanish Assignment 1</h4>
-                            <h6>Deadline:</h6><p>22-10-2024</p>
-                        </div>
-                    </div>
-                    <img src={download} alt="Download" />
-                    <p className="date">01-06-2024</p>
-                    <div className="left-border"></div>
-                </div>
 
-                <div className="assignment">
+                {assignments && assignments.slice().reverse().map((assignment, index)=>{
+                    return(
+                    <div className="assignment">
                     <div className="info">
                         <img src={doc} alt="Document" />
                         <div>
-                            <h4>Spanish Assignment 1</h4>
-                            <h6>Deadline:</h6><p>22-10-2024</p>
+                            <h4>{assignment.title}</h4>
+                            <h6>Deadline:</h6><p>{formatDeadline(assignment.deadline)}</p>
+
                         </div>
                     </div>
-                    <img src={download} alt="Download" />
-                    <p className="date">01-06-2024</p>
+
+                    <a href={assignment.url} download onClick={() => showFile(assignment.file)}>
+                            <img src={download} alt="Download" />
+                    </a>
+                    <p className="date">{handleDate(assignment.date)}</p>
                     <div className="left-border"></div>
-                </div>
+                    </div>
+
+                    )
+
+                })}
                 </>
                 }
                 
@@ -117,7 +149,7 @@ const Assignments = () => {
                     </>:
                     <>
                     {isInstructor ?
-                        <div className="assignment" onClick={()=>setIsStudentHwOpen(!isStudentHwOpen)}>
+                    <div className="assignment" onClick={()=>setIsStudentHwOpen(!isStudentHwOpen)}>
                     <div className="info">
                         <div className="pic">A</div>
                         <div>
@@ -127,7 +159,7 @@ const Assignments = () => {
                     </div>
                     <p className="date">01-06-2024</p>
                     <div className="left-border"></div>
-                        </div>
+                    </div>
                     :     
                     <div className="assignment">
                         <div className="info">
