@@ -126,16 +126,15 @@ const Sidebar = () => {
             {isOpen &&
                 <div className='classes'>
                     <ul>
-                    {classes && classes.map((klass, index)=>{
-                        if(klass.instructors.includes(id))
-                        return(
-                        <div key={index} className='class-parent' onClick={()=>goToClassroom(klass._id)}>
-                            <div className="profile-pic" style={{backgroundColor: klass.classColor} }>M</div>
-                            <li>{klass.name}</li>
-                        </div>
-                        )
-                    })}
-                    
+                        {classes && classes.map((klass, index)=>{
+                            if(klass.instructors.includes(id))
+                            return(
+                            <div key={index} className='class-parent' onClick={()=>goToClassroom(klass._id)}>
+                                <div className="profile-pic" style={{backgroundColor: klass.classColor} }>M</div>
+                                <li>{klass.name}</li>
+                            </div>
+                            )
+                        })}
                     </ul>
                 </div>
             }
@@ -150,30 +149,17 @@ const Sidebar = () => {
                 {isOpen2 &&
                 <div className='classes'>
                     <ul>
-                        <div className='class-parent' onClick={goToClassroomS}>
-                            <div className="profile-pic">M</div>
-                            <li>math</li>
-                        </div>
-                        <div className='class-parent'>
-                            <div className="profile-pic">B</div>
-                            <li>biology</li>
-                        </div>
-                        <div className='class-parent'>
-                            <div className="profile-pic">S</div>
-                            <li>Spanish</li>
-                        </div>
-                        <div className='class-parent'>
-                            <div className="profile-pic">M</div>
-                            <li>math</li>
-                        </div>
-                        <div className='class-parent'>
-                            <div className="profile-pic">B</div>
-                            <li>biology</li>
-                        </div>
-                        <div className='class-parent'>
-                            <div className="profile-pic">S</div>
-                            <li>Spanish</li>
-                        </div>
+                        {classes && classes.map((klass, index)=>{
+                            if(klass.students.includes(id)){
+                            return(
+                            <div key={index} className='class-parent' onClick={()=>goToClassroomS(klass._id)}>
+                                <div className="profile-pic" style={{backgroundColor: klass.classColor} }>M</div>
+                                <li>{klass.name}</li>
+                            </div>
+                            )
+
+                            }
+                        })}
                     </ul>
                 </div>
                 }

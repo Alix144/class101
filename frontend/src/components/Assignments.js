@@ -205,7 +205,7 @@ const Assignments = () => {
                             </div>
                         </div>
 
-                        <a href={assignment.url} download onClick={() => showFile(assignment.file)}>
+                        <a href={assignment.url} download onClick={() => showFile(assignment.file)} className='download-img'>
                                 <img src={download} alt="Download" />
                         </a>
                         <p className="date">{handleDate(assignment.date)}</p>

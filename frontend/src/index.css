@@ -1777,6 +1777,20 @@ input[type='file']{
     cursor: pointer;
 }
 
+.download-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.download-img:hover{
+    background-color: #b3b2b279;
+}
+
+
 .assignment .info img, .documents .info img{
     margin-right: 10px;
     width: 35px;
