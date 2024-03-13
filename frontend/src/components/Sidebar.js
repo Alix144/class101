@@ -57,8 +57,7 @@ const Sidebar = () => {
         localStorage.setItem('currentSection', 'classT');
     }
 
-
-    const goToClassroomS = () => {
+    const goToClassroomS = (id) => {
         navigate(`classroom/${id}/home`)
         dispatch(setToStudent())
         dispatch(setToDashboard())

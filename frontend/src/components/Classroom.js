@@ -14,6 +14,7 @@ const Classroom = () => {
 
     const fetchDetails = async() => {
         const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
+        console.log(res)
         const data = await res.data;
         return data;
     }

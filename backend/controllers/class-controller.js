@@ -57,6 +57,56 @@ export const updateClass = async(req, res, next) => {
     return res.status(200).json({klass})
 }
 
+export const joinClass = async(req, res, next) => {
+    const {invitationCode} = req.body;
+    const userId = req.params.id;
+    let existingUser;
+
+    try{
+        existingUser = await User.findById(userId)
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!existingUser){
+        return res.status(404).json({message: "No user Found"})
+    }
+
+
+    let existingClass;
+    try{
+        existingClass = await Class.findOneAndUpdate(
+            { invitationCode: invitationCode }, // Correctly defining the filter object
+            { $addToSet: { students: userId } }, // Adding userId to the students array
+            { new: true } // To return the updated document
+        )
+
+        if(!existingClass){
+            return res.status(400).json({message: "Unable to Find Class by with this invitation code"})
+        }
+
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        try {
+            existingUser.classes.push(existingClass._id);
+            await existingUser.save({ session });
+            await session.commitTransaction();
+        } catch (error) {
+            await session.abortTransaction();
+            throw error;
+        } finally {
+            session.endSession();
+        }
+
+    }catch(err){
+        console.log(err)
+    }
+    
+
+    return res.status(200).json({existingClass})
+}
+
 export const getByUserId = async(req, res, next) => {
     const userId = req.params.id;
     let userClasses;
