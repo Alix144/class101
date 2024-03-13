@@ -354,6 +354,14 @@ input:focus, textarea:focus{
     cursor: pointer;
 }
 
+.hwForm{
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+.hwForm .label{
+    font-weight: bold;
+}
 
 /*** Dashboard ***/
 
@@ -1732,7 +1740,7 @@ input[type='file']{
     margin: 0 auto;
     margin-bottom: 50px;
     width: 95%;
-    max-height: 70vh;
+
 }
 
 .assignment, .documents{
@@ -2027,6 +2035,11 @@ input[type='file']{
 .announc-div{
     display: flex;
     flex-direction: column;
+}
+
+.center-btn{
+    margin: 20px auto 0px !important;
+    width: 170px;
 }
 /**************************/
 

@@ -59,7 +59,7 @@ const Sidebar = () => {
 
 
     const goToClassroomS = () => {
-        navigate("classroom/home")
+        navigate(`classroom/${id}/home`)
         dispatch(setToStudent())
         dispatch(setToDashboard())
         dispatch(setToClassS())

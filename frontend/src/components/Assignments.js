@@ -16,7 +16,11 @@ const Assignments = () => {
     const classId = useParams().id
 
     const [isStudentHwOpen, setIsStudentHwOpen] = useState(false)
+    const [isHwDetailsOpen, setIsHwDetailsOpen] = useState(false)
+    const [isSendHwOpen, setIsSendHwOpen] = useState(false)
     const [assignments, setAssignments] = useState([]);
+    const [fileName, setFileName] = useState('');
+    const [file, setFile] = useState("")
 
     const getAssignments = async() => {
         const res = await axios.get(`http://localhost:4000/assignment/${classId}`).catch(err=>console.log(err))
@@ -33,6 +37,21 @@ const Assignments = () => {
     const handleDate = (date) => {
         return moment(date).fromNow()
     }
+
+    const handleSendHwBtn = () =>{
+        setIsHwDetailsOpen(!isHwDetailsOpen)
+        setIsSendHwOpen(!isSendHwOpen)
+    }
+
+    const handleFileChange = (event) => {
+        const fileInput = event.target;
+        if (fileInput.files.length > 0) {
+          setFileName(fileInput.files[0].name);
+          setFile(event.target.files[0])
+        } else {
+          setFileName('Upload');
+        }
+      }
 
     function formatDeadline(deadline) {
         if (!deadline) return "-";
@@ -86,6 +105,77 @@ const Assignments = () => {
                 </div>
             </div>
         }
+        
+        {isHwDetailsOpen && 
+            <div className="on-page-div">   
+                <div className="add-form edit-task-form" >
+                    <div className="on-page-title">
+                        <h3>Assignment Details</h3>
+                        <hr/>
+                    </div>
+                    <div className="student-hw-info">
+ 
+                        <h4>Title</h4>
+                        <p>Spanish Assignment</p>
+
+                        <h4>Date</h4>
+                        <p>18/04/2023</p>
+
+                        <h4>Deadline</h4>
+                        <p>20/05/2023</p>
+
+                        <h4>Discription</h4>
+                        <p className='maxh'>Lorem ipsum dolor Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit aut alias dignissimos, magnam ex magni neque cumque perferendis voluptate deserunt doloribus placeat odio hic eligendi in! Hic possimus rem quod. eveniet neque vitae libero quo corporis dolorem quasi.</p>
+
+                        <h4>Document</h4>
+                        <button className='download no-mrgn'>Download</button>
+
+
+                    </div>
+                    {!isInstructor &&
+                    <button className='download no-mrgn center-btn' onClick={handleSendHwBtn}>Send Assignment</button>
+                    }
+                    <div className="on-page-btns">
+                        <button onClick={()=>setIsHwDetailsOpen(!isHwDetailsOpen)}>Cancel</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        {isSendHwOpen && 
+            <div className="on-page-div">   
+                <div className="add-form edit-task-form" >
+                    <div className="on-page-title">
+                        <h3>Send Assignment</h3>
+                        <hr/>
+                    </div>
+                    <div className="student-hw-info">
+ 
+                        <h4>Title</h4>
+                        <p>Spanish Assignment</p>
+                        <form action="" className='hwForm'>
+                            <h4>Message</h4>
+                            <textarea name="" id="" cols="30" rows="5"></textarea>
+                            
+                            <label htmlFor="file" className='label'>Document</label>
+                            <label htmlFor="file" className='upload no-mrgn'>Upload</label>
+                            <input type="file" id="file" onChange={handleFileChange}/>
+                            <p>{fileName}</p>
+                        </form>
+
+
+
+                    </div>
+                    {!isInstructor &&
+                    <button className='download no-mrgn center-btn'>Send Assignment</button>
+                    }
+                    <div className="on-page-btns">
+                        <button onClick={handleSendHwBtn}>back</button>
+                        <button>Send</button>
+                    </div>
+                </div>
+            </div>
+        }
 
         <div className="content assignments">
             {isInstructor ?
@@ -96,7 +186,6 @@ const Assignments = () => {
             
 
             <div className="going-assignments empty-parent">
-
                 {false ? 
                     <>
                     <img src={leaf} alt="Empty" className='empty'/>
@@ -106,21 +195,21 @@ const Assignments = () => {
 
                 {assignments && assignments.slice().reverse().map((assignment, index)=>{
                     return(
-                    <div className="assignment">
-                    <div className="info">
-                        <img src={doc} alt="Document" />
-                        <div>
-                            <h4>{assignment.title}</h4>
-                            <h6>Deadline:</h6><p>{formatDeadline(assignment.deadline)}</p>
+                    <div className="assignment" onClick={()=>setIsHwDetailsOpen(!isHwDetailsOpen)}>
+                        <div className="info">
+                            <img src={doc} alt="Document" />
+                            <div>
+                                <h4>{assignment.title}</h4>
+                                <h6>Deadline:</h6><p>{formatDeadline(assignment.deadline)}</p>
 
+                            </div>
                         </div>
-                    </div>
 
-                    <a href={assignment.url} download onClick={() => showFile(assignment.file)}>
-                            <img src={download} alt="Download" />
-                    </a>
-                    <p className="date">{handleDate(assignment.date)}</p>
-                    <div className="left-border"></div>
+                        <a href={assignment.url} download onClick={() => showFile(assignment.file)}>
+                                <img src={download} alt="Download" />
+                        </a>
+                        <p className="date">{handleDate(assignment.date)}</p>
+                        <div className="left-border"></div>
                     </div>
 
                     )
@@ -128,10 +217,11 @@ const Assignments = () => {
                 })}
                 </>
                 }
-                
-
+            
             </div>
             
+            {/****** coming assignments *******/}
+
             {isInstructor ?
             <Title propTitle={"Coming Assignments"}/>
             :
@@ -150,27 +240,27 @@ const Assignments = () => {
                     <>
                     {isInstructor ?
                     <div className="assignment" onClick={()=>setIsStudentHwOpen(!isStudentHwOpen)}>
-                    <div className="info">
-                        <div className="pic">A</div>
-                        <div>
-                            <h4>Ali Youssef</h4>
-                            <h6>Spanish Assignment 1</h6>
-                        </div>
-                    </div>
-                    <p className="date">01-06-2024</p>
-                    <div className="left-border"></div>
-                    </div>
-                    :     
-                    <div className="assignment">
                         <div className="info">
-                            <img src={doc} alt="Document" />
+                            <div className="pic">A</div>
                             <div>
-                                <h4>Spanish Assignment 1</h4>
+                                <h4>Ali Youssef</h4>
+                                <h6>Spanish Assignment 1</h6>
                             </div>
                         </div>
-                        <p><b>Grade:</b> 90</p>
                         <p className="date">01-06-2024</p>
                         <div className="left-border"></div>
+                        </div>
+                        :     
+                        <div className="assignment">
+                            <div className="info">
+                                <img src={doc} alt="Document" />
+                                <div>
+                                    <h4>Spanish Assignment 1</h4>
+                                </div>
+                            </div>
+                            <p><b>Grade:</b> 90</p>
+                            <p className="date">01-06-2024</p>
+                            <div className="left-border"></div>
                     </div>
                     }
                     </>
