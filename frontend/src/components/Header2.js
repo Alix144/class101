@@ -17,6 +17,8 @@ const Header2 = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
+    const userId = localStorage.getItem("userId");
+
     const [plusBtn, setPlusBtn] = useState(false)
     const [profileBtn, setProfileBtn] = useState(false)
     const [notificationBtn, setNotificationBtn] = useState(false)
@@ -28,6 +30,7 @@ const Header2 = () => {
     const [description, setDescription] = useState("");
     const [maxStudents, setMaxStudents] = useState();
 
+    const [invitationCode, setInvitationCode] = useState("");
 
     const plusMenu = () => {
         setPlusBtn(!plusBtn)
@@ -87,6 +90,8 @@ const Header2 = () => {
         return code;
     }
 
+    // create class
+    
     const createClass = async() => {
         const res = await axios.post("http://localhost:4000/class/create", {
             name,
@@ -105,6 +110,27 @@ const Header2 = () => {
         e.preventDefault()
         createClass().then((data) => {
             navigate(`dashboard/classroom/${data.class._id}/home`);
+            window.location.reload();
+        });
+    }
+
+
+    // join class
+
+    const joinClass = async() => {
+        const res = await axios.put(`http://localhost:4000/class/join/${userId}`, {
+            invitationCode,
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleJoinClass = (e) => {
+        e.preventDefault()
+        joinClass().then((data) => {
+            console.log(data)
+            navigate(`dashboard/classroom/${data.existingClass._id}/home`);
             window.location.reload();
         });
     }
@@ -165,13 +191,13 @@ const Header2 = () => {
                     <form action="">
                         <div>
                             <label htmlFor="code">Class Code</label>
-                            <input type="text"/>
+                            <input type="text" value={invitationCode} onChange={(e)=>setInvitationCode(e.target.value)}/>
                         </div>
                     </form>
 
                     <div className="on-page-btns">
                         <button onClick={closeJoinClassDiv}>close</button>
-                        <button>join</button>
+                        <button onClick={handleJoinClass}>join</button>
                     </div>
                 </div>
             </div>

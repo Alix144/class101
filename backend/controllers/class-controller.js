@@ -59,6 +59,7 @@ export const updateClass = async(req, res, next) => {
 
 export const joinClass = async(req, res, next) => {
     const {invitationCode} = req.body;
+
     const userId = req.params.id;
     let existingUser;
 
@@ -89,9 +90,13 @@ export const joinClass = async(req, res, next) => {
         session.startTransaction();
 
         try {
-            existingUser.classes.push(existingClass._id);
-            await existingUser.save({ session });
-            await session.commitTransaction();
+            if (existingUser.classes.includes(existingClass._id)) {
+                return res.status(400).json({ message: "User is already a member of this class" });
+            }else{
+                existingUser.classes.push(existingClass._id);
+                await existingUser.save({ session });
+                await session.commitTransaction();
+            }
         } catch (error) {
             await session.abortTransaction();
             throw error;
