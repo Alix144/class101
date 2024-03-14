@@ -5,7 +5,7 @@ import SubmittedHw from "../models/SubmittedHwModel.js";
 import mongoose from "mongoose";
 
 export const submitAssignment = async(req, res, next) => {
-    const {message, klass, user, assignment, deadline} = req.body;
+    const {message, klass, user, assignment} = req.body;
     const file = req.file.filename;
     
     let existingClass;
@@ -38,7 +38,7 @@ export const submitAssignment = async(req, res, next) => {
         return res.status(400).json({message: "Unable to Find a Assignment by This ID"})
     }
 
-    const submittedHw = new SubmittedHw({message, file, class: klass, user, assignment, deadline})
+    const submittedHw = new SubmittedHw({message, file, class: klass, user, assignment})
     try{
         const session = await mongoose.startSession();
         session.startTransaction();
@@ -117,7 +117,7 @@ export const getClassSubmittedHws = async(req, res, next) => {
     }
 
     try{
-        submittedHws = await SubmittedHw.find({ class: classId });
+        submittedHws = await SubmittedHw.find({ class: classId }).populate("user").populate("assignment");
 
     }catch(err){
         return res.status(400).json({err})
@@ -141,7 +141,7 @@ export const getUserSubmittedHws = async(req, res, next) => {
     }
 
     try{
-        submittedHws = await SubmittedHw.find({ user: userId });
+        submittedHws = await SubmittedHw.find({ user: userId }).populate("assignment");
 
     }catch(err){
         return res.status(400).json({err})

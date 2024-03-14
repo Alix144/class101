@@ -30,4 +30,4 @@ const assignmentSchema = new Schema({
 
 })
 
-export default mongoose.model("assignment", assignmentSchema)
+export default mongoose.model("Assignment", assignmentSchema)

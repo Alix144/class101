@@ -14,11 +14,14 @@ const Assignments = () => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const classId = useParams().id
+    const userId = localStorage.getItem("userId");
 
     const [isStudentHwOpen, setIsStudentHwOpen] = useState(false)
     const [isHwDetailsOpen, setIsHwDetailsOpen] = useState(false)
     const [isSendHwOpen, setIsSendHwOpen] = useState(false)
     const [assignments, setAssignments] = useState([]);
+    const [submittedHws, setSubmittedHws] = useState([]);
+    const [studentSubmittedHws, setStudentSubmittedHws] = useState([]);
     const [fileName, setFileName] = useState('');
     const [file, setFile] = useState("")
 
@@ -31,6 +34,30 @@ const Assignments = () => {
     useEffect(() => {
         getAssignments().then(
         (data)=>{setAssignments(data) 
+        console.log(data)})
+    },[classId])
+
+    const getSubmittedHws = async() => {
+        const res = await axios.get(`http://localhost:4000/submitted/${classId}`).catch(err=>console.log(err))
+        const data = await res.data.submittedHws
+        return data;
+    }
+
+    useEffect(() => {
+        getSubmittedHws().then(
+        (data)=>{setSubmittedHws(data) 
+        console.log(data)})
+    },[classId])
+
+    const getStudentSubmittedHws = async() => {
+        const res = await axios.get(`http://localhost:4000/submitted/user/${userId}`).catch(err=>console.log(err))
+        const data = await res.data.submittedHws
+        return data;
+    }
+
+    useEffect(() => {
+        getStudentSubmittedHws().then(
+        (data)=>{setStudentSubmittedHws(data) 
         console.log(data)})
     },[classId])
 
@@ -166,9 +193,7 @@ const Assignments = () => {
 
 
                     </div>
-                    {!isInstructor &&
-                    <button className='download no-mrgn center-btn'>Send Assignment</button>
-                    }
+                    
                     <div className="on-page-btns">
                         <button onClick={handleSendHwBtn}>back</button>
                         <button>Send</button>
@@ -184,6 +209,7 @@ const Assignments = () => {
                 <Title propTitle={"Assignments"}/>
             }
             
+            {/****** going assignments *******/}
 
             <div className="going-assignments empty-parent">
                 {false ? 
@@ -239,29 +265,42 @@ const Assignments = () => {
                     </>:
                     <>
                     {isInstructor ?
-                    <div className="assignment" onClick={()=>setIsStudentHwOpen(!isStudentHwOpen)}>
-                        <div className="info">
-                            <div className="pic">A</div>
-                            <div>
-                                <h4>Ali Youssef</h4>
-                                <h6>Spanish Assignment 1</h6>
-                            </div>
-                        </div>
-                        <p className="date">01-06-2024</p>
-                        <div className="left-border"></div>
-                        </div>
-                        :     
-                        <div className="assignment">
-                            <div className="info">
-                                <img src={doc} alt="Document" />
-                                <div>
-                                    <h4>Spanish Assignment 1</h4>
+                    (submittedHws && submittedHws.slice().reverse().map((assignment, index)=>{
+                        return(
+                            <div className="assignment" onClick={()=>setIsStudentHwOpen(!isStudentHwOpen)}>
+                                <div className="info">
+                                    <div className="pic">{assignment.user.name[0].toUpperCase()}</div>
+                                    <div>
+                                        <h4>{assignment.user.name} {assignment.user.surname}</h4>
+                                        <h6>{assignment.assignment.title}</h6>
+                                    </div>
                                 </div>
+                                <p className="date">{handleDate(assignment.date)}</p>
+                                <div className="left-border"></div>
                             </div>
-                            <p><b>Grade:</b> 90</p>
-                            <p className="date">01-06-2024</p>
-                            <div className="left-border"></div>
-                    </div>
+                        )
+    
+                    }))
+                        :     
+                    (studentSubmittedHws && studentSubmittedHws.slice().reverse().map((assignment, index)=>{
+                        return(
+                            <div className="assignment">
+                                <div className="info">
+                                    <img src={doc} alt="Document" />
+                                    <div>
+                                        <h4>{assignment.assignment.title}</h4>
+                                    </div>
+                                </div>
+                                {assignment.grade ?
+                                <p><b>Grade:</b> {assignment.grade} </p>
+                                :
+                                <p><b>Grade:</b> - </p>
+                                }
+                                <p className="date">{handleDate(assignment.date)}</p>
+                                <div className="left-border"></div>
+                            </div>     
+                        )
+                    }))
                     }
                     </>
                 }
