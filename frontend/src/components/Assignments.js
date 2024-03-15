@@ -227,7 +227,6 @@ const Assignments = () => {
                             <div>
                                 <h4>{assignment.title}</h4>
                                 <h6>Deadline:</h6><p>{formatDeadline(assignment.deadline)}</p>
-
                             </div>
                         </div>
 
@@ -281,7 +280,7 @@ const Assignments = () => {
                         )
     
                     }))
-                        :     
+                    :     
                     (studentSubmittedHws && studentSubmittedHws.slice().reverse().map((assignment, index)=>{
                         return(
                             <div className="assignment">

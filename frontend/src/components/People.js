@@ -34,6 +34,7 @@ const People = () => {
 
     const openInfoPage = (userId) => {
         setStudentInfoPage(!isStudentInfoPageOpen)
+        setUserInfo("")
         fetchUserDetails(userId).then((data)=>setUserInfo(data))
     }
 
@@ -66,14 +67,14 @@ const People = () => {
             <div className="on-page-div">   
                 <div className="add-form edit-task-form" >
                     <div className="on-page-title">
-                        <h3>{userInfo.name}'s Details</h3>
+                        <h3>{userInfo.name ? userInfo.name.charAt(0).toUpperCase() + userInfo.name.slice(1): ""}'s Details</h3>
                         <hr/>
                     </div>
                     <div className="student-hw-info">
                         <div className="st-info">
-                            <div className="profile-pic">{userInfo.name[0].toUpperCase()}</div>
+                            <div className="profile-pic">k</div>
                             <div>
-                                <h4>{userInfo.name} {userInfo.surname}</h4>
+                                <h4>{userInfo.name ? userInfo.name.charAt(0).toUpperCase() + userInfo.name.slice(1): ""} {userInfo.surname ? userInfo.surname.charAt(0).toUpperCase() + userInfo.surname.slice(1): ""}</h4>
                             </div>
                         </div>
                         <h4>Email</h4>
@@ -120,8 +121,8 @@ const People = () => {
                     <div className="one-ppl" key={user._id} onClick={()=>openInfoPage(user._id)}>
                         <div className="left-border"></div>
                         <div className="info">
-                            <div className="profile-pic">{user.name.charAt(0).toUpperCase()}</div>
-                            <h4>{user.name}</h4>
+                            <div className="profile-pic">{user.name[0].toUpperCase()}</div>
+                            <h4>{user.name.charAt(0).toUpperCase()+user.name.slice(1)}</h4>
                         </div>
                         <p>{user.email}</p>
                     </div>
@@ -153,7 +154,7 @@ const People = () => {
                 <div className="people">
                     {students.filter(user=>user.name.toLowerCase().includes(query)).map((user)=>(
 
-                    <div className="one-ppl" key={user.id} onClick={()=>openInfoPage(user.id)}>
+                    <div className="one-ppl" key={user.id} onClick={()=>openInfoPage(user._id)}>
                         <div className="left-border"></div>
                         <div className="info">
                             <div className="profile-pic">{user.name.charAt(0).toUpperCase()}</div>
