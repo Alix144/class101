@@ -126,6 +126,22 @@ export const getClassSubmittedHws = async(req, res, next) => {
     return res.status(200).json({submittedHws})
 }
 
+export const getById = async(req, res, next) => {
+    const assignmentId = req.params.id;
+    let submittedHw;
+    try{
+        submittedHw = await SubmittedHw.findById(assignmentId).populate("user").populate("assignment");
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!submittedHw){
+        return res.status(404).json({message: "No Assignment Found"})
+    }
+
+    return res.status(200).json({submittedHw})
+}
+
 export const getUserSubmittedHws = async(req, res, next) => {
     const userId = req.params.id;
     let submittedHws;

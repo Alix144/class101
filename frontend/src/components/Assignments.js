@@ -20,8 +20,10 @@ const Assignments = () => {
     const [isHwDetailsOpen, setIsHwDetailsOpen] = useState(false)
     const [isSendHwOpen, setIsSendHwOpen] = useState(false)
     const [assignments, setAssignments] = useState([]);
+    const [assignment, setAssignment] = useState("");
     const [submittedHws, setSubmittedHws] = useState([]);
     const [studentSubmittedHws, setStudentSubmittedHws] = useState([]);
+    const [studentSubmittedHw, setStudentSubmittedHw] = useState("");
     const [fileName, setFileName] = useState('');
     const [file, setFile] = useState("")
 
@@ -92,6 +94,30 @@ const Assignments = () => {
         window.open(`http://localhost:4000/files/${url}`, "_blank", "noreferrer");
     }
 
+    const fetchAssignmentDetails = async(assignmentId) => {
+        const res = await axios.get(`http://localhost:4000/assignment/details/${assignmentId}`).catch(err=>console.log(err))
+        const data = await res.data.assignment;
+        return data;
+    }
+
+    const openHwDetails = (assignmentId) => {
+        setIsHwDetailsOpen(!isHwDetailsOpen)
+        setAssignment("")
+        fetchAssignmentDetails(assignmentId).then((data)=>setAssignment(data))
+    }
+
+    const fetchSubmittedHwDetails = async(assignmentId) => {
+        const res = await axios.get(`http://localhost:4000/submitted/details/${assignmentId}`).catch(err=>console.log(err))
+        const data = await res.data.submittedHw;
+        return data;
+    }
+
+    const openSubmittedHwDetails = (assignmentId) => {
+        setIsStudentHwOpen(!isStudentHwOpen)
+        setStudentSubmittedHw("")
+        fetchSubmittedHwDetails(assignmentId).then((data)=>setStudentSubmittedHw(data))
+    }
+
     return ( 
         <>
         {isStudentHwOpen && 
@@ -105,18 +131,20 @@ const Assignments = () => {
                         <div className="st-info">
                             <div className="profile-pic">A</div>
                             <div>
-                                <h4>Ali Youssef</h4>
-                                <p>14-06-2023</p>
+                                <h4>{studentSubmittedHw && studentSubmittedHw.user.name} {studentSubmittedHw && studentSubmittedHw.user.surname}</h4>
+                                <p>{studentSubmittedHw && handleDate(studentSubmittedHw.assignment.date)}</p>
                             </div>
                         </div>
                         <h4>Title</h4>
-                        <p>Spanish Assignment</p>
+                        <p>{studentSubmittedHw && studentSubmittedHw.assignment.title}</p>
 
                         <h4>message</h4>
-                        <p className='maxh'>Lorem ipsum dolor Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit aut alias dignissimos, magnam ex magni neque cumque perferendis voluptate deserunt doloribus placeat odio hic eligendi in! Hic possimus rem quod. eveniet neque vitae libero quo corporis dolorem quasi.</p>
+                        <p className='maxh'>{studentSubmittedHw && studentSubmittedHw.message}</p>
 
                         <h4>Document</h4>
-                        <button className='download no-mrgn'>Download</button>
+                        <a href={assignment.url} download onClick={() => showFile(studentSubmittedHw.file)}>
+                            <button className='download no-mrgn'>Download</button>    
+                        </a>
 
                     </div>
                     <form action="">
@@ -143,20 +171,21 @@ const Assignments = () => {
                     <div className="student-hw-info">
  
                         <h4>Title</h4>
-                        <p>Spanish Assignment</p>
+                        <p>{assignment.title}</p>
 
                         <h4>Date</h4>
-                        <p>18/04/2023</p>
+                        <p>{handleDate(assignment.date)}</p>
 
                         <h4>Deadline</h4>
-                        <p>20/05/2023</p>
+                        <p>{formatDeadline(assignment.deadline)}</p>
 
                         <h4>Discription</h4>
-                        <p className='maxh'>Lorem ipsum dolor Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit aut alias dignissimos, magnam ex magni neque cumque perferendis voluptate deserunt doloribus placeat odio hic eligendi in! Hic possimus rem quod. eveniet neque vitae libero quo corporis dolorem quasi.</p>
+                        <p className='maxh'>{assignment.description}</p>
 
                         <h4>Document</h4>
-                        <button className='download no-mrgn'>Download</button>
-
+                        <a href={assignment.url} download onClick={() => showFile(assignment.file)}>
+                            <button className='download no-mrgn'>Download</button>    
+                        </a>
 
                     </div>
                     {!isInstructor &&
@@ -221,7 +250,7 @@ const Assignments = () => {
 
                 {assignments && assignments.slice().reverse().map((assignment, index)=>{
                     return(
-                    <div className="assignment" onClick={()=>setIsHwDetailsOpen(!isHwDetailsOpen)}>
+                    <div className="assignment" onClick={()=>openHwDetails(assignment._id)} key={index}>
                         <div className="info">
                             <img src={doc} alt="Document" />
                             <div>
@@ -266,7 +295,7 @@ const Assignments = () => {
                     {isInstructor ?
                     (submittedHws && submittedHws.slice().reverse().map((assignment, index)=>{
                         return(
-                            <div className="assignment" onClick={()=>setIsStudentHwOpen(!isStudentHwOpen)}>
+                            <div className="assignment" onClick={()=>openSubmittedHwDetails(assignment._id)} key={index}>
                                 <div className="info">
                                     <div className="pic">{assignment.user.name[0].toUpperCase()}</div>
                                     <div>

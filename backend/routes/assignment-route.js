@@ -1,5 +1,5 @@
 import express from "express";
-import { addAssignment, getClassAssignments } from "../controllers/assignment-controller.js";
+import { addAssignment, getById, getClassAssignments } from "../controllers/assignment-controller.js";
 
 const assignmentRouter = express.Router();
 
@@ -18,5 +18,6 @@ const upload = multer({ storage: storage });
 
 assignmentRouter.post("/add", upload.single("file"), addAssignment)
 assignmentRouter.get("/:id", getClassAssignments)// class id
+assignmentRouter.get("/details/:id", getById)// assignment id
 
 export default assignmentRouter;
