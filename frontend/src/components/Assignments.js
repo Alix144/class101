@@ -294,6 +294,9 @@ const Assignments = () => {
                     <>
                     {isInstructor ?
                     (submittedHws && submittedHws.slice().reverse().map((assignment, index)=>{
+                        if(assignment.grade){
+                            return
+                        }else{
                         return(
                             <div className="assignment" onClick={()=>openSubmittedHwDetails(assignment._id)} key={index}>
                                 <div className="info">
@@ -306,7 +309,7 @@ const Assignments = () => {
                                 <p className="date">{handleDate(assignment.date)}</p>
                                 <div className="left-border"></div>
                             </div>
-                        )
+                        )}
     
                     }))
                     :     

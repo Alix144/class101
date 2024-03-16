@@ -1,5 +1,5 @@
 import express from "express";
-import { submitAssignment, getClassSubmittedHws, getUserSubmittedHws, getById } from "../controllers/submittedHw-controller.js";
+import { submitAssignment, getClassSubmittedHws, getUserSubmittedHws, getById, gradeAssignment } from "../controllers/submittedHw-controller.js";
 
 const submittedHwsRouter = express.Router();
 
@@ -20,5 +20,6 @@ submittedHwsRouter.post("/submit", upload.single("file"), submitAssignment)
 submittedHwsRouter.get("/:id", getClassSubmittedHws)// class id
 submittedHwsRouter.get("/user/:id", getUserSubmittedHws)// user id
 submittedHwsRouter.get("/details/:id", getById)// submitted assignment id
+submittedHwsRouter.put("/grade/:id", gradeAssignment)// submitted assignment id
 
 export default submittedHwsRouter;
