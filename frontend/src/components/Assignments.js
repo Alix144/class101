@@ -24,6 +24,7 @@ const Assignments = () => {
     const [submittedHws, setSubmittedHws] = useState([]);
     const [studentSubmittedHws, setStudentSubmittedHws] = useState([]);
     const [studentSubmittedHw, setStudentSubmittedHw] = useState("");
+    const [grade, setGrade] = useState("");
     const [fileName, setFileName] = useState('');
     const [file, setFile] = useState("")
 
@@ -118,6 +119,24 @@ const Assignments = () => {
         fetchSubmittedHwDetails(assignmentId).then((data)=>setStudentSubmittedHw(data))
     }
 
+    /******* Grade *******/
+    const gradeAssignment = async(assignmentId) => {
+        const res = await axios.put(`http://localhost:4000/submitted/grade/${assignmentId}`, {
+            grade
+        })
+        .catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+    
+    const handleGradeAssignment = (e, assignmentId) => {
+        e.preventDefault()
+        gradeAssignment(assignmentId).then(() => {
+            window.location.reload();
+        });
+    }
+
     return ( 
         <>
         {isStudentHwOpen && 
@@ -150,12 +169,12 @@ const Assignments = () => {
                     <form action="">
                         <div>
                             <label htmlFor="grade">Grade*</label>
-                            <input type="number" max={100} min={0} id="grade" name="grade"/>
+                            <input type="number" max={100} min={0} id="grade" name="grade" value={grade} onChange={(e)=>setGrade(e.target.value)}/>
                         </div>
                     </form>
                     <div className="on-page-btns">
                         <button onClick={()=>setIsStudentHwOpen(!isStudentHwOpen)}>Cancel</button>
-                        <button>Send</button>
+                        <button onClick={(e)=>handleGradeAssignment(e, studentSubmittedHw._id)}>Send</button>
                     </div>
                 </div>
             </div>
@@ -297,19 +316,20 @@ const Assignments = () => {
                         if(assignment.grade){
                             return
                         }else{
-                        return(
-                            <div className="assignment" onClick={()=>openSubmittedHwDetails(assignment._id)} key={index}>
-                                <div className="info">
-                                    <div className="pic">{assignment.user.name[0].toUpperCase()}</div>
-                                    <div>
-                                        <h4>{assignment.user.name} {assignment.user.surname}</h4>
-                                        <h6>{assignment.assignment.title}</h6>
+                            return(
+                                <div className="assignment" onClick={()=>openSubmittedHwDetails(assignment._id)} key={index}>
+                                    <div className="info">
+                                        <div className="pic">{assignment.user.name[0].toUpperCase()}</div>
+                                        <div>
+                                            <h4>{assignment.user.name} {assignment.user.surname}</h4>
+                                            <h6>{assignment.assignment.title}</h6>
+                                        </div>
                                     </div>
+                                    <p className="date">{handleDate(assignment.date)}</p>
+                                    <div className="left-border"></div>
                                 </div>
-                                <p className="date">{handleDate(assignment.date)}</p>
-                                <div className="left-border"></div>
-                            </div>
-                        )}
+                            )
+                        }
     
                     }))
                     :     
