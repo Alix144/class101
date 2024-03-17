@@ -25,6 +25,7 @@ const Assignments = () => {
     const [studentSubmittedHws, setStudentSubmittedHws] = useState([]);
     const [studentSubmittedHw, setStudentSubmittedHw] = useState("");
     const [grade, setGrade] = useState("");
+    const [message, setMessage] = useState("");
     const [fileName, setFileName] = useState('');
     const [file, setFile] = useState("")
 
@@ -73,6 +74,12 @@ const Assignments = () => {
         setIsSendHwOpen(!isSendHwOpen)
     }
 
+    const openHwDetails = (assignmentId) => {
+        setIsHwDetailsOpen(!isHwDetailsOpen)
+        setAssignment("")
+        fetchAssignmentDetails(assignmentId).then((data)=>setAssignment(data))
+    }
+
     const handleFileChange = (event) => {
         const fileInput = event.target;
         if (fileInput.files.length > 0) {
@@ -101,12 +108,6 @@ const Assignments = () => {
         return data;
     }
 
-    const openHwDetails = (assignmentId) => {
-        setIsHwDetailsOpen(!isHwDetailsOpen)
-        setAssignment("")
-        fetchAssignmentDetails(assignmentId).then((data)=>setAssignment(data))
-    }
-
     const fetchSubmittedHwDetails = async(assignmentId) => {
         const res = await axios.get(`http://localhost:4000/submitted/details/${assignmentId}`).catch(err=>console.log(err))
         const data = await res.data.submittedHw;
@@ -118,6 +119,8 @@ const Assignments = () => {
         setStudentSubmittedHw("")
         fetchSubmittedHwDetails(assignmentId).then((data)=>setStudentSubmittedHw(data))
     }
+
+   
 
     /******* Grade *******/
     const gradeAssignment = async(assignmentId) => {
@@ -133,6 +136,28 @@ const Assignments = () => {
     const handleGradeAssignment = (e, assignmentId) => {
         e.preventDefault()
         gradeAssignment(assignmentId).then(() => {
+            window.location.reload();
+        });
+    }
+
+    /******* submit assignment *******/
+    const submitAssignment = async(assignmentId) => {
+        const res = await axios.post("http://localhost:4000/submitted/submit", {
+            message,
+            klass: classId,
+            user: userId,
+            assignment: assignmentId,
+            file,
+        })
+        .catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+    
+    const handleSubmitAssignment = (e, assignmentId) => {
+        e.preventDefault()
+        submitAssignment(assignmentId).then(() => {
             window.location.reload();
         });
     }
@@ -227,10 +252,10 @@ const Assignments = () => {
                     <div className="student-hw-info">
  
                         <h4>Title</h4>
-                        <p>Spanish Assignment</p>
+                        <p>{assignment.title}</p>
                         <form action="" className='hwForm'>
                             <h4>Message</h4>
-                            <textarea name="" id="" cols="30" rows="5"></textarea>
+                            <textarea name="" id="" cols="30" rows="5" value={message} onChange={(e)=>setMessage(e.target.value)}></textarea>
                             
                             <label htmlFor="file" className='label'>Document</label>
                             <label htmlFor="file" className='upload no-mrgn'>Upload</label>
@@ -238,13 +263,11 @@ const Assignments = () => {
                             <p>{fileName}</p>
                         </form>
 
-
-
                     </div>
                     
                     <div className="on-page-btns">
                         <button onClick={handleSendHwBtn}>back</button>
-                        <button>Send</button>
+                        <button onClick={(e)=>handleSubmitAssignment(e, assignment._id)}>Send</button>
                     </div>
                 </div>
             </div>

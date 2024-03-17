@@ -33,9 +33,9 @@ const ClassesContainer = ({type}) => {
 
             {classes && classes.map((klass, index)=>{
                 if (type==="teaching" && klass.instructors.includes(id))
-                    return <ClassBox key={index} id={klass._id} color={klass.color} img={bg1} className={klass.name} instructorsNum={klass.instructors.length} studentsNum={klass.students.length}/>
+                    return <ClassBox key={index} id={klass._id} color={klass.classColor} img={bg1} className={klass.name} instructorsNum={klass.instructors.length} studentsNum={klass.students.length}/>
                 else if(type==="learning" && klass.students.includes(id)){
-                    return <ClassBox key={index} id={klass._id} color={klass.color} img={bg1} className={klass.name} instructorsNum={klass.instructors.length} studentsNum={klass.students.length}/>
+                    return <ClassBox key={index} id={klass._id} color={klass.classColor} img={bg1} className={klass.name} instructorsNum={klass.instructors.length} studentsNum={klass.students.length}/>
                 }
             })}
             <AddBox/>

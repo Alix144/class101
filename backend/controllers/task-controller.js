@@ -43,7 +43,7 @@ export const updateTask = async(req, res, next) => {
         task = await Task.findByIdAndUpdate(taskId,{
             title,
             deadline,
-            course, 
+            course,
             description, 
         })
     }catch(err){

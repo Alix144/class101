@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 
 export const submitAssignment = async(req, res, next) => {
     const {message, klass, user, assignment} = req.body;
-    const file = req.file.filename;
+    const file = req.file;
     
     let existingClass;
     try{
