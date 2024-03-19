@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from "axios";
+
 import pen from '../images/pen.png'
 import { clearOnPageDiv, setOnPageDiv } from '../store/slices/onPageDivSlice';
 
@@ -22,6 +24,9 @@ import check from '../images/check.png'
 
 const Welcome = () => {
 
+    const userId = localStorage.getItem("userId");
+
+    const [user, setUser] = useState("")
     const [isCustomizeDivOpen, setCustomizeDiv] = useState(false)
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedBg, setSelectedBg] = useState("bg1");
@@ -34,7 +39,20 @@ const Welcome = () => {
         const file = event.target.files[0];    
         setSelectedImage(file);
         setSelectedBg("bg9")
-      };
+    };
+
+    // user info
+    const getUser = async() => {
+        const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
+        const data = await res.data.user
+        return data;
+    }
+
+    useEffect(() => {
+        getUser().then(
+        (data)=>{setUser(data) 
+        console.log(data)})
+    },[userId])
 
     return ( 
         <>
@@ -74,7 +92,7 @@ const Welcome = () => {
         }
 
             <div className="welcome">
-                <h1>Welcome Back Ali!</h1>
+                <h1>Welcome Back {user.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : ""}!</h1>
                 <img src={pen} alt="Edit" onClick={() => setCustomizeDiv(true)}/>
             </div>
             

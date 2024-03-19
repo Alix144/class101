@@ -129,7 +129,7 @@ const Sidebar = () => {
                             if(klass.instructors.includes(id))
                             return(
                             <div key={index} className='class-parent' onClick={()=>goToClassroom(klass._id)}>
-                                <div className="profile-pic" style={{backgroundColor: klass.classColor} }>M</div>
+                                <div className="profile-pic" style={{backgroundColor: klass.classColor} }>{klass.name ? klass.name[0].toUpperCase() : ""}</div>
                                 <li>{klass.name}</li>
                             </div>
                             )
@@ -152,7 +152,7 @@ const Sidebar = () => {
                             if(klass.students.includes(id)){
                             return(
                             <div key={index} className='class-parent' onClick={()=>goToClassroomS(klass._id)}>
-                                <div className="profile-pic" style={{backgroundColor: klass.classColor} }>M</div>
+                                <div className="profile-pic" style={{backgroundColor: klass.classColor} }>{klass.name ? klass.name[0].toUpperCase() : ""}</div>
                                 <li>{klass.name}</li>
                             </div>
                             )
