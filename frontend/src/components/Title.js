@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +9,7 @@ const Title = ({propTitle, add}) => {
     const navigate = useNavigate();
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
     const { id } = useParams();
+    const userId = localStorage.getItem('userId')
 
     const [isAddTaskPageOpen, setAddTaskPage] = useState(false)
     const [isAddAnnouncementPageOpen, setAddAnnouncementPage] = useState(false)
@@ -21,11 +22,36 @@ const Title = ({propTitle, add}) => {
     const [week, setWeek] = useState("");
     const [topics, setTopics] = useState([{ id: 1, value: '' }]);
 
+
+    const [classes, setClasses] = useState([]);
+
+    //get user classes
+    const fetchClasses = async() => {
+        console.log(userId)
+        const res = await axios.get(`http://localhost:4000/class/view/${userId}`).catch(err=>console.log(err))
+        const data = await res.data.classes;
+        console.log(data)
+        return data;
+    }
+
+    useEffect(()=>{ 
+        fetchClasses()
+        .then((data)=>{
+            setClasses(data)
+        })
+    },[isAddTaskPageOpen])
+
+
+
     //task
     const [title, setTitle] = useState("")
     const [deadline, setDeadline] = useState("")
     const [course, setCourse] = useState("")
     const [description, setDescription] = useState("")
+
+    useEffect(()=>{ 
+        console.log("course is: "+course)
+    },[course])
 
     //announcement
     const [announcementTitle, setAnnouncementTitle] = useState("")
@@ -60,7 +86,6 @@ const Title = ({propTitle, add}) => {
       } else {
         setFileName('Upload');
       }
-
     }
 
     /*******************/
@@ -70,7 +95,8 @@ const Title = ({propTitle, add}) => {
             title,
             deadline,
             description,
-            user: localStorage.getItem('userId')
+            course,
+            user: userId
         }).catch(err=>console.log(err));
         const data = await res.data;
         console.log(data)
@@ -195,10 +221,10 @@ const Title = ({propTitle, add}) => {
                     <div>
                         <label htmlFor="courses">Course</label>
                         <select id="courses" name="courses" value={course} onChange={(e)=>setCourse(e.target.value)}>
-                            <option selected>Select a Course</option>
-                            <option>Math</option>
-                            <option>Spanish</option>
-                            <option>Biology</option>
+                            <option selected value={""}>Select a Course</option>
+                            {classes.map((klass, index)=>(
+                                <option key={klass._id} value={klass._id}>{klass.name}</option>   
+                            ))}
                         </select>
                     </div>
                     <div>

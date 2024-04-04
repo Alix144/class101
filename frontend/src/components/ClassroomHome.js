@@ -87,8 +87,6 @@ const ClassroomHome = () => {
                                 </div>
                                 <p style={{fontSize: "12px"}}>{handleDate(announcement.date)}</p>
                             </div>
-                        
-                    
                     ))}
                     </div>
                 }
@@ -124,6 +122,7 @@ const ClassroomHome = () => {
                         <p>No work to be done</p>
                     </div>
                 </div>
+
             </div>
         </div>
                                    

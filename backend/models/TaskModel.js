@@ -26,6 +26,11 @@ const taskSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: "User",
         required: true,
+      },
+      class:{ 
+        type: mongoose.Types.ObjectId,
+        ref: "Class",
+        required: true,
       }
 
 })

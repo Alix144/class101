@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 
 export const addTask = async(req, res, next) => {
-    const {title, deadline, course, description, user} = req.body;
+    const {title, deadline, description, course, user} = req.body;
     
     let existingUser;
     try{
@@ -17,7 +17,7 @@ export const addTask = async(req, res, next) => {
         return res.status(400).json({message: "Unable to Find User by This ID"})
     }
     
-    const task = new Task({title, deadline, course, description, user})
+    const task = new Task({title, deadline, description, class: course, user})
     try{
         const session = await mongoose.startSession();
         session.startTransaction();
@@ -80,7 +80,13 @@ export const getByUserId = async(req, res, next) => {
     const userId = req.params.id;
     let userTasks;
     try{
-        userTasks = await User.findById(userId).populate("tasks")
+        userTasks = await User.findById(userId).populate({
+            path: "tasks",
+            populate: {
+                path: "class",
+                model: "Class"
+            }
+        })
     }catch(err){
         return console.log(err)
     }

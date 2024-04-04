@@ -20,7 +20,7 @@ const container = {
     }
   };
   
-const NoteBox = ({id, title, description, deadline, isCompleted}) => {
+const NoteBox = ({id, title, description, klass, deadline, isCompleted}) => {
     const [isMoreOpen, setMore] = useState(false)
     const [isEditPageOpen, setEditPage] = useState(false)
     const [formattedDate, setFormattedDate] = useState("")
@@ -159,7 +159,7 @@ const NoteBox = ({id, title, description, deadline, isCompleted}) => {
             >
                 <img src={more} alt="More" className='show-more' onClick={showMore}/>
                 <h4>{title}</h4>
-                <p>Spanish</p>
+                {klass && <p>{klass.name}</p>}
                 {deadline && <p>Deadline: {formattedDate}</p>}
                 <h5>{description}</h5>
             
