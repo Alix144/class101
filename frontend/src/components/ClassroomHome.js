@@ -14,6 +14,7 @@ const ClassroomHome = () => {
 
     const [isCopied, setIsCopied] = useState(false);
     const [isEmpty, setIsEmpty] = useState(true)
+    const [isTaskEmpty, setIsTaskEmpty] = useState(true)
 
     // random text 
     const textAreaRef = useRef(null);
@@ -36,7 +37,9 @@ const ClassroomHome = () => {
     }
 
     const id = useParams().id
+    const userId = localStorage.userId;
     const [klass, setKlass] = useState('');
+    const [tasks, setTasks] = useState('');
 
     const fetchDetails = async() => {
         const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
@@ -54,10 +57,42 @@ const ClassroomHome = () => {
         })
     },[id])
 
+    const fetchToDoDetails = async() => {
+        const res = await axios.get(`http://localhost:4000/task/view/${userId}`).catch(err=>console.log(err))
+        const data = await res.data.tasks;
+        console.log(data)
+        return data;
+    }
+
+    useEffect(()=>{ 
+        fetchToDoDetails()
+        .then((data)=>{
+            setTasks(data)
+                        // Check if there are tasks for the given class ID
+                        let hasTasksForClass;
+                        data.map((task, index) => {
+                            if(task.class){
+                                if(task.class._id === id){
+                                    hasTasksForClass = true
+                                    return
+                                }
+                            }
+                          });
+                        // let hasTasksForClass = data.some((task) => task.class._id === id);
+
+                        // Set the state based on whether there are tasks for the class ID
+                        setIsTaskEmpty(!hasTasksForClass);
+        })
+    },[id])
+
     useEffect(() => {
         console.log(klass)
         console.log(isEmpty);
     }, [klass, isEmpty]);
+
+    useEffect(() => {
+        console.log("taskoo: " + isTaskEmpty)
+    }, [isTaskEmpty]);
 
     return ( 
         <div className="content classroom-home">
@@ -117,10 +152,37 @@ const ClassroomHome = () => {
                     <div className="div-title">
                         <h4>To Do</h4>
                     </div>
+                    {isTaskEmpty ? 
                     <div className="div-content">
                         <img src={noTask} alt="No-Task" id='no-task'/>
                         <p>No work to be done</p>
                     </div>
+                    :
+                    <div className="announcement-home">
+                    {tasks.slice().reverse().map((task, index)=>{
+                        if(task.class){
+                        if(task.class._id === id){
+                            return (
+                            <div className="one-ppl" key={index} style={{width: '90%'}}>
+                                <div className="left-border"></div>
+                                <div className="info">
+                                    <div className='announc-div'>
+                                        <h5>{task.title}</h5>
+                                    </div>
+                                </div>
+                                {task.deadline ?
+                                <p style={{fontSize: "12px"}}>{handleDate(task.deadline)}</p>
+                                :
+                                <p style={{fontSize: "12px"}}>-</p>
+
+                                }
+                            </div>
+                            )
+                        }}
+                    })}
+                    </div>
+                }
+                    
                 </div>
 
             </div>

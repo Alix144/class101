@@ -102,9 +102,9 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
                                 <div className='bg' style={{backgroundImage: `url(${bg7})`}} onClick={()=>handleClick("bg7")}> <div className={`${selectedBg ==="bg7" ? 'selected-bg' : ''}`}> {selectedBg ==="bg7" && <img src={check} alt="check"/>} </div> </div>
                                 <div className='bg' style={{backgroundImage: `url(${bg8})`}} onClick={()=>handleClick("bg8")}> <div className={`${selectedBg ==="bg8" ? 'selected-bg' : ''}`}> {selectedBg ==="bg8" && <img src={check} alt="check"/>} </div> </div>
                                 {selectedImage ? (
-                                <div className='bg' style={{backgroundImage: `url(${URL.createObjectURL(selectedImage)})`}} onClick={()=>handleClick("bg9")}> <div className={`${selectedBg === "bg9" ? 'selected-bg' : ''}`}> {selectedBg ==="bg9" && <img src={check} alt="check"/>} </div></div>
+                                    <div className='bg' style={{backgroundImage: `url(${URL.createObjectURL(selectedImage)})`}} onClick={()=>handleClick("bg9")}> <div className={`${selectedBg === "bg9" ? 'selected-bg' : ''}`}> {selectedBg ==="bg9" && <img src={check} alt="check"/>} </div></div>
                                 ) :
-                                <div className='bg'><img src={noImg} alt="No-Uploaded-Img" className='no-img'/></div>
+                                    <div className='bg'><img src={noImg} alt="No-Uploaded-Img" className='no-img'/></div>
                                 }       
                                 <label htmlFor="uploadBg" className='upload'> <img src={upload} alt="upload" /> Upload</label>
                                 <input type="file" accept="image/*" id='uploadBg' className='upload' onChange={handleImageChange}/>                         

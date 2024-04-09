@@ -46,7 +46,7 @@ const Title = ({propTitle, add}) => {
     //task
     const [title, setTitle] = useState("")
     const [deadline, setDeadline] = useState("")
-    const [course, setCourse] = useState("")
+    const [course, setCourse] = useState(null)
     const [description, setDescription] = useState("")
 
     useEffect(()=>{ 
@@ -95,7 +95,7 @@ const Title = ({propTitle, add}) => {
             title,
             deadline,
             description,
-            course,
+            klass: course,
             user: userId
         }).catch(err=>console.log(err));
         const data = await res.data;
@@ -221,7 +221,7 @@ const Title = ({propTitle, add}) => {
                     <div>
                         <label htmlFor="courses">Course</label>
                         <select id="courses" name="courses" value={course} onChange={(e)=>setCourse(e.target.value)}>
-                            <option selected value={""}>Select a Course</option>
+                            <option selected value={"null"}>Select a Course</option>
                             {classes.map((klass, index)=>(
                                 <option key={klass._id} value={klass._id}>{klass.name}</option>   
                             ))}

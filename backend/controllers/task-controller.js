@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 
 export const addTask = async(req, res, next) => {
-    const {title, deadline, description, course, user} = req.body;
+    const {title, deadline, description, klass, user} = req.body;
     
     let existingUser;
     try{
@@ -17,7 +17,7 @@ export const addTask = async(req, res, next) => {
         return res.status(400).json({message: "Unable to Find User by This ID"})
     }
     
-    const task = new Task({title, deadline, description, class: course, user})
+    const task = new Task({title, deadline, description, class: klass, user})
     try{
         const session = await mongoose.startSession();
         session.startTransaction();
