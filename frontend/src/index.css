@@ -1144,13 +1144,19 @@ input[type='file']{
     align-items: center;
 }
 
-.selected-bg img{
+.selected-bg img, .circle-color img{
     width: 25px;
     height: 25px;
 }
 
 .selected-bg:hover{
     display: none;
+}
+
+.circle-color {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Profile */

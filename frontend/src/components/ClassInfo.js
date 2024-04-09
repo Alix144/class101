@@ -28,13 +28,20 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
     const id = useParams().id;
     const [isCustomizeDivOpen, setCustomizeDiv] = useState(false)
     const [isClassInfoOpen, setClassInfoDiv] = useState(false)
+
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedBg, setSelectedBg] = useState("bg3");
+
+    const [selectedColor, setSelectedColor] = useState("#74BCFF");
+
     const [newName, setName] = useState("");
     const [newCourseCode, setCourseCode] = useState("");
     const [newDescription, setDescription] = useState("");
     const [newMaxStudents, setMaxStudents] = useState("");
 
+    const handleColorClick = (color) => {
+        setSelectedColor(color)
+    }
 
     const handleClick = (index) => {
         setSelectedBg(index)
@@ -70,11 +77,15 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
             .catch(err => console.log(err));
         }
 
+    const openClassColors = () => {
+        setCustomizeDiv(true)
+    }
+
     const openClassInfo = () => {
         setClassInfoDiv(true)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setName(name)
         setCourseCode(courseCode)
         setDescription(description)
@@ -111,11 +122,11 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
                             </div>
                             <label htmlFor="">Class Color</label>
                             <div className="colors" style={{width:"50%", marginLeft: "50px"}}>
-                                <div style={{backgroundColor: "#74BCFF"}}></div>
-                                <div style={{backgroundColor: "#86FFAF"}}></div>
-                                <div style={{backgroundColor: "#B63EFF"}}></div>
-                                <div style={{backgroundColor: "#FF6464"}}></div>
-                                <div style={{backgroundColor: "#FFD15A"}}></div>
+                                <div className='circle-color' style={{backgroundColor: "#74BCFF"}} onClick={()=>handleColorClick("#74BCFF")}> {selectedColor ==="#74BCFF" && <img src={check} alt="check"/>} </div>
+                                <div className='circle-color' style={{backgroundColor: "#86FFAF"}} onClick={()=>handleColorClick("#86FFAF")}> {selectedColor ==="#86FFAF" && <img src={check} alt="check"/>} </div>
+                                <div className='circle-color' style={{backgroundColor: "#B63EFF"}} onClick={()=>handleColorClick("#B63EFF")}> {selectedColor ==="#B63EFF" && <img src={check} alt="check"/>} </div>
+                                <div className='circle-color' style={{backgroundColor: "#FF6464"}} onClick={()=>handleColorClick("#FF6464")}> {selectedColor ==="#FF6464" && <img src={check} alt="check"/>} </div>
+                                <div className='circle-color' style={{backgroundColor: "#FFD15A"}} onClick={()=>handleColorClick("#FFD15A")}> {selectedColor ==="#FFD15A" && <img src={check} alt="check"/>} </div>
                             </div>
                     </form>
                     <div className="on-page-btns">
@@ -184,7 +195,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
                 <div className='default-pic' style={{backgroundColor: classColor}}>{name[0].toUpperCase()}</div>
                 <h1>{name}</h1>
                 {isInstructor &&
-                <img src={pen} alt="Edit" onClick={() => setCustomizeDiv(true)}/>
+                <img src={pen} alt="Edit" onClick={() => openClassColors()}/>
                 }
                 <img src={info} alt="Info" onClick={()=> openClassInfo()} style={{marginLeft:'5px'}}/>
             </div>

@@ -80,7 +80,7 @@ const Title = ({propTitle, add}) => {
 
     const handleFileChange = (event) => {
       const fileInput = event.target;
-      if (fileInput.files.length > 0) {
+      if(fileInput.files.length > 0) {
         setFileName(fileInput.files[0].name);
         setFile(event.target.files[0])
       } else {
