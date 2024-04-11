@@ -1,7 +1,23 @@
 import express from "express";
-import { createClass, getByUserId, updateClass, getById, joinClass } from "../controllers/class-controller.js";
+import { createClass, getByUserId, updateClass, getById, joinClass, addBg } from "../controllers/class-controller.js";
 
 const classRouter = express.Router();
+
+
+import multer from "multer";
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "./images");
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now();
+        cb(null, uniqueSuffix + file.originalname);
+    },
+});
+const upload = multer({ storage: storage });
+
+classRouter.put("/addBg/:id", upload.single("file"), addBg)
 
 classRouter.post("/create", createClass)
 classRouter.put("/edit/:id", updateClass)//this id is for class

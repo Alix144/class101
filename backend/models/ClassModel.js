@@ -22,6 +22,10 @@ const classSchema = new Schema({
       maxStudents:{
         type: Number,
       },
+      background: {
+        type: String,
+        default: "bg1"
+      },
       classColor:{
         type: String,
         default: 'blue',

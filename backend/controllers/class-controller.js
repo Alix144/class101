@@ -57,6 +57,26 @@ export const updateClass = async(req, res, next) => {
     return res.status(200).json({klass})
 }
 
+export const addBg = async(req, res, next) => {
+    const classId = req.params.id;
+    const file = req.file.filename;
+
+    let klass;
+    try{
+        klass = await Class.findByIdAndUpdate(classId,{
+            background: file
+        })
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!klass){
+        return res.status(500).json({message: "Unable To Update The Class"})
+    }
+
+    return res.status(200).json({klass})
+}
+
 export const joinClass = async(req, res, next) => {
     const {invitationCode} = req.body;
 
