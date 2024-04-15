@@ -57,25 +57,55 @@ export const updateClass = async(req, res, next) => {
     return res.status(200).json({klass})
 }
 
-export const addBg = async(req, res, next) => {
+export const addBg = async (req, res, next) => {
     const classId = req.params.id;
-    const file = req.file.filename;
-
-    let klass;
-    try{
-        klass = await Class.findByIdAndUpdate(classId,{
-            background: file
-        })
-    }catch(err){
-        return console.log(err)
+  
+    // Check if the request contains a file
+    if (req.file) {
+      const file = req.file.filename;
+  
+      let klass;
+      try {
+        klass = await Class.findByIdAndUpdate(classId, {
+          background: file,
+        });
+      } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Unable to update the class" });
+      }
+  
+      if (!klass) {
+        return res.status(500).json({ message: "Unable to update the class" });
+      }
+  
+      return res.status(200).json({ klass });
     }
-
-    if(!klass){
-        return res.status(500).json({message: "Unable To Update The Class"})
+  
+    // Check if the request contains a string parameter
+    if (req.body.stringParam) {
+      const stringParam = req.body.stringParam;
+  
+      let klass;
+      try {
+        klass = await Class.findByIdAndUpdate(classId, {
+          background: stringParam,
+        });
+      } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Unable to update the class" });
+      }
+  
+      if (!klass) {
+        return res.status(500).json({ message: "Unable to update the class" });
+      }
+  
+      return res.status(200).json({ klass });
     }
-
-    return res.status(200).json({klass})
-}
+  
+    // If neither file nor stringParam is present in the request
+    return res.status(400).json({ message: "No file or string parameter provided" });
+  };
+  
 
 export const joinClass = async(req, res, next) => {
     const {invitationCode} = req.body;

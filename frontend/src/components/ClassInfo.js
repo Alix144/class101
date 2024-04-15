@@ -34,6 +34,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
 
     const [uploadedImage, setUploadedImage] = useState(null);
 
+    const [isForeignImg, setForeignImg] = useState(false);
 
     const [selectedColor, setSelectedColor] = useState("#74BCFF");
 
@@ -41,13 +42,14 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
     const [newCourseCode, setCourseCode] = useState("");
     const [newDescription, setDescription] = useState("");
     const [newMaxStudents, setMaxStudents] = useState("");
-
+    
     const handleColorClick = (color) => {
         setSelectedColor(color)
     }
 
     const handleClick = (index) => {
         setSelectedBg(index)
+        setUploadedImage(index)
     };
 
     const handleImageChange = (event) => {
@@ -61,21 +63,50 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
 
         //update
         const update = async() => {
-            const res = await axios.put(`http://localhost:4000/class/view/class/${id}`,{
+            const res = await axios.put(`http://localhost:4000/class/edit/${id}`,{
                 name: newName,
                 courseCode: newCourseCode,
                 description: newDescription,
                 maxStudents: newMaxStudents,
             }).catch(err=>console.log(err))
-            const data = await res;
+            const data = await res.data;
+            console.log(data)
             return data;
         }
     
         const handleUpdate = (e) => {
             e.preventDefault()
             update()
-            .then(data => {
+            .then(() => {
                 alert("Updated Successfully");
+                window.location.reload();
+            })
+            .catch(err => console.log(err));
+        }
+
+
+        //customize
+        const customize = async() => {
+            const formData = new FormData();
+            if (uploadedImage instanceof File) {
+                formData.append("file", uploadedImage);
+              } else if (typeof uploadedImage === "string") {
+                // If uploadedImage is a string, append it as a string parameter
+                formData.append("stringParam", uploadedImage);
+              }
+        
+            const res = await axios.put(`http://localhost:4000/class/addBg/${id}`, formData)
+            .catch(err=>console.log(err));
+            const data = await res.data;
+            console.log(data)
+            return data;
+        }
+    
+        const handleCustomize = (e) => {
+            e.preventDefault()
+            customize()
+            .then(() => {
+                alert("customized Successfully");
                 window.location.reload();
             })
             .catch(err => console.log(err));
@@ -94,43 +125,68 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
         setCourseCode(courseCode)
         setDescription(description)
         setMaxStudents(maxStudents)   
+        console.log(bg)
     }, [])
 
     useEffect(() => {
         if(bg === "bg1"){
             setSelectedImage(bg1)
             setSelectedBg("bg1")
+            setForeignImg(false)
         }
         else if(bg === "bg2"){
             setSelectedImage(bg2)
             setSelectedBg("bg2")
+            setForeignImg(false)
         }
         else if(bg === "bg3"){
             setSelectedImage(bg3)
             setSelectedBg("bg3")
+            setForeignImg(false)
         }
         else if(bg === "bg4"){
             setSelectedImage(bg4)
             setSelectedBg("bg4")
+            setForeignImg(false)
         }
         else if(bg === "bg5"){
             setSelectedImage(bg5)
             setSelectedBg("bg5")
+            setForeignImg(false)
         }
         else if(bg === "bg6"){
             setSelectedImage(bg6)
             setSelectedBg("bg6")
+            setForeignImg(false)
         }
         else if(bg === "bg7"){
             setSelectedImage(bg7)
             setSelectedBg("bg7")
+            setForeignImg(false)
         }
         else if(bg === "bg8"){
             setSelectedImage(bg8)
             setSelectedBg("bg8")
+            setForeignImg(false)
+        }
+        else{
+            setSelectedImage(bg)
+            setSelectedBg("bg9")
+            setUploadedImage(bg)
+            setForeignImg(true)
         }
 
+        
     }, [bg])
+    
+    const backgroundImageStyle = isForeignImg
+    ? {
+        backgroundImage: `url(${require('../uploaded-imgs/' + selectedImage)})`,
+      }
+    : {
+        backgroundImage: `url(${selectedImage})`
+    };
+
 
 
     return ( 
@@ -153,7 +209,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
                                 <div className='bg' style={{backgroundImage: `url(${bg6})`}} onClick={()=>handleClick("bg6")}> <div className={`${selectedBg ==="bg6" ? 'selected-bg' : ''}`}> {selectedBg ==="bg6" && <img src={check} alt="check"/>} </div> </div>
                                 <div className='bg' style={{backgroundImage: `url(${bg7})`}} onClick={()=>handleClick("bg7")}> <div className={`${selectedBg ==="bg7" ? 'selected-bg' : ''}`}> {selectedBg ==="bg7" && <img src={check} alt="check"/>} </div> </div>
                                 <div className='bg' style={{backgroundImage: `url(${bg8})`}} onClick={()=>handleClick("bg8")}> <div className={`${selectedBg ==="bg8" ? 'selected-bg' : ''}`}> {selectedBg ==="bg8" && <img src={check} alt="check"/>} </div> </div>
-                                {uploadedImage ? (
+                                {uploadedImage && uploadedImage instanceof File  ? (
                                     <div className='bg' style={{backgroundImage: `url(${URL.createObjectURL(uploadedImage)})`}} onClick={()=>handleClick("bg9")}> <div className={`${selectedBg === "bg9" ? 'selected-bg' : ''}`}> {selectedBg ==="bg9" && <img src={check} alt="check"/>} </div></div>
                                 ) :
                                     <div className='bg'><img src={noImg} alt="No-Uploaded-Img" className='no-img'/></div>
@@ -172,7 +228,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
                     </form>
                     <div className="on-page-btns">
                         <button onClick={()=>setCustomizeDiv(false)}>close</button>
-                        <button>Save</button>
+                        <button onClick={(e)=>handleCustomize(e)}>Save</button>
                     </div>
                 </div>
             </div>
@@ -231,7 +287,12 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
             </div>
         }
 
-        <div className="class-info" style={{backgroundImage: `url(${selectedImage})`}}>
+
+        <div className="class-info" >
+            {isForeignImg ?  <img src={require(`../uploaded-imgs/${selectedImage}`)} id='foreign' alt="hha" />
+            :
+            <img src={selectedImage} id='foreign' alt="background-img" />
+            }
             <div className='class-name-pic'>
                 <div className='default-pic' style={{backgroundColor: classColor}}>{name[0].toUpperCase()}</div>
                 <h1>{name}</h1>

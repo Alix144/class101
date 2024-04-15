@@ -22,7 +22,7 @@ const Classroom = () => {
         fetchDetails()
         .then((data)=>{
             setKlass(data.class)
-            console.log(klass)
+            console.log(klass.background)
         })
     },[id])
 
@@ -30,8 +30,8 @@ const Classroom = () => {
         <main className="classroom-main">
             {klass && 
             <>
-            <Board2 name={klass.name} courseCode={klass.courseCode} invitationCode={klass.invitationCode} description={klass.description} maxStudents={klass.maxStudents} classColor={klass.classColor} instructors={klass.instructors} students={klass.students}/>
-            <Outlet name={klass.name} courseCode={klass.courseCode} invitationCode={klass.invitationCode} description={klass.description} maxStudents={klass.maxStudents} classColor={klass.classColor} instructors={klass.instructors} students={klass.students}/>
+            <Board2 name={klass.name} courseCode={klass.courseCode} invitationCode={klass.invitationCode} description={klass.description} maxStudents={klass.maxStudents} bg={klass.background} classColor={klass.classColor} instructors={klass.instructors} students={klass.students}/>
+            <Outlet name={klass.name} courseCode={klass.courseCode} invitationCode={klass.invitationCode} description={klass.description} maxStudents={klass.maxStudents} bg={klass.background} classColor={klass.classColor} instructors={klass.instructors} students={klass.students}/>
             </>
             }
         </main>
