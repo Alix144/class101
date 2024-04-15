@@ -23,6 +23,10 @@ const userSchema = new Schema({
       description: {
         type: String,
       },
+      color: {
+        type: String,
+        default: "#74BCFF"
+      },
       classes: [{
         type: mongoose.Types.ObjectId,
         ref:"Class",

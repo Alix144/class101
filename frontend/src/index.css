@@ -1327,6 +1327,11 @@ input[type='file']{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    color: #86ffaf;
+    color: #b63eff;
+    color: #ff6464;
+    color: #ffd15a;
 }
 
 .class-info div{

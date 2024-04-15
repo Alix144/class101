@@ -126,7 +126,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
         setDescription(description)
         setMaxStudents(maxStudents)   
         console.log(bg)
-    }, [])
+    }, [name, courseCode, id])
 
     useEffect(() => {
         if(bg === "bg1"){
@@ -178,15 +178,6 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
 
         
     }, [bg])
-    
-    const backgroundImageStyle = isForeignImg
-    ? {
-        backgroundImage: `url(${require('../uploaded-imgs/' + selectedImage)})`,
-      }
-    : {
-        backgroundImage: `url(${selectedImage})`
-    };
-
 
 
     return ( 

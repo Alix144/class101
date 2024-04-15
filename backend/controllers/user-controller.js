@@ -95,3 +95,25 @@ export const login = async(req, res, next) => {
 
     return res.status(200).json({message: "Login Successfull", user: existingUser})
 }
+
+export const updateUser = async(req, res, next) => {
+    const {userId, name, surname, email, description} = req.body;
+
+    let user;
+    try{
+        user = await User.findByIdAndUpdate(userId,{
+            name,
+            surname, 
+            email,
+            description, 
+        })
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!user){
+        return res.status(500).json({message: "Unable To Update User"})
+    }
+
+    return res.status(200).json({user})
+}
