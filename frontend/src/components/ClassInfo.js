@@ -22,7 +22,7 @@ import info from '../images/info.png'
 import upload from '../images/upload.png'
 import check from '../images/check.png'
 
-const ClassInfo = ({name, courseCode, description, maxStudents, classColor, instructors, students}) => {
+const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, instructors, students}) => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const id = useParams().id;
@@ -30,7 +30,10 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
     const [isClassInfoOpen, setClassInfoDiv] = useState(false)
 
     const [selectedImage, setSelectedImage] = useState(null);
-    const [selectedBg, setSelectedBg] = useState("bg3");
+    const [selectedBg, setSelectedBg] = useState("bg1");
+
+    const [uploadedImage, setUploadedImage] = useState(null);
+
 
     const [selectedColor, setSelectedColor] = useState("#74BCFF");
 
@@ -48,8 +51,9 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
     };
 
     const handleImageChange = (event) => {
-        const file = event.target.files[0];    
-        setSelectedImage(file);
+        const file = event.target.files[0]; 
+        console.log(file)
+        setUploadedImage(file)
         setSelectedBg("bg9")
     };
 
@@ -89,8 +93,45 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
         setName(name)
         setCourseCode(courseCode)
         setDescription(description)
-        setMaxStudents(maxStudents)
+        setMaxStudents(maxStudents)   
     }, [])
+
+    useEffect(() => {
+        if(bg === "bg1"){
+            setSelectedImage(bg1)
+            setSelectedBg("bg1")
+        }
+        else if(bg === "bg2"){
+            setSelectedImage(bg2)
+            setSelectedBg("bg2")
+        }
+        else if(bg === "bg3"){
+            setSelectedImage(bg3)
+            setSelectedBg("bg3")
+        }
+        else if(bg === "bg4"){
+            setSelectedImage(bg4)
+            setSelectedBg("bg4")
+        }
+        else if(bg === "bg5"){
+            setSelectedImage(bg5)
+            setSelectedBg("bg5")
+        }
+        else if(bg === "bg6"){
+            setSelectedImage(bg6)
+            setSelectedBg("bg6")
+        }
+        else if(bg === "bg7"){
+            setSelectedImage(bg7)
+            setSelectedBg("bg7")
+        }
+        else if(bg === "bg8"){
+            setSelectedImage(bg8)
+            setSelectedBg("bg8")
+        }
+
+    }, [bg])
+
 
     return ( 
         <>
@@ -112,13 +153,13 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
                                 <div className='bg' style={{backgroundImage: `url(${bg6})`}} onClick={()=>handleClick("bg6")}> <div className={`${selectedBg ==="bg6" ? 'selected-bg' : ''}`}> {selectedBg ==="bg6" && <img src={check} alt="check"/>} </div> </div>
                                 <div className='bg' style={{backgroundImage: `url(${bg7})`}} onClick={()=>handleClick("bg7")}> <div className={`${selectedBg ==="bg7" ? 'selected-bg' : ''}`}> {selectedBg ==="bg7" && <img src={check} alt="check"/>} </div> </div>
                                 <div className='bg' style={{backgroundImage: `url(${bg8})`}} onClick={()=>handleClick("bg8")}> <div className={`${selectedBg ==="bg8" ? 'selected-bg' : ''}`}> {selectedBg ==="bg8" && <img src={check} alt="check"/>} </div> </div>
-                                {selectedImage ? (
-                                    <div className='bg' style={{backgroundImage: `url(${URL.createObjectURL(selectedImage)})`}} onClick={()=>handleClick("bg9")}> <div className={`${selectedBg === "bg9" ? 'selected-bg' : ''}`}> {selectedBg ==="bg9" && <img src={check} alt="check"/>} </div></div>
+                                {uploadedImage ? (
+                                    <div className='bg' style={{backgroundImage: `url(${URL.createObjectURL(uploadedImage)})`}} onClick={()=>handleClick("bg9")}> <div className={`${selectedBg === "bg9" ? 'selected-bg' : ''}`}> {selectedBg ==="bg9" && <img src={check} alt="check"/>} </div></div>
                                 ) :
                                     <div className='bg'><img src={noImg} alt="No-Uploaded-Img" className='no-img'/></div>
                                 }       
                                 <label htmlFor="uploadBg" className='upload'> <img src={upload} alt="upload" /> Upload</label>
-                                <input type="file" accept="image/*" id='uploadBg' className='upload' onChange={handleImageChange}/>                         
+                                <input type="file" accept="image/*" id='uploadBg' className='upload' onChange={(e)=>handleImageChange(e)}/>                         
                             </div>
                             <label htmlFor="">Class Color</label>
                             <div className="colors" style={{width:"50%", marginLeft: "50px"}}>
@@ -190,7 +231,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, classColor, inst
             </div>
         }
 
-        <div className="class-info">
+        <div className="class-info" style={{backgroundImage: `url(${selectedImage})`}}>
             <div className='class-name-pic'>
                 <div className='default-pic' style={{backgroundColor: classColor}}>{name[0].toUpperCase()}</div>
                 <h1>{name}</h1>
