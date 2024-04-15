@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import axios from "axios";
@@ -18,6 +18,9 @@ const Header2 = () => {
     const dispatch = useDispatch()
 
     const userId = localStorage.getItem("userId");
+
+    const [user, setUser] = useState(null)
+    const [color, setColor] = useState("#74BCFF")
 
     const [plusBtn, setPlusBtn] = useState(false)
     const [profileBtn, setProfileBtn] = useState(false)
@@ -135,6 +138,21 @@ const Header2 = () => {
         });
     }
 
+    // fetch user name
+    const fetchDetails = async() => {
+        const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
+        const data = await res.data.user;
+        return data;
+    }
+
+    useEffect(()=>{ 
+        fetchDetails()
+        .then((data)=>{
+            setUser(data)
+            setColor(data.color)
+        })
+    },[userId])
+
     return ( 
 
         <>
@@ -215,7 +233,7 @@ const Header2 = () => {
             <div className="header-part-2">
                 <img src={plus} alt="Plus" className='plus' onClick={plusMenu}/>
                 <img src={bell} alt="Notification" className='bell' onClick={notificationMenu}/>
-                <div className="profile" onClick={profileMenu}>A</div>
+                <div className="profile" style={{backgroundColor: `${color}`}} onClick={profileMenu}>{user && user.name[0].toUpperCase()}</div>
 
                 {plusBtn && 
                     <div className="plus-menu">

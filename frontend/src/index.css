@@ -424,7 +424,6 @@ input:focus, textarea:focus{
     width: 40px;
     height: 40px;
     border-radius: 50px;
-    background-color: #74BCFF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1328,10 +1327,10 @@ input[type='file']{
     background-repeat: no-repeat;
     background-size: cover;
 
-    color: #86ffaf;
+    /* color: #86ffaf;
     color: #b63eff;
     color: #ff6464;
-    color: #ffd15a;
+    color: #ffd15a; */
 }
 
 .class-info div{
