@@ -266,9 +266,9 @@ const Header2 = () => {
                 {profileBtn &&
                     <div className="profile-menu">
                         <div className='profile-menu-1'>
-                            <div className="profile-img">A</div>
-                            <h3>Hi, Ali</h3>
-                            <p>ali@gmail.com</p>
+                            <div className="profile-img" style={{backgroundColor: `${color}`}}>{user && user.name[0].toUpperCase()}</div>
+                            <h3>Hi, {user && user.name}</h3>
+                            <p>{user && user.email}</p>
                             <div className='profile-btn' onClick={goToProfile}>Manage</div>
                         </div>
 

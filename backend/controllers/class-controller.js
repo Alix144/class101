@@ -58,6 +58,7 @@ export const updateClass = async(req, res, next) => {
 }
 
 export const addBg = async (req, res, next) => {
+    const {classColor} = req.body;
     const classId = req.params.id;
   
     // Check if the request contains a file
@@ -67,6 +68,7 @@ export const addBg = async (req, res, next) => {
       let klass;
       try {
         klass = await Class.findByIdAndUpdate(classId, {
+          classColor,
           background: file,
         });
       } catch (err) {
@@ -88,6 +90,7 @@ export const addBg = async (req, res, next) => {
       let klass;
       try {
         klass = await Class.findByIdAndUpdate(classId, {
+          classColor,
           background: stringParam,
         });
       } catch (err) {
@@ -104,8 +107,7 @@ export const addBg = async (req, res, next) => {
   
     // If neither file nor stringParam is present in the request
     return res.status(400).json({ message: "No file or string parameter provided" });
-  };
-  
+}
 
 export const joinClass = async(req, res, next) => {
     const {invitationCode} = req.body;

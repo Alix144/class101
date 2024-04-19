@@ -22,22 +22,22 @@ const ClassBox = ( {color, img, className, instructorsNum, studentsNum}) => {
     let secondColor;
     let picColor;
 
-    if(color === "red"){
+    if(color === "#ff6464"){
         primaryColor = "#FF6161"
         secondColor = "#D10F0F"
         picColor = "#FFC0C0"
 
-    }else if(color === "purple"){
+    }else if(color === "#b63eff"){
         primaryColor = "#D650F8"
         secondColor = "#A024AB"
         picColor = "#E6AFFF"
     }
-    else if(color === "green"){
+    else if(color === "#86ffaf"){
         primaryColor = "#86FFAF"
         secondColor = "#15B84D"
         picColor = "#DDFFE9"
     }
-    else if(color === "yellow"){
+    else if(color === "#ffd15a"){
         primaryColor = "#FFD15A"
         secondColor = "#E3A609"
         picColor = "#FFEAB5"

@@ -3,6 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+.hshs{
+    color: #74BCFF;
+    color: #86FFAF;
+    color: #B63EFF;
+    color: #FF6464;
+    color: #FFD15A;
+}
 
 body, button{
     font-family: 'Montserrat', sans-serif;
@@ -570,6 +577,7 @@ input:focus, textarea:focus{
     justify-content: center;
     align-items: center;
     font-size: 4rem;
+    border: 0.5px solid #C2DEFF;
 }
 
 .profile-menu-1 h3, .profile-menu-1 p{
@@ -1314,11 +1322,12 @@ input[type='file']{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: hidden;
 }
 
 #foreign{
     width: 100%;
-    height: 100%;
+    height: 180%;
     position: absolute;
     top: 0;
     left: 0;
@@ -1327,10 +1336,6 @@ input[type='file']{
     background-repeat: no-repeat;
     background-size: cover;
 
-    /* color: #86ffaf;
-    color: #b63eff;
-    color: #ff6464;
-    color: #ffd15a; */
 }
 
 .class-info div{

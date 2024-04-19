@@ -31,12 +31,12 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
 
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedBg, setSelectedBg] = useState("bg1");
-
     const [uploadedImage, setUploadedImage] = useState(null);
+    const [newColor, setNewColor] = useState("");
 
     const [isForeignImg, setForeignImg] = useState(false);
 
-    const [selectedColor, setSelectedColor] = useState("#74BCFF");
+    const [selectedColor, setSelectedColor] = useState(classColor);
 
     const [newName, setName] = useState("");
     const [newCourseCode, setCourseCode] = useState("");
@@ -88,12 +88,16 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
         //customize
         const customize = async() => {
             const formData = new FormData();
+
             if (uploadedImage instanceof File) {
                 formData.append("file", uploadedImage);
+                formData.append("classColor", selectedColor);
               } else if (typeof uploadedImage === "string") {
                 // If uploadedImage is a string, append it as a string parameter
                 formData.append("stringParam", uploadedImage);
+                formData.append("classColor", selectedColor);
               }
+
         
             const res = await axios.put(`http://localhost:4000/class/addBg/${id}`, formData)
             .catch(err=>console.log(err));
@@ -112,6 +116,57 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
             .catch(err => console.log(err));
         }
 
+        const closeCustomize = (e) => {
+            setCustomizeDiv(false)
+            setSelectedColor(classColor)
+            if(bg === "bg1"){
+                setSelectedImage(bg1)
+                setSelectedBg("bg1")
+                setForeignImg(false)
+            }
+            else if(bg === "bg2"){
+                setSelectedImage(bg2)
+                setSelectedBg("bg2")
+                setForeignImg(false)
+            }
+            else if(bg === "bg3"){
+                setSelectedImage(bg3)
+                setSelectedBg("bg3")
+                setForeignImg(false)
+            }
+            else if(bg === "bg4"){
+                setSelectedImage(bg4)
+                setSelectedBg("bg4")
+                setForeignImg(false)
+            }
+            else if(bg === "bg5"){
+                setSelectedImage(bg5)
+                setSelectedBg("bg5")
+                setForeignImg(false)
+            }
+            else if(bg === "bg6"){
+                setSelectedImage(bg6)
+                setSelectedBg("bg6")
+                setForeignImg(false)
+            }
+            else if(bg === "bg7"){
+                setSelectedImage(bg7)
+                setSelectedBg("bg7")
+                setForeignImg(false)
+            }
+            else if(bg === "bg8"){
+                setSelectedImage(bg8)
+                setSelectedBg("bg8")
+                setForeignImg(false)
+            }
+            else{
+                setSelectedImage(bg)
+                setSelectedBg("bg9")
+                setUploadedImage(bg)
+                setForeignImg(true)
+            }
+        }
+
     const openClassColors = () => {
         setCustomizeDiv(true)
     }
@@ -125,48 +180,57 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
         setCourseCode(courseCode)
         setDescription(description)
         setMaxStudents(maxStudents)   
+        setSelectedColor(classColor)
         console.log(bg)
-    }, [name, courseCode, id])
+    }, [name, courseCode, classColor, id])
 
     useEffect(() => {
         if(bg === "bg1"){
             setSelectedImage(bg1)
             setSelectedBg("bg1")
+            setUploadedImage("bg1")
             setForeignImg(false)
         }
         else if(bg === "bg2"){
             setSelectedImage(bg2)
             setSelectedBg("bg2")
+            setUploadedImage("bg2")
             setForeignImg(false)
         }
         else if(bg === "bg3"){
             setSelectedImage(bg3)
             setSelectedBg("bg3")
+            setUploadedImage("bg3")
             setForeignImg(false)
         }
         else if(bg === "bg4"){
             setSelectedImage(bg4)
             setSelectedBg("bg4")
+            setUploadedImage("bg4")
             setForeignImg(false)
         }
         else if(bg === "bg5"){
             setSelectedImage(bg5)
             setSelectedBg("bg5")
+            setUploadedImage("bg5")
             setForeignImg(false)
         }
         else if(bg === "bg6"){
             setSelectedImage(bg6)
             setSelectedBg("bg6")
+            setUploadedImage("bg6")
             setForeignImg(false)
         }
         else if(bg === "bg7"){
             setSelectedImage(bg7)
             setSelectedBg("bg7")
+            setUploadedImage("bg7")
             setForeignImg(false)
         }
         else if(bg === "bg8"){
             setSelectedImage(bg8)
             setSelectedBg("bg8")
+            setUploadedImage("bg8")
             setForeignImg(false)
         }
         else{
@@ -218,7 +282,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
                             </div>
                     </form>
                     <div className="on-page-btns">
-                        <button onClick={()=>setCustomizeDiv(false)}>close</button>
+                        <button onClick={()=>closeCustomize()}>close</button>
                         <button onClick={(e)=>handleCustomize(e)}>Save</button>
                     </div>
                 </div>
@@ -290,7 +354,8 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
                 {isInstructor &&
                 <img src={pen} alt="Edit" onClick={() => openClassColors()}/>
                 }
-                <img src={info} alt="Info" onClick={()=> openClassInfo()} style={{marginLeft:'5px'}}/>
+                <img src={info} alt="Info" onClick={()=> openClassInfo()} style={{ marginLeft: '5px', backgroundColor: '#ffffff79' }}
+/>
             </div>
             {courseCode &&
             <div className='class-code'>
