@@ -15,6 +15,7 @@ import bg8 from '../images/classBgs/bg8.jpg'
 import bg9 from '../images/classBgs/bg9.jpg'
 
 const ClassesContainer = ({type}) => {
+
     const id = localStorage.getItem("userId");
     const [classes, setClasses] = useState();
 
@@ -30,12 +31,11 @@ const ClassesContainer = ({type}) => {
 
     return ( 
         <div className="classes-container">
-
             {classes && classes.map((klass, index)=>{
                 if (type==="teaching" && klass.instructors.includes(id))
-                    return <ClassBox key={index} id={klass._id} color={klass.classColor} img={bg1} className={klass.name} instructorsNum={klass.instructors.length} studentsNum={klass.students.length}/>
+                    return <ClassBox key={klass._id} id={klass._id} color={klass.classColor} img={bg1} className={klass.name} instructorsNum={klass.instructors.length} studentsNum={klass.students.length} type={"teacher"} />
                 else if(type==="learning" && klass.students.includes(id)){
-                    return <ClassBox key={index} id={klass._id} color={klass.classColor} img={bg1} className={klass.name} instructorsNum={klass.instructors.length} studentsNum={klass.students.length}/>
+                    return <ClassBox key={klass._id} id={klass._id} color={klass.classColor} img={bg1} className={klass.name} instructorsNum={klass.instructors.length} studentsNum={klass.students.length} type={"student"} />
                 }
             })}
             <AddBox/>

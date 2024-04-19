@@ -1,3 +1,12 @@
+
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+
+import { setToClassT, setToClassS } from '../store/slices/currentSection';
+import { setToInstructor, setToStudent } from '../store/slices/instructorOrStudent';
+import { setToDashboard } from '../store/slices/currentClassPage';
+
+
 import ProfileImg from './ProfileImg'
 
 import student from '../images/student.png'
@@ -17,27 +26,27 @@ const container = {
     }
   };
 
-const ClassBox = ( {color, img, className, instructorsNum, studentsNum}) => {
+const ClassBox = ( {id, color, img, className, instructorsNum, studentsNum, type}) => {
     let primaryColor;
     let secondColor;
     let picColor;
 
-    if(color === "#ff6464"){
+    if(color === "#FF6464"){
         primaryColor = "#FF6161"
         secondColor = "#D10F0F"
         picColor = "#FFC0C0"
 
-    }else if(color === "#b63eff"){
+    }else if(color === "#B63EFF"){
         primaryColor = "#D650F8"
         secondColor = "#A024AB"
         picColor = "#E6AFFF"
     }
-    else if(color === "#86ffaf"){
+    else if(color === "#86FFAF"){
         primaryColor = "#86FFAF"
         secondColor = "#15B84D"
         picColor = "#DDFFE9"
     }
-    else if(color === "#ffd15a"){
+    else if(color === "#FFD15A"){
         primaryColor = "#FFD15A"
         secondColor = "#E3A609"
         picColor = "#FFEAB5"
@@ -47,11 +56,31 @@ const ClassBox = ( {color, img, className, instructorsNum, studentsNum}) => {
         picColor = "#C2DEFF"
     }
     
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
+
+    const goToClassroom = (id) => {
+        navigate(`/dashboard/classroom/${id}/home`)
+        dispatch(setToDashboard())
+
+        if(type === "teacher"){
+            dispatch(setToInstructor())
+            dispatch(setToClassT())
+            localStorage.setItem('currentSection', 'classT');
+        }
+        else{
+            dispatch(setToStudent())
+            dispatch(setToClassS())
+            localStorage.setItem('currentSection', 'classS');
+        }
+    }
+
     return ( 
         <motion.div className="class-box" style={{backgroundColor: (primaryColor)}}
         variants={container}
         initial="hidden"
         animate="visible"
+        onClick={()=>goToClassroom(id)}
         >
             <div className="class-img" style={{backgroundImage: `url(${img})`}}>
                 <div className="img-overlay" style={{backgroundImage: `linear-gradient(${secondColor}, ${primaryColor})`}}></div>

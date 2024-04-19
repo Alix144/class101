@@ -3,7 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 .hshs{
+    /* class colors */
     color: #74BCFF;
     color: #86FFAF;
     color: #B63EFF;
@@ -830,7 +832,6 @@ main{
 
 .class-box-info{
     margin: 0 15px;
-
     display: flex;
     justify-content: space-between;
 }
