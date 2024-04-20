@@ -696,6 +696,10 @@ main{
     width: 100%;
 }
 
+.board{
+    overflow: hidden;
+}
+
 .board hr, .title hr{
     height: 3px;
     border: none;
@@ -704,7 +708,6 @@ main{
 
 .welcome{
     height: 35vh;
-    background-image: url(images/bgg.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1332,11 +1335,11 @@ input[type='file']{
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 0;
+    z-index: -3;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
+    border-radius: 0;
 }
 
 .class-info div{

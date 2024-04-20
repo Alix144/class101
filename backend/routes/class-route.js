@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-classRouter.put("/addBg/:id", upload.single("file"), addBg)
+classRouter.put("/addBg/:id", upload.single("file"), addBg) // this id is for class
 
 classRouter.post("/create", createClass)
 classRouter.put("/edit/:id", updateClass)//this id is for class

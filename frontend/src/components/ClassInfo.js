@@ -32,7 +32,6 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedBg, setSelectedBg] = useState("bg1");
     const [uploadedImage, setUploadedImage] = useState(null);
-    const [newColor, setNewColor] = useState("");
 
     const [isForeignImg, setForeignImg] = useState(false);
 

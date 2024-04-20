@@ -27,6 +27,10 @@ const userSchema = new Schema({
         type: String,
         default: "#74BCFF"
       },
+      background: {
+        type: String,
+        default: "bg1"
+      },
       classes: [{
         type: mongoose.Types.ObjectId,
         ref:"Class",

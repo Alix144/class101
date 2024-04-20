@@ -28,17 +28,23 @@ const Welcome = () => {
 
     const [user, setUser] = useState("")
     const [isCustomizeDivOpen, setCustomizeDiv] = useState(false)
+
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedBg, setSelectedBg] = useState("bg1");
+    const [uploadedImage, setUploadedImage] = useState(null);
+
+    const [isForeignImg, setForeignImg] = useState(false);
 
     const handleClick = (index) => {
         setSelectedBg(index)
+        setUploadedImage(index)
     };
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];    
         setSelectedImage(file);
         setSelectedBg("bg9")
+        setUploadedImage(file)
     };
 
     // user info
@@ -51,8 +57,95 @@ const Welcome = () => {
     useEffect(() => {
         getUser().then(
         (data)=>{setUser(data) 
-        console.log(data)})
+        console.log(data)
+
+        if(data.background === "bg1"){
+            setSelectedImage(bg1)
+            setSelectedBg("bg1")
+            setUploadedImage("bg1")
+            setForeignImg(false)
+        }
+        else if(data.background === "bg2"){
+            setSelectedImage(bg2)
+            setSelectedBg("bg2")
+            setUploadedImage("bg2")
+            setForeignImg(false)
+        }
+        else if(data.background === "bg3"){
+            setSelectedImage(bg3)
+            setSelectedBg("bg3")
+            setUploadedImage("bg3")
+            setForeignImg(false)
+        }
+        else if(data.background === "bg4"){
+            setSelectedImage(bg4)
+            setSelectedBg("bg4")
+            setUploadedImage("bg4")
+            setForeignImg(false)
+        }
+        else if(data.background === "bg5"){
+            setSelectedImage(bg5)
+            setSelectedBg("bg5")
+            setUploadedImage("bg5")
+            setForeignImg(false)
+        }
+        else if(data.background === "bg6"){
+            setSelectedImage(bg6)
+            setSelectedBg("bg6")
+            setUploadedImage("bg6")
+            setForeignImg(false)
+        }
+        else if(data.background === "bg7"){
+            setSelectedImage(bg7)
+            setSelectedBg("bg7")
+            setUploadedImage("bg7")
+            setForeignImg(false)
+        }
+        else if(data.background === "bg8"){
+            setSelectedImage(bg8)
+            setSelectedBg("bg8")
+            setUploadedImage("bg8")
+            setForeignImg(false)
+        }
+        else{
+            setSelectedImage(data.background)
+            setSelectedBg("bg9")
+            setUploadedImage(data.background)
+            setForeignImg(true)
+        }
+
+        console.log(data.background)
+    })
     },[userId])
+
+
+    const customize = async() => {
+        const formData = new FormData();
+
+        if (uploadedImage instanceof File) {
+            formData.append("file", uploadedImage);
+          } else if (typeof uploadedImage === "string") {
+            // If uploadedImage is a string, append it as a string parameter
+            formData.append("stringParam", uploadedImage);
+          }
+
+    
+        const res = await axios.put(`http://localhost:4000/user/addBg/${userId}`, formData)
+        .catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleCustomize = (e) => {
+        e.preventDefault()
+        customize()
+        .then(() => {
+            alert("customized Successfully");
+            window.location.reload();
+        })
+        .catch(err => console.log(err));
+    }
 
     return ( 
         <>
@@ -74,10 +167,10 @@ const Welcome = () => {
                                 <div className='bg' style={{backgroundImage: `url(${bg6})`}} onClick={()=>handleClick("bg6")}> <div className={`${selectedBg ==="bg6" ? 'selected-bg' : ''}`}> {selectedBg ==="bg6" && <img src={check} alt="check"/>} </div> </div>
                                 <div className='bg' style={{backgroundImage: `url(${bg7})`}} onClick={()=>handleClick("bg7")}> <div className={`${selectedBg ==="bg7" ? 'selected-bg' : ''}`}> {selectedBg ==="bg7" && <img src={check} alt="check"/>} </div> </div>
                                 <div className='bg' style={{backgroundImage: `url(${bg8})`}} onClick={()=>handleClick("bg8")}> <div className={`${selectedBg ==="bg8" ? 'selected-bg' : ''}`}> {selectedBg ==="bg8" && <img src={check} alt="check"/>} </div> </div>
-                                {selectedImage ? (
-                                <div className='bg' style={{backgroundImage: `url(${URL.createObjectURL(selectedImage)})`}} onClick={()=>handleClick("bg9")}> <div className={`${selectedBg === "bg9" ? 'selected-bg' : ''}`}> {selectedBg ==="bg9" && <img src={check} alt="check"/>} </div></div>
+                                {uploadedImage && uploadedImage instanceof File  ? (
+                                    <div className='bg' style={{backgroundImage: `url(${URL.createObjectURL(uploadedImage)})`}} onClick={()=>handleClick("bg9")}> <div className={`${selectedBg === "bg9" ? 'selected-bg' : ''}`}> {selectedBg ==="bg9" && <img src={check} alt="check"/>} </div></div>
                                 ) :
-                                <div className='bg'><img src={noImg} alt="No-Uploaded-Img" className='no-img'/></div>
+                                    <div className='bg'><img src={noImg} alt="No-Uploaded-Img" className='no-img'/></div>
                                 }       
                                 <label htmlFor="uploadBg" className='upload'> <img src={upload} alt="upload" /> Upload</label>
                                 <input type="file" accept="image/*" id='uploadBg' className='upload' onChange={handleImageChange}/>                         
@@ -85,13 +178,17 @@ const Welcome = () => {
                     </form>
                     <div className="on-page-btns">
                         <button onClick={()=>setCustomizeDiv(false)}>Close</button>
-                        <button>Save</button>
+                        <button onClick={(e)=>handleCustomize(e)}>Save</button>
                     </div>
                 </div>
             </div>
         }
 
             <div className="welcome">
+            {isForeignImg && selectedImage ?  <img src={require(`../uploaded-imgs/${selectedImage}`)} id='foreign' alt="hha"/>
+            :
+            selectedImage && <img src={selectedImage} id='foreign' alt="background-img" />
+            }
                 <h1>Welcome Back {user.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : ""}!</h1>
                 <img src={pen} alt="Edit" onClick={() => setCustomizeDiv(true)}/>
             </div>

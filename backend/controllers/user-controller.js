@@ -117,3 +117,52 @@ export const updateUser = async(req, res, next) => {
 
     return res.status(200).json({user})
 }
+
+export const addBg = async (req, res, next) => {
+    const userId = req.params.id;
+  
+    // Check if the request contains a file
+    if (req.file) {
+      const file = req.file.filename;
+  
+      let user;
+      try {
+        user = await User.findByIdAndUpdate(userId, {
+          background: file,
+        });
+      } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Unable to update the user" });
+      }
+  
+      if (!user) {
+        return res.status(500).json({ message: "Unable to update the user" });
+      }
+  
+      return res.status(200).json({ user });
+    }
+  
+    // Check if the request contains a string parameter
+    if (req.body.stringParam) {
+      const stringParam = req.body.stringParam;
+  
+      let user;
+      try {
+        user = await User.findByIdAndUpdate(userId, {
+          background: stringParam,
+        });
+      } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Unable to update the user" });
+      }
+  
+      if (!user) {
+        return res.status(500).json({ message: "Unable to update the user" });
+      }
+  
+      return res.status(200).json({ user });
+    }
+  
+    // If neither file nor stringParam is present in the request
+    return res.status(400).json({ message: "No file or string parameter provided" });
+}
