@@ -1,5 +1,6 @@
 import Class from "../models/ClassModel.js";
 import User from "../models/UserModel.js";
+import Chat from "../models/ChatModel.js";
 import mongoose from "mongoose";
 
 
@@ -16,11 +17,12 @@ export const createClass = async(req, res, next) => {
     if(!existingUser){
         return res.status(400).json({message: "Unable to Find User by This ID"})
     }
-    
+
     const klass = new Class({name, courseCode, invitationCode, description, maxStudents, classColor, instructors: [user]})
     try{
         const session = await mongoose.startSession();
         session.startTransaction();
+
         await klass.save({session})
         
         existingUser.classes.push(klass)

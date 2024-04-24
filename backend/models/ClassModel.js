@@ -55,6 +55,11 @@ const classSchema = new Schema({
         ref: "Assignment",
         default: [],
       }],
+      messages: [{
+        type: mongoose.Types.ObjectId,
+        ref: "Message",
+        default: [],
+      }],
       instructors:[{
         type: mongoose.Types.ObjectId,
         ref:"User",

@@ -10,19 +10,34 @@ import syllabusRouter from "./routes/syllabus-route.js";
 import documentRouter from "./routes/document-route.js";
 import assignmentRouter from "./routes/assignment-route.js";
 import submittedHwsRouter from "./routes/submittedHw-route.js";
+import messageRouter from "./routes/message-route.js";
 import { config } from 'dotenv';
 config();
+import { Server } from 'socket.io'; // Import Server from socket.io
+import http from 'http'; // Import http module
 
 const PORT = process.env.PORT;
 const app = express();
 
+app.use(cors())
 // app.use(cors({
 //     origin: ["http://localhost:4000/"],
 //     methods: ["POST", "GET", "PUT", "DELETE"]
 // }))
 
-app.use(cors());
 app.use(express.json())
+
+/***********socket.io************/
+
+const server = http.createServer(app); // Create an HTTP server using Express app
+
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["POST", "GET", "PUT", "DELETE"]
+    }
+});
+
 
 app.use("/files", express.static("files"));
 app.use("/user", userRouter)
@@ -34,9 +49,18 @@ app.use("/syllabus", syllabusRouter)
 app.use("/document", documentRouter)
 app.use("/assignment", assignmentRouter)
 app.use("/submitted", submittedHwsRouter)
+app.use("/chat", messageRouter)
 
+
+io.on('connection', (socket) => {
+    console.log(`a user connected ${socket.id}`);
+
+    socket.on("send_message", (data) => {
+        socket.broadcast.emit("receive_message", data)
+    })
+  });
 
 mongoose.connect(process.env.MONGO_URI)
-.then(() => app.listen(PORT, () => {
+.then(() => server.listen(PORT, () => {
     console.log("Live on port " + PORT)
 })).catch((err) => console.log(err))

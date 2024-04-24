@@ -185,9 +185,9 @@ const Welcome = () => {
         }
 
             <div className="welcome">
-            {isForeignImg && selectedImage ?  <img src={require(`../uploaded-imgs/${selectedImage}`)} id='foreign' alt="hha"/>
+            {isForeignImg && selectedImage ?  <img src={require(`../uploaded-imgs/${selectedImage}`)} style={{zIndex: "-1"}} id='foreign' alt="hha"/>
             :
-            selectedImage && <img src={selectedImage} id='foreign' alt="background-img" />
+            selectedImage && <img src={selectedImage} style={{zIndex: "-1"}} id='foreign' alt="background-img" />
             }
                 <h1>Welcome Back {user.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : ""}!</h1>
                 <img src={pen} alt="Edit" onClick={() => setCustomizeDiv(true)}/>
