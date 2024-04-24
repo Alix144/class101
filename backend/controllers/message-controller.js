@@ -64,7 +64,7 @@ export const getMessages = async(req, res, next) => {
     }
 
     try{
-     messages = await Message.find({ class: classId });
+     messages = await Message.find({ class: classId }).populate("sender");
 
     }catch(err){
         return res.status(400).json({err})

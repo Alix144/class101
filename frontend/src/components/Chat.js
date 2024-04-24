@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { useParams } from "react-router-dom";
+import moment from "moment";
 
 import send from '../images/send.png'
 import emojy from '../images/emojy.png'
@@ -10,22 +11,68 @@ import io from 'socket.io-client';
 const socket = io.connect("http://localhost:4000")
 
 const Chat = () => {
+    const classId = useParams().id
+    const userId = localStorage.getItem("userId");
+
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState("");
 
-    const sendMessage = () => {
-        setMessages([...messages, messageInput]);
-        console.log([...messages, messageInput])
-        socket.emit("send_message", [...messages, messageInput])
-        setMessageInput("")
+    // const sendMessage = () => {
+    //     setMessages([...messages, messageInput]);
+    //     console.log([...messages, messageInput])
+    //     socket.emit("send_message", [...messages, messageInput])
+    //     setMessageInput("")
+    // }
+
+    // useEffect(()=>{ 
+    //     socket.on("receive_message", (data) => {
+    //         console.log(data)
+    //         setMessages(...messages, data);
+    //     })
+    // },[socket])
+
+    // const sendMessage = () => {
+    //     const data = {
+
+    //     }
+    //     setMessages([...messages, messageInput]);
+    //     console.log([...messages, messageInput])
+    //     setMessageInput("")
+    // }
+
+    const handleSendMessage = async() => {
+        const res = await axios.post("http://localhost:4000/chat/send", {
+            user: userId,
+            klass: classId,
+            content: messageInput
+        })
+        .catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+    
+    const sendMessage = (e) => {
+        e.preventDefault()
+        handleSendMessage().then(() => {
+            window.location.reload();
+        });
+    }
+
+    /**** fetch data ****/
+
+    const getMessages = async() => {
+        const res = await axios.get(`http://localhost:4000/chat/${classId}`).catch(err=>console.log(err))
+        const data = await res.data.messages
+        console.log(data)
+        return data;
     }
 
     useEffect(()=>{ 
-        socket.on("receive_message", (data) => {
-            console.log(data)
-            setMessages(...messages, data);
-        })
-    },[socket])
+        getMessages().then(
+            (data)=>{setMessages(data) 
+            })
+    },[classId])
 
     return ( 
         <div className="content chat">
@@ -76,11 +123,11 @@ const Chat = () => {
                     messages.map((message, index)=>(
 
                     <div className="others-msg" key={index}>
-                        <div className="msg-pic">A</div>
+                        <div className="msg-pic">{message.sender && message.sender.name[0].toUpperCase()}</div>
                         <div className="msg-text">
-                            <h4>aaaa</h4>
-                            <h5>{message}</h5>
-                            <p>12:09</p>
+                            <h4>{message.sender.name} {message.sender.surname}</h4>
+                            <h5>{message.content}</h5>
+                            <p>{moment(message.date).format('hh:mm A')}</p>
                         </div>
                     </div>
 
@@ -101,7 +148,7 @@ const Chat = () => {
                     <img src={attach} alt="Attach-file" />
                 </div>
                 
-                <div className="send" onClick={()=>sendMessage()}>
+                <div className="send" onClick={(e)=>sendMessage(e)}>
                     <img src={send} alt="Send" />
                 </div>
             </div>
