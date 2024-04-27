@@ -11,7 +11,7 @@ const Home = () => {
             <div className="content">
                 <Title propTitle={"Teaching Classes"}/>
                 <ClassesContainer type={"teaching"}/>
-                <Title propTitle={"Learning Classes"}/>
+                <Title propTitle={"Learning Classes"} add={"searchClass"}/>
                 <ClassesContainer type={"learning"}/>
             </div>
         </main>

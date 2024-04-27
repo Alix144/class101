@@ -182,6 +182,22 @@ export const getByUserId = async(req, res, next) => {
     return res.status(200).json({classes: userClasses.classes})
 }
 
+export const getAllClasses = async(req, res, next) => {
+    let classes;
+    try{
+        classes = await Class.find().populate("instructors");
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!classes){
+        return res.status(404).json({message: "No Classes Found"})
+    }
+
+    return res.status(200).json({classes})
+}
+
+
 export const deleteClass = async(req, res, next) => {
     const id = req.params.id;
     let task;

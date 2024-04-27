@@ -2119,6 +2119,26 @@ p{
     width: 120px;
 }
 
+.selected-class{
+    border: 2px solid #2fbdff;
+    background-color: #f1f1f1;
+}
+
+.search-class-members div{
+    display: flex;
+    align-items: center;
+}
+
+.search-class-members img{
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+.search-class-members p{
+    font-size: 12px;
+}
+
 /* scrollbar */
 
 /* Track */

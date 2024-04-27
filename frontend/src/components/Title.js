@@ -4,6 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import plus from '../images/plus.png'
+import search from '../images/search.png'
+import search2 from '../images/search2.png'
+import teacher from '../images/teacher.png'
+import student from '../images/student.png'
 
 const Title = ({propTitle, add}) => {
     const navigate = useNavigate();
@@ -11,6 +15,7 @@ const Title = ({propTitle, add}) => {
     const { id } = useParams();
     const userId = localStorage.getItem('userId')
 
+    const [query, setQuery] = useState("");
     const [isAddTaskPageOpen, setAddTaskPage] = useState(false)
     const [isAddAnnouncementPageOpen, setAddAnnouncementPage] = useState(false)
     const [isAddAssignmentPageOpen, setAddAssignmentPage] = useState(false)
@@ -18,11 +23,14 @@ const Title = ({propTitle, add}) => {
     const [isAddDocPageOpen, setAddDocPage] = useState(false)
     const [isAddInstPageOpen, setAddInstPage] = useState(false)
     const [isAddStudentPageOpen, setAddStudentPage] = useState(false)
+    const [isSearchClassOpen, setSearchClass] = useState(false)
     const [fileName, setFileName] = useState('');
     const [week, setWeek] = useState("");
     const [topics, setTopics] = useState([{ id: 1, value: '' }]);
 
+    const [selectedClass, setSelectedClass] = useState("")
 
+    const [allClasses, setAllClasses] = useState([]);
     const [classes, setClasses] = useState([]);
 
     //get user classes
@@ -41,6 +49,20 @@ const Title = ({propTitle, add}) => {
         })
     },[isAddTaskPageOpen])
 
+    //get all classes
+    const getAllClasses = async() => {
+        const res = await axios.get("http://localhost:4000/class/").catch(err=>console.log(err))
+        const data = await res.data.classes;
+        console.log(data)
+        return data;
+    }
+
+    useEffect(()=>{ 
+        getAllClasses()
+        .then((data)=>{
+            setAllClasses(data)
+        })
+    },[isSearchClassOpen])
 
 
     //task
@@ -77,7 +99,6 @@ const Title = ({propTitle, add}) => {
       setTopics([...topics, { id: topics.length + 1, value: '' }]);
     };
   
-
     const handleFileChange = (event) => {
       const fileInput = event.target;
       if(fileInput.files.length > 0) {
@@ -196,6 +217,11 @@ const Title = ({propTitle, add}) => {
         addAssignment().then(() => {
             window.location.reload();
         });
+    }
+
+    //search class
+    const selectClass = (id) => {
+        setSelectedClass(id)
     }
 
     return ( 
@@ -411,6 +437,61 @@ const Title = ({propTitle, add}) => {
         </div>
         }
 
+        {isSearchClassOpen && 
+        <div className="on-page-div">   
+            <div className="add-form edit-task-form" >
+                <div className="on-page-title">
+                    <h3>Search Class</h3>
+                    <hr/>
+                </div>
+
+                <div className="people-parent-div" style={{width: "80%"}}>
+                    <div className="ppl-search">
+                        <img src={search} alt="Search" />
+                        <input type="text" name="" id="" onChange={e=>setQuery(e.target.value)} style={{boxShadow: "none"}}/>
+                    </div>
+
+                <div className="people">
+                {allClasses.filter(klass=>klass.name.toLowerCase().includes(query)).map((klass)=>(
+
+                    <div className={`one-ppl ${klass._id === selectedClass ? "selected-class" : ""}` } onClick={()=>selectClass(klass._id)} key={klass._id}>
+                        <div className="left-border"></div>
+                        <div className="info">
+                            <div className="profile-pic" style={{backgroundColor: `${klass.classColor}`}}>{klass.name && klass.name[0]}</div>
+                            <div>
+                                <h4>{klass.name && klass.name}</h4>
+                                <p style={{fontSize: "12px"}}><b>Instructor:</b> {klass && klass.instructors[0].name} {klass && klass.instructors[0].surname}</p>
+                            </div>
+                        </div>
+                        <div className='search-class-members'>
+                            <div>
+                                <img src={teacher} alt="Instructors"/>
+                                <p>{klass.instructors.length}</p>
+                            </div>
+                            <div>
+                                <img src={student} alt="students"/>
+                                <p>{klass.students.length}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                ))}
+                    
+
+                   
+                </div>
+
+                <hr className="hr"/>
+            </div>
+
+                <div className="on-page-btns">
+                    <button onClick={()=>setSearchClass(!isSearchClassOpen)}>Cancel</button>
+                    <button>Invite</button>
+                </div>
+            </div>
+        </div>
+        }
+
         <div className="title">
             <div>
                 <h3>{propTitle}</h3>
@@ -442,6 +523,9 @@ const Title = ({propTitle, add}) => {
 
                     {add === "add-student" &&
                         <img src={plus} alt="Add" onClick={()=>setAddStudentPage(!isAddStudentPageOpen)}/>
+                    }
+                    {add === "searchClass" &&
+                        <img src={search2} alt="Add" onClick={()=>setSearchClass(!isSearchClassOpen)}/>
                     }
                 </>
                 }
