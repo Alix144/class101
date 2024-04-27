@@ -22,7 +22,7 @@ import info from '../images/info.png'
 import upload from '../images/upload.png'
 import check from '../images/check.png'
 
-const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, instructors, students}) => {
+const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, instructors, students}) => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const id = useParams().id;
@@ -41,6 +41,9 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
     const [newCourseCode, setCourseCode] = useState("");
     const [newDescription, setDescription] = useState("");
     const [newMaxStudents, setMaxStudents] = useState("");
+
+    const [newVisibility, setVisibility] = useState("");
+
     
     const handleColorClick = (color) => {
         setSelectedColor(color)
@@ -66,7 +69,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
                 name: newName,
                 courseCode: newCourseCode,
                 description: newDescription,
-                maxStudents: newMaxStudents,
+                visibility: newVisibility,
             }).catch(err=>console.log(err))
             const data = await res.data;
             console.log(data)
@@ -178,7 +181,7 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
         setName(name)
         setCourseCode(courseCode)
         setDescription(description)
-        setMaxStudents(maxStudents)   
+        setVisibility(visibility)   
         setSelectedColor(classColor)
         console.log(bg)
     }, [name, courseCode, classColor, id])
@@ -323,11 +326,17 @@ const ClassInfo = ({name, courseCode, description, maxStudents, bg, classColor, 
                             }
                         </div>
                         <div>
-                            <label htmlFor="max">Max Students</label>
+                            <label htmlFor="max">Visibility</label>
                             {isInstructor?
-                                <input type="number" min={1} className='type-number' name="max" id="max" value={newMaxStudents} onChange={(e)=>setMaxStudents(e.target.value)}/>
+                                <select id="visibility" name="visibility" value={newVisibility} onChange={(e)=>setVisibility(e.target.value)}>
+                                    <option value={"public"}>Public</option>
+                                    <option value={"private"}>Private</option>
+                                </select>
                                 :
-                                <input type="number" min={1} className='type-number' name="max" id="max" value={newMaxStudents} onChange={(e)=>setMaxStudents(e.target.value)} readOnly/>
+                                <select id="visibility" name="visibility" value={newVisibility} onChange={(e)=>setVisibility(e.target.value)} readOnly>
+                                    <option value="public">Public</option>
+                                    <option value="private">Private</option>
+                                </select>
                             }
                         </div>
                     </form>

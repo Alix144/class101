@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 
 export const createClass = async(req, res, next) => {
-    const {name, courseCode, invitationCode, description, maxStudents, classColor, user} = req.body;
+    const {name, courseCode, invitationCode, description, visibility, classColor, user} = req.body;
     
     let existingUser;
     try{
@@ -18,7 +18,7 @@ export const createClass = async(req, res, next) => {
         return res.status(400).json({message: "Unable to Find User by This ID"})
     }
 
-    const klass = new Class({name, courseCode, invitationCode, description, maxStudents, classColor, instructors: [user]})
+    const klass = new Class({name, courseCode, invitationCode, description, visibility, classColor, instructors: [user]})
     try{
         const session = await mongoose.startSession();
         session.startTransaction();
@@ -38,7 +38,7 @@ export const createClass = async(req, res, next) => {
 }
 
 export const updateClass = async(req, res, next) => {
-    const {name, courseCode, description, maxStudents} = req.body;
+    const {name, courseCode, description, visibility} = req.body;
     const classId = req.params.id;
     let klass;
     try{
@@ -46,7 +46,7 @@ export const updateClass = async(req, res, next) => {
             name,
             courseCode, 
             description, 
-            maxStudents
+            visibility
         })
     }catch(err){
         return console.log(err)

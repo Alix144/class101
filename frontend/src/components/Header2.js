@@ -31,7 +31,7 @@ const Header2 = () => {
     const [name, setName] = useState("");
     const [courseCode, setCourseCode] = useState("");
     const [description, setDescription] = useState("");
-    const [maxStudents, setMaxStudents] = useState();
+    const [visibility, setVisibility] = useState("public");
 
     const [invitationCode, setInvitationCode] = useState("");
 
@@ -101,7 +101,7 @@ const Header2 = () => {
             courseCode,
             invitationCode: generateRandomCode(6),
             description,
-            maxStudents,
+            visibility,
             user: localStorage.getItem('userId')
         }).catch(err=>console.log(err));
         const data = await res.data;
@@ -177,8 +177,11 @@ const Header2 = () => {
                             <textarea name="desc" id="desc"  rows="5" value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
                         </div>
                         <div>
-                            <label htmlFor="max">Max Students</label>
-                            <input type="number" min={1} className='type-number' name="max" id="max" value={maxStudents} onChange={(e)=>setMaxStudents(e.target.value)}/>
+                            <label htmlFor="visibility">Visibility</label>
+                            <select id="visibility" name="visibility" value={visibility} onChange={(e)=>setVisibility(e.target.value)}>
+                                <option value="public">Public</option>
+                                <option value="private">Private</option>
+                            </select>
                         </div>
                         <div>
                         <p>Class Color</p>

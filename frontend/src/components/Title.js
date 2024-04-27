@@ -452,8 +452,8 @@ const Title = ({propTitle, add}) => {
                     </div>
 
                 <div className="people">
-                {allClasses.filter(klass=>klass.name.toLowerCase().includes(query)).map((klass)=>(
-
+                {allClasses.filter(klass=>klass.name.toLowerCase().includes(query) && klass.visibility === "public").map((klass)=>(
+                    
                     <div className={`one-ppl ${klass._id === selectedClass ? "selected-class" : ""}` } onClick={()=>selectClass(klass._id)} key={klass._id}>
                         <div className="left-border"></div>
                         <div className="info">

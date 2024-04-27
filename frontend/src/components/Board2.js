@@ -6,7 +6,7 @@ import { setToDashboard, setToAnnouncements, setToChat, setToAssignments, setToQ
 
 import ClassInfo from "./ClassInfo";
 
-const Board = ({name, courseCode, invitationCode, description, maxStudents, bg, classColor, instructors, students}) => {
+const Board = ({name, courseCode, invitationCode, description, visibility, bg, classColor, instructors, students}) => {
     const navigate = useNavigate();
 
     const currentClassPage = useSelector((state) => state.currentClassPage.value)
@@ -70,7 +70,7 @@ const Board = ({name, courseCode, invitationCode, description, maxStudents, bg, 
 
     return ( 
         <div className="board2">
-            <ClassInfo name={name} courseCode={courseCode} invitationCode={invitationCode} description={description} maxStudents={maxStudents} bg={bg} classColor={classColor} instructors={instructors} students={students}/>
+            <ClassInfo name={name} courseCode={courseCode} invitationCode={invitationCode} description={description} visibility={visibility} bg={bg} classColor={classColor} instructors={instructors} students={students}/>
             <div className="nav">
                 <div className={`${currentClassPage === "dashboard" && "current-page"}`} onClick={home}>Dashboard</div>
                 <div className={`${currentClassPage === "announcements" && "current-page"}`} onClick={announcements}>Announcements</div>

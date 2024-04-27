@@ -19,8 +19,9 @@ const classSchema = new Schema({
       description: {
         type: String,
       },
-      maxStudents:{
-        type: Number,
+      visibility:{
+        type: String,
+        default: "public"
       },
       background: {
         type: String,
