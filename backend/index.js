@@ -55,9 +55,19 @@ app.use("/chat", messageRouter)
 io.on('connection', (socket) => {
     console.log(`a user connected ${socket.id}`);
 
-    socket.on("send_message", (data) => {
-        socket.broadcast.emit("receive_message", data)
+    socket.on("join_room", (room)=>{
+        socket.join(room)
+        console.log(`User joined room: ${room}`);
     })
+
+    socket.on('send_message', (data) => {
+        console.log("log from backend " + data)
+        io.to(data.class).emit('receive_message', data);
+    });
+
+    // socket.on("send_message", (data) => {
+    //     socket.broadcast.emit("receive_message", data)
+    // })
   });
 
 mongoose.connect(process.env.MONGO_URI)

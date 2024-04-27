@@ -8,37 +8,35 @@ import emojy from '../images/emojy.png'
 import attach from '../images/attach.png'
 
 import io from 'socket.io-client';
-const socket = io.connect("http://localhost:4000")
+
 
 const Chat = () => {
     const classId = useParams().id
     const userId = localStorage.getItem("userId");
 
+    const currentDate = new Date();
+    const socket = io.connect("http://localhost:4000")
+
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState("");
+    const [user, setUser] = useState(null);
 
-    // const sendMessage = () => {
-    //     setMessages([...messages, messageInput]);
-    //     console.log([...messages, messageInput])
-    //     socket.emit("send_message", [...messages, messageInput])
-    //     setMessageInput("")
-    // }
 
-    // useEffect(()=>{ 
-    //     socket.on("receive_message", (data) => {
-    //         console.log(data)
-    //         setMessages(...messages, data);
-    //     })
-    // },[socket])
 
-    // const sendMessage = () => {
-    //     const data = {
 
-    //     }
-    //     setMessages([...messages, messageInput]);
-    //     console.log([...messages, messageInput])
-    //     setMessageInput("")
-    // }
+    useEffect(() => {
+        socket.emit('join_room', classId);
+
+        socket.on('receive_message', (data) => {
+            console.log(data)
+            setMessages([...messages, data])
+        })
+
+        return () => {
+            socket.disconnect();
+        };
+    }, [socket]);
+
 
     const handleSendMessage = async() => {
         const res = await axios.post("http://localhost:4000/chat/send", {
@@ -54,9 +52,13 @@ const Chat = () => {
     
     const sendMessage = (e) => {
         e.preventDefault()
-        handleSendMessage().then(() => {
-            window.location.reload();
-        });
+        {messageInput &&
+            handleSendMessage().then(() => {
+                setMessages([...messages, {class: classId, content: messageInput, date: currentDate.toISOString(), sender: {_id: userId, name: user.name, surname: user.surname}}])
+                socket.emit('send_message', {class: classId, content: messageInput, date: currentDate.toISOString(), sender: {_id: userId, name: user.name, surname: user.surname}});
+                setMessageInput("")
+            });
+        }
     }
 
     /**** fetch data ****/
@@ -74,6 +76,22 @@ const Chat = () => {
             })
     },[classId])
 
+    /**** fetch User ****/
+
+    const fetchUser = async() => {
+        const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
+        const data = await res.data.user;
+        console.log(data)
+        return data;
+    }
+
+    useEffect(()=>{ 
+        fetchUser()
+        .then((data)=>{
+            setUser(data)
+        })
+    },[])
+
     return ( 
         <div className="content chat">
 
@@ -87,41 +105,11 @@ const Chat = () => {
                 </div>
                     <hr />
                 <div className="chat-content">
-                    {/* <div className="my-msg">
-                        <div className="msg-text">
-                            <h4>Ali Youssef</h4>
-                            <h5>hi how are you ali? lorrks man</h5>
-                            <p>13:03</p>
-                        </div>
-
-                        <div className="msg-pic">A</div>
-                    </div>
-
-                    <div className="others-msg">
-                        <div className="msg-pic">A</div>
-
-                        <div className="msg-text">
-                            <h4>Ali Youssef</h4>
-                            <h5>Lorem ipsum dolor sit amet, consectetur adipisic</h5>
-                            <p>13:08</p>
-                        </div>
-
-                    </div>
-
-                    <div className="others-msg">
-                        <div className="msg-pic">A</div>
-
-                        <div className="msg-text">
-                            <h4>Ali Youssef</h4>
-                            <h5>Lorem ipsum periam aut.</h5>
-                            <p>13:08</p>
-                        </div>
-
-                    </div> */}
 
                     {messages && 
                     messages.map((message, index)=>(
 
+                    message.sender._id != userId ?
                     <div className="others-msg" key={index}>
                         <div className="msg-pic">{message.sender && message.sender.name[0].toUpperCase()}</div>
                         <div className="msg-text">
@@ -129,6 +117,16 @@ const Chat = () => {
                             <h5>{message.content}</h5>
                             <p>{moment(message.date).format('hh:mm A')}</p>
                         </div>
+                    </div>
+                    :
+                    <div className="my-msg">
+                        <div className="msg-text">
+                            <h4>{message.sender.name} {message.sender.surname}</h4>
+                            <h5>{message.content}</h5>
+                            <p>{moment(message.date).format('hh:mm A')}</p>
+                        </div>
+
+                        <div className="msg-pic">{message.sender && message.sender.name[0].toUpperCase()}</div>
                     </div>
 
                     ))
@@ -145,7 +143,7 @@ const Chat = () => {
                 <div className="input">
                     <img src={emojy} alt="Emojy" />
                     <input type="text" value={messageInput} onChange={(e)=>setMessageInput(e.target.value)}/>
-                    <img src={attach} alt="Attach-file" />
+                    
                 </div>
                 
                 <div className="send" onClick={(e)=>sendMessage(e)}>

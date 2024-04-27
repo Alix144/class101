@@ -1717,7 +1717,6 @@ input[type='file']{
 
 .my-msg, .others-msg{
     margin: 10px 0;
-   
     display: flex;
     justify-content: space-between;
 }
@@ -1733,6 +1732,7 @@ input[type='file']{
 .msg-text{
     margin: 0 5px;
     padding: 10px;
+    min-width: 100px;
     border-radius: 10px;
     position: relative;
 }
