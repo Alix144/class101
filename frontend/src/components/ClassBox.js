@@ -84,7 +84,7 @@ const ClassBox = ( {id, color, img, className, instructorsNum, studentsNum, type
         >
             <div className="class-img" style={{backgroundImage: `url(${img})`}}>
                 <div className="img-overlay" style={{backgroundImage: `linear-gradient(${secondColor}, ${primaryColor})`}}></div>
-                <img src={more} alt="More" className="more" />
+                {/* <img src={more} alt="More" className="more" /> */}
                 <ProfileImg picColor={picColor}/>
             </div>
             <div className="class-box-info">

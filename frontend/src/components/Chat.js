@@ -107,7 +107,7 @@ const Chat = () => {
                 <div className="chat-content">
 
                     {messages && 
-                    messages.map((message, index)=>(
+                    messages.slice().reverse().map((message, index)=>(
 
                     message.sender._id != userId ?
                     <div className="others-msg" key={index}>
