@@ -1,6 +1,6 @@
-const ProfileImg = ({picColor}) => {
+const ProfileImg = ({picColor, className}) => {
     return (
-         <div className="profile" style={{backgroundColor: (picColor)}}>S</div>
+         <div className="profile" style={{backgroundColor: (picColor)}}>{className && className[0].toUpperCase()}</div>
      );
 }
  

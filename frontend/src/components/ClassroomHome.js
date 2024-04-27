@@ -113,7 +113,7 @@ const ClassroomHome = () => {
                     <div className="announcement-home">
                     {klass.announcements.slice().reverse().map((announcement, index)=>(
                         
-                            <div className="one-ppl" key={index} style={{width: '90%'}}>
+                            <div className="one-ppl" key={index} style={{width: '90%', cursor: "auto"}}>
                                 <div className="left-border"></div>
                                 <div className="info">
                                     <div className='announc-div'>
@@ -171,9 +171,9 @@ const ClassroomHome = () => {
                                     </div>
                                 </div>
                                 {task.deadline ?
-                                <p style={{fontSize: "12px"}}>{handleDate(task.deadline)}</p>
+                                <p style={{fontSize: "12px"}}><b>Deadline:</b><br /> {handleDate(task.deadline)}</p>
                                 :
-                                <p style={{fontSize: "12px"}}>-</p>
+                                <p style={{fontSize: "12px"}}><b>Deadline:</b> -</p>
 
                                 }
                             </div>

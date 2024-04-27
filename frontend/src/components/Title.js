@@ -486,7 +486,7 @@ const Title = ({propTitle, add}) => {
 
                 <div className="on-page-btns">
                     <button onClick={()=>setSearchClass(!isSearchClassOpen)}>Cancel</button>
-                    <button>Invite</button>
+                    <button>Join</button>
                 </div>
             </div>
         </div>
