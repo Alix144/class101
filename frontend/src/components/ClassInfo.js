@@ -304,7 +304,7 @@ const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, i
                             {isInstructor ?
                                 <input type="text" value={newName} onChange={(e)=>setName(e.target.value)}/>
                                 :
-                                <input type="text" value={newName} onChange={(e)=>setName(e.target.value)} readOnly/>
+                                <input type="text" value={newName} readOnly/>
                             }
                             
                         </div>
@@ -313,7 +313,7 @@ const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, i
                             {isInstructor ?
                                 <input type="text" id="code" name="code" value={newCourseCode} onChange={(e)=>setCourseCode(e.target.value)}/>
                                 :
-                                <input type="text" id="code" name="code" value={newCourseCode} onChange={(e)=>setCourseCode(e.target.value)} readOnly/>
+                                <input type="text" id="code" name="code" value={newCourseCode} readOnly/>
                             }
                             
                         </div>
@@ -322,7 +322,7 @@ const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, i
                             {isInstructor ?
                                 <textarea name="desc" id="desc"  rows="5" value={newDescription} onChange={(e)=>setDescription(e.target.value)}></textarea>
                                 :
-                                <textarea name="desc" id="desc"  rows="5" value={newDescription} onChange={(e)=>setDescription(e.target.value)} readOnly></textarea>
+                                <textarea name="desc" id="desc"  rows="5" value={newDescription} readOnly></textarea>
                             }
                         </div>
                         <div>
@@ -333,7 +333,7 @@ const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, i
                                     <option value={"private"}>Private</option>
                                 </select>
                                 :
-                                <select id="visibility" name="visibility" value={newVisibility} onChange={(e)=>setVisibility(e.target.value)} readOnly>
+                                <select id="visibility" name="visibility" value={newVisibility} readOnly>
                                     <option value="public">Public</option>
                                     <option value="private">Private</option>
                                 </select>

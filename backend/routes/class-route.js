@@ -1,5 +1,5 @@
 import express from "express";
-import { createClass, getByUserId, updateClass, getById, joinClass, addBg, getAllClasses } from "../controllers/class-controller.js";
+import { createClass, getByUserId, updateClass, getById, joinClass, joinPublicClass, addBg, getAllClasses } from "../controllers/class-controller.js";
 
 const classRouter = express.Router();
 
@@ -22,6 +22,7 @@ classRouter.put("/addBg/:id", upload.single("file"), addBg) // this id is for cl
 classRouter.post("/create", createClass)
 classRouter.put("/edit/:id", updateClass)//this id is for class
 classRouter.put("/join/:id", joinClass)//this id is for user
+classRouter.put("/join/class/:id", joinPublicClass)//this id is for class
 classRouter.get("/view/:id", getByUserId)// this id is for user
 classRouter.get("/view/class/:id", getById)// this id is for class
 classRouter.get("/", getAllClasses)

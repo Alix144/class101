@@ -29,7 +29,7 @@ const classSchema = new Schema({
       },
       classColor:{
         type: String,
-        default: 'blue',
+        default: '#74BCFF',
       },
       announcements:[{
         type: mongoose.Types.ObjectId,

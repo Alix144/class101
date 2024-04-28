@@ -19,9 +19,9 @@ const Chat = () => {
 
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState("");
+    const [typing, setTyping] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
     const [user, setUser] = useState(null);
-
-
 
 
     useEffect(() => {
@@ -30,6 +30,16 @@ const Chat = () => {
         socket.on('receive_message', (data) => {
             console.log(data)
             setMessages([...messages, data])
+        })
+
+        socket.on('typing', (data) => {
+            console.log("user is typingggg" + data)
+            setIsTyping(true)
+        })
+
+        socket.on('typing_stoped', () => {
+            console.log("user stopped typingggg")
+            setIsTyping(false)
         })
 
         return () => {
@@ -92,6 +102,39 @@ const Chat = () => {
         })
     },[])
 
+    /**** Typing event ****/
+    // useEffect(()=>{ 
+    //     if(messageInput != ""){
+    //         setTyping(true)
+    //         socket.emit('typing', {classId, name: user.name});
+    //     }
+    //     else{
+    //         setTyping(false)
+    //         socket.emit('typing_stoped', {classId});
+    //     }
+    // },[messageInput])
+
+    // const typingHandler = (e) => {
+    //     setMessageInput(e.target.value)
+
+    //     if(messageInput != ""){
+    //         socket.emit('typing', {classId, name: user.name});
+    //     }
+
+    //     if(messageInput === ""){
+    //         socket.emit('typing_stoped', {classId});
+    //     }
+
+    // }
+
+    // useEffect(()=>{ 
+        
+
+    //     socket.on('typing_stoped', () => {
+    //         console.log("typingggg stopeed")
+    //     })
+    // },[])
+
     return ( 
         <div className="content chat">
 
@@ -105,6 +148,14 @@ const Chat = () => {
                 </div>
                     <hr />
                 <div className="chat-content">
+
+                    {/* {isTyping && 
+                        <div className="others-msg">
+                            <div className="msg-text" style={{margin: "0", padding: "5px"}}>
+                                <p style={{position: "static"}}><b>Ali</b> is typing...</p>
+                            </div>
+                        </div>
+                    } */}
 
                     {messages && 
                     messages.slice().reverse().map((message, index)=>(
@@ -142,8 +193,7 @@ const Chat = () => {
             <div className="input-msg">
                 <div className="input">
                     <img src={emojy} alt="Emojy" />
-                    <input type="text" value={messageInput} onChange={(e)=>setMessageInput(e.target.value)}/>
-                    
+                    <input type="text" value={messageInput} onChange={(e)=>{setMessageInput(e.target.value)}}/>
                 </div>
                 
                 <div className="send" onClick={(e)=>sendMessage(e)}>

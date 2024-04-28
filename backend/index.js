@@ -65,10 +65,20 @@ io.on('connection', (socket) => {
         io.to(data.class).emit('receive_message', data);
     });
 
+    socket.on('typing', (data) => {
+        console.log("typingggggg " + data)
+        io.to(data.classId).emit('typing');
+    });
+
+    socket.on('typing_stoped', (data) => {
+        console.log("typingggggg stoped" + data)
+        io.to(data.classId).emit('typing_stoped');
+    });
+
     // socket.on("send_message", (data) => {
     //     socket.broadcast.emit("receive_message", data)
     // })
-  });
+});
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => server.listen(PORT, () => {

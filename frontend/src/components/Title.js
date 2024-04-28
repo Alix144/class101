@@ -33,6 +33,8 @@ const Title = ({propTitle, add}) => {
     const [allClasses, setAllClasses] = useState([]);
     const [classes, setClasses] = useState([]);
 
+    const [error, setError] = useState("")
+
     //get user classes
     const fetchClasses = async() => {
         console.log(userId)
@@ -222,6 +224,31 @@ const Title = ({propTitle, add}) => {
     //search class
     const selectClass = (id) => {
         setSelectedClass(id)
+    }
+
+    //join class
+
+    const joinClass = async() => {
+        const res = await axios.put(`http://localhost:4000/class/join/class/${selectedClass}`, {
+            userId,
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleJoinClass = (e) => {
+        e.preventDefault()
+        console.log("clicked")
+        if(!selectedClass){
+            setError("Please select a class!")
+        }else{
+            joinClass().then((data) => {
+                console.log(data)
+                navigate(`/dashboard/classroom/${data.existingClass._id}/home`);
+                window.location.reload();
+            });
+        }
     }
 
     return ( 
@@ -477,8 +504,6 @@ const Title = ({propTitle, add}) => {
 
                 ))}
                     
-
-                   
                 </div>
 
                 <hr className="hr"/>
@@ -486,7 +511,7 @@ const Title = ({propTitle, add}) => {
 
                 <div className="on-page-btns">
                     <button onClick={()=>setSearchClass(!isSearchClassOpen)}>Cancel</button>
-                    <button>Join</button>
+                    <button onClick={handleJoinClass}>Join</button>
                 </div>
             </div>
         </div>
