@@ -11,10 +11,11 @@ import documentRouter from "./routes/document-route.js";
 import assignmentRouter from "./routes/assignment-route.js";
 import submittedHwsRouter from "./routes/submittedHw-route.js";
 import messageRouter from "./routes/message-route.js";
+import invitationRouter from "./routes/invitation-route.js";
 import { config } from 'dotenv';
 config();
-import { Server } from 'socket.io'; // Import Server from socket.io
-import http from 'http'; // Import http module
+import { Server } from 'socket.io';
+import http from 'http';
 
 const PORT = process.env.PORT;
 const app = express();
@@ -50,6 +51,7 @@ app.use("/document", documentRouter)
 app.use("/assignment", assignmentRouter)
 app.use("/submitted", submittedHwsRouter)
 app.use("/chat", messageRouter)
+app.use("/invite", invitationRouter)
 
 
 io.on('connection', (socket) => {
