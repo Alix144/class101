@@ -35,6 +35,9 @@ const Title = ({propTitle, add}) => {
 
     const [error, setError] = useState("")
 
+    // for sending in invitation
+    const [email, setEmail] = useState("")
+
     //get user classes
     const fetchClasses = async() => {
         console.log(userId)
@@ -109,6 +112,16 @@ const Title = ({propTitle, add}) => {
       } else {
         setFileName('Upload');
       }
+    }
+
+    const closeInviteStudent = () => {
+        setAddStudentPage(!isAddStudentPageOpen)
+        setEmail("")
+    }
+
+    const closeInviteInstructor = () => {
+        setAddInstPage(!isAddInstPageOpen)
+        setEmail("")
     }
 
     /*******************/
@@ -249,6 +262,47 @@ const Title = ({propTitle, add}) => {
                 window.location.reload();
             });
         }
+    }
+
+
+    //invite student
+    const inviteInstructor = async() => {
+        const res = await axios.post("http://localhost:4000/invite/instructor", {
+            from: userId,
+            klass: id,
+            email,
+            asInstructor: true,
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleInviteInstructor = (e) => {
+        e.preventDefault()
+        inviteInstructor().then(() => {
+            window.location.reload();
+        });
+    }
+
+    //invite student
+    const inviteStudent = async() => {
+        const res = await axios.post("http://localhost:4000/invite/student", {
+            from: userId,
+            klass: id,
+            email,
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleInviteStudent = (e) => {
+        e.preventDefault()
+        inviteStudent().then((data) => {
+            console.log(data)
+            window.location.reload();
+        });
     }
 
     return ( 
@@ -430,13 +484,13 @@ const Title = ({propTitle, add}) => {
                 <form action="">
                     <div>
                         <label htmlFor="email">Email*</label>
-                        <input type="email" id="email" name="email"/>
+                        <input type="email" id="email" name="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                     </div>
 
                 </form>
                 <div className="on-page-btns">
-                    <button onClick={()=>setAddInstPage(!isAddInstPageOpen)}>Cancel</button>
-                    <button>Invite</button>
+                    <button onClick={closeInviteInstructor}>Cancel</button>
+                    <button onClick={handleInviteInstructor}>Invite</button>
                 </div>
             </div>
         </div>
@@ -452,13 +506,13 @@ const Title = ({propTitle, add}) => {
                 <form action="">
                     <div>
                         <label htmlFor="email">Email*</label>
-                        <input type="email" id="email" name="email"/>
+                        <input type="email" id="email" name="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                     </div>
 
                 </form>
                 <div className="on-page-btns">
-                    <button onClick={()=>setAddStudentPage(!isAddStudentPageOpen)}>Cancel</button>
-                    <button>Invite</button>
+                    <button onClick={closeInviteStudent}>Cancel</button>
+                    <button onClick={handleInviteStudent}>Invite</button>
                 </div>
             </div>
         </div>

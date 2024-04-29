@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import axios from "axios";
+import moment from "moment";
 
 import { login, logout } from '../store/slices/authSlice';
 
@@ -35,6 +36,10 @@ const Header2 = () => {
     const [invitations, setInvitations] = useState([]);
 
     const [invitationCode, setInvitationCode] = useState("");
+
+    const handleDate = (date) => {
+        return moment(date).fromNow()
+    }
 
     const plusMenu = () => {
         setPlusBtn(!plusBtn)
@@ -272,18 +277,6 @@ const Header2 = () => {
 
                         <div className="notifications">
 
-                                    {/* <div className="notification" onClick={goToNotifications} key={invitation._id}>
-                                        <div className="notification-profile-pic">
-                                            {invitation.from.name && invitation.from.name[0].toUpperCase()}
-                                        </div>
-                                        <div className="notification-info">
-                                            <p>
-                                                <b>{invitation.from.name} {invitation.from.surname}</b> invited you to{' '}
-                                                <b>{invitation.class.name}</b>
-                                            </p>
-                                            <p className="notification-date">4 October</p>
-                                        </div>
-                                    </div> */}
                             {invitations ? (
                                 invitations.map((invitation, index) => (
                                     
@@ -293,14 +286,14 @@ const Header2 = () => {
                                             </div>
                                             <div className="notification-info">
                                                 <p> <b>{invitation.from.name} {invitation.from.surname}</b> invited you to <b>{invitation.class.name}</b>{invitation.asInstructor ? " to be an instructor": ""}.</p>
-                                                <p className="notification-date">4 October</p>
+                                                <p className="notification-date">{handleDate(invitation.date)}</p>
                                             </div>
                                         </div>
                                     
                                 ))
                                 ) : (
                                         <h1>No notifications</h1>
-                                )}
+                            )}
                     
                         </div>
                         

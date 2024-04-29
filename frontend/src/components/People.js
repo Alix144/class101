@@ -154,7 +154,7 @@ const People = () => {
                 <div className="people">
                     {students.filter(user=>user.name.toLowerCase().includes(query)).map((user)=>(
 
-                    <div className="one-ppl" key={user.id} onClick={()=>openInfoPage(user._id)}>
+                    <div className="one-ppl" key={user._id} onClick={()=>openInfoPage(user._id)}>
                         <div className="left-border"></div>
                         <div className="info">
                             <div className="profile-pic">{user.name.charAt(0).toUpperCase()}</div>
