@@ -32,6 +32,7 @@ const Header2 = () => {
     const [courseCode, setCourseCode] = useState("");
     const [description, setDescription] = useState("");
     const [visibility, setVisibility] = useState("public");
+    const [invitations, setInvitations] = useState([]);
 
     const [invitationCode, setInvitationCode] = useState("");
 
@@ -153,6 +154,22 @@ const Header2 = () => {
         })
     },[userId])
 
+
+    // fetch invitations
+    const getInvitations = async() => {
+        const res = await axios.get(`http://localhost:4000/invite/get/${userId}`).catch(err=>console.log(err))
+        const data = await res.data.invitations;
+        console.log(data)
+        return data;
+    }
+
+    useEffect(()=>{ 
+        getInvitations()
+        .then((data)=>{
+            setInvitations(data)
+        })
+    },[])
+
     return ( 
 
         <>
@@ -252,15 +269,39 @@ const Header2 = () => {
                             <img src={bell2} alt="Bell" />
                             <h4>Notifications</h4>
                         </div>
-                        <div className="notifications">
-                            <div className="notification" onClick={goToNotifications}>
-                                <div className="notification-profile-pic">S</div>
-                                <div className="notification-info">
-                                    <p><b>Sara Nur</b> Invited you to <b>Spanish101</b></p>
-                                    <p className='notification-date'>4 October</p>
-                                </div>
-                            </div>
 
+                        <div className="notifications">
+
+                                    {/* <div className="notification" onClick={goToNotifications} key={invitation._id}>
+                                        <div className="notification-profile-pic">
+                                            {invitation.from.name && invitation.from.name[0].toUpperCase()}
+                                        </div>
+                                        <div className="notification-info">
+                                            <p>
+                                                <b>{invitation.from.name} {invitation.from.surname}</b> invited you to{' '}
+                                                <b>{invitation.class.name}</b>
+                                            </p>
+                                            <p className="notification-date">4 October</p>
+                                        </div>
+                                    </div> */}
+                            {invitations ? (
+                                invitations.map((invitation, index) => (
+                                    
+                                        <div className="notification" onClick={goToNotifications} key={invitation._id}>
+                                            <div className="notification-profile-pic" style={{backgroundColor: `${invitation.color}`}}>
+                                                {invitation.from.name && invitation.from.name[0].toUpperCase()}
+                                            </div>
+                                            <div className="notification-info">
+                                                <p> <b>{invitation.from.name} {invitation.from.surname}</b> invited you to <b>{invitation.class.name}</b>{invitation.asInstructor ? " to be an instructor": ""}.</p>
+                                                <p className="notification-date">4 October</p>
+                                            </div>
+                                        </div>
+                                    
+                                ))
+                                ) : (
+                                        <h1>No notifications</h1>
+                                )}
+                    
                         </div>
                         
                     </div>

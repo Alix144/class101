@@ -61,3 +61,19 @@ export const inviteInstructor = async(req, res, next) => {
     return res.status(200).json({invitation})
 }
 
+
+export const getByUserId = async(req, res, next) => {
+    const userId = req.params.id;
+    let invitations;
+    try{
+        invitations = await Invitation.find({ to: userId }).populate('class').populate('from');
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!invitations){
+        return res.status(404).json({message: "No invitations Found"})
+    }
+
+    return res.status(200).json({invitations})
+}
