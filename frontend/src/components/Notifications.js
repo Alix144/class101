@@ -6,6 +6,7 @@ import moment from "moment";
 import Title from "./Title";
 
 const Notifications = () => {
+    const navigate = useNavigate();
     const userId = localStorage.getItem("userId");
 
     const [invitations, setInvitations] = useState([]);
@@ -27,13 +28,67 @@ const Notifications = () => {
         })
     },[])
 
+    // accept class invitation
+
+    const acceptToBeInstructor = async(classId) => {
+        const res = await axios.put(`http://localhost:4000/class/join/instructor/${userId}`, {
+            classId,
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const acceptToBeStudent = async(classId) => {
+        const res = await axios.put(`http://localhost:4000/class/join/student/${userId}`, {
+            classId,
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const acceptClassInvitation = (e, invitationId, classId, asInstructor) => {
+        e.preventDefault()
+        if(asInstructor){
+            acceptToBeInstructor(classId).then((data) => {
+                handleRejectInvitation(e, invitationId)
+                navigate(`/dashboard/classroom/${data.existingClass._id}/home`);
+               
+            });
+        }
+        else{
+            acceptToBeStudent(classId).then((data) => {
+                handleRejectInvitation(e, invitationId)
+                navigate(`/dashboard/classroom/${data.existingClass._id}/home`);
+            });
+        }
+        
+    }
+
+    // deleting invitation
+
+    const rejectInvitation = async(invitationId) => {
+        const res = await axios.delete(`http://localhost:4000/invite/delete/${invitationId}`)
+        .catch(err=>console.log(err));
+        const data = await res.data;
+        return data;
+    }
+
+    const handleRejectInvitation = (e, invitationId) => {
+        e.preventDefault()
+        rejectInvitation(invitationId).then((data) => {
+            window.location.reload();
+        });
+    }
+
     return ( 
         <main>
         <div className="content">
             <Title propTitle={"Notifications"}/>
 
             {invitations ? (
-                invitations.map((invitation, index) => (
+                invitations.slice().reverse().map((invitation, index) => (
 
                     <div className="qna-post notification-details">
                         <div className="question-div">
@@ -49,8 +104,12 @@ const Notifications = () => {
                             </div>
                             <hr />
                             <div className="on-page-btns">
-                                <button className="danger">Reject</button>
-                                <button>Accept</button>
+                                <button className="danger" onClick={(e)=>handleRejectInvitation(e, invitation._id)}>Reject</button>
+                                {invitation.asInstructor ?
+                                    <button onClick={(e)=>acceptClassInvitation(e, invitation._id, invitation.class._id, true)}>Accept</button>
+                                :
+                                    <button onClick={(e)=>acceptClassInvitation(e, invitation._id, invitation.class._id, false)}>Accept</button>
+                                }
                             </div>
 
                         </div>

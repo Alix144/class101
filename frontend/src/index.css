@@ -2139,6 +2139,13 @@ p{
     font-size: 12px;
 }
 
+.no-notification{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* scrollbar */
 
 /* Track */

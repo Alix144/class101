@@ -12,7 +12,10 @@ import hamburger from '../images/hamburger.png'
 import plus from '../images/plus.png'
 import bell from '../images/bell.png'
 import bell2 from '../images/bell2.png'
+import bell3 from '../images/bell3.png'
 import logoutIcon from '../images/logout.png'
+import emptyBox from '../images/empty-box.png'
+
 
 const Header2 = () => {
     const navigate = useNavigate();
@@ -257,7 +260,7 @@ const Header2 = () => {
 
             <div className="header-part-2">
                 <img src={plus} alt="Plus" className='plus' onClick={plusMenu}/>
-                <img src={bell} alt="Notification" className='bell' onClick={notificationMenu}/>
+                <img src={invitations.length != 0 ? bell3 : bell} alt="Notification" className='bell' onClick={notificationMenu}/>
                 <div className="profile" style={{backgroundColor: `${color}`}} onClick={profileMenu}>{user && user.name[0].toUpperCase()}</div>
 
                 {plusBtn && 
@@ -271,14 +274,14 @@ const Header2 = () => {
                 {notificationBtn &&
                     <div className="notification-menu">
                         <div className="notification-menu-header">
-                            <img src={bell2} alt="Bell" />
+                            <img src={bell} alt="Bell" />
                             <h4>Notifications</h4>
                         </div>
 
                         <div className="notifications">
 
-                            {invitations ? (
-                                invitations.map((invitation, index) => (
+                            {invitations.length != 0 ? (
+                                invitations.slice().reverse().map((invitation, index) => (
                                     
                                         <div className="notification" onClick={goToNotifications} key={invitation._id}>
                                             <div className="notification-profile-pic" style={{backgroundColor: `${invitation.color}`}}>
@@ -292,7 +295,12 @@ const Header2 = () => {
                                     
                                 ))
                                 ) : (
-                                        <h1>No notifications</h1>
+                                    
+                                    <div className="no-notification">
+                                        <img src={emptyBox} alt="Empty-box" style={{width: "60px"}}/>
+                                        <p>No notifications</p>
+                                    </div>
+                                    
                             )}
                     
                         </div>

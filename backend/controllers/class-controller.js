@@ -221,6 +221,114 @@ export const joinPublicClass = async(req, res, next) => {
     return res.status(200).json({existingClass})
 }
 
+export const joinClassInvitationAsInstructor = async(req, res, next) => {
+    const {classId} = req.body;
+
+    const userId = req.params.id;
+    let existingUser;
+
+    try{
+        existingUser = await User.findById(userId)
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!existingUser){
+        return res.status(404).json({message: "No user Found"})
+    }
+
+
+    let existingClass;
+    try{
+        existingClass = await Class.findOneAndUpdate(
+            { _id: classId },
+            { $addToSet: { instructors: userId } },
+            { new: true }
+        )
+
+        if(!existingClass){
+            return res.status(400).json({message: "Unable to Find Class by with this ID"})
+        }
+
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        try {
+            if (existingUser.classes.includes(existingClass._id)) {
+                return res.status(400).json({ message: "User is already a member of this class" });
+            }else{
+                existingUser.classes.push(existingClass._id);
+                await existingUser.save({ session });
+                await session.commitTransaction();
+            }
+        } catch (error) {
+            await session.abortTransaction();
+            throw error;
+        } finally {
+            session.endSession();
+        }
+
+    }catch(err){
+        console.log(err)
+    }
+    
+    return res.status(200).json({existingClass})
+}
+
+export const joinClassInvitationAsStudent = async(req, res, next) => {
+    const {classId} = req.body;
+
+    const userId = req.params.id;
+    let existingUser;
+
+    try{
+        existingUser = await User.findById(userId)
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!existingUser){
+        return res.status(404).json({message: "No user Found"})
+    }
+
+
+    let existingClass;
+    try{
+        existingClass = await Class.findOneAndUpdate(
+            { _id: classId },
+            { $addToSet: { students: userId } },
+            { new: true }
+        )
+
+        if(!existingClass){
+            return res.status(400).json({message: "Unable to Find Class by with this ID"})
+        }
+
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        try {
+            if (existingUser.classes.includes(existingClass._id)) {
+                return res.status(400).json({ message: "User is already a member of this class" });
+            }else{
+                existingUser.classes.push(existingClass._id);
+                await existingUser.save({ session });
+                await session.commitTransaction();
+            }
+        } catch (error) {
+            await session.abortTransaction();
+            throw error;
+        } finally {
+            session.endSession();
+        }
+
+    }catch(err){
+        console.log(err)
+    }
+    
+    return res.status(200).json({existingClass})
+}
+
 export const getByUserId = async(req, res, next) => {
     const userId = req.params.id;
     let userClasses;

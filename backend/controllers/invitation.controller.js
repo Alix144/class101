@@ -61,7 +61,6 @@ export const inviteInstructor = async(req, res, next) => {
     return res.status(200).json({invitation})
 }
 
-
 export const getByUserId = async(req, res, next) => {
     const userId = req.params.id;
     let invitations;
@@ -76,4 +75,21 @@ export const getByUserId = async(req, res, next) => {
     }
 
     return res.status(200).json({invitations})
+}
+
+export const deleteNotification = async(req, res, next) => {
+    const invitationId = req.params.id;
+    let invitation;
+    try{
+        invitation = await Invitation.findByIdAndDelete(invitationId);
+
+        if(!invitation){
+            return res.status(500).json({message: "invitation not found"});
+        }
+
+        return res.status(200).json({message: "Successfully Deleted"})
+
+    }catch(err){
+        return console.log(err)
+    }
 }
