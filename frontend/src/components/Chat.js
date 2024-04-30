@@ -162,7 +162,7 @@ const Chat = () => {
 
                     message.sender._id != userId ?
                     <div className="others-msg" key={index}>
-                        <div className="msg-pic">{message.sender && message.sender.name[0].toUpperCase()}</div>
+                        <div className="msg-pic" style={{backgroundColor: `${message.sender.color}`}}>{message.sender && message.sender.name[0].toUpperCase()}</div>
                         <div className="msg-text">
                             <h4>{message.sender.name} {message.sender.surname}</h4>
                             <h5>{message.content}</h5>
@@ -177,7 +177,7 @@ const Chat = () => {
                             <p>{moment(message.date).format('hh:mm A')}</p>
                         </div>
 
-                        <div className="msg-pic">{message.sender && message.sender.name[0].toUpperCase()}</div>
+                        <div className="msg-pic" style={{backgroundColor: `${message.sender.color}`}}>{message.sender && message.sender.name[0].toUpperCase()}</div>
                     </div>
 
                     ))
