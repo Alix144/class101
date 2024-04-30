@@ -274,7 +274,7 @@ const Header2 = () => {
                 {notificationBtn &&
                     <div className="notification-menu">
                         <div className="notification-menu-header">
-                            <img src={bell} alt="Bell" />
+                            <img src={bell2} alt="Bell" />
                             <h4>Notifications</h4>
                         </div>
 

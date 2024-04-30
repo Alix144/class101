@@ -172,7 +172,7 @@ const Chat = () => {
                     :
                     <div className="my-msg">
                         <div className="msg-text">
-                            <h4>{message.sender.name} {message.sender.surname}</h4>
+                            <h4>You</h4>
                             <h5>{message.content}</h5>
                             <p>{moment(message.date).format('hh:mm A')}</p>
                         </div>
