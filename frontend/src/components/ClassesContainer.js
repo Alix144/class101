@@ -38,7 +38,7 @@ const ClassesContainer = ({type}) => {
                     return <ClassBox key={klass._id} id={klass._id} color={klass.classColor} img={bg1} className={klass.name} instructorsNum={klass.instructors.length} studentsNum={klass.students.length} type={"student"} />
                 }
             })}
-            <AddBox/>
+            {/* <AddBox/> */}
         </div>
      );
 }
