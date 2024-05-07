@@ -297,7 +297,7 @@ const Header2 = () => {
                                 ) : (
                                     
                                     <div className="no-notification">
-                                        <img src={emptyBox} alt="Empty-box" style={{width: "60px"}}/>
+                                        <img src={emptyBox} alt="Empty-box"/>
                                         <p>No notifications</p>
                                     </div>
                                     

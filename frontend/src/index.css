@@ -397,6 +397,7 @@ input:focus, textarea:focus{
 }
 
 .hamburger{
+    display: none;
     margin-right: 20px;
     height: 30px;
     width: 30px;
@@ -432,7 +433,7 @@ input:focus, textarea:focus{
     margin-left: 25px;
     width: 40px;
     height: 40px;
-    border-radius: 50px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -540,7 +541,7 @@ input:focus, textarea:focus{
     margin-right: 5px;
     width: 50px;
     height: 50px;
-    border-radius: 50px;
+    border-radius: 50%;
     background-color: #418dff;
     display: flex;
     align-items: center;
@@ -573,7 +574,7 @@ input:focus, textarea:focus{
     margin-bottom: 10px;
     width: 130px;
     height: 130px;
-    border-radius: 100px;
+    border-radius: 50%;
     background-color: #C2DEFF;
     display: flex;
     justify-content: center;
@@ -617,6 +618,7 @@ input:focus, textarea:focus{
 .sidebar{
     padding: 40px 0;
     width: 20%;
+    min-width: 160px;
     height: 95vh;
     background-image: linear-gradient(#74BCFF, #86FFAf);
     box-shadow: 1px 1px 5px rgb(126, 126, 126);
@@ -2146,6 +2148,10 @@ p{
     align-items: center;
 }
 
+.no-notification img{
+    width: 60px;
+}
+
 /* scrollbar */
 
 /* Track */
@@ -2174,3 +2180,222 @@ p{
   ::-webkit-scrollbar-thumb:active {
     background-image: linear-gradient(#68ffaf, #74bcff);
   } 
+
+  /***** responsiveness *****/
+@media (max-width: 800px){
+
+    /*sidebar icons*/
+    .hamburger{
+        display: block;
+    }
+
+    .sidebar{
+        display: none;
+        font-size: 15px;
+    }
+
+    .sidebar-list img{
+        margin-right: 5px;
+        width: 15px;
+        height: 15px;
+    }
+    
+    #arrow{
+        margin-right: 10px;
+        width: 10px;
+        height: 10px;
+    }
+
+    /*menu*/
+
+    .profile-menu{
+        padding: 20px 10px;
+        width: 250px;
+        top: 50px;
+        right: 0px;
+    }
+
+    
+    .profile-img{
+        margin-bottom: 10px;
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+    
+    .profile-menu-1 h3, .profile-menu-1 p{
+        margin-bottom: 5px;
+    }
+    
+    .profile-menu hr{
+        margin: 10px 0;
+    }
+
+    .profile-btn{
+        width: 100px;
+        height: 20px;
+        font-size: 14px;
+    }
+
+    .profile-btn img{
+        width: 13px;
+        height: 13px;
+    }
+
+}
+
+@media (max-width: 600px){
+
+    .header2{
+        padding: 5px 10px;
+    }
+
+    .hamburger{
+        margin-right: 15px;
+        height: 20px;
+        width: 20px;
+    }
+
+    .header-part-1 div img{
+        width: 35px;
+        height: 35px;
+    }
+
+    .logo img{
+        margin-right: 2px;
+    }
+
+    .logo h2{
+        font-size: 1.2em;
+    }
+  
+    .header-part-2 .plus{
+        height: 20px;
+        width: 20px;
+    }
+    
+    .header-part-2 .bell{
+        margin-left: 15px;
+        height: 20px;
+        width: 20px;
+    }
+    
+    .header-part-2 .profile{
+        margin-left: 15px;
+        width: 35px;
+        height: 35px;
+    }
+
+    /* Notification menu */
+    .notification-menu{
+        width: 300px;
+        right: 50px;
+    }
+
+    .notification-menu-header{
+        height: 40px;
+    }
+
+    .notifications{
+        margin: 10px 0;
+        width: 95%;
+        max-height: 270px;
+    }
+
+    .notification{
+        margin-bottom: 5px;
+    }
+
+    .notification p{
+        font-size: 13px;
+    }
+
+    .notification-date{
+        font-size: 10px !important;
+    }
+
+    .notification-profile-pic{
+        width: 40px;
+        height: 40px;
+    }
+
+    .no-notification img{
+        width: 50px;
+    }
+
+    .no-notification p{
+        font-size: 12px;
+    }
+
+}
+
+@media (max-width: 380px){
+    .logo h2{
+        display: none;
+    }
+
+    .hamburger{
+        margin-right: 10px;
+        height: 15px;
+        width: 15px;
+    }
+    
+    .header-part-2 .bell{
+        margin-left: 10px;
+    }
+    
+    .header-part-2 .profile{
+        margin-left: 10px;
+    }
+
+    /*menu*/
+    .profile-menu{
+        padding: 10px 0px;
+        width: 190px;
+    }
+
+    /* Notification menu */
+    .notification-menu{
+        width: 200px;
+        right: 0px;
+    }
+
+    .notification-menu-header{
+        height: 35px;
+    }
+
+    .notification-menu-header img{
+        width: 10px;
+        height: 10px;
+    }
+
+    .notification-menu-header h4{
+        font-size: 13px;
+    }
+
+    .notifications{
+        margin: 5px 0;
+        width: 99%;
+    }
+   
+    .notification-profile-pic{
+        min-width: 30px;
+        min-height: 30px;
+    }
+
+    .no-notification img{
+        width: 45px;
+    }
+
+    /*plus menu*/
+    .plus-menu{
+        width: 120px;
+        height: 100px;
+        right: 0px;
+    }
+    
+    .plus-menu div{
+        width: 100%;
+        height: 100px;
+    }
+}
