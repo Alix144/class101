@@ -29,6 +29,7 @@ const Title = ({propTitle, add}) => {
     const [topics, setTopics] = useState([{ id: 1, value: '' }]);
 
     const [selectedClass, setSelectedClass] = useState("")
+    const [selectedUser, setSelectedUser] = useState("")
 
     const [allClasses, setAllClasses] = useState([]);
     const [classes, setClasses] = useState([]);
@@ -68,6 +69,23 @@ const Title = ({propTitle, add}) => {
             setAllClasses(data)
         })
     },[isSearchClassOpen])
+
+    //get all classes
+    const [users, setUsers] = useState([]);
+
+    const getAllUsers = async() => {
+        const res = await axios.get("http://localhost:4000/user/").catch(err=>console.log(err))
+        const data = await res.data.users;
+        console.log(data)
+        return data;
+    }
+
+    useEffect(()=>{ 
+        getAllUsers()
+        .then((data)=>{
+            setUsers(data)
+        })
+    },[isAddStudentPageOpen, isAddInstPageOpen])
 
 
     //task
@@ -239,8 +257,13 @@ const Title = ({propTitle, add}) => {
         setSelectedClass(id)
     }
 
-    //join class
+    //search user
+    const selectUser = (id, userEmail) => {
+        setSelectedUser(id)
+        setEmail(userEmail)
+    }
 
+    //join class
     const joinClass = async() => {
         const res = await axios.put(`http://localhost:4000/class/join/class/${selectedClass}`, {
             userId,
@@ -264,8 +287,32 @@ const Title = ({propTitle, add}) => {
         }
     }
 
+    // //invite student ***new**
+    // const inviteStudents = async() => {
+    //     const res = await axios.put(`http://localhost:4000/class/join/class/${selectedClass}`, {
+    //         userId,
+    //     }).catch(err=>console.log(err));
+    //     const data = await res.data;
+    //     console.log(data)
+    //     return data;
+    // }
 
-    //invite student
+    // const handleJoinClass = (e) => {
+    //     e.preventDefault()
+    //     console.log("clicked")
+    //     if(!selectedClass){
+    //         setError("Please select a class!")
+    //     }else{
+    //         joinClass().then((data) => {
+    //             console.log(data)
+    //             navigate(`/dashboard/classroom/${data.existingClass._id}/home`);
+    //             window.location.reload();
+    //         });
+    //     }
+    // }
+
+
+    //invite instructor
     const inviteInstructor = async() => {
         const res = await axios.post("http://localhost:4000/invite/instructor", {
             from: userId,
@@ -481,13 +528,36 @@ const Title = ({propTitle, add}) => {
                     <h3>Add Instructor</h3>
                     <hr/>
                 </div>
-                <form action="">
-                    <div>
-                        <label htmlFor="email">Email*</label>
-                        <input type="email" id="email" name="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+
+                <div className="people-parent-div" style={{width: "80%"}}>
+                    <div className="ppl-search">
+                        <img src={search} alt="Search" />
+                        <input type="text" name="" id="" onChange={e=>setQuery(e.target.value)} style={{boxShadow: "none"}}/>
                     </div>
 
-                </form>
+                <div className="people">
+                {users.filter(user=>user.email.toLowerCase().includes(query) && user._id != userId).map((user)=>(
+                    
+                    <div className={`one-ppl ${user._id === selectedUser ? "selected-class" : ""}` } onClick={()=>selectUser(user._id, user.email)} key={user._id}>
+                        <div className="left-border"></div>
+                        <div className="info">
+                            <div className="profile-pic" style={{backgroundColor: `${user.color}`}}>{user.name && user.name[0]}</div>
+                            <div>
+                                <h4>{user.name && user.name}</h4>
+                            </div>
+                        </div>
+                        <div className='search-class-members'>
+                            <p>{user.email}</p>
+                        </div>
+                    </div>
+
+                ))}
+                    
+                </div>
+
+                <hr className="hr"/>
+                </div>
+                
                 <div className="on-page-btns">
                     <button onClick={closeInviteInstructor}>Cancel</button>
                     <button onClick={handleInviteInstructor}>Invite</button>
@@ -503,13 +573,36 @@ const Title = ({propTitle, add}) => {
                     <h3>Add Student</h3>
                     <hr/>
                 </div>
-                <form action="">
-                    <div>
-                        <label htmlFor="email">Email*</label>
-                        <input type="email" id="email" name="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+
+                <div className="people-parent-div" style={{width: "80%"}}>
+                    <div className="ppl-search">
+                        <img src={search} alt="Search" />
+                        <input type="text" name="" id="" onChange={e=>setQuery(e.target.value)} style={{boxShadow: "none"}}/>
                     </div>
 
-                </form>
+                <div className="people">
+                {users.filter(user=>user.email.toLowerCase().includes(query) && user._id != userId).map((user)=>(
+                    
+                    <div className={`one-ppl ${user._id === selectedUser ? "selected-class" : ""}` } onClick={()=>selectUser(user._id, user.email)} key={user._id}>
+                        <div className="left-border"></div>
+                        <div className="info">
+                            <div className="profile-pic" style={{backgroundColor: `${user.color}`}}>{user.name && user.name[0]}</div>
+                            <div>
+                                <h4>{user.name && user.name}</h4>
+                            </div>
+                        </div>
+                        <div className='search-class-members'>
+                            <p>{user.email}</p>
+                        </div>
+                    </div>
+
+                ))}
+                    
+                </div>
+
+                <hr className="hr"/>
+                </div>
+
                 <div className="on-page-btns">
                     <button onClick={closeInviteStudent}>Cancel</button>
                     <button onClick={handleInviteStudent}>Invite</button>
@@ -561,7 +654,7 @@ const Title = ({propTitle, add}) => {
                 </div>
 
                 <hr className="hr"/>
-            </div>
+                </div>
 
                 <div className="on-page-btns">
                     <button onClick={()=>setSearchClass(!isSearchClassOpen)}>Cancel</button>
