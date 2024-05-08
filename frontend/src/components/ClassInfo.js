@@ -372,7 +372,7 @@ const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, i
             </div>
             }
             {description &&
-            <div>
+            <div className='board2-description'>
                 <h5>Description:</h5>
                 <p>{description}</p>
             </div>

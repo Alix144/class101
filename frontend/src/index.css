@@ -878,7 +878,7 @@ main{
     position: absolute;
     top: 10px;
     right: 10px;
-    border-radius: 50px;
+    border-radius: 50%;
 }
 
 .note-box .show-more:hover{
@@ -991,6 +991,7 @@ main{
     width: 35%;
     background-color: #fff;
     border-radius: 20px;
+    overflow: auto;
 }
 
 .add-form form, .student-hw-info{
@@ -1369,8 +1370,7 @@ input[type='file']{
     margin-right: 5px;
     width: 60px;
     height: 60px;
-
-    border-radius: 50px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1380,7 +1380,7 @@ input[type='file']{
     margin-left: 15px;
     width: 25px;
     height: 25px;
-    border-radius: 50px;
+    border-radius: 50%;
 }
 
 .class-name-pic img:hover, .welcome img:hover{
@@ -1398,6 +1398,7 @@ input[type='file']{
 .people-num  div{
     margin-left: 20px;
     display: flex;
+    align-items: center;
 }
 
 .people-num img{
@@ -1410,10 +1411,17 @@ input[type='file']{
     padding: 0px 20px;
     display: flex;
     background-image: linear-gradient(to right, #74BCFF, #86FFAf);
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.nav::-webkit-scrollbar {
+    width: 0;
 }
 
 .nav div{
     padding: 10px 15px;
+    font-size: 95%;
 }
 
 .current-page{
@@ -2183,6 +2191,7 @@ p{
   } 
 
   /***** responsiveness *****/
+
 @media (max-width: 800px){
 
     /*sidebar icons*/
@@ -2274,6 +2283,86 @@ p{
         width: 15px;
     }
 
+    /*to do list*/
+    .note-box{
+        margin: 5px 10px;
+        padding: 10px 5px;
+        width: 200px;
+        height: 200px;
+    }
+
+    /*on page div*/
+    .add-form{
+        height: 80vh;
+        padding: 10px 0px;
+        width: 65%;
+    }
+
+    .add-form input{
+        margin-bottom: 10px;
+        height: 25px;
+    }
+
+    .add-form textarea{
+        margin-bottom: 10px;
+    }
+
+    .on-page-title{
+        margin-bottom: 10px;
+    }
+
+
+    /*board2*/
+    .class-info{
+        padding: 15px 40px;
+        min-height: 150px;
+    }
+    
+    .class-info div{
+        max-width: 80%;
+    }
+    
+    .class-name-pic{
+        margin-bottom: 5px;
+    }
+
+    .class-name-pic div{
+        margin-right: 5px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .class-name-pic h1{
+        font-size: 1.5em;
+    }
+
+    .class-name-pic img{
+        margin-left: 10px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .class-code h5, .board2-description h5{
+        font-size: 12px;
+    }
+
+    .class-code p, .board2-description p{
+        font-size: 12px;
+    }
+
+    .people-num{
+        right: 20px;
+    }
+    
+    .people-num  div{
+        margin-left: 10px;
+    }
+    
+    .people-num img{
+        margin-right: 0px;
+        width: 15px;
+        height: 15px;
+    }
 }
 
 @media (max-width: 600px){
@@ -2373,6 +2462,50 @@ p{
         height: 20px;
     }
 
+    /*title component*/
+    .title{
+        margin-bottom: 10px;
+    }
+    
+    .title h3{
+        font-weight: 90;
+        font-size: 1em;
+    }
+
+    .title hr{
+        height: 2px;
+    }
+
+    .title img{
+        width: 20px;
+        height: 20px;
+    }
+
+    /* note box*/
+    .note-box .show-more{
+        padding: 5px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .note-box h4{
+        font-size: 0.8em;
+    }
+
+    .note-box p{
+        font-size: 10px;
+    }
+
+    .note-box h5{
+        margin-top: 5px;
+        font-size: 0.7em;
+    }
+
+    /*class nav*/
+    .nav div{
+        padding: 10px 15px;
+        font-size: 85%;
+    }
 
 }
 
@@ -2466,5 +2599,93 @@ p{
 
     .content{
         width: 95%;
+    }
+
+    /*note box*/
+    .notes-container{
+        margin-bottom: 30px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .note-box{
+        margin: 5px;
+        padding: 5px 5px;
+        width: 150px;
+        height: 150px;
+    }
+
+    /*on page div*/
+    .on-page-title h3{
+        padding: 5px 10px;
+        font-size: 1em;
+    }
+
+    .add-form{
+        height: 80vh;
+        width: 85%;
+    }
+
+    .add-form form{
+        width: 85%;
+    }
+
+    /*on page btns*/
+    .on-page-btns{
+        margin: 10px auto 0;
+        width: 95%;
+    }
+    
+    .on-page-btns button{
+        width: 80px;
+    }
+
+    /*board2*/
+    .class-info{
+        padding: 15px 10px;
+        min-height: 150px;
+    }
+    
+    .class-info div{
+        max-width: 100%;
+    }
+
+    .class-name-pic div{
+        width: 35px;
+        min-width: 35px;
+        height: 35px;
+        min-height: 35px;
+        font-size: 1em;
+    }
+
+    .class-name-pic h1{
+        font-size: 1.2em;
+    }
+
+    .class-code h5, .board2-description h5{
+        font-size: 12px;
+    }
+
+    .class-code p, .board2-description p{
+        font-size: 12px;
+        line-height: 15px;
+    }
+    
+    .people-num{
+        right: 10px;
+        bottom: 5px;
+    }
+    
+    .people-num  div{
+        margin-left: 10px;
+    }
+
+    .nav{
+        padding: 0px 0px;
+    }
+
+    .nav div{
+        padding: 8px 10px;
+        font-size: 80%;
     }
 }
