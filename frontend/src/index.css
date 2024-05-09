@@ -1309,6 +1309,7 @@ input[type='file']{
 
 /* classroom */
 .classroom-main{
+    width: 100%;
     background-color: #e6e6e6;
 }
 
@@ -1408,8 +1409,10 @@ input[type='file']{
 }
 
 .nav{
+    width: 100%;
     padding: 0px 20px;
     display: flex;
+    flex-wrap: wrap;
     background-image: linear-gradient(to right, #74BCFF, #86FFAf);
     overflow-y: auto;
     scrollbar-width: none;
@@ -1569,6 +1572,8 @@ input[type='file']{
 .announcement-box .profile-pic{
     width: 50px;
     height: 50px;
+    min-width: 35px;
+    min-height: 35px;
 }
 
 .announcement-box .info p{
@@ -1667,8 +1672,10 @@ input[type='file']{
 
 .input-msg .send{
     width: 50px;
+    min-width: 35px;
     height: 50px;
-    border-radius: 50px;
+    min-height: 35px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1709,8 +1716,10 @@ input[type='file']{
 .chat-img{
     margin-right: 10px;
     width: 45px;
+    min-width: 35px;
     height: 45px;
-    border-radius: 50px;
+    min-height: 35px;
+    border-radius: 50%;
     background-color: #2fbdff;
     display: flex;
     justify-content: center;
@@ -1769,10 +1778,11 @@ input[type='file']{
 }
 
 .msg-pic{
-    min-width: 45px;
+    min-width: 35px;
+    min-height: 35px;
     width: 45px;
     height: 45px;
-    border-radius: 50px;
+    border-radius: 50%;
     background-color: #2fbdff;
     display: flex;
     justify-content: center;
@@ -1844,8 +1854,10 @@ input[type='file']{
 .assignment .info .pic, .documents .info .pic{
     margin-right: 10px;
     width: 45px;
+    min-width: 35px;
     height: 45px;
-    border-radius: 50px;
+    min-width: 35px;
+    border-radius: 50%;
     background-color: #68ffaf;
     display: flex;
     align-items: center;
@@ -1885,6 +1897,10 @@ input[type='file']{
     box-shadow: 1px 1px 2px rgb(126, 126, 126);
 }
 
+.answer input{
+    margin-left: 0px;
+}
+
 .q-input button, .answer button{
     height: 35px;
     background-color: #8AABFF;
@@ -1894,11 +1910,12 @@ input[type='file']{
     width: 55px;
     height: 55px;
     min-width: 55px;
+    min-height: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #2fbdff;
-    border-radius: 50px;
+    border-radius: 50%;
 }
 
 .qna-post{
@@ -1947,7 +1964,7 @@ input[type='file']{
     justify-content: center;
     align-items: center;
     background-color: #0066FF;
-    border-radius: 50px;
+    border-radius: 50%;
 }
 
 .question-div hr{
@@ -2078,7 +2095,9 @@ input[type='file']{
 
 .one-ppl .info .profile-pic{
     width: 40px;
+    min-width: 40px;
     height: 40px;
+    min-height: 40px;
 }
 
 .announcement-home{
@@ -2191,6 +2210,12 @@ p{
   } 
 
   /***** responsiveness *****/
+
+@media (max-width: 1040px){
+
+    
+
+}
 
 @media (max-width: 800px){
 
@@ -2363,6 +2388,16 @@ p{
         width: 15px;
         height: 15px;
     }
+
+    .nav{
+        flex-wrap: nowrap;
+    }
+
+    /*people*/
+    .people-parent-div{
+        width: 65%;
+    }
+    
 }
 
 @media (max-width: 600px){
@@ -2502,10 +2537,227 @@ p{
     }
 
     /*class nav*/
+    .nav{
+        padding: 0;
+    }
+
     .nav div{
         padding: 10px 15px;
         font-size: 85%;
     }
+
+    /*content*/
+    .content{
+        margin: 20px auto 40px;
+        width: 95%;
+        min-height: 70vh;
+        max-width: 965px;
+    }
+
+    /*class home page*/
+
+    .classroom-home{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .classroom-home h4{
+        font-size: 0.9em;
+    }
+
+    .announcements-div{
+        margin-bottom: 10px;
+        margin-right: 0px;
+        width: 100%;
+        height: 250px;
+    }
+
+    .code-todo-div{
+        width: 100%;
+        flex-direction: row;
+        flex-direction: row-reverse;
+    }
+
+    .code{
+        width: 40%;
+        height: 150px;
+    }
+
+    .code-string h2{
+        font-size: 1.2em;
+    }
+
+    .code-string img{
+        width: 15px;
+        height: 15px;
+    }
+
+    .todo-div{
+        margin-right: 10px;
+        width: 60%;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /*announcements*/
+    .announcement-box, .syllabus-box, .assignment{
+        padding: 10px 20px;
+        width: 100%;
+    }
+
+    .announcement-box .profile-pic{
+        width: 40px;
+        height: 40px;
+    }
+
+    .announcement-box .info h4{
+        font-size: 0.9em;
+    }
+
+    .syllabus-box h3{
+        font-size: 1em;
+        margin-right: 30px;
+    }
+
+    .syllabus-box li{
+        margin-bottom: 3px;
+    }
+    
+    .announcement-text p, .syllabus-box li{
+        font-size: 0.9em;
+    }
+
+    .date{
+        font-size: 0.8em;
+    }
+
+    /*assignments*/
+    .assignment img{
+        width: 15px;
+        height: 15px;
+    }
+
+    .assignment h4, .documents h4{
+        font-size: 0.9em;
+    }
+
+    .assignment .info .pic, .documents .info .pic{
+        width: 40px;
+        height: 40px;
+    }
+
+    /*chat*/
+    .chat-info{
+        padding: 5px 15px;
+        width: 100%;
+    }
+
+    .chat-img, .msg-pic{
+        margin-right: 5px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .my-msg .msg-pic{
+        margin-right: 0;
+        margin-left: 5px;
+    }
+
+    .chat-content{
+        padding: 0 5px 15px;
+    }
+
+    .my-msg, .others-msg{
+        margin: 5px 0;
+    }
+
+    .input-msg{
+        width: 90%;
+        height: 40px;
+    }
+
+    .input-msg .input input{
+        height: 90%;
+        font-size: 15px;
+    }
+
+    .input-msg .send{
+        width: 40px;
+        height: 40px;
+    }
+    .input-msg img{
+        width: 20px;
+        height: 20px;
+    }
+
+    .send img{
+        width: 15px;
+        height: 15px;
+    }
+
+    /* Q&A */
+    .qna{
+        margin: 0 auto 40px;
+        width: 100%;
+    }
+
+    .q-input, .qna-post{
+        padding: 10px 25px;
+    }
+
+    .q-img{
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+
+    .q-input input, .answer input, .q-input button, .answer button{
+        height: 30px;
+    }
+
+    .answer input{
+        margin-left: 0px;
+    }
+
+    .q-input input{
+        margin-left: 10px;
+    }
+
+    /*people*/
+    .people-parent-div{
+        width: 75%;
+    }
+
+    .ppl-search{
+        height: 30px;
+    }
+
+    .ppl-search img{
+        width: 15px;
+        height: 15px;
+    }
+
+    .one-ppl{
+        padding: 20px 15px;
+    }
+
+    .one-ppl .info .profile-pic{
+        width: 35px;
+        min-width: 35px;
+        height: 35px;
+        min-height: 35px;
+    }
+
+    .one-ppl .info h4{
+        font-size: 0.9em;
+    }
+
+    .one-ppl p{
+        font-size: 0.8em;
+    }
+    
 
 }
 
@@ -2688,4 +2940,267 @@ p{
         padding: 8px 10px;
         font-size: 80%;
     }
+
+    /*class home page*/
+
+    .classroom-home h4{
+        font-size: 0.8em;
+    }
+
+    .code-todo-div{
+        flex-direction: column-reverse;
+    }
+
+    .code{
+        width: 100%;
+        height: 150px;
+    }
+
+    .code-string h2{
+        font-size: 1.2em;
+    }
+
+    .todo-div{
+        margin-bottom: 10px !important;
+        margin-right: 0px;
+        width: 100%;
+        height: 250px;
+    }
+
+    /*announcements*/
+    .announcement-box, .syllabus-box {
+        padding: 10px 15px;
+    }
+
+    .announcement-box .profile-pic{
+        margin-right: 5px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .announcement-box .info h4{
+        margin-right: 15px;
+        font-size: 0.8em;
+    }
+
+    .announcement-text p, .syllabus-box li{
+        font-size: 0.7em;
+    }
+
+    .date{
+        font-size: 0.6em;
+        bottom: 3px;
+    }
+
+    .update-delete{
+        top: 10px;
+        right: 15px;
+    }
+    
+    .update-delete img{
+        margin-left: 10px;
+        width: 12px;
+        height: 12px;
+    }
+
+    .announcement-box, .syllabus-box, .assignment{
+        margin: 0 auto;
+        margin-bottom: 10px;
+        border-bottom-right-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+    /*assignments*/
+    .assignment, .documents{
+        padding: 10px 15px;
+    }
+
+    .assignment h4, .documents h4{
+        font-size: 0.8em;
+    }
+
+    .assignment h6, .documents h6, .assignment p, .documents p{
+        font-size: 0.7em;
+    }
+
+    .assignment .info .pic, .documents .info .pic{
+        width: 35px;
+        height: 35px;
+    }
+
+    .assignment .info img, .documents .info img{
+        margin-right: 5px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .documents a img{
+        width: 15px;
+        height: 15px;
+    }
+
+    
+    .syllabus-box h3{
+        font-size: 0.9em;
+    }
+
+    .syllabus-box li{
+        margin-bottom: 2px;
+    }
+
+    /*chat*/
+    .chat-info{
+        padding: 5px 15px;
+        width: 100%;
+    }
+
+    .chat-img, .msg-pic{
+        margin-right: 2px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .my-msg .msg-pic{
+        margin-left: 2px;
+    }
+
+    .chat-content{
+        padding: 0 5px 15px;
+    }
+
+    .input-msg{
+        width: 90%;
+        height: 40px;
+    }
+
+    .input-msg .input{
+        padding: 0 10px;
+        height: 35px;
+    }
+
+    .input-msg .input input{
+        margin: 0 5px;
+        padding: 1px 3px;
+    }
+
+    .input-msg .send{
+        width: 35px;
+        height: 35px;
+    }
+    .input-msg img{
+        width: 18px;
+        height: 18px;
+    }
+    
+    .my-msg, .others-msg{
+        margin: 5px 0 !important;
+    }
+
+       /*chat*/
+       .chat-info{
+        padding: 5px 15px;
+        width: 100%;
+    }
+
+    .chat-img, .msg-pic{
+        margin-right: 5px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .my-msg .msg-pic{
+        margin-right: 0;
+        margin-left: 5px;
+    }
+
+    .chat-content{
+        padding: 0 5px 15px;
+    }
+
+    .my-msg, .others-msg{
+        margin: 5px 0;
+    }
+
+    .input-msg{
+        width: 90%;
+        height: 40px;
+    }
+
+    .input-msg .input input{
+        height: 90%;
+        font-size: 15px;
+    }
+
+    .input-msg .send{
+        width: 40px;
+        height: 40px;
+    }
+    .input-msg img{
+        width: 20px;
+        height: 20px;
+    }
+
+    .send img{
+        width: 15px;
+        height: 15px;
+    }
+
+    /* Q&A */
+    .q-input, .qna-post{
+        padding: 5px 10px;
+    }
+
+    .q-img{
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+        min-height: 35px;
+    }
+
+    .q-input input, .answer input, .q-input button, .answer button{
+        height: 25px;
+    }
+
+    .q-input input{
+        margin-left: 0;
+    }
+
+    .q-img, .a-img{
+        margin-right: 5px;
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+        min-height: 35px;
+    }
+
+    .a-img{
+        margin-right: 10px;
+    }
+
+    
+    /*people*/
+    .people-parent-div{
+        width: 90%;
+    }
+
+    .one-ppl{
+        padding: 10px 10px;
+    }
+
+    .one-ppl .info .profile-pic{
+        margin-right: 5px;
+    }
+
+    .one-ppl .info h4{
+        font-size: 0.8em;
+    }
+
+    .one-ppl p{
+        font-size: 0.7em;
+    }
+
+    /*scrollbar*/
+    ::-webkit-scrollbar {
+        width: 0px;
+      }
 }

@@ -53,7 +53,6 @@ const Syllabus = () => {
                         {isInstructor &&
                         <div className="update-delete">
                             <img src={trash} alt="Delete" />
-                            <img src={edit} alt="" />
                         </div>
                         }
     
