@@ -114,7 +114,6 @@ const Profile = () => {
                                 <label htmlFor="desc">Description</label>
                                 <textarea name="desc" id="desc" cols="30" rows="6" value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
                             </div>
-                            <button>Change Password</button>
                             <button className="save" onClick={(e)=>handleUpdateUser(e)}>Save</button>
                         </form>
                     </div>

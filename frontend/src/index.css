@@ -1196,7 +1196,7 @@ input[type='file']{
     display: flex;
     justify-content: space-between;
     background-color: #FAFAFA;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 .profile-divs p{
@@ -1239,7 +1239,7 @@ input[type='file']{
     margin-bottom: 5px;
     width: 130px;
     height: 130px;
-    border-radius: 100px;
+    border-radius: 100%;
     background-color: #d4d4d4;
     display: flex;
     justify-content: center;
@@ -1318,7 +1318,7 @@ input[type='file']{
     margin-top: 40px;
     width: 150px;
     height: 30px !important;
-
+    background-color: #74BCFF;
 }
 
 /* classroom */
@@ -2834,6 +2834,49 @@ p{
         top: 45px;
 
     }
+
+    /*notifications*/
+    .notification-details{
+        width: 90%;
+    }
+
+    /*profile*/
+
+    .profile-divs{
+        width: 85%;
+        flex-direction: column;
+        border: 1px solid #68ffaf;
+    }
+
+    .profile-div1{
+        padding: 15px 10px;
+        width: 100%;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 5px;
+        align-items: center;
+    }
+
+    .profile-div-pic{
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-div2{
+        margin: 0 auto;
+        padding: 15px 20px;
+        width: 85%;
+    }
+
+    .profile-div2 form{
+        margin: 15px auto;
+        width: 95%;
+    }
+
+    .div1, .div2, .classroom{
+        margin-bottom: 15px;
+        font-size: 0.9em;
+    }
 }
 
 @media (max-width: 380px){
@@ -3313,6 +3356,27 @@ p{
         top: 45px;
         left: 0;
         z-index: 100;
+    }
+
+    /*notifications*/
+    .notification-details{
+        width: 95%;
+    }
+
+    /*profile*/
+    .profile-div2{
+        margin: 0 auto;
+        padding: 10px 5px;
+        width: 95%;
+    }
+
+    .full-name{
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .full-name div{
+        width: 100%;
     }
 
 
