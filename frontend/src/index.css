@@ -994,6 +994,11 @@ main{
     overflow: auto;
 }
 
+.colors-form{
+    height: 95vh;
+    width: 50%;
+}
+
 .add-form form, .student-hw-info{
     margin: 0 auto;
     width: 70%;
@@ -1066,17 +1071,26 @@ textarea:focus, select:focus{
 }
 
 .colors{
+    width: 100%;
+}
+
+.colors-container{
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.colors div{
+.colors-container div{
+    margin-right: 10px;
+    margin-bottom: 5px;
     width: 60px;
+    min-width: 60px;
     height: 60px;
-    border-radius: 100px;
+    min-height: 60px;
+    border-radius: 100%;
 }
 
-.colors div:hover{
+.colors-container div:hover{
     cursor: pointer;
     box-shadow: 1px 1px 10px rgb(126, 126, 126);
 }
@@ -1098,6 +1112,7 @@ textarea:focus, select:focus{
 
 .bgs{
     margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -2318,9 +2333,25 @@ p{
 
     /*on page div*/
     .add-form{
-        height: 80vh;
+        margin-top: 20px;
+        height: 90vh;
         padding: 10px 0px;
         width: 65%;
+    }
+
+    #add-form-join-class, #add-form-add-announcement, #add-form-add-syllabus, #add-form-add-doc{
+        height: auto;
+        max-width: 350px;
+    }
+
+    #add-form-join-class .on-page-btns, #add-form-add-announcement .on-page-btns, #add-form-add-syllabus .on-page-btns, #add-form-add-doc .on-page-btns{
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 10px;
+    }
+
+    #add-form-add-announcement, #add-form-add-syllabus, #add-form-add-doc{
+        max-width: 450px;
     }
 
     .add-form input{
@@ -2395,6 +2426,10 @@ p{
 
     /*people*/
     .people-parent-div{
+        width: 65%;
+    }
+
+    .colors-form{
         width: 65%;
     }
     
@@ -2757,8 +2792,43 @@ p{
     .one-ppl p{
         font-size: 0.8em;
     }
-    
 
+    /*customize form*/
+    .customize-form{
+        width: 80%;
+    }
+
+    .bgs .bg{
+        width: 25%;
+        min-width: 120px;
+        height: 50px;
+    }
+    
+    .add-form form p, .add-form form label{
+        font-size: 0.9em;
+    }
+
+    /*colors input*/
+
+    .colors{
+        width: 100%;
+    }
+    
+    .colors-container div{
+        margin-right: 5px;
+        width: 50px;
+        min-width: 50px;
+        height: 50px;
+        min-height: 50px;
+    }
+
+    .colors-form{
+        width: 90%;
+    }
+
+    .on-page-btns{
+        margin-top: 20px;
+    }
 }
 
 @media (max-width: 380px){
@@ -2842,7 +2912,7 @@ p{
 
     /*class box*/
     .class-box, .add-box{
-        margin: 10px 15px;
+        margin: 5px 5px;
         width: 180px;
         height: 180px;
         min-width: 180px;
@@ -2875,7 +2945,7 @@ p{
 
     .add-form{
         height: 80vh;
-        width: 85%;
+        width: 95%;
     }
 
     .add-form form{
@@ -3038,7 +3108,6 @@ p{
         width: 15px;
         height: 15px;
     }
-
     
     .syllabus-box h3{
         font-size: 0.9em;
@@ -3198,6 +3267,39 @@ p{
     .one-ppl p{
         font-size: 0.7em;
     }
+
+    /*customize form*/
+    .customize-form{
+        width: 95%;
+    }
+
+    .customize-form form{
+        width: 95%;
+    }
+
+    .customize-form form p{
+        font-size: 0.9em;
+    }
+
+    .bgs .bg{
+        width: 25%;
+        min-width: 100px;
+        height: 45px;
+    }
+
+    .upload{
+        width: 100px;
+        margin-top: 10px;
+    }
+
+    /*colors form*/
+    .colors-container div{
+        width: 45px;
+        min-width: 45px;
+        height: 45px;
+        min-height: 45px;
+    }
+
 
     /*scrollbar*/
     ::-webkit-scrollbar {

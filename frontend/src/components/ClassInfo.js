@@ -275,12 +275,14 @@ const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, i
                                 <input type="file" accept="image/*" id='uploadBg' className='upload' onChange={(e)=>handleImageChange(e)}/>                         
                             </div>
                             <label htmlFor="">Class Color</label>
-                            <div className="colors" style={{width:"50%", marginLeft: "50px"}}>
-                                <div className='circle-color' style={{backgroundColor: "#74BCFF"}} onClick={()=>handleColorClick("#74BCFF")}> {selectedColor ==="#74BCFF" && <img src={check} alt="check"/>} </div>
-                                <div className='circle-color' style={{backgroundColor: "#86FFAF"}} onClick={()=>handleColorClick("#86FFAF")}> {selectedColor ==="#86FFAF" && <img src={check} alt="check"/>} </div>
-                                <div className='circle-color' style={{backgroundColor: "#B63EFF"}} onClick={()=>handleColorClick("#B63EFF")}> {selectedColor ==="#B63EFF" && <img src={check} alt="check"/>} </div>
-                                <div className='circle-color' style={{backgroundColor: "#FF6464"}} onClick={()=>handleColorClick("#FF6464")}> {selectedColor ==="#FF6464" && <img src={check} alt="check"/>} </div>
-                                <div className='circle-color' style={{backgroundColor: "#FFD15A"}} onClick={()=>handleColorClick("#FFD15A")}> {selectedColor ==="#FFD15A" && <img src={check} alt="check"/>} </div>
+                            <div className="colors" style={{ }}>
+                                <div className="colors-container">
+                                    <div className='circle-color' style={{backgroundColor: "#74BCFF"}} onClick={()=>handleColorClick("#74BCFF")}> {selectedColor ==="#74BCFF" && <img src={check} alt="check"/>} </div>
+                                    <div className='circle-color' style={{backgroundColor: "#86FFAF"}} onClick={()=>handleColorClick("#86FFAF")}> {selectedColor ==="#86FFAF" && <img src={check} alt="check"/>} </div>
+                                    <div className='circle-color' style={{backgroundColor: "#B63EFF"}} onClick={()=>handleColorClick("#B63EFF")}> {selectedColor ==="#B63EFF" && <img src={check} alt="check"/>} </div>
+                                    <div className='circle-color' style={{backgroundColor: "#FF6464"}} onClick={()=>handleColorClick("#FF6464")}> {selectedColor ==="#FF6464" && <img src={check} alt="check"/>} </div>
+                                    <div className='circle-color' style={{backgroundColor: "#FFD15A"}} onClick={()=>handleColorClick("#FFD15A")}> {selectedColor ==="#FFD15A" && <img src={check} alt="check"/>} </div>
+                                </div>
                             </div>
                     </form>
                     <div className="on-page-btns">

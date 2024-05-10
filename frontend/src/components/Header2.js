@@ -183,15 +183,15 @@ const Header2 = () => {
         <>
         {isCreateClassDivOpen && 
             <div className="on-page-div">
-                <div className="add-form">
+                <div className="add-form colors-form">
                     <div className="on-page-title">
                         <h3>Create Class</h3>
                         <hr />
                     </div>
                     <form action="">
                         <div>
-                            <p>Name*</p>
-                            <input type="text" value={name} onChange={(e)=>setName(e.target.value)}/>
+                            <label htmlFor="name">Name*</label>
+                            <input type="text" id='name' name='name' value={name} onChange={(e)=>setName(e.target.value)}/>
                         </div>
                         <div>
                             <label htmlFor="code">Course Code</label>
@@ -211,11 +211,13 @@ const Header2 = () => {
                         <div>
                         <p>Class Color</p>
                             <div className="colors">
-                                <div style={{backgroundColor: "#74BCFF"}}></div>
-                                <div style={{backgroundColor: "#86FFAF"}}></div>
-                                <div style={{backgroundColor: "#B63EFF"}}></div>
-                                <div style={{backgroundColor: "#FF6464"}}></div>
-                                <div style={{backgroundColor: "#FFD15A"}}></div>
+                                <div className="colors-container">
+                                    <div style={{backgroundColor: "#74BCFF"}}></div>
+                                    <div style={{backgroundColor: "#86FFAF"}}></div>
+                                    <div style={{backgroundColor: "#B63EFF"}}></div>
+                                    <div style={{backgroundColor: "#FF6464"}}></div>
+                                    <div style={{backgroundColor: "#FFD15A"}}></div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -229,7 +231,7 @@ const Header2 = () => {
 
         {isJoinClassDivOpen && 
             <div className="on-page-div">
-                <div className="add-form" style={{marginTop: "0"}}>
+                <div className="add-form" id="add-form-join-class" style={{marginTop: "0"}}>
                     <div className="on-page-title">
                         <h3>Join Class</h3>
                         <hr />

@@ -397,7 +397,7 @@ const Title = ({propTitle, add}) => {
 
         {isAddAnnouncementPageOpen && 
         <div className="on-page-div">   
-            <div className="add-form edit-task-form" >
+            <div className="add-form edit-task-form" id='add-form-add-announcement' >
                 <div className="on-page-title">
                     <h3>Add Announcement</h3>
                     <hr />
@@ -463,7 +463,7 @@ const Title = ({propTitle, add}) => {
 
         {isAddSyllabusPageOpen && 
         <div className="on-page-div">   
-            <div className="add-form edit-task-form" >
+            <div className="add-form edit-task-form" id='add-form-add-syllabus' >
                 <div className="on-page-title">
                     <h3>Add Syllabus</h3>
                     <hr/>
@@ -494,7 +494,7 @@ const Title = ({propTitle, add}) => {
 
         {isAddDocPageOpen && 
         <div className="on-page-div">   
-            <div className="add-form edit-task-form" >
+            <div className="add-form edit-task-form" id='add-form-add-doc' >
                 <div className="on-page-title">
                     <h3>New Document</h3>
                     <hr/>
