@@ -523,7 +523,7 @@ const Title = ({propTitle, add}) => {
 
         {isAddInstPageOpen && 
         <div className="on-page-div">   
-            <div className="add-form edit-task-form" >
+            <div className="add-form edit-task-form" id='add-from-add-inst'>
                 <div className="on-page-title">
                     <h3>Add Instructor</h3>
                     <hr/>
@@ -568,7 +568,7 @@ const Title = ({propTitle, add}) => {
 
         {isAddStudentPageOpen && 
         <div className="on-page-div">   
-            <div className="add-form edit-task-form" >
+            <div className="add-form edit-task-form" id='add-from-add-users' >
                 <div className="on-page-title">
                     <h3>Add Student</h3>
                     <hr/>

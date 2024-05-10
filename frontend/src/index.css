@@ -2338,12 +2338,12 @@ p{
         width: 65%;
     }
 
-    #add-form-join-class, #add-form-add-announcement, #add-form-add-syllabus, #add-form-add-doc{
+    #add-form-join-class, #add-form-add-announcement, #add-form-add-syllabus, #add-form-add-doc, #add-from-add-users, #add-from-add-inst, #user-info{
         height: auto;
         max-width: 350px;
     }
 
-    #add-form-join-class .on-page-btns, #add-form-add-announcement .on-page-btns, #add-form-add-syllabus .on-page-btns, #add-form-add-doc .on-page-btns{
+    #add-form-join-class .on-page-btns, #add-form-add-announcement .on-page-btns, #add-form-add-syllabus .on-page-btns, #add-form-add-doc .on-page-btns, #add-from-add-users .on-page-btns, #add-from-add-inst .on-page-btns, #user-info .on-page-btns{
         padding-left: 10px;
         padding-right: 10px;
         margin-top: 10px;

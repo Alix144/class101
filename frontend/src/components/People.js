@@ -65,7 +65,7 @@ const People = () => {
         <>
         {isStudentInfoPageOpen && 
             <div className="on-page-div">   
-                <div className="add-form edit-task-form" >
+                <div className="add-form edit-task-form" id="user-info">
                     <div className="on-page-title">
                         <h3>{userInfo.name ? userInfo.name.charAt(0).toUpperCase() + userInfo.name.slice(1): ""}'s Details</h3>
                         <hr/>
