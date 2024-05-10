@@ -15,6 +15,7 @@ import student from '../images/student.png'
 import arrow from '../images/arrow.png'
 
 const Sidebar = () => {
+    const isSidebarOpen = useSelector((state) => state.openOrClose.isOpen)
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
     const currentSection = useSelector((state) => state.currentSection.value)
 
@@ -102,7 +103,7 @@ const Sidebar = () => {
     })
 
     return ( 
-        <div className="sidebar">
+        <div className="sidebar" style={{ display: isSidebarOpen ? 'block' : 'none' }}>
             <div className={`sidebar-list ${currentSection === 'home' ? 'current-page' : ''}`} onClick={goToHome}>
                 <img src={home} alt="Home" />
                 <p>Home</p>

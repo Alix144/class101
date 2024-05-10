@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from "axios";
 import moment from "moment";
 
 import { login, logout } from '../store/slices/authSlice';
+import { setToOpen, setToClose } from '../store/slices/hamburger';
 
 import ProfileImg from './ProfileImg'
 import logo from '../images/logo1.png'
@@ -20,6 +21,7 @@ import emptyBox from '../images/empty-box.png'
 const Header2 = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const isSidebarOpen = useSelector((state) => state.openOrClose.isOpen)
 
     const userId = localStorage.getItem("userId");
 
@@ -178,6 +180,14 @@ const Header2 = () => {
         })
     },[])
 
+    const toggleSidebar = () => {
+        if(isSidebarOpen){
+            dispatch(setToClose())
+        }else{
+            dispatch(setToOpen())
+        }
+    }
+
     return ( 
 
         <>
@@ -253,7 +263,7 @@ const Header2 = () => {
         
         <div className='header2'>
             <div className='header-part-1'>
-                <img src={hamburger} alt="" className='hamburger'/>
+                <img src={hamburger} alt="" className='hamburger' onClick={toggleSidebar}/>
                 <div className="logo" onClick={()=>navigate('dashboard/home')}>
                     <img src={logo} alt="logo" />
                     <h2>Class101</h2>
