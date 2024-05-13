@@ -132,7 +132,6 @@ const Header2 = () => {
 
 
     // join class
-
     const joinClass = async() => {
         const res = await axios.put(`http://localhost:4000/class/join/${userId}`, {
             invitationCode,

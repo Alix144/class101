@@ -6,6 +6,7 @@ import axios from "axios";
 import {  setToNull, setToHome, setToCalendar, setToToDo, setToClassT, setToClassS } from '../store/slices/currentSection';
 import { setToInstructor, setToStudent } from '../store/slices/instructorOrStudent';
 import { setToDashboard } from '../store/slices/currentClassPage';
+import { setToClose } from '../store/slices/hamburger';
 
 import home from '../images/home.png'
 import calendar from '../images/calendar.png'
@@ -28,33 +29,30 @@ const Sidebar = () => {
     const goToHome = () => {
         navigate("home")
         dispatch(setToHome())
+        dispatch(setToClose())
         localStorage.setItem('currentSection', 'home');
     }
 
     const goToCalendar = () => {
         navigate("calendar")
         dispatch(setToCalendar())
+        dispatch(setToClose())
         localStorage.setItem('currentSection', 'calendar');
     }
 
     const goToToDo = () => {
         navigate("to-do")
         dispatch(setToToDo())
+        dispatch(setToClose())
         localStorage.setItem('currentSection', 'toDo');
     }
-
-    // const classPress = async(id) => {
-    //     const res = await axios.get(`http://localhost:4000/class/view/class/${id}`)
-    //     .catch(err=>console.log(err))
-    //     const data = await res.data;
-    //     return data;
-    // }
 
     const goToClassroom = (id) => {
         navigate(`classroom/${id}/home`)
         dispatch(setToInstructor())
         dispatch(setToDashboard())
         dispatch(setToClassT())
+        dispatch(setToClose())
         localStorage.setItem('currentSection', 'classT');
     }
 
@@ -63,6 +61,7 @@ const Sidebar = () => {
         dispatch(setToStudent())
         dispatch(setToDashboard())
         dispatch(setToClassS())
+        dispatch(setToClose())
         localStorage.setItem('currentSection', 'classS');
     }
 
