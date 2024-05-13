@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { setToInstructor, setToStudent } from '../store/slices/instructorOrStudent';
+
 import axios from "axios";
 import moment from "moment";
 
@@ -7,6 +10,8 @@ import Title from "./Title";
 
 const Notifications = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+
     const userId = localStorage.getItem("userId");
 
     const [invitations, setInvitations] = useState([]);
@@ -53,6 +58,7 @@ const Notifications = () => {
         if(asInstructor){
             acceptToBeInstructor(classId).then((data) => {
                 handleRejectInvitation(e, invitationId)
+                dispatch(setToInstructor())
                 navigate(`/dashboard/classroom/${data.existingClass._id}/home`);
                
             });
@@ -60,6 +66,7 @@ const Notifications = () => {
         else{
             acceptToBeStudent(classId).then((data) => {
                 handleRejectInvitation(e, invitationId)
+                dispatch(setToStudent())
                 navigate(`/dashboard/classroom/${data.existingClass._id}/home`);
             });
         }

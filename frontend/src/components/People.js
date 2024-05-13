@@ -17,6 +17,8 @@ const People = () => {
     const [query, setQuery] = useState("");
     const [query2, setQuery2] = useState("");
     const id = useParams().id;
+    const userId = localStorage.userId;
+
     const [instructors, setInstructors] = useState([]);
     const [students, setStudents] = useState([]);
     const [name, setName] = useState("");
@@ -25,6 +27,37 @@ const People = () => {
     const [userInfo, setUserInfo] = useState("");
     
 
+    const kickInstructor = async(Id) => {
+        const res = await axios.put(`http://localhost:4000/class/kick/instructor/${Id}`, {
+            classId: id,
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleKickInstructor = (e, Id) => {
+        e.preventDefault();
+        kickInstructor(Id).then(()=>{
+            window.location.reload()
+        })
+    }
+
+    const kickStudent = async(Id) => {
+        const res = await axios.put(`http://localhost:4000/class/kick/student/${Id}`, {
+            classId: id,
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        console.log(data)
+        return data;
+    }
+
+    const handleKickStudent = (e, Id) => {
+        e.preventDefault();
+        kickStudent(Id).then(()=>{
+            window.location.reload()
+        })
+    }
 
     const fetchUserDetails = async(userId) => {
         const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
@@ -37,8 +70,6 @@ const People = () => {
         setUserInfo("")
         fetchUserDetails(userId).then((data)=>setUserInfo(data))
     }
-
-
 
     const fetchDetails = async() => {
         const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
@@ -53,6 +84,10 @@ const People = () => {
             setStudents(data.students)
         })
     }, [id])
+
+    useEffect(()=>{
+        console.log(instructors)
+    }, [instructors])
 
     useEffect(()=>{
         console.log(instructors)
@@ -90,8 +125,14 @@ const People = () => {
 
                     <div className="on-page-btns">
                         <button onClick={()=>setStudentInfoPage(!isStudentInfoPageOpen)}>Back</button>
-                        {isInstructor &&
-                        <button className="danger">Kick</button>
+                        {
+                            isInstructor && userInfo._id !== userId && (
+                                instructors.includes(userInfo._id) ? (
+                                    <button className="danger" onClick={(e) => handleKickInstructor(e, userInfo._id)}>Kick</button>
+                                ) : (
+                                    <button className="danger" onClick={(e) => handleKickStudent(e, userInfo._id)}>Kick</button>
+                                )
+                            )
                         }
                     </div>
                 </div>

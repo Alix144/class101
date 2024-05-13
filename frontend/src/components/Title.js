@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { setToInstructor, setToStudent } from '../store/slices/instructorOrStudent';
 
 import plus from '../images/plus.png'
 import search from '../images/search.png'
@@ -11,6 +12,7 @@ import student from '../images/student.png'
 
 const Title = ({propTitle, add}) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
     const { id } = useParams();
     const userId = localStorage.getItem('userId')
@@ -281,35 +283,12 @@ const Title = ({propTitle, add}) => {
         }else{
             joinClass().then((data) => {
                 console.log(data)
+                dispatch(setToStudent())
                 navigate(`/dashboard/classroom/${data.existingClass._id}/home`);
                 window.location.reload();
             });
         }
     }
-
-    // //invite student ***new**
-    // const inviteStudents = async() => {
-    //     const res = await axios.put(`http://localhost:4000/class/join/class/${selectedClass}`, {
-    //         userId,
-    //     }).catch(err=>console.log(err));
-    //     const data = await res.data;
-    //     console.log(data)
-    //     return data;
-    // }
-
-    // const handleJoinClass = (e) => {
-    //     e.preventDefault()
-    //     console.log("clicked")
-    //     if(!selectedClass){
-    //         setError("Please select a class!")
-    //     }else{
-    //         joinClass().then((data) => {
-    //             console.log(data)
-    //             navigate(`/dashboard/classroom/${data.existingClass._id}/home`);
-    //             window.location.reload();
-    //         });
-    //     }
-    // }
 
 
     //invite instructor
@@ -536,7 +515,7 @@ const Title = ({propTitle, add}) => {
                     </div>
 
                 <div className="people">
-                {users.filter(user=>user.email.toLowerCase().includes(query) && user._id != userId).map((user)=>(
+                {users.filter(user=>user.email.toLowerCase().includes(query) && user._id !== userId).map((user)=>(
                     
                     <div className={`one-ppl ${user._id === selectedUser ? "selected-class" : ""}` } onClick={()=>selectUser(user._id, user.email)} key={user._id}>
                         <div className="left-border"></div>
@@ -581,7 +560,7 @@ const Title = ({propTitle, add}) => {
                     </div>
 
                 <div className="people">
-                {users.filter(user=>user.email.toLowerCase().includes(query) && user._id != userId).map((user)=>(
+                {users.filter(user=>user.email.toLowerCase().includes(query) && user._id !== userId).map((user)=>(
                     
                     <div className={`one-ppl ${user._id === selectedUser ? "selected-class" : ""}` } onClick={()=>selectUser(user._id, user.email)} key={user._id}>
                         <div className="left-border"></div>

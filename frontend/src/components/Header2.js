@@ -6,6 +6,7 @@ import moment from "moment";
 
 import { login, logout } from '../store/slices/authSlice';
 import { setToOpen, setToClose } from '../store/slices/hamburger';
+import { setToInstructor, setToStudent } from '../store/slices/instructorOrStudent';
 
 import ProfileImg from './ProfileImg'
 import logo from '../images/logo1.png'
@@ -124,6 +125,7 @@ const Header2 = () => {
         e.preventDefault()
         createClass().then((data) => {
             navigate(`dashboard/classroom/${data.class._id}/home`);
+            dispatch(setToInstructor())
             window.location.reload();
         });
     }
@@ -143,8 +145,8 @@ const Header2 = () => {
     const handleJoinClass = (e) => {
         e.preventDefault()
         joinClass().then((data) => {
-            console.log(data)
             navigate(`dashboard/classroom/${data.existingClass._id}/home`);
+            dispatch(setToStudent())
             window.location.reload();
         });
     }

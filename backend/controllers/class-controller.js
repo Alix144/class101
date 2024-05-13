@@ -361,6 +361,80 @@ export const getAllClasses = async(req, res, next) => {
 }
 
 
+export const kickInstructor = async(req, res, next) => {
+    const {classId} = req.body;
+    const userId = req.params.id;
+    let updatedClass;
+    let updatedUser;
+
+    try{
+        updatedClass = await Class.findByIdAndUpdate(
+            classId,
+            { $pull: { instructors: userId } },
+            { new: true }
+        );
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!updatedClass){
+        return res.status(404).json({message: "No Class Found"})
+    }
+
+    try{
+        updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { $pull: { classes: classId } },
+            { new: true }
+        );
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!updatedUser){
+        return res.status(404).json({message: "No user Found"})
+    }
+
+    return res.status(200).json({message: "Successfully kicked"})
+}
+
+export const kickStudent = async(req, res, next) => {
+    const {classId} = req.body;
+    const userId = req.params.id;
+    let updatedClass;
+    let updatedUser;
+
+    try{
+        updatedClass = await Class.findByIdAndUpdate(
+            classId,
+            { $pull: { students: userId } },
+            { new: true }
+        );
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!updatedClass){
+        return res.status(404).json({message: "No Class Found"})
+    }
+
+    try{
+        updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { $pull: { classes: classId } },
+            { new: true }
+        );
+    }catch(err){
+        return console.log(err)
+    }
+
+    if(!updatedUser){
+        return res.status(404).json({message: "No user Found"})
+    }
+
+    return res.status(200).json({message: "Successfully kicked"})
+}
+
 export const deleteClass = async(req, res, next) => {
     const id = req.params.id;
     let task;
