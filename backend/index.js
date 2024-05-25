@@ -13,24 +13,19 @@ import submittedHwsRouter from "./routes/submittedHw-route.js";
 import messageRouter from "./routes/message-route.js";
 import invitationRouter from "./routes/invitation-route.js";
 import { config } from 'dotenv';
-config();
 import { Server } from 'socket.io';
 import http from 'http';
+config();
 
 const PORT = process.env.PORT;
 const app = express();
 
 app.use(cors())
-// app.use(cors({
-//     origin: ["http://localhost:4000/"],
-//     methods: ["POST", "GET", "PUT", "DELETE"]
-// }))
 
 app.use(express.json())
 
 /***********socket.io************/
-
-const server = http.createServer(app); // Create an HTTP server using Express app
+const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
@@ -38,7 +33,6 @@ const io = new Server(server, {
         methods: ["POST", "GET", "PUT", "DELETE"]
     }
 });
-
 
 app.use("/files", express.static("files"));
 app.use("/user", userRouter)
@@ -76,10 +70,6 @@ io.on('connection', (socket) => {
         console.log("typingggggg stoped" + data)
         io.to(data.classId).emit('typing_stoped');
     });
-
-    // socket.on("send_message", (data) => {
-    //     socket.broadcast.emit("receive_message", data)
-    // })
 });
 
 mongoose.connect(process.env.MONGO_URI)

@@ -342,7 +342,7 @@ const Assignments = () => {
                             return(
                                 <div className="assignment" onClick={()=>openSubmittedHwDetails(assignment._id)} key={index}>
                                     <div className="info">
-                                        <div className="pic">{assignment.user.name[0].toUpperCase()}</div>
+                                        <div className="pic" style={{backgroundColor: `${assignment.user.color}`}}>{assignment.user.name[0].toUpperCase()}</div>
                                         <div>
                                             <h4>{assignment.user.name} {assignment.user.surname}</h4>
                                             <h6>{assignment.assignment.title}</h6>

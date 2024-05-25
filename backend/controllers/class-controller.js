@@ -3,7 +3,6 @@ import User from "../models/UserModel.js";
 import Chat from "../models/ChatModel.js";
 import mongoose from "mongoose";
 
-
 export const createClass = async(req, res, next) => {
     const {name, courseCode, invitationCode, description, visibility, classColor, user} = req.body;
     

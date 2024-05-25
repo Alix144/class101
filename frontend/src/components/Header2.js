@@ -17,7 +17,7 @@ import bell2 from '../images/bell2.png'
 import bell3 from '../images/bell3.png'
 import logoutIcon from '../images/logout.png'
 import emptyBox from '../images/empty-box.png'
-
+import check from '../images/check.png'
 
 const Header2 = () => {
     const navigate = useNavigate();
@@ -35,6 +35,8 @@ const Header2 = () => {
     const [isCreateClassDivOpen, setCreateClassDiv] = useState(false)
     const [isJoinClassDivOpen, setJoinClassDiv] = useState(false)
 
+    const [selectedColor, setSelectedColor] = useState("#74BCFF");
+
     const [name, setName] = useState("");
     const [courseCode, setCourseCode] = useState("");
     const [description, setDescription] = useState("");
@@ -45,6 +47,10 @@ const Header2 = () => {
 
     const handleDate = (date) => {
         return moment(date).fromNow()
+    }
+
+    const handleColorClick = (color) => {
+        setSelectedColor(color)
     }
 
     const plusMenu = () => {
@@ -114,6 +120,7 @@ const Header2 = () => {
             invitationCode: generateRandomCode(6),
             description,
             visibility,
+            classColor: selectedColor,
             user: localStorage.getItem('userId')
         }).catch(err=>console.log(err));
         const data = await res.data;
@@ -223,11 +230,11 @@ const Header2 = () => {
                         <p>Class Color</p>
                             <div className="colors">
                                 <div className="colors-container">
-                                    <div style={{backgroundColor: "#74BCFF"}}></div>
-                                    <div style={{backgroundColor: "#86FFAF"}}></div>
-                                    <div style={{backgroundColor: "#B63EFF"}}></div>
-                                    <div style={{backgroundColor: "#FF6464"}}></div>
-                                    <div style={{backgroundColor: "#FFD15A"}}></div>
+                                    <div className='circle-color' style={{backgroundColor: "#74BCFF"}} onClick={()=>handleColorClick("#74BCFF")}> {selectedColor ==="#74BCFF" && <img src={check} alt="check"/>} </div>
+                                    <div className='circle-color' style={{backgroundColor: "#86FFAF"}} onClick={()=>handleColorClick("#86FFAF")}> {selectedColor ==="#86FFAF" && <img src={check} alt="check"/>} </div>
+                                    <div className='circle-color' style={{backgroundColor: "#B63EFF"}} onClick={()=>handleColorClick("#B63EFF")}> {selectedColor ==="#B63EFF" && <img src={check} alt="check"/>} </div>
+                                    <div className='circle-color' style={{backgroundColor: "#FF6464"}} onClick={()=>handleColorClick("#FF6464")}> {selectedColor ==="#FF6464" && <img src={check} alt="check"/>} </div>
+                                    <div className='circle-color' style={{backgroundColor: "#FFD15A"}} onClick={()=>handleColorClick("#FFD15A")}> {selectedColor ==="#FFD15A" && <img src={check} alt="check"/>} </div>
                                 </div>
                             </div>
                         </div>
@@ -273,7 +280,7 @@ const Header2 = () => {
 
             <div className="header-part-2">
                 <img src={plus} alt="Plus" className='plus' onClick={plusMenu}/>
-                <img src={invitations.length != 0 ? bell3 : bell} alt="Notification" className='bell' onClick={notificationMenu}/>
+                <img src={invitations.length !== 0 ? bell3 : bell} alt="Notification" className='bell' onClick={notificationMenu}/>
                 <div className="profile" style={{backgroundColor: `${color}`}} onClick={profileMenu}>{user && user.name[0].toUpperCase()}</div>
 
                 {plusBtn && 
@@ -293,7 +300,7 @@ const Header2 = () => {
 
                         <div className="notifications">
 
-                            {invitations.length != 0 ? (
+                            {invitations.length !== 0 ? (
                                 invitations.slice().reverse().map((invitation, index) => (
                                     
                                         <div className="notification" onClick={goToNotifications} key={invitation._id}>

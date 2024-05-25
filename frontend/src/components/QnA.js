@@ -103,7 +103,7 @@ const QnA = () => {
             <div className="qna">
 
                 <div className="q-input">
-                    <div className="q-img">{user.name[0].toUpperCase()}</div>
+                    <div className="q-img" style={{backgroundColor: `${user.color}`}}>{user.name[0].toUpperCase()}</div>
                     <input type="text" placeholder="Add Question" value={question} onChange={(e)=>setQuestion(e.target.value)}/>
                     <button onClick={handleCreatePost}>Submit</button>
                 </div>
@@ -114,7 +114,7 @@ const QnA = () => {
                 <div className="qna-post" key={index}>
                     <div className="question-div">
                         <div className="info">
-                            <div className="a-img">{post.user.name[0].toUpperCase()}</div>
+                            <div className="a-img" style={{backgroundColor: `${post.user.color}`}}>{post.user.name[0].toUpperCase()}</div>
                             <div>
                                 <h4>{post.user.name}</h4>
                                 <p>{handleDate(post.date)}</p>
@@ -126,7 +126,7 @@ const QnA = () => {
                         <hr />
                     </div>
                     <div className="answer">
-                        <div className="a-img">{user.name[0].toUpperCase()}</div>
+                        <div className="a-img" style={{backgroundColor: `${user.color}`}}>{user.name[0].toUpperCase()}</div>
                         <input type="text" placeholder="Answer" onChange={(e)=>{setAnswer(e.target.value)}}/>
                         <button onClick={(e)=>handleAnswerSubmit(e, post._id)}>Answer</button>
                     </div>
@@ -136,7 +136,7 @@ const QnA = () => {
                         answer.post === post._id &&
                         <div className="comment" key={index}>
                             <div className="info">
-                                <div className="a-img">{answer.user.name[0].toUpperCase()}</div>
+                                <div className="a-img" style={{backgroundColor: `${answer.user.color}`}}>{answer.user.name[0].toUpperCase()}</div>
                                 <div>
                                     <h4>{answer.user.name}</h4>
                                     <p>{handleDate(answer.date)}</p>

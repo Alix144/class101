@@ -61,7 +61,7 @@ const Announcements = () => {
                         <div className="announcement-box" key={index}>
                             <div className="left-border"></div>
                             <div className="info">
-                                <div className="profile-pic">{announcement.user.name[0].toUpperCase()}</div>
+                                <div className="profile-pic" style={{backgroundColor: `${announcement.user.color}`}}>{announcement.user.name[0].toUpperCase()}</div>
                                 <div>
                                     <h4>{announcement.title}</h4>
                                     <p>{announcement.user.name}</p>

@@ -2871,6 +2871,11 @@ p{
         height: 250px;
     }
 
+    .div-content img{
+        width: 80px;
+        height: 80px;
+    }
+
     .code-todo-div{
         width: 100%;
         flex-direction: row;
@@ -3381,6 +3386,11 @@ p{
 
     .classroom-home h4{
         font-size: 0.8em;
+    }
+
+    .div-content img{
+        width: 60px;
+        height: 60px;
     }
 
     .code-todo-div{

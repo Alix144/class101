@@ -86,7 +86,6 @@ const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, i
             .catch(err => console.log(err));
         }
 
-
         //customize
         const customize = async() => {
             const formData = new FormData();

@@ -55,11 +55,9 @@ function App() {
     <div className="App">
       
         {isLoggedIn ? <Header2/> : <Header/>}
-        {/* {true ? <Header2/> : <Header/>} */}
 
         <Routes>
           {!isLoggedIn ?
-          // {!true ?
           <>
             <Route path="/" element={<Main/>}/>
             <Route path="/auth" element={<Auth/>}/>

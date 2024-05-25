@@ -107,7 +107,7 @@ const People = () => {
                     </div>
                     <div className="student-hw-info">
                         <div className="st-info">
-                            <div className="profile-pic">k</div>
+                            <div className="profile-pic" style={{backgroundColor: `${userInfo.color}`}}>{userInfo.name[0].toUpperCase()}</div>
                             <div>
                                 <h4>{userInfo.name ? userInfo.name.charAt(0).toUpperCase() + userInfo.name.slice(1): ""} {userInfo.surname ? userInfo.surname.charAt(0).toUpperCase() + userInfo.surname.slice(1): ""}</h4>
                             </div>
@@ -162,7 +162,7 @@ const People = () => {
                     <div className="one-ppl" key={user._id} onClick={()=>openInfoPage(user._id)}>
                         <div className="left-border"></div>
                         <div className="info">
-                            <div className="profile-pic">{user.name[0].toUpperCase()}</div>
+                            <div className="profile-pic" style={{backgroundColor: `${user.color}`}}>{user.name[0].toUpperCase()}</div>
                             <h4>{user.name.charAt(0).toUpperCase()+user.name.slice(1)}</h4>
                         </div>
                         <p>{user.email}</p>
@@ -198,7 +198,7 @@ const People = () => {
                     <div className="one-ppl" key={user._id} onClick={()=>openInfoPage(user._id)}>
                         <div className="left-border"></div>
                         <div className="info">
-                            <div className="profile-pic">{user.name.charAt(0).toUpperCase()}</div>
+                            <div className="profile-pic" style={{backgroundColor: `${user.color}`}}>{user.name.charAt(0).toUpperCase()}</div>
                             <h4>{user.name.charAt(0).toUpperCase()+user.name.slice(1)}</h4>
                         </div>
                         <p>{user.email}</p>

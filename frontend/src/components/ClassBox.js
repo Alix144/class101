@@ -11,7 +11,16 @@ import ProfileImg from './ProfileImg'
 
 import student from '../images/student.png'
 import teacher from '../images/teacher.png'
-import more from '../images/more.png'
+
+import bg1 from '../images/classBgs/bg1.jpg'
+import bg2 from '../images/classBgs/bg2.jpg'
+import bg3 from '../images/classBgs/bg3.jpg'
+import bg4 from '../images/classBgs/bg4.jpg'
+import bg5 from '../images/classBgs/bg5.jpg'
+import bg6 from '../images/classBgs/bg6.jpg'
+import bg7 from '../images/classBgs/bg7.jpg'
+import bg8 from '../images/classBgs/bg8.jpg'
+import bg9 from '../images/classBgs/bg9.jpg'
 
 import { motion } from "framer-motion";
 const container = {
@@ -30,6 +39,8 @@ const ClassBox = ( {id, color, img, className, instructorsNum, studentsNum, type
     let primaryColor;
     let secondColor;
     let picColor;
+
+    let bg;
 
     if(color === "#FF6464"){
         primaryColor = "#FF6161"
@@ -55,6 +66,27 @@ const ClassBox = ( {id, color, img, className, instructorsNum, studentsNum, type
         secondColor = "#282DA4"
         picColor = "#C2DEFF"
     }
+
+    if(img === "bg1"){
+        bg = bg1;
+    }else if(img === "bg2"){
+        bg = bg2;
+    }else if(img === "bg3"){
+        bg = bg3;
+    }else if(img === "bg4"){
+        bg = bg4;
+    }else if(img === "bg5"){
+        bg = bg5;
+    }else if(img === "bg6"){
+        bg = bg6;
+    }else if(img === "bg7"){
+        bg = bg7;
+    }else if(img === "bg8"){
+        bg = bg8;
+    }else{
+        bg = bg9;
+    }
+
     
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -82,7 +114,7 @@ const ClassBox = ( {id, color, img, className, instructorsNum, studentsNum, type
         animate="visible"
         onClick={()=>goToClassroom(id)}
         >
-            <div className="class-img" style={{backgroundImage: `url(${img})`}}>
+            <div className="class-img" style={{backgroundImage: `url(${bg})`}}>
                 <div className="img-overlay" style={{backgroundImage: `linear-gradient(${secondColor}, ${primaryColor})`}}></div>
                 <ProfileImg picColor={picColor} className={className}/>
             </div>
@@ -90,7 +122,7 @@ const ClassBox = ( {id, color, img, className, instructorsNum, studentsNum, type
                 <div>
                     <h4>{className}</h4>
                     <p><b>Instructor:</b></p>
-                    <p>Person1</p>
+                    <p>Ali</p>
                 </div>
                 <div className='info-part2'>
                     <div>
