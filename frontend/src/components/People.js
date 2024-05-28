@@ -66,9 +66,10 @@ const People = () => {
     }
 
     const openInfoPage = (userId) => {
-        setStudentInfoPage(!isStudentInfoPageOpen)
+        
         setUserInfo("")
-        fetchUserDetails(userId).then((data)=>setUserInfo(data))
+        fetchUserDetails(userId).then((data)=>setUserInfo(data)).then(()=> setStudentInfoPage(!isStudentInfoPageOpen))
+        
     }
 
     const fetchDetails = async() => {
@@ -102,7 +103,7 @@ const People = () => {
             <div className="on-page-div">   
                 <div className="add-form edit-task-form" id="user-info">
                     <div className="on-page-title">
-                        <h3>{userInfo.name ? userInfo.name.charAt(0).toUpperCase() + userInfo.name.slice(1): ""}'s Details</h3>
+                        <h3>{userInfo.name ? userInfo.name[0].toUpperCase() + userInfo.name.slice(1): ""}'s Details</h3>
                         <hr/>
                     </div>
                     <div className="student-hw-info">
@@ -138,6 +139,7 @@ const People = () => {
                 </div>
             </div>
         }
+
         <div className="content">
             {isInstructor ?
                 <Title propTitle={"Instructors"} add={"add-instructors"}/>

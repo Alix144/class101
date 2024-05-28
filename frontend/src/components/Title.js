@@ -43,10 +43,8 @@ const Title = ({propTitle, add}) => {
 
     //get user classes
     const fetchClasses = async() => {
-        console.log(userId)
         const res = await axios.get(`http://localhost:4000/class/view/${userId}`).catch(err=>console.log(err))
         const data = await res.data.classes;
-        console.log(data)
         return data;
     }
 
@@ -61,7 +59,6 @@ const Title = ({propTitle, add}) => {
     const getAllClasses = async() => {
         const res = await axios.get("http://localhost:4000/class/").catch(err=>console.log(err))
         const data = await res.data.classes;
-        console.log(data)
         return data;
     }
 
@@ -78,7 +75,6 @@ const Title = ({propTitle, add}) => {
     const getAllUsers = async() => {
         const res = await axios.get("http://localhost:4000/user/").catch(err=>console.log(err))
         const data = await res.data.users;
-        console.log(data)
         return data;
     }
 
@@ -96,9 +92,9 @@ const Title = ({propTitle, add}) => {
     const [course, setCourse] = useState(null)
     const [description, setDescription] = useState("")
 
-    useEffect(()=>{ 
-        console.log("course is: "+course)
-    },[course])
+    // useEffect(()=>{ 
+    //     console.log("course is: "+course)
+    // },[course])
 
     //announcement
     const [announcementTitle, setAnnouncementTitle] = useState("")
@@ -137,11 +133,13 @@ const Title = ({propTitle, add}) => {
     const closeInviteStudent = () => {
         setAddStudentPage(!isAddStudentPageOpen)
         setEmail("")
+        setError("")
     }
 
     const closeInviteInstructor = () => {
         setAddInstPage(!isAddInstPageOpen)
         setEmail("")
+        setError("")
     }
 
     /*******************/
@@ -161,10 +159,15 @@ const Title = ({propTitle, add}) => {
 
     const handleAddTask = (e) => {
         e.preventDefault()
-        addTask().then(() => {
-            // navigate("dashboard/todo");
-            window.location.reload();
-        });
+        
+        if(title === ""){
+            setError("Please Fill in the required fields!")
+        }else{
+            setError("")
+            addTask().then(() => {
+                window.location.reload();
+            });
+        }
     }
 
     //add announcement
@@ -182,9 +185,15 @@ const Title = ({propTitle, add}) => {
 
     const handleAddAnnouncement = (e) => {
         e.preventDefault()
-        addAnnouncement().then(() => {
-            window.location.reload();
-        });
+
+        if(announcementTitle === ""){
+            setError("Please Fill in the required fields!")
+        }else{
+            setError("")
+            addAnnouncement().then(() => {
+                window.location.reload();
+            });
+        }
     }
 
     //add syllabus
@@ -201,10 +210,15 @@ const Title = ({propTitle, add}) => {
 
     const handleAddSyllabus = (e) => {
         e.preventDefault()
-        addSyllabus().then(() => {
-            // navigate("dashboard/todo");
-            window.location.reload();
-        });
+        if(week === ""){
+            setError("Please Fill in the required fields!")
+        }else{
+            setError("")
+            addSyllabus().then(() => {
+                window.location.reload();
+            });
+        }
+        
     }
 
     //add document
@@ -224,9 +238,14 @@ const Title = ({propTitle, add}) => {
 
     const handleAddDocument = (e) => {
         e.preventDefault()
-        addDocument().then(() => {
-            window.location.reload();
-        });
+        if(docTitle === "" || file === ""){
+            setError("Please Fill in the required fields!")
+        }else{
+            setError("")
+            addDocument().then(() => {
+                window.location.reload();
+            });
+        }
     }
 
 
@@ -249,9 +268,14 @@ const Title = ({propTitle, add}) => {
 
     const handleAddAssignment = (e) => {
         e.preventDefault()
-        addAssignment().then(() => {
-            window.location.reload();
-        });
+        if(HwTitle === "" || file === ""){
+            setError("Please Fill in the required fields!")
+        }else{
+            setError("")
+            addAssignment().then(() => {
+                window.location.reload();
+            });
+        }
     }
 
     //search class
@@ -271,18 +295,15 @@ const Title = ({propTitle, add}) => {
             userId,
         }).catch(err=>console.log(err));
         const data = await res.data;
-        console.log(data)
         return data;
     }
 
     const handleJoinClass = (e) => {
         e.preventDefault()
-        console.log("clicked")
         if(!selectedClass){
             setError("Please select a class!")
         }else{
             joinClass().then((data) => {
-                console.log(data)
                 dispatch(setToStudent())
                 navigate(`/dashboard/classroom/${data.existingClass._id}/home`);
                 window.location.reload();
@@ -306,9 +327,14 @@ const Title = ({propTitle, add}) => {
 
     const handleInviteInstructor = (e) => {
         e.preventDefault()
-        inviteInstructor().then(() => {
-            window.location.reload();
-        });
+        if(!email){
+            setError("Please select a user to invite!")
+        }else{
+            setError("")
+            inviteInstructor().then(() => {
+                window.location.reload();
+            });
+        }
     }
 
     //invite student
@@ -325,10 +351,16 @@ const Title = ({propTitle, add}) => {
 
     const handleInviteStudent = (e) => {
         e.preventDefault()
-        inviteStudent().then((data) => {
-            console.log(data)
-            window.location.reload();
-        });
+        if(!email){
+            setError("Please select a user to invite!")
+        }else{
+            setError("")
+            inviteStudent().then((data) => {
+                console.log(data)
+                window.location.reload();
+            });
+            
+        }
     }
 
     return ( 
@@ -365,6 +397,7 @@ const Title = ({propTitle, add}) => {
                         <textarea name="desc" id="desc" cols="30" rows="5" value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
                     </div>
 
+                {error && <p className='error'>{error}</p>}
                 </form>
                 <div className="on-page-btns">
                     <button onClick={()=>setAddTaskPage(!isAddTaskPageOpen)}>Cancel</button>
@@ -391,7 +424,8 @@ const Title = ({propTitle, add}) => {
                         <label htmlFor="desc">Description</label>
                         <textarea name="desc" id="desc" cols="30" rows="5" value={announcementDescription} onChange={(e)=>setAnnouncementDescription(e.target.value)}></textarea>
                     </div>
-
+                    {error && <p className='error'>{error}</p>}
+                    
                 </form>
                 <div className="on-page-btns">
                     <button onClick={()=>setAddAnnouncementPage(!isAddAnnouncementPageOpen)}>Cancel</button>
@@ -431,6 +465,7 @@ const Title = ({propTitle, add}) => {
                         <p>{fileName}</p>
                     </div>
 
+                    {error && <p className='error'>{error}</p>}
                 </form>
                 <div className="on-page-btns">
                     <button onClick={()=>setAddAssignmentPage(!isAddAssignmentPageOpen)}>Cancel</button>
@@ -461,6 +496,7 @@ const Title = ({propTitle, add}) => {
                     ))}
 
                 <button type="button" className='add-topic no-mrgn' onClick={handleAddTopic}>Add Topic</button>
+                {error && <p className='error'>{error}</p>}
                 </form>
 
                 <div className="on-page-btns">
@@ -491,6 +527,7 @@ const Title = ({propTitle, add}) => {
                         <p>{fileName}</p>
                     </div>
 
+                    {error && <p className='error'>{error}</p>}
                 </form>
                 <div className="on-page-btns">
                     <button onClick={()=>setAddDocPage(!isAddDocPageOpen)}>Cancel</button>
@@ -532,9 +569,12 @@ const Title = ({propTitle, add}) => {
 
                 ))}
                     
+                    
+
                 </div>
 
                 <hr className="hr"/>
+                {error && <p className='error'>{error}</p>}
                 </div>
                 
                 <div className="on-page-btns">
@@ -580,6 +620,7 @@ const Title = ({propTitle, add}) => {
                 </div>
 
                 <hr className="hr"/>
+                {error && <p className='error'>{error}</p>}
                 </div>
 
                 <div className="on-page-btns">

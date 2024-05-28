@@ -182,7 +182,6 @@ const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, i
         setDescription(description)
         setVisibility(visibility)   
         setSelectedColor(classColor)
-        console.log(bg)
     }, [name, courseCode, classColor, id])
 
     useEffect(() => {

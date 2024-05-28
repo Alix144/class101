@@ -45,6 +45,8 @@ const Header2 = () => {
 
     const [invitationCode, setInvitationCode] = useState("");
 
+    const [error, setError] = useState("")
+
     const handleDate = (date) => {
         return moment(date).fromNow()
     }
@@ -79,11 +81,13 @@ const Header2 = () => {
     const closeCreateClassDiv = () => {
         setCreateClassDiv(false)
         setPlusBtn(false)
+        setError("")
     }
 
     const closeJoinClassDiv = () => {
         setJoinClassDiv(false)
         setPlusBtn(false)
+        setError("")
     }
 
     const logoutFunction = () => {
@@ -130,11 +134,17 @@ const Header2 = () => {
 
     const handleCreateClass = (e) => {
         e.preventDefault()
-        createClass().then((data) => {
-            navigate(`dashboard/classroom/${data.class._id}/home`);
-            dispatch(setToInstructor())
-            window.location.reload();
-        });
+        if(name === ""){
+            setError("Please Fill in the required fields!")
+        }else{
+            setError("")
+            createClass().then((data) => {
+                navigate(`dashboard/classroom/${data.class._id}/home`);
+                dispatch(setToInstructor())
+                window.location.reload();
+            });
+            
+        }
     }
 
 
@@ -150,11 +160,17 @@ const Header2 = () => {
 
     const handleJoinClass = (e) => {
         e.preventDefault()
-        joinClass().then((data) => {
-            navigate(`dashboard/classroom/${data.existingClass._id}/home`);
-            dispatch(setToStudent())
-            window.location.reload();
-        });
+        if(invitationCode === ""){
+            setError("Please provide the class invitation code!")
+        }else{
+            setError("")
+            joinClass().then((data) => {
+                navigate(`dashboard/classroom/${data.existingClass._id}/home`);
+                dispatch(setToStudent())
+                window.location.reload();
+            });
+            
+        }
     }
 
     // fetch user name
@@ -177,7 +193,6 @@ const Header2 = () => {
     const getInvitations = async() => {
         const res = await axios.get(`http://localhost:4000/invite/get/${userId}`).catch(err=>console.log(err))
         const data = await res.data.invitations;
-        console.log(data)
         return data;
     }
 
@@ -238,6 +253,8 @@ const Header2 = () => {
                                 </div>
                             </div>
                         </div>
+                        {error && <p className='error'>{error}</p>}
+
                     </form>
                     <div className="on-page-btns">
                         <button onClick={closeCreateClassDiv}>close</button>
@@ -259,6 +276,9 @@ const Header2 = () => {
                             <label htmlFor="code">Class Code</label>
                             <input type="text" value={invitationCode} onChange={(e)=>setInvitationCode(e.target.value)}/>
                         </div>
+
+                        {error && <p className='error'>{error}</p>}
+
                     </form>
 
                     <div className="on-page-btns">

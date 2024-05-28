@@ -13,6 +13,10 @@
     color: #FFD15A;
 }
 
+.error{
+    color: rgb(250, 101, 101);
+}
+
 body, button{
     font-family: 'Montserrat', sans-serif;
 }

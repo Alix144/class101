@@ -22,7 +22,6 @@ const Classroom = () => {
         fetchDetails()
         .then((data)=>{
             setKlass(data.class)
-            console.log(klass.background)
         })
     },[id])
 
