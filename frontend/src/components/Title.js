@@ -251,7 +251,6 @@ const Title = ({propTitle, add}) => {
 
     //add assignment
     const addAssignment = async() => {
-
         const formData = new FormData();
         formData.append("title", HwTitle);
         formData.append("description", HwDescription);
@@ -359,7 +358,6 @@ const Title = ({propTitle, add}) => {
                 console.log(data)
                 window.location.reload();
             });
-            
         }
     }
 
@@ -646,7 +644,7 @@ const Title = ({propTitle, add}) => {
                     </div>
 
                 <div className="people">
-                {allClasses.filter(klass=>klass.name.toLowerCase().includes(query) && klass.visibility === "public").map((klass)=>(
+                {allClasses.filter(klass=>klass.name.toLowerCase().includes(query) && klass.visibility === "public" && klass.instructors[0]._id !== userId).map((klass)=>(
                     
                     <div className={`one-ppl ${klass._id === selectedClass ? "selected-class" : ""}` } onClick={()=>selectClass(klass._id)} key={klass._id}>
                         <div className="left-border"></div>

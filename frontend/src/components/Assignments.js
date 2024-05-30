@@ -283,7 +283,7 @@ const Assignments = () => {
             {/****** going assignments *******/}
 
             <div className="going-assignments empty-parent">
-                {false ? 
+                {assignments.length === 0 ? 
                     <>
                     <img src={leaf} alt="Empty" className='empty'/>
                     <p>No Assignment Added</p>
@@ -324,7 +324,7 @@ const Assignments = () => {
             <Title propTitle={"Previous Assignments"}/>
             }
             <div className="coming-assignments empty-parent">
-                {false ? 
+                {submittedHws.length === 0 ? 
                     <>
                         <img src={leaf} alt="Empty" className='empty'/>
                         {isInstructor ?

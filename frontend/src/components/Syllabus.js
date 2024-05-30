@@ -6,13 +6,14 @@ import axios from "axios";
 import Title from "./Title";
 
 import trash from '../images/trash-can.png'
+import leaf from '../images/leaf.png'
 import edit from '../images/pencil.png'
 
 const Syllabus = () => {
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const id = useParams().id
-    const [syllabus, setSyllabus] = useState()
+    const [syllabus, setSyllabus] = useState([])
 
     const sendRequest = async() => {
         const res = await axios.get("http://localhost:4000/syllabus").catch(err=>console.log(err))
@@ -37,6 +38,15 @@ const Syllabus = () => {
                 <Title propTitle={"Syllabus"}/>
             }
 
+            {syllabus.length === 0 ? 
+            <>
+                <div style={{display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center"}}>
+                <img src={leaf} alt="Empty" className='empty'/>
+                <p>No Syllabus Shared</p>
+                </div>
+            </>
+            :
+            <>
             {syllabus && syllabus.map((sylla, index)=>{
                 if(id === sylla.class){
                     return(
@@ -52,13 +62,16 @@ const Syllabus = () => {
                         </div>
                         {isInstructor &&
                         <div className="update-delete">
-                            <img src={trash} alt="Delete" />
+                            {/* <img src={trash} alt="Delete" /> */}
                         </div>
                         }
     
                     </div>)
                 }
             })}
+            </>
+
+        }
 
 
 

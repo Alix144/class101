@@ -8,6 +8,7 @@ import Title from "./Title";
 
 import doc from '../images/doc.png'
 import download from '../images/download.png'
+import leaf from '../images/leaf.png'
 
 const Documents = () => {
     const [documents, setDocuments] = useState([]);
@@ -43,7 +44,15 @@ const Documents = () => {
                 <Title propTitle={"Documents"}/>
             }
 
-
+            {documents.length === 0 ?
+                <>
+                <div style={{display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center"}}>
+                <img src={leaf} alt="Empty" className='empty'/>
+                <p>No One has Posted</p>
+                </div>
+                </>:
+        
+            <>
             {documents && documents.slice().reverse().map((document, index)=>{
                 return(
                 <div className="documents" key={index}>
@@ -63,6 +72,8 @@ const Documents = () => {
                 )
 
             })}
+            </>
+        }
 
 
         </div>

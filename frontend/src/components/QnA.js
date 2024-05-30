@@ -5,6 +5,8 @@ import moment from "moment";
 
 import Title from "./Title";
 
+import leaf from '../images/leaf.png'
+
 const QnA = () => {
     const id = useParams().id
     const userId = localStorage.getItem("userId");
@@ -14,6 +16,8 @@ const QnA = () => {
     const [answer, setAnswer] = useState("");
     const [answers, setAnswers] = useState([]);
     
+    const [error, setError] = useState("");
+
     const handleDate = (date) => {
         return moment(date).fromNow()
     }
@@ -47,9 +51,14 @@ const QnA = () => {
 
     const handleCreatePost = (e) => {
         e.preventDefault();
-        createPost().then(()=>{
-            window.location.reload()
-        })
+        if(!question){
+            setError("Please type something!")
+        }else{
+            setError("")
+            createPost().then(()=>{
+                window.location.reload()
+            })
+        }
     }
 
     // Add answer
@@ -66,9 +75,14 @@ const QnA = () => {
 
     const handleAnswerSubmit = async(e, postId) => {
         e.preventDefault();
-        await addAnswer(postId).then(()=>{
-            window.location.reload()
-        })
+        if(!answer){
+            setError("Please type something!")
+        }else{
+            setError("")
+            await addAnswer(postId).then(()=>{
+                window.location.reload()
+            })
+        }
     }
 
     //******************************* */
@@ -107,11 +121,20 @@ const QnA = () => {
                     <input type="text" placeholder="Add Question" value={question} onChange={(e)=>setQuestion(e.target.value)}/>
                     <button onClick={handleCreatePost}>Submit</button>
                 </div>
+                {error && <p className='error'>{error}</p>}
 
-                {posts.slice().reverse().map((post, index)=>
-                        
-                post.class === id &&
-                <div className="qna-post" key={index}>
+                {posts.length === 0 ?
+                    <>
+                        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center"}}>
+                        <img src={leaf} alt="Empty" className='empty'/>
+                        <p>No One has Posted</p>
+                        </div>
+                    </>
+                    :
+                    <>
+                    {posts.slice().reverse().map((post, index)=> 
+                    post.class === id &&
+                    <div className="qna-post" key={index}>  
                     <div className="question-div">
                         <div className="info">
                             <div className="a-img" style={{backgroundColor: `${post.user.color}`}}>{post.user.name[0].toUpperCase()}</div>
@@ -130,6 +153,7 @@ const QnA = () => {
                         <input type="text" placeholder="Answer" onChange={(e)=>{setAnswer(e.target.value)}}/>
                         <button onClick={(e)=>handleAnswerSubmit(e, post._id)}>Answer</button>
                     </div>
+                    
 
                     <div className="comments">
                         {answers.length !== 0 && answers.slice().reverse().map((answer, index) => (
@@ -147,10 +171,10 @@ const QnA = () => {
                         ))}
                     </div>
                     <hr className="hr"/>
-                </div>
-                
-                
-                )}
+                    </div>
+                    )}
+                </>
+                }
 
             </div>
         </div>
