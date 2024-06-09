@@ -122,7 +122,7 @@ const ClassBox = ( {id, color, img, className, instructorsNum, studentsNum, type
                 <div>
                     <h4>{className}</h4>
                     <p><b>Instructor:</b></p>
-                    <p>Ali</p>
+                    <p>-</p>
                 </div>
                 <div className='info-part2'>
                     <div>
