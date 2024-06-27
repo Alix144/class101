@@ -15,6 +15,7 @@ import invitationRouter from "./routes/invitation-route.js";
 import { config } from 'dotenv';
 import { Server } from 'socket.io';
 import http from 'http';
+import path from 'path';
 const __dirname = path.resolve();
 config();
 
