@@ -11,11 +11,14 @@ import io from 'socket.io-client';
 
 
 const Chat = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const classId = useParams().id
     const userId = localStorage.getItem("userId");
 
     const currentDate = new Date();
-    const socket = io.connect("http://localhost:4000")
+    const socket = io.connect(`${link}`)
 
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState("");
@@ -49,7 +52,7 @@ const Chat = () => {
 
 
     const handleSendMessage = async() => {
-        const res = await axios.post("http://localhost:4000/chat/send", {
+        const res = await axios.post(`${link}/chat/send`, {
             user: userId,
             klass: classId,
             content: messageInput
@@ -74,7 +77,7 @@ const Chat = () => {
     /**** fetch data ****/
 
     const getMessages = async() => {
-        const res = await axios.get(`http://localhost:4000/chat/${classId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/chat/${classId}`).catch(err=>console.log(err))
         const data = await res.data.messages
         console.log(data)
         return data;
@@ -89,7 +92,7 @@ const Chat = () => {
     /**** fetch User ****/
 
     const fetchUser = async() => {
-        const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/user/${userId}`).catch(err=>console.log(err))
         const data = await res.data.user;
         console.log(data)
         return data;

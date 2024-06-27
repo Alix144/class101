@@ -7,13 +7,16 @@ import Title from "./Title";
 import ClassroomHome from './ClassroomHome';
 
 const Classroom = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const id = useParams().id
 
     const [klass, setKlass] = useState("");
 
 
     const fetchDetails = async() => {
-        const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/class/view/class/${id}`).catch(err=>console.log(err))
         const data = await res.data;
         return data;
     }

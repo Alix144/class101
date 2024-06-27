@@ -11,7 +11,8 @@ const Auth = () => {
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
     const isRegister = useSelector((state) => state.loginOrRegister.isRegister)
     const navigate = useNavigate();
-  
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -28,7 +29,7 @@ const Auth = () => {
     // }
 
     const sendRequest = async() => {
-        const res = await axios.post("http://localhost:4000/user/register", {
+        const res = await axios.post(`${link}/user/register`, {
             email: email2,
             name,
             surname,
@@ -48,7 +49,7 @@ const Auth = () => {
     }
 
     const sendRequest2 = async() => {
-        const res = await axios.post("http://localhost:4000/user/login", {
+        const res = await axios.post(`${link}/user/login`, {
             email,
             password
         }).catch(err=>console.log(err))

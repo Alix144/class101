@@ -21,6 +21,9 @@ const container = {
   };
   
 const NoteBox = ({id, title, description, klass, deadline, isCompleted}) => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const [isMoreOpen, setMore] = useState(false)
     const [isEditPageOpen, setEditPage] = useState(false)
     const [formattedDate, setFormattedDate] = useState("")
@@ -62,7 +65,7 @@ const NoteBox = ({id, title, description, klass, deadline, isCompleted}) => {
     /************************/
     //complete task / undo
     const triggerComplete = async() => {
-        const res = await axios.put(`http://localhost:4000/task/complete/${id}`, {
+        const res = await axios.put(`${link}/task/complete/${id}`, {
             isCompleted: !isCompleted,
         }).catch(err=>console.log(err));
         const data = await res.data;
@@ -79,7 +82,7 @@ const NoteBox = ({id, title, description, klass, deadline, isCompleted}) => {
 
     //delete
     const deleteTask = async() => {
-        const res = await axios.delete(`http://localhost:4000/task/delete/${id}`)
+        const res = await axios.delete(`${link}/task/delete/${id}`)
         .catch(err=>console.log(err));
         const data = await res.data;
         console.log(data)
@@ -95,7 +98,7 @@ const NoteBox = ({id, title, description, klass, deadline, isCompleted}) => {
 
     //update
     const update = async() => {
-        const res = await axios.put(`http://localhost:4000/task/edit/${id}`,{
+        const res = await axios.put(`${link}/task/edit/${id}`,{
             title: newTitle,
             deadline: newDeadline,
             description: newDescription,

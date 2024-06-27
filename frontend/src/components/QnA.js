@@ -8,6 +8,9 @@ import Title from "./Title";
 import leaf from '../images/leaf.png'
 
 const QnA = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const id = useParams().id
     const userId = localStorage.getItem("userId");
     const [posts, setPosts] = useState([]);
@@ -23,13 +26,13 @@ const QnA = () => {
     }
 
     const fetchUserDetails = async() => {
-        const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/user/${userId}`).catch(err=>console.log(err))
         const data = await res.data.user;
         return data;
     }
 
     const fetchDetails = async() => {
-        const res = await axios.get("http://localhost:4000/post/").catch(err=>console.log(err))
+        const res = await axios.get(`${link}/post/`).catch(err=>console.log(err))
         const data = await res.data;
         return data;
     }
@@ -39,7 +42,7 @@ const QnA = () => {
     }, [posts, user, answers]);
 
     const createPost = async() => {
-        const res = await axios.post("http://localhost:4000/post/create", {
+        const res = await axios.post(`${link}/post/create`, {
             question,
             klass: id,
             user: userId
@@ -63,7 +66,7 @@ const QnA = () => {
 
     // Add answer
     const addAnswer = async(postId) => {
-        const res = await axios.post("http://localhost:4000/post/answers/add", {
+        const res = await axios.post(`${link}/post/answers/add`, {
             answer,
             user: userId,
             post: postId
@@ -88,7 +91,7 @@ const QnA = () => {
     //******************************* */
 
     const fetchAnswers = async() => {
-        const res = await axios.get("http://localhost:4000/post/answers").catch(err=>console.log(err))
+        const res = await axios.get(`${link}/post/answers`).catch(err=>console.log(err))
         const data = await res.data.answers;
         return data;
     }

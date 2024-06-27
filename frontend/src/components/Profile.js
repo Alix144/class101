@@ -7,6 +7,9 @@ import Title from "./Title";
 import classroom from '../images/classroom.png'
 
 const Profile = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+    
     const userId = localStorage.getItem('userId')
 
     const [user, setUser] = useState(null)
@@ -19,7 +22,7 @@ const Profile = () => {
 
 
     const updateUser = async() => {
-        const res = await axios.put("http://localhost:4000/user/update",{
+        const res = await axios.put(`${link}/user/update`,{
             userId,
             name,
             surname,
@@ -42,7 +45,7 @@ const Profile = () => {
 
 
     const fetchDetails = async() => {
-        const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/user/${userId}`).catch(err=>console.log(err))
         const data = await res.data.user;
         console.log(data)
         return data;
@@ -62,8 +65,6 @@ const Profile = () => {
 
         
     },[userId])
-
-
 
     return (       
         <main>

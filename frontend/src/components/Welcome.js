@@ -23,6 +23,8 @@ import upload from '../images/upload.png'
 import check from '../images/check.png'
 
 const Welcome = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
 
     const userId = localStorage.getItem("userId");
 
@@ -49,7 +51,7 @@ const Welcome = () => {
 
     // user info
     const getUser = async() => {
-        const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/user/${userId}`).catch(err=>console.log(err))
         const data = await res.data.user
         return data;
     }
@@ -130,7 +132,7 @@ const Welcome = () => {
           }
 
     
-        const res = await axios.put(`http://localhost:4000/user/addBg/${userId}`, formData)
+        const res = await axios.put(`${link}/user/addBg/${userId}`, formData)
         .catch(err=>console.log(err));
         const data = await res.data;
         console.log(data)

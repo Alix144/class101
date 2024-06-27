@@ -11,6 +11,9 @@ import teacher from '../images/teacher.png'
 import student from '../images/student.png'
 
 const Title = ({propTitle, add}) => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
@@ -43,7 +46,7 @@ const Title = ({propTitle, add}) => {
 
     //get user classes
     const fetchClasses = async() => {
-        const res = await axios.get(`http://localhost:4000/class/view/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/class/view/${userId}`).catch(err=>console.log(err))
         const data = await res.data.classes;
         return data;
     }
@@ -57,7 +60,7 @@ const Title = ({propTitle, add}) => {
 
     //get all classes
     const getAllClasses = async() => {
-        const res = await axios.get("http://localhost:4000/class/").catch(err=>console.log(err))
+        const res = await axios.get(`${link}/class/`).catch(err=>console.log(err))
         const data = await res.data.classes;
         return data;
     }
@@ -73,7 +76,7 @@ const Title = ({propTitle, add}) => {
     const [users, setUsers] = useState([]);
 
     const getAllUsers = async() => {
-        const res = await axios.get("http://localhost:4000/user/").catch(err=>console.log(err))
+        const res = await axios.get(`${link}/user/`).catch(err=>console.log(err))
         const data = await res.data.users;
         return data;
     }
@@ -91,10 +94,6 @@ const Title = ({propTitle, add}) => {
     const [deadline, setDeadline] = useState("")
     const [course, setCourse] = useState(null)
     const [description, setDescription] = useState("")
-
-    // useEffect(()=>{ 
-    //     console.log("course is: "+course)
-    // },[course])
 
     //announcement
     const [announcementTitle, setAnnouncementTitle] = useState("")
@@ -145,7 +144,7 @@ const Title = ({propTitle, add}) => {
     /*******************/
     //add task
     const addTask = async() => {
-        const res = await axios.post("http://localhost:4000/task/add", {
+        const res = await axios.post(`${link}/task/add`, {
             title,
             deadline,
             description,
@@ -172,7 +171,7 @@ const Title = ({propTitle, add}) => {
 
     //add announcement
     const addAnnouncement = async() => {
-        const res = await axios.post("http://localhost:4000/announcement/add", {
+        const res = await axios.post(`${link}/announcement/add`, {
             title: announcementTitle,
             description: announcementDescription,
             user: localStorage.getItem('userId'),
@@ -198,7 +197,7 @@ const Title = ({propTitle, add}) => {
 
     //add syllabus
     const addSyllabus = async() => {
-        const res = await axios.post("http://localhost:4000/syllabus/add", {
+        const res = await axios.post(`${link}/syllabus/add`, {
             week,
             topics,
             klass: id
@@ -223,13 +222,12 @@ const Title = ({propTitle, add}) => {
 
     //add document
     const addDocument = async() => {
-
         const formData = new FormData();
         formData.append("title", docTitle);
         formData.append("file", file);
         formData.append("klass", id);
         
-        const res = await axios.post("http://localhost:4000/document/add", formData)
+        const res = await axios.post(`${link}/document/add`, formData)
         .catch(err=>console.log(err));
         const data = await res.data;
         console.log(data)
@@ -258,7 +256,7 @@ const Title = ({propTitle, add}) => {
         formData.append("klass", id);
         formData.append("deadline", HwDeadline);
         
-        const res = await axios.post("http://localhost:4000/assignment/add", formData)
+        const res = await axios.post(`${link}/assignment/add`, formData)
         .catch(err=>console.log(err));
         const data = await res.data;
         console.log(data)
@@ -290,7 +288,7 @@ const Title = ({propTitle, add}) => {
 
     //join class
     const joinClass = async() => {
-        const res = await axios.put(`http://localhost:4000/class/join/class/${selectedClass}`, {
+        const res = await axios.put(`${link}/class/join/class/${selectedClass}`, {
             userId,
         }).catch(err=>console.log(err));
         const data = await res.data;
@@ -313,7 +311,7 @@ const Title = ({propTitle, add}) => {
 
     //invite instructor
     const inviteInstructor = async() => {
-        const res = await axios.post("http://localhost:4000/invite/instructor", {
+        const res = await axios.post(`${link}/invite/instructor`, {
             from: userId,
             klass: id,
             email,
@@ -338,7 +336,7 @@ const Title = ({propTitle, add}) => {
 
     //invite student
     const inviteStudent = async() => {
-        const res = await axios.post("http://localhost:4000/invite/student", {
+        const res = await axios.post(`${link}/invite/student`, {
             from: userId,
             klass: id,
             email,

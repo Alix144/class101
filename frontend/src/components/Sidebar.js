@@ -16,6 +16,9 @@ import student from '../images/student.png'
 import arrow from '../images/arrow.png'
 
 const Sidebar = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const isSidebarOpen = useSelector((state) => state.openOrClose.isOpen)
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
     const currentSection = useSelector((state) => state.currentSection.value)
@@ -92,7 +95,7 @@ const Sidebar = () => {
     const [classes, setClasses] = useState();
 
     const sendRequest = async() => {
-        const res = await axios.get(`http://localhost:4000/class/view/${id}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/class/view/${id}`).catch(err=>console.log(err))
         const data = await res.data.classes
         return data;
     }

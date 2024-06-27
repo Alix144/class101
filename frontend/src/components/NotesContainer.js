@@ -3,11 +3,14 @@ import NoteBox from "./NoteBox";
 import { useEffect, useState } from "react";
 
 const NotesContainer = ({isCompleted}) => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const id = localStorage.getItem("userId");
     const [notes, setNotes] = useState();
 
     const sendRequest = async() => {
-        const res = await axios.get(`http://localhost:4000/task/view/${id}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/task/view/${id}`).catch(err=>console.log(err))
         const data = await res.data.tasks
         return data;
     }

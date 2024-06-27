@@ -11,6 +11,9 @@ import leaf from '../images/leaf.png'
 import download from '../images/download.png'
 
 const Assignments = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const classId = useParams().id
@@ -30,7 +33,7 @@ const Assignments = () => {
     const [file, setFile] = useState("")
 
     const getAssignments = async() => {
-        const res = await axios.get(`http://localhost:4000/assignment/${classId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/assignment/${classId}`).catch(err=>console.log(err))
         const data = await res.data.assignments
         return data;
     }
@@ -42,7 +45,7 @@ const Assignments = () => {
     },[classId])
 
     const getSubmittedHws = async() => {
-        const res = await axios.get(`http://localhost:4000/submitted/${classId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/submitted/${classId}`).catch(err=>console.log(err))
         const data = await res.data.submittedHws
         return data;
     }
@@ -54,7 +57,7 @@ const Assignments = () => {
     },[classId])
 
     const getStudentSubmittedHws = async() => {
-        const res = await axios.get(`http://localhost:4000/submitted/user/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/submitted/user/${userId}`).catch(err=>console.log(err))
         const data = await res.data.submittedHws
         return data;
     }
@@ -99,17 +102,17 @@ const Assignments = () => {
     }
 
     const showFile = async(url) => {
-        window.open(`http://localhost:4000/files/${url}`, "_blank", "noreferrer");
+        window.open(`${link}/files/${url}`, "_blank", "noreferrer");
     }
 
     const fetchAssignmentDetails = async(assignmentId) => {
-        const res = await axios.get(`http://localhost:4000/assignment/details/${assignmentId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/assignment/details/${assignmentId}`).catch(err=>console.log(err))
         const data = await res.data.assignment;
         return data;
     }
 
     const fetchSubmittedHwDetails = async(assignmentId) => {
-        const res = await axios.get(`http://localhost:4000/submitted/details/${assignmentId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/submitted/details/${assignmentId}`).catch(err=>console.log(err))
         const data = await res.data.submittedHw;
         return data;
     }
@@ -120,11 +123,10 @@ const Assignments = () => {
         fetchSubmittedHwDetails(assignmentId).then((data)=>setStudentSubmittedHw(data))
     }
 
-   
 
     /******* Grade *******/
     const gradeAssignment = async(assignmentId) => {
-        const res = await axios.put(`http://localhost:4000/submitted/grade/${assignmentId}`, {
+        const res = await axios.put(`${link}/submitted/grade/${assignmentId}`, {
             grade
         })
         .catch(err=>console.log(err));
@@ -142,7 +144,7 @@ const Assignments = () => {
 
     /******* submit assignment *******/
     const submitAssignment = async(assignmentId) => {
-        const res = await axios.post("http://localhost:4000/submitted/submit", {
+        const res = await axios.post(`${link}/submitted/submit`, {
             message,
             klass: classId,
             user: userId,

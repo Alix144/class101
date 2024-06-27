@@ -20,6 +20,9 @@ import emptyBox from '../images/empty-box.png'
 import check from '../images/check.png'
 
 const Header2 = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const isSidebarOpen = useSelector((state) => state.openOrClose.isOpen)
@@ -118,7 +121,7 @@ const Header2 = () => {
     // create class
     
     const createClass = async() => {
-        const res = await axios.post("http://localhost:4000/class/create", {
+        const res = await axios.post(`${link}/class/create`, {
             name,
             courseCode,
             invitationCode: generateRandomCode(6),
@@ -150,7 +153,7 @@ const Header2 = () => {
 
     // join class
     const joinClass = async() => {
-        const res = await axios.put(`http://localhost:4000/class/join/${userId}`, {
+        const res = await axios.put(`${link}/class/join/${userId}`, {
             invitationCode,
         }).catch(err=>console.log(err));
         const data = await res.data;
@@ -175,7 +178,7 @@ const Header2 = () => {
 
     // fetch user name
     const fetchDetails = async() => {
-        const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/user/${userId}`).catch(err=>console.log(err))
         const data = await res.data.user;
         return data;
     }
@@ -191,7 +194,7 @@ const Header2 = () => {
 
     // fetch invitations
     const getInvitations = async() => {
-        const res = await axios.get(`http://localhost:4000/invite/get/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/invite/get/${userId}`).catch(err=>console.log(err))
         const data = await res.data.invitations;
         return data;
     }

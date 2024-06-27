@@ -9,6 +9,9 @@ import moment from "moment";
 import Title from "./Title";
 
 const Notifications = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
@@ -21,7 +24,7 @@ const Notifications = () => {
     }
 
     const getInvitations = async() => {
-        const res = await axios.get(`http://localhost:4000/invite/get/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/invite/get/${userId}`).catch(err=>console.log(err))
         const data = await res.data.invitations;
         return data;
     }
@@ -36,7 +39,7 @@ const Notifications = () => {
     // accept class invitation
 
     const acceptToBeInstructor = async(classId) => {
-        const res = await axios.put(`http://localhost:4000/class/join/instructor/${userId}`, {
+        const res = await axios.put(`${link}/class/join/instructor/${userId}`, {
             classId,
         }).catch(err=>console.log(err));
         const data = await res.data;
@@ -45,7 +48,7 @@ const Notifications = () => {
     }
 
     const acceptToBeStudent = async(classId) => {
-        const res = await axios.put(`http://localhost:4000/class/join/student/${userId}`, {
+        const res = await axios.put(`${link}/class/join/student/${userId}`, {
             classId,
         }).catch(err=>console.log(err));
         const data = await res.data;
@@ -76,7 +79,7 @@ const Notifications = () => {
     // deleting invitation
 
     const rejectInvitation = async(invitationId) => {
-        const res = await axios.delete(`http://localhost:4000/invite/delete/${invitationId}`)
+        const res = await axios.delete(`${link}/invite/delete/${invitationId}`)
         .catch(err=>console.log(err));
         const data = await res.data;
         return data;

@@ -10,6 +10,9 @@ import copy from '../images/copy.png'
 import noTask from '../images/no-task.png'
 
 const ClassroomHome = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const [isCopied, setIsCopied] = useState(false);
@@ -42,7 +45,7 @@ const ClassroomHome = () => {
     const [tasks, setTasks] = useState('');
 
     const fetchDetails = async() => {
-        const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/class/view/class/${id}`).catch(err=>console.log(err))
         const data = await res.data;
         return data;
     }
@@ -58,7 +61,7 @@ const ClassroomHome = () => {
     },[id])
 
     const fetchToDoDetails = async() => {
-        const res = await axios.get(`http://localhost:4000/task/view/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/task/view/${userId}`).catch(err=>console.log(err))
         const data = await res.data.tasks;
         console.log(data)
         return data;

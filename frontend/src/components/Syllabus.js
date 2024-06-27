@@ -10,13 +10,16 @@ import leaf from '../images/leaf.png'
 import edit from '../images/pencil.png'
 
 const Syllabus = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const id = useParams().id
     const [syllabus, setSyllabus] = useState([])
 
     const sendRequest = async() => {
-        const res = await axios.get("http://localhost:4000/syllabus").catch(err=>console.log(err))
+        const res = await axios.get(`${link}/syllabus`).catch(err=>console.log(err))
         const data = await res.data.syllabus
         return data;
     }

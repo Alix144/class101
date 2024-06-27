@@ -11,12 +11,15 @@ import download from '../images/download.png'
 import leaf from '../images/leaf.png'
 
 const Documents = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const [documents, setDocuments] = useState([]);
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
     const classId = useParams().id
 
     const getDocuments = async() => {
-        const res = await axios.get(`http://localhost:4000/document/${classId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/document/${classId}`).catch(err=>console.log(err))
         const data = await res.data.documents
         return data;
     }
@@ -32,7 +35,7 @@ const Documents = () => {
     }
 
     const showFile = async(url) => {
-        window.open(`http://localhost:4000/files/${url}`, "_blank", "noreferrer");
+        window.open(`${link}/files/${url}`, "_blank", "noreferrer");
     }
 
     return ( 

@@ -11,6 +11,9 @@ import teacher from '../images/teacher.png'
 import student from '../images/student.png'
 
 const People = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const [isStudentInfoPageOpen, setStudentInfoPage] = useState(false)
@@ -28,7 +31,7 @@ const People = () => {
     
 
     const kickInstructor = async(Id) => {
-        const res = await axios.put(`http://localhost:4000/class/kick/instructor/${Id}`, {
+        const res = await axios.put(`${link}/class/kick/instructor/${Id}`, {
             classId: id,
         }).catch(err=>console.log(err));
         const data = await res.data;
@@ -44,7 +47,7 @@ const People = () => {
     }
 
     const kickStudent = async(Id) => {
-        const res = await axios.put(`http://localhost:4000/class/kick/student/${Id}`, {
+        const res = await axios.put(`${link}/class/kick/student/${Id}`, {
             classId: id,
         }).catch(err=>console.log(err));
         const data = await res.data;
@@ -60,20 +63,18 @@ const People = () => {
     }
 
     const fetchUserDetails = async(userId) => {
-        const res = await axios.get(`http://localhost:4000/user/${userId}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/user/${userId}`).catch(err=>console.log(err))
         const data = await res.data.user;
         return data;
     }
 
     const openInfoPage = (userId) => {
-        
         setUserInfo("")
         fetchUserDetails(userId).then((data)=>setUserInfo(data)).then(()=> setStudentInfoPage(!isStudentInfoPageOpen))
-        
     }
 
     const fetchDetails = async() => {
-        const res = await axios.get(`http://localhost:4000/class/view/class/${id}`).catch(err=>console.log(err))
+        const res = await axios.get(`${link}/class/view/class/${id}`).catch(err=>console.log(err))
         const data = await res.data.class;
         return data;
     }
@@ -95,7 +96,6 @@ const People = () => {
         console.log(students)
         console.log(name)
     }, [instructors, students, name])
-    
 
     return ( 
         <>

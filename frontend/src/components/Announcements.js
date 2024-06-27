@@ -11,13 +11,16 @@ import edit from '../images/pencil.png'
 import emptyBox from '../images/empty-box.png'
 
 const Announcements = () => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const id = useParams().id
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
     const [announcements, setAnnouncements] = useState()
     const [isEmpty, setIsEmpty] = useState(true)
 
     const sendRequest = async() => {
-        const res = await axios.get("http://localhost:4000/announcement").catch(err=>console.log(err))
+        const res = await axios.get(`${link}/announcement`).catch(err=>console.log(err))
         const data = await res.data.announcements
         setIsEmpty(data.filter(announcement => announcement.class === id).length === 0);
         return data;
@@ -29,7 +32,7 @@ const Announcements = () => {
 
     //delete
     const deleteTask = async(id) => {
-        const res = await axios.delete(`http://localhost:4000/announcement/delete/${id}`)
+        const res = await axios.delete(`${link}/announcement/delete/${id}`)
         .catch(err=>console.log(err));
         const data = await res.data;
         return data;

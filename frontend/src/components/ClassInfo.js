@@ -23,6 +23,9 @@ import upload from '../images/upload.png'
 import check from '../images/check.png'
 
 const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, instructors, students}) => {
+    const link = "https://class101-api.onrender.com"
+    const localLink = "http://localhost:4000"
+
     const isInstructor = useSelector((state) => state.instructorOrStudent.isInstructor)
 
     const id = useParams().id;
@@ -65,7 +68,7 @@ const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, i
 
         //update
         const update = async() => {
-            const res = await axios.put(`http://localhost:4000/class/edit/${id}`,{
+            const res = await axios.put(`${link}/class/edit/${id}`,{
                 name: newName,
                 courseCode: newCourseCode,
                 description: newDescription,
@@ -100,7 +103,7 @@ const ClassInfo = ({name, courseCode, description, visibility, bg, classColor, i
               }
 
         
-            const res = await axios.put(`http://localhost:4000/class/addBg/${id}`, formData)
+            const res = await axios.put(`${link}/class/addBg/${id}`, formData)
             .catch(err=>console.log(err));
             const data = await res.data;
             console.log(data)
